@@ -3,8 +3,8 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+# Use mysql as the database for Active Record
+gem 'mysql2'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -18,10 +18,34 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
+gem 'jquery-turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
+
+## library for push notification
+gem 'pushmeup'
+
+## Auth library
+gem 'devise'
+
+## schduler library
+gem 'whenever', require: false
+
+## make easy for nested form
+gem "cocoon"
+
+gem 'mini_magick'
+gem 'carrierwave'
+gem 'kaminari'
+gem 'bootstrap-sass'
+gem 'bootstrap-kaminari-views'
+gem 'bootstrap-sass-extras'
+gem 'slim-rails'
+gem 'nprogress-rails'
+gem 'friendly_id', '~> 5.1.0'
+gem 'dotenv-rails'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -43,5 +67,10 @@ group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+
+  gem 'letter_opener_web', '~> 1.2.0'
+  gem 'bullet'
+  gem 'quiet_assets'
+  gem 'annotate', github: 'ctran/annotate_models'
 end
 
