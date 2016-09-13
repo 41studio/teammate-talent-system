@@ -1,0 +1,43 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  job_title: MyString
+  departement: MyString
+  job_code: MyString
+  country: MyString
+  state: MyString
+  city: MyString
+  zip_code: MyString
+  min_salary: 1
+  max_salary: 1
+  curency: MyString
+  job_description: MyText
+  job_requirement: MyText
+  benefits: MyText
+  aplicant_experience: MyString
+  aplicant_function: MyString
+  aplicant_employment_type: MyString
+  aplicant_industry: MyString
+  aplicant_education: MyString
+  job_search_keyword: MyString
+
+two:
+  job_title: MyString
+  departement: MyString
+  job_code: MyString
+  country: MyString
+  state: MyString
+  city: MyString
+  zip_code: MyString
+  min_salary: 1
+  max_salary: 1
+  curency: MyString
+  job_description: MyText
+  job_requirement: MyText
+  benefits: MyText
+  aplicant_experience: MyString
+  aplicant_function: MyString
+  aplicant_employment_type: MyString
+  aplicant_industry: MyString
+  aplicant_education: MyString
+  job_search_keyword: MyString

@@ -1,0 +1,57 @@
+p#notice = notice
+
+p
+  strong Name:
+  = @applicant.name
+p
+  strong Gender:
+  = @applicant.gender
+p
+  strong Date birth:
+  = @applicant.date_birth
+p
+  strong Email:
+  = @applicant.email
+p
+  strong Headline:
+  = @applicant.headline
+p
+  strong Phone:
+  = @applicant.phone
+p
+  strong Address:
+  = @applicant.address
+p
+  strong Photo:
+  = @applicant.photo
+p
+  strong Name school:
+  = @applicant.name_school
+p
+  strong State study:
+  = @applicant.state_study
+p
+  strong Degree:
+  = @applicant.degree
+p
+  strong Company name:
+  = @applicant.company_name
+p
+  strong Industry:
+  = @applicant.industry
+p
+  strong Title:
+  = @applicant.title
+p
+  strong Summary:
+  = @applicant.summary
+p
+  strong Resume:
+  = @applicant.resume
+p
+  strong Status:
+  = @applicant.status
+
+= link_to 'Edit', edit_applicant_path(@applicant)
+'|
+= link_to 'Back', applicants_path

@@ -1,0 +1,57 @@
+h1 Listing jobs
+
+table border="1"
+  thead
+    tr
+      th Job title
+      th Departement
+      th Job code
+      th Country
+      th State
+      th City
+      th Zip code
+      th Min salary
+      th Max salary
+      th Curency
+      th Job description
+      th Job requirement
+      th Benefits
+      th Aplicant experience
+      th Aplicant function
+      th Aplicant employment type
+      th Aplicant industry
+      th Aplicant education
+      th Job search keyword
+      th
+      th
+      th
+
+  tbody
+    - @jobs.each do |job|
+      tr
+        td = job.job_title
+        td = job.departement
+        td = job.job_code
+        td = job.country
+        td = job.state
+        td = job.city
+        td = job.zip_code
+        td = job.min_salary
+        td = job.max_salary
+        td = job.curency
+        td = job.job_description
+        td = job.job_requirement
+        td = job.benefits
+        td = job.aplicant_experience
+        td = job.aplicant_function
+        td = job.aplicant_employment_type
+        td = job.aplicant_industry
+        td = job.aplicant_education
+        td = job.job_search_keyword
+        td = link_to 'Show', job
+        td = link_to 'Edit', edit_job_path(job)
+        td = link_to 'Destroy', job, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Job', new_job_path
