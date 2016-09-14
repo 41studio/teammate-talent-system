@@ -11,13 +11,6 @@ table border="1"
       th Phone
       th Address
       th Photo
-      th Name school
-      th State study
-      th Degree
-      th Company name
-      th Industry
-      th Title
-      th Summary
       th Resume
       th Status
       th
@@ -35,14 +28,7 @@ table border="1"
         td = applicant.phone
         td = applicant.address
         td = image_tag applicant.photo.thumb.url
-        td = applicant.name_school
-        td = applicant.state_study
-        td = applicant.degree
-        td = applicant.company_name
-        td = applicant.industry
-        td = applicant.title
-        td = applicant.summary
-        td = link_to "Download Resume",  applicant.resume_url
+        td = link_to "Download Resume",  applicant.resume_url, target: '_blank'
         td = applicant.status
         td = link_to 'Show', applicant
         td = link_to 'Edit', edit_applicant_path(applicant)

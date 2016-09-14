@@ -10,11 +10,14 @@
     = f.label :name
     = f.text_field :name
   .field
-    = f.label :gender
-    = f.text_field :gender
+    = f.label :gender 
+    = f.radio_button :gender, 'Male' 
+    = f.label :Male
+    = f.radio_button :gender, 'Female'
+    = f.label :Female
   .field
     = f.label :date_birth
-    = f.date_select :date_birth
+    = f.date_select :date_birth, order: [:day, :month, :year]
   .field
     = f.label :email
     = f.text_field :email
@@ -29,31 +32,19 @@
     = f.text_field :address
   .field
     = f.label :photo
-    = f.file_field :photo
-  .field
-    = f.label :name_school
-    = f.text_field :name_school
-  .field
-    = f.label :state_study
-    = f.text_field :state_study
-  .field
-    = f.label :degree
-    = f.text_field :degree
-  .field
-    = f.label :company_name
-    = f.text_field :company_name
-  .field
-    = f.label :industry
-    = f.text_field :industry
-  .field
-    = f.label :title
-    = f.text_field :title
-  .field
-    = f.label :summary
-    = f.text_field :summary
+    = f.file_field :photo, accept: 'image/png,image/jpeg'
+    - if f.object.photo?
+      = image_tag f.object.photo.thumb.url
+      = f.label :remove_photo
+      = f.check_box :remove_photo
   .field
     = f.label :resume
-    = f.file_field :resume
+    = f.file_field :resume , accept: 'application/pdf'
+    - if f.object.resume?
+      = link_to "Preview Resume", f.object.resume.url, target: '_blank'
+      = f.label :remove_resume
+      = f.check_box :remove_resume
+  .field
   .field
     = f.label :status
     = f.text_field :status
