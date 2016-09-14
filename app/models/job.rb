@@ -1,4 +1,7 @@
 class Job < ActiveRecord::Base
+
+	has_many :applicants
+
 	def experience
 		@experience = {select_level: "Select level", not_applicable: "Not applicable", internship: "Internship", new_graduate: "New graduate", entry_level: "Entry level", associate: "Associate", experienced: "Experienced", executive: "Executive", mid_senior_level: "Mid-Senior level", director_c_level: "Director C-level"}
 	end
@@ -18,4 +21,5 @@ class Job < ActiveRecord::Base
 	def education
 		@education = {_1: "Select level", _2: "Unspecified", _3: "High School or equivalent", _4: "Certification", _5: "Vocational", _6: "Associate Degree", _7: "Bachelor's Degree", _8: "Master's Degree", _9: "Doctorate", _10: "Professional", _11: "Some College Coursework Completed", _12: "Vocational - HS Diploma", _13: "Vocational - Degree", _14: "Some High School Coursework"}
 	end
+
 end

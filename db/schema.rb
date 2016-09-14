@@ -11,7 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160914040306) do
+ActiveRecord::Schema.define(version: 20160914065051) do
+
+  create_table "applicant_educations", force: :cascade do |t|
+    t.string "education", limit: 255
+  end
+
+  create_table "applicant_employment_types", force: :cascade do |t|
+    t.string "employment_type", limit: 255
+  end
+
+  create_table "applicant_experiences", force: :cascade do |t|
+    t.string "experience", limit: 255
+  end
+
+  create_table "applicant_functions", force: :cascade do |t|
+    t.string "function", limit: 255
+  end
+
+  create_table "applicant_industries", force: :cascade do |t|
+    t.string "industry", limit: 255
+  end
 
   create_table "applicants", force: :cascade do |t|
     t.string   "name",          limit: 255, default: "", null: false

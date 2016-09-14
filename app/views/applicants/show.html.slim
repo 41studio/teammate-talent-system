@@ -25,29 +25,8 @@ p
   strong Photo:
   = image_tag @applicant.photo.thumb.url
 p
-  strong Name school:
-  = @applicant.name_school
-p
-  strong State study:
-  = @applicant.state_study
-p
-  strong Degree:
-  = @applicant.degree
-p
-  strong Company name:
-  = @applicant.company_name
-p
-  strong Industry:
-  = @applicant.industry
-p
-  strong Title:
-  = @applicant.title
-p
-  strong Summary:
-  = @applicant.summary
-p
   strong Resume:
-  = link_to "Download Resume", @applicant.resume_url
+  = link_to "Download Resume", @applicant.resume_url, target: '_blank'
 p
   strong Status:
   = @applicant.status
