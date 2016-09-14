@@ -23,7 +23,7 @@ p
   = @applicant.address
 p
   strong Photo:
-  = @applicant.photo
+  = image_tag @applicant.photo.thumb.url
 p
   strong Name school:
   = @applicant.name_school
@@ -47,7 +47,7 @@ p
   = @applicant.summary
 p
   strong Resume:
-  = @applicant.resume
+  = link_to "Download Resume", @applicant.resume_url
 p
   strong Status:
   = @applicant.status
