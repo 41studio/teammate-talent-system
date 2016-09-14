@@ -1,421 +1,6 @@
-
-
-Started GET "/" for 127.0.0.1 at 2016-09-13 13:19:51 +0700
-
-Mysql2::Error (Can't connect to local MySQL server through socket '/opt/lampp/var/mysql/mysql.sock' (2)):
-  mysql2 (0.4.4) lib/mysql2/client.rb:87:in `connect'
-  mysql2 (0.4.4) lib/mysql2/client.rb:87:in `initialize'
-  activerecord (4.2.6) lib/active_record/connection_adapters/mysql2_adapter.rb:18:in `new'
-  activerecord (4.2.6) lib/active_record/connection_adapters/mysql2_adapter.rb:18:in `mysql2_connection'
-  activerecord (4.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:438:in `new_connection'
-  activerecord (4.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:448:in `checkout_new_connection'
-  activerecord (4.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:422:in `acquire_connection'
-  activerecord (4.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:349:in `block in checkout'
-  /home/ilhamfi/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/monitor.rb:214:in `mon_synchronize'
-  activerecord (4.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:348:in `checkout'
-  activerecord (4.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:263:in `block in connection'
-  /home/ilhamfi/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/monitor.rb:214:in `mon_synchronize'
-  activerecord (4.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:262:in `connection'
-  activerecord (4.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:571:in `retrieve_connection'
-  activerecord (4.2.6) lib/active_record/connection_handling.rb:113:in `retrieve_connection'
-  activerecord (4.2.6) lib/active_record/connection_handling.rb:87:in `connection'
-  activerecord (4.2.6) lib/active_record/migration.rb:383:in `connection'
-  activerecord (4.2.6) lib/active_record/migration.rb:370:in `call'
-  actionpack (4.2.6) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
-  activesupport (4.2.6) lib/active_support/callbacks.rb:88:in `__run_callbacks__'
-  activesupport (4.2.6) lib/active_support/callbacks.rb:778:in `_run_call_callbacks'
-  activesupport (4.2.6) lib/active_support/callbacks.rb:81:in `run_callbacks'
-  actionpack (4.2.6) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
-  actionpack (4.2.6) lib/action_dispatch/middleware/reloader.rb:73:in `call'
-  actionpack (4.2.6) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
-  actionpack (4.2.6) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
-  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
-  web-console (2.3.0) lib/web_console/middleware.rb:18:in `catch'
-  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
-  actionpack (4.2.6) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
-  railties (4.2.6) lib/rails/rack/logger.rb:38:in `call_app'
-  railties (4.2.6) lib/rails/rack/logger.rb:20:in `block in call'
-  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `block in tagged'
-  activesupport (4.2.6) lib/active_support/tagged_logging.rb:26:in `tagged'
-  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `tagged'
-  railties (4.2.6) lib/rails/rack/logger.rb:20:in `call'
-  quiet_assets (1.1.0) lib/quiet_assets.rb:27:in `call_with_quiet_assets'
-  actionpack (4.2.6) lib/action_dispatch/middleware/request_id.rb:21:in `call'
-  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
-  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
-  activesupport (4.2.6) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
-  rack (1.6.4) lib/rack/lock.rb:17:in `call'
-  actionpack (4.2.6) lib/action_dispatch/middleware/static.rb:120:in `call'
-  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
-  railties (4.2.6) lib/rails/engine.rb:518:in `call'
-  railties (4.2.6) lib/rails/application.rb:165:in `call'
-  rack (1.6.4) lib/rack/lock.rb:17:in `call'
-  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
-  rack (1.6.4) lib/rack/handler/webrick.rb:88:in `service'
-  /home/ilhamfi/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:140:in `service'
-  /home/ilhamfi/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:96:in `run'
-  /home/ilhamfi/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/server.rb:296:in `block in start_thread'
-
-
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_source.erb (3.3ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.7ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.2ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (63.4ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.5ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (43.6ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (95.2ms)
-
-
-Started GET "/" for 127.0.0.1 at 2016-09-13 14:26:48 +0700
-
-Mysql2::Error (Can't connect to local MySQL server through socket '/opt/lampp/var/mysql/mysql.sock' (2)):
-  mysql2 (0.4.4) lib/mysql2/client.rb:87:in `connect'
-  mysql2 (0.4.4) lib/mysql2/client.rb:87:in `initialize'
-  activerecord (4.2.6) lib/active_record/connection_adapters/mysql2_adapter.rb:18:in `new'
-  activerecord (4.2.6) lib/active_record/connection_adapters/mysql2_adapter.rb:18:in `mysql2_connection'
-  activerecord (4.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:438:in `new_connection'
-  activerecord (4.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:448:in `checkout_new_connection'
-  activerecord (4.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:422:in `acquire_connection'
-  activerecord (4.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:349:in `block in checkout'
-  /home/ilhamfi/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/monitor.rb:214:in `mon_synchronize'
-  activerecord (4.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:348:in `checkout'
-  activerecord (4.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:263:in `block in connection'
-  /home/ilhamfi/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/monitor.rb:214:in `mon_synchronize'
-  activerecord (4.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:262:in `connection'
-  activerecord (4.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:571:in `retrieve_connection'
-  activerecord (4.2.6) lib/active_record/connection_handling.rb:113:in `retrieve_connection'
-  activerecord (4.2.6) lib/active_record/connection_handling.rb:87:in `connection'
-  activerecord (4.2.6) lib/active_record/migration.rb:383:in `connection'
-  activerecord (4.2.6) lib/active_record/migration.rb:370:in `call'
-  actionpack (4.2.6) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
-  activesupport (4.2.6) lib/active_support/callbacks.rb:88:in `__run_callbacks__'
-  activesupport (4.2.6) lib/active_support/callbacks.rb:778:in `_run_call_callbacks'
-  activesupport (4.2.6) lib/active_support/callbacks.rb:81:in `run_callbacks'
-  actionpack (4.2.6) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
-  actionpack (4.2.6) lib/action_dispatch/middleware/reloader.rb:73:in `call'
-  actionpack (4.2.6) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
-  actionpack (4.2.6) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
-  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
-  web-console (2.3.0) lib/web_console/middleware.rb:18:in `catch'
-  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
-  actionpack (4.2.6) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
-  railties (4.2.6) lib/rails/rack/logger.rb:38:in `call_app'
-  railties (4.2.6) lib/rails/rack/logger.rb:20:in `block in call'
-  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `block in tagged'
-  activesupport (4.2.6) lib/active_support/tagged_logging.rb:26:in `tagged'
-  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `tagged'
-  railties (4.2.6) lib/rails/rack/logger.rb:20:in `call'
-  quiet_assets (1.1.0) lib/quiet_assets.rb:27:in `call_with_quiet_assets'
-  actionpack (4.2.6) lib/action_dispatch/middleware/request_id.rb:21:in `call'
-  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
-  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
-  activesupport (4.2.6) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
-  rack (1.6.4) lib/rack/lock.rb:17:in `call'
-  actionpack (4.2.6) lib/action_dispatch/middleware/static.rb:120:in `call'
-  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
-  railties (4.2.6) lib/rails/engine.rb:518:in `call'
-  railties (4.2.6) lib/rails/application.rb:165:in `call'
-  rack (1.6.4) lib/rack/lock.rb:17:in `call'
-  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
-  rack (1.6.4) lib/rack/handler/webrick.rb:88:in `service'
-  /home/ilhamfi/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:140:in `service'
-  /home/ilhamfi/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:96:in `run'
-  /home/ilhamfi/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/server.rb:296:in `block in start_thread'
-
-
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_source.erb (3.2ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.6ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.1ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (21.9ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.4ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (23.4ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.3ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (41.4ms)
-
-
-Started GET "/" for 127.0.0.1 at 2016-09-13 14:26:49 +0700
-
-Mysql2::Error (Can't connect to local MySQL server through socket '/opt/lampp/var/mysql/mysql.sock' (2)):
-  mysql2 (0.4.4) lib/mysql2/client.rb:87:in `connect'
-  mysql2 (0.4.4) lib/mysql2/client.rb:87:in `initialize'
-  activerecord (4.2.6) lib/active_record/connection_adapters/mysql2_adapter.rb:18:in `new'
-  activerecord (4.2.6) lib/active_record/connection_adapters/mysql2_adapter.rb:18:in `mysql2_connection'
-  activerecord (4.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:438:in `new_connection'
-  activerecord (4.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:448:in `checkout_new_connection'
-  activerecord (4.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:422:in `acquire_connection'
-  activerecord (4.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:349:in `block in checkout'
-  /home/ilhamfi/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/monitor.rb:214:in `mon_synchronize'
-  activerecord (4.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:348:in `checkout'
-  activerecord (4.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:263:in `block in connection'
-  /home/ilhamfi/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/monitor.rb:214:in `mon_synchronize'
-  activerecord (4.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:262:in `connection'
-  activerecord (4.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:571:in `retrieve_connection'
-  activerecord (4.2.6) lib/active_record/connection_handling.rb:113:in `retrieve_connection'
-  activerecord (4.2.6) lib/active_record/connection_handling.rb:87:in `connection'
-  activerecord (4.2.6) lib/active_record/migration.rb:383:in `connection'
-  activerecord (4.2.6) lib/active_record/migration.rb:370:in `call'
-  actionpack (4.2.6) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
-  activesupport (4.2.6) lib/active_support/callbacks.rb:88:in `__run_callbacks__'
-  activesupport (4.2.6) lib/active_support/callbacks.rb:778:in `_run_call_callbacks'
-  activesupport (4.2.6) lib/active_support/callbacks.rb:81:in `run_callbacks'
-  actionpack (4.2.6) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
-  actionpack (4.2.6) lib/action_dispatch/middleware/reloader.rb:73:in `call'
-  actionpack (4.2.6) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
-  actionpack (4.2.6) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
-  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
-  web-console (2.3.0) lib/web_console/middleware.rb:18:in `catch'
-  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
-  actionpack (4.2.6) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
-  railties (4.2.6) lib/rails/rack/logger.rb:38:in `call_app'
-  railties (4.2.6) lib/rails/rack/logger.rb:20:in `block in call'
-  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `block in tagged'
-  activesupport (4.2.6) lib/active_support/tagged_logging.rb:26:in `tagged'
-  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `tagged'
-  railties (4.2.6) lib/rails/rack/logger.rb:20:in `call'
-  quiet_assets (1.1.0) lib/quiet_assets.rb:27:in `call_with_quiet_assets'
-  actionpack (4.2.6) lib/action_dispatch/middleware/request_id.rb:21:in `call'
-  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
-  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
-  activesupport (4.2.6) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
-  rack (1.6.4) lib/rack/lock.rb:17:in `call'
-  actionpack (4.2.6) lib/action_dispatch/middleware/static.rb:120:in `call'
-  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
-  railties (4.2.6) lib/rails/engine.rb:518:in `call'
-  railties (4.2.6) lib/rails/application.rb:165:in `call'
-  rack (1.6.4) lib/rack/lock.rb:17:in `call'
-  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
-  rack (1.6.4) lib/rack/handler/webrick.rb:88:in `service'
-  /home/ilhamfi/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:140:in `service'
-  /home/ilhamfi/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:96:in `run'
-  /home/ilhamfi/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/server.rb:296:in `block in start_thread'
-
-
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_source.erb (2.4ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.4ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (20.5ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.4ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.2ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.6ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (18.0ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.3ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (35.8ms)
-
-
-Started GET "/" for 127.0.0.1 at 2016-09-13 16:05:57 +0700
-
-ActiveRecord::NoDatabaseError (Unknown database 'teammate-talent-system_development'):
-  activerecord (4.2.6) lib/active_record/connection_adapters/mysql2_adapter.rb:23:in `rescue in mysql2_connection'
-  activerecord (4.2.6) lib/active_record/connection_adapters/mysql2_adapter.rb:10:in `mysql2_connection'
-  activerecord (4.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:438:in `new_connection'
-  activerecord (4.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:448:in `checkout_new_connection'
-  activerecord (4.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:422:in `acquire_connection'
-  activerecord (4.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:349:in `block in checkout'
-  /home/ilhamfi/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/monitor.rb:214:in `mon_synchronize'
-  activerecord (4.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:348:in `checkout'
-  activerecord (4.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:263:in `block in connection'
-  /home/ilhamfi/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/monitor.rb:214:in `mon_synchronize'
-  activerecord (4.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:262:in `connection'
-  activerecord (4.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:571:in `retrieve_connection'
-  activerecord (4.2.6) lib/active_record/connection_handling.rb:113:in `retrieve_connection'
-  activerecord (4.2.6) lib/active_record/connection_handling.rb:87:in `connection'
-  activerecord (4.2.6) lib/active_record/migration.rb:383:in `connection'
-  activerecord (4.2.6) lib/active_record/migration.rb:370:in `call'
-  actionpack (4.2.6) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
-  activesupport (4.2.6) lib/active_support/callbacks.rb:88:in `__run_callbacks__'
-  activesupport (4.2.6) lib/active_support/callbacks.rb:778:in `_run_call_callbacks'
-  activesupport (4.2.6) lib/active_support/callbacks.rb:81:in `run_callbacks'
-  actionpack (4.2.6) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
-  actionpack (4.2.6) lib/action_dispatch/middleware/reloader.rb:73:in `call'
-  actionpack (4.2.6) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
-  actionpack (4.2.6) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
-  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
-  web-console (2.3.0) lib/web_console/middleware.rb:18:in `catch'
-  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
-  actionpack (4.2.6) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
-  railties (4.2.6) lib/rails/rack/logger.rb:38:in `call_app'
-  railties (4.2.6) lib/rails/rack/logger.rb:20:in `block in call'
-  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `block in tagged'
-  activesupport (4.2.6) lib/active_support/tagged_logging.rb:26:in `tagged'
-  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `tagged'
-  railties (4.2.6) lib/rails/rack/logger.rb:20:in `call'
-  quiet_assets (1.1.0) lib/quiet_assets.rb:27:in `call_with_quiet_assets'
-  actionpack (4.2.6) lib/action_dispatch/middleware/request_id.rb:21:in `call'
-  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
-  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
-  activesupport (4.2.6) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
-  rack (1.6.4) lib/rack/lock.rb:17:in `call'
-  actionpack (4.2.6) lib/action_dispatch/middleware/static.rb:120:in `call'
-  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
-  railties (4.2.6) lib/rails/engine.rb:518:in `call'
-  railties (4.2.6) lib/rails/application.rb:165:in `call'
-  rack (1.6.4) lib/rack/lock.rb:17:in `call'
-  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
-  rack (1.6.4) lib/rack/handler/webrick.rb:88:in `service'
-  /home/ilhamfi/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:140:in `service'
-  /home/ilhamfi/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:96:in `run'
-  /home/ilhamfi/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/server.rb:296:in `block in start_thread'
-
-
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_source.erb (2.7ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.8ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.4ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (40.8ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.7ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.2ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (91.6ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.2ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.3ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (115.2ms)
-
-
-Started GET "/" for 127.0.0.1 at 2016-09-13 16:14:10 +0700
-
-ActiveRecord::NoDatabaseError (Unknown database 'teammate-talent-system_development'):
-  activerecord (4.2.6) lib/active_record/connection_adapters/mysql2_adapter.rb:23:in `rescue in mysql2_connection'
-  activerecord (4.2.6) lib/active_record/connection_adapters/mysql2_adapter.rb:10:in `mysql2_connection'
-  activerecord (4.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:438:in `new_connection'
-  activerecord (4.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:448:in `checkout_new_connection'
-  activerecord (4.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:422:in `acquire_connection'
-  activerecord (4.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:349:in `block in checkout'
-  /home/ilhamfi/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/monitor.rb:214:in `mon_synchronize'
-  activerecord (4.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:348:in `checkout'
-  activerecord (4.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:263:in `block in connection'
-  /home/ilhamfi/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/monitor.rb:214:in `mon_synchronize'
-  activerecord (4.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:262:in `connection'
-  activerecord (4.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:571:in `retrieve_connection'
-  activerecord (4.2.6) lib/active_record/connection_handling.rb:113:in `retrieve_connection'
-  activerecord (4.2.6) lib/active_record/connection_handling.rb:87:in `connection'
-  activerecord (4.2.6) lib/active_record/migration.rb:383:in `connection'
-  activerecord (4.2.6) lib/active_record/migration.rb:370:in `call'
-  actionpack (4.2.6) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
-  activesupport (4.2.6) lib/active_support/callbacks.rb:88:in `__run_callbacks__'
-  activesupport (4.2.6) lib/active_support/callbacks.rb:778:in `_run_call_callbacks'
-  activesupport (4.2.6) lib/active_support/callbacks.rb:81:in `run_callbacks'
-  actionpack (4.2.6) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
-  actionpack (4.2.6) lib/action_dispatch/middleware/reloader.rb:73:in `call'
-  actionpack (4.2.6) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
-  actionpack (4.2.6) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
-  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
-  web-console (2.3.0) lib/web_console/middleware.rb:18:in `catch'
-  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
-  actionpack (4.2.6) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
-  railties (4.2.6) lib/rails/rack/logger.rb:38:in `call_app'
-  railties (4.2.6) lib/rails/rack/logger.rb:20:in `block in call'
-  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `block in tagged'
-  activesupport (4.2.6) lib/active_support/tagged_logging.rb:26:in `tagged'
-  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `tagged'
-  railties (4.2.6) lib/rails/rack/logger.rb:20:in `call'
-  quiet_assets (1.1.0) lib/quiet_assets.rb:27:in `call_with_quiet_assets'
-  actionpack (4.2.6) lib/action_dispatch/middleware/request_id.rb:21:in `call'
-  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
-  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
-  activesupport (4.2.6) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
-  rack (1.6.4) lib/rack/lock.rb:17:in `call'
-  actionpack (4.2.6) lib/action_dispatch/middleware/static.rb:120:in `call'
-  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
-  railties (4.2.6) lib/rails/engine.rb:518:in `call'
-  railties (4.2.6) lib/rails/application.rb:165:in `call'
-  rack (1.6.4) lib/rack/lock.rb:17:in `call'
-  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
-  rack (1.6.4) lib/rack/handler/webrick.rb:88:in `service'
-  /home/ilhamfi/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:140:in `service'
-  /home/ilhamfi/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:96:in `run'
-  /home/ilhamfi/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/server.rb:296:in `block in start_thread'
-
-
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_source.erb (3.3ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.7ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.8ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (23.3ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (1.0ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.4ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (23.9ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.2ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.5ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (44.3ms)
-
-
-Started GET "/" for 127.0.0.1 at 2016-09-13 16:14:52 +0700
-Processing by Rails::WelcomeController#index as HTML
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/railties-4.2.6/lib/rails/templates/rails/welcome/index.html.erb (0.9ms)
-Completed 200 OK in 33ms (Views: 14.3ms | ActiveRecord: 0.0ms)
-  [1m[36m (255.5ms)[0m  [1mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB[0m
-  [1m[35m (458.0ms)[0m  CREATE UNIQUE INDEX `unique_schema_migrations`  ON `schema_migrations` (`version`) 
-  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
-  [1m[36m (0.2ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations`[0m
-  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
-Migrating to CreateJobs (20160913092133)
-  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
-Migrating to CreateJobs (20160913092133)
-  [1m[35m (0.5ms)[0m  CREATE TABLE `jobs` (`id` int(11) auto_increment PRIMARY KEY, `job_title` varchar(255) DEFAULT '' NOT NULL, `departement` varchar(255) DEFAULT '' NOT NULL, `job_code` varchar(255) DEFAULT '' NOT NULL, `country` varchar(255) DEFAULT '' NOT NULL, `state` varchar(255) DEFAULT '' NOT NULL, `city` varchar(255) DEFAULT '' NOT NULL, `zip_code` varchar(255) DEFAULT '' NOT NULL, `min_salary` int(11) DEFAULT 0 NOT NULL, `max_salary` int(11) DEFAULT 0 NOT NULL, `curency` varchar(255) DEFAULT '' NOT NULL, `job_description` text DEFAULT '' NOT NULL, `job_requirement` text DEFAULT '' NOT NULL, `benefits` text DEFAULT '' NOT NULL, `aplicant_experience` varchar(255) DEFAULT '' NOT NULL, `aplicant_function` varchar(255) DEFAULT '' NOT NULL, `aplicant_employment_type` varchar(255) DEFAULT '' NOT NULL, `aplicant_industry` varchar(255) DEFAULT '' NOT NULL, `aplicant_education` varchar(255) DEFAULT '' NOT NULL, `job_search_keyword` varchar(255) DEFAULT '' NOT NULL, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
-  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
-Migrating to CreateJobs (20160913092133)
-  [1m[35m (0.5ms)[0m  CREATE TABLE `jobs` (`id` int(11) auto_increment PRIMARY KEY, `job_title` varchar(255) DEFAULT '' NOT NULL, `departement` varchar(255) DEFAULT '' NOT NULL, `job_code` varchar(255) DEFAULT '' NOT NULL, `country` varchar(255) DEFAULT '' NOT NULL, `state` varchar(255) DEFAULT '' NOT NULL, `city` varchar(255) DEFAULT '' NOT NULL, `zip_code` varchar(255) DEFAULT '' NOT NULL, `min_salary` int(11) DEFAULT 0 NOT NULL, `max_salary` int(11) DEFAULT 0 NOT NULL, `curency` varchar(255) DEFAULT '' NOT NULL, `job_description` text DEFAULT '' NOT NULL, `job_requirement` text DEFAULT '' NOT NULL, `benefits` text DEFAULT '' NOT NULL, `aplicant_experience` varchar(255) DEFAULT '' NOT NULL, `aplicant_function` varchar(255) DEFAULT '' NOT NULL, `aplicant_employment_type` varchar(255) DEFAULT '' NOT NULL, `aplicant_industry` varchar(255) DEFAULT '' NOT NULL, `aplicant_education` varchar(255) DEFAULT '' NOT NULL, `job_search_keyword` varchar(255) DEFAULT '' NOT NULL, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
-  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
-Migrating to CreateJobs (20160913092133)
-  [1m[35m (267.3ms)[0m  CREATE TABLE `jobs` (`id` int(11) auto_increment PRIMARY KEY, `job_title` varchar(255) DEFAULT '' NOT NULL, `departement` varchar(255) DEFAULT '' NOT NULL, `job_code` varchar(255) DEFAULT '' NOT NULL, `country` varchar(255) DEFAULT '' NOT NULL, `state` varchar(255) DEFAULT '' NOT NULL, `city` varchar(255) DEFAULT '' NOT NULL, `zip_code` varchar(255) DEFAULT '' NOT NULL, `min_salary` int(11) DEFAULT 0 NOT NULL, `max_salary` int(11) DEFAULT 0 NOT NULL, `curency` varchar(255) DEFAULT '' NOT NULL, `job_description` text NOT NULL, `job_requirement` text NOT NULL, `benefits` text NOT NULL, `aplicant_experience` varchar(255) DEFAULT '' NOT NULL, `aplicant_function` varchar(255) DEFAULT '' NOT NULL, `aplicant_employment_type` varchar(255) DEFAULT '' NOT NULL, `aplicant_industry` varchar(255) DEFAULT '' NOT NULL, `aplicant_education` varchar(255) DEFAULT '' NOT NULL, `job_search_keyword` varchar(255) DEFAULT '' NOT NULL, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
-  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
-  [1m[35mSQL (0.3ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20160913092133')
-  [1m[36m (42.0ms)[0m  [1mCOMMIT[0m
-  [1m[35mActiveRecord::SchemaMigration Load (0.2ms)[0m  SELECT `schema_migrations`.* FROM `schema_migrations`
-  [1m[36m (0.3ms)[0m  [1mSELECT fk.referenced_table_name as 'to_table'
-      ,fk.referenced_column_name as 'primary_key'
-      ,fk.column_name as 'column'
-      ,fk.constraint_name as 'name'
-FROM information_schema.key_column_usage fk
-WHERE fk.referenced_column_name is not null
-  AND fk.table_schema = 'teammate-talent-system_development'
-  AND fk.table_name = 'jobs'
-[0m
-  [1m[35m (0.2ms)[0m  SHOW CREATE TABLE `jobs`
-  [1m[36m (0.3ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations`[0m
-  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
-  [1m[35m (139.4ms)[0m  DROP TABLE `jobs`
-  [1m[36mSQL (47.2ms)[0m  [1mDELETE FROM `schema_migrations` WHERE `schema_migrations`.`version` = '20160913092133'[0m
-  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT `schema_migrations`.* FROM `schema_migrations`
-  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
-Migrating to CreateJobs (20160913095528)
-  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
-Migrating to CreateJobs (20160913100017)
-  [1m[35m (255.6ms)[0m  CREATE TABLE `jobs` (`id` int(11) auto_increment PRIMARY KEY, `job_title` varchar(255) DEFAULT '' NOT NULL, `departement` varchar(255) DEFAULT '' NOT NULL, `job_code` varchar(255) DEFAULT '' NOT NULL, `country` varchar(255) DEFAULT '' NOT NULL, `state` varchar(255) DEFAULT '' NOT NULL, `city` varchar(255) DEFAULT '' NOT NULL, `zip_code` varchar(255) DEFAULT '' NOT NULL, `min_salary` int(11) DEFAULT 0 NOT NULL, `max_salary` int(11) DEFAULT 0 NOT NULL, `curency` varchar(255) DEFAULT '' NOT NULL, `job_description` text NOT NULL, `job_requirement` text NOT NULL, `benefits` text NOT NULL, `aplicant_experience` varchar(255) DEFAULT '' NOT NULL, `aplicant_function` varchar(255) DEFAULT '' NOT NULL, `aplicant_employment_type` varchar(255) DEFAULT '' NOT NULL, `aplicant_industry` varchar(255) DEFAULT '' NOT NULL, `aplicant_education` varchar(255) DEFAULT '' NOT NULL, `job_search_keyword` varchar(255) DEFAULT '' NOT NULL, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
-  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
-  [1m[35mSQL (0.5ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20160913100017')
-  [1m[36m (33.0ms)[0m  [1mCOMMIT[0m
-  [1m[35mActiveRecord::SchemaMigration Load (0.2ms)[0m  SELECT `schema_migrations`.* FROM `schema_migrations`
-  [1m[36m (0.3ms)[0m  [1mSELECT fk.referenced_table_name as 'to_table'
-      ,fk.referenced_column_name as 'primary_key'
-      ,fk.column_name as 'column'
-      ,fk.constraint_name as 'name'
-FROM information_schema.key_column_usage fk
-WHERE fk.referenced_column_name is not null
-  AND fk.table_schema = 'teammate-talent-system_development'
-  AND fk.table_name = 'jobs'
-[0m
-  [1m[35m (0.2ms)[0m  SHOW CREATE TABLE `jobs`
-  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
-Migrating to CreateApplicants (20160913100602)
-  [1m[35m (255.0ms)[0m  CREATE TABLE `applicants` (`id` int(11) auto_increment PRIMARY KEY, `name` varchar(255) DEFAULT '' NOT NULL, `gender` varchar(255) DEFAULT '' NOT NULL, `date_birth` date NOT NULL, `email` varchar(255) DEFAULT '' NOT NULL, `headline` varchar(255) DEFAULT '' NOT NULL, `phone` varchar(255) DEFAULT '' NOT NULL, `address` varchar(255) DEFAULT '' NOT NULL, `photo` varchar(255) DEFAULT '' NOT NULL, `name_school` varchar(255) DEFAULT '' NOT NULL, `state_study` varchar(255) DEFAULT '' NOT NULL, `degree` varchar(255) DEFAULT '' NOT NULL, `company_name` varchar(255) DEFAULT '' NOT NULL, `industry` varchar(255) DEFAULT '' NOT NULL, `title` varchar(255) DEFAULT '' NOT NULL, `summary` varchar(255) DEFAULT '' NOT NULL, `resume` varchar(255) DEFAULT '' NOT NULL, `status` varchar(255) DEFAULT '' NOT NULL, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
-  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
-  [1m[35mSQL (0.2ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20160913100602')
-  [1m[36m (65.1ms)[0m  [1mCOMMIT[0m
-  [1m[35mActiveRecord::SchemaMigration Load (0.2ms)[0m  SELECT `schema_migrations`.* FROM `schema_migrations`
-  [1m[36m (0.3ms)[0m  [1mSELECT fk.referenced_table_name as 'to_table'
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.3ms)[0m  SELECT `schema_migrations`.* FROM `schema_migrations`
+  [1m[36m (0.4ms)[0m  [1mSELECT fk.referenced_table_name as 'to_table'
       ,fk.referenced_column_name as 'primary_key'
       ,fk.column_name as 'column'
       ,fk.constraint_name as 'name'
@@ -425,7 +10,7 @@ WHERE fk.referenced_column_name is not null
   AND fk.table_name = 'applicants'
 [0m
   [1m[35m (0.2ms)[0m  SHOW CREATE TABLE `applicants`
-  [1m[36m (0.2ms)[0m  [1mSELECT fk.referenced_table_name as 'to_table'
+  [1m[36m (0.4ms)[0m  [1mSELECT fk.referenced_table_name as 'to_table'
       ,fk.referenced_column_name as 'primary_key'
       ,fk.column_name as 'column'
       ,fk.constraint_name as 'name'
@@ -437,214 +22,24 @@ WHERE fk.referenced_column_name is not null
   [1m[35m (0.2ms)[0m  SHOW CREATE TABLE `jobs`
 
 
-Started GET "/job" for 127.0.0.1 at 2016-09-13 17:13:41 +0700
-
-ArgumentError (Invalid route name, already in use: 'jobs' 
-You may have defined two routes with the same name using the `:as` option, or you may be overriding a route already defined by a resource with the same naming. For the latter, you can restrict the routes created with `resources` as explained here: 
-http://guides.rubyonrails.org/routing.html#restricting-the-routes-created):
-  config/routes.rb:4:in `block in <top (required)>'
-  config/routes.rb:1:in `<top (required)>'
-
-
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_source.erb (7.7ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.4ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.6ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (24.6ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.4ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.2ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.2ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (15.4ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.2ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.7ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (33.5ms)
+Started GET "/applicants/new" for 127.0.0.1 at 2016-09-14 09:47:29 +0700
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Processing by ApplicantsController#new as HTML
+  Rendered applicants/_form.html.slim (46.3ms)
+  Rendered applicants/new.html.slim within layouts/application (64.3ms)
+Completed 200 OK in 4890ms (Views: 4856.4ms | ActiveRecord: 1.2ms)
 
 
-Started GET "/jobs" for 127.0.0.1 at 2016-09-13 17:13:45 +0700
-  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
-Processing by JobsController#index as HTML
-  [1m[35mJob Load (0.3ms)[0m  SELECT `jobs`.* FROM `jobs`
-  Rendered jobs/index.html.slim within layouts/application (32.2ms)
-Completed 500 Internal Server Error in 418ms (ActiveRecord: 0.9ms)
-
-ActionView::Template::Error (require_self can only be called once per source file):
-    2: <html>
-    3: <head>
-    4:   <title>Teamhire</title>
-    5:   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-    6:   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-    7:   <%= csrf_meta_tags %>
-    8: </head>
-  app/assets/stylesheets/application.css:16
-  app/views/layouts/application.html.erb:5:in `_app_views_layouts_application_html_erb___1549007912050729281_70001331822600'
+Started GET "/applicants" for 127.0.0.1 at 2016-09-14 09:47:40 +0700
+Processing by ApplicantsController#index as HTML
+  [1m[35mApplicant Load (4.0ms)[0m  SELECT `applicants`.* FROM `applicants`
+  Rendered applicants/index.html.slim within layouts/application (30.1ms)
+Completed 200 OK in 78ms (Views: 72.5ms | ActiveRecord: 4.0ms)
 
 
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_source.erb (6.6ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.6ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (24.2ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.3ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.5ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (17.6ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.2ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (32.9ms)
+Started GET "/uploads/applicant/photo/1/thumb_42_big.jpg" for 127.0.0.1 at 2016-09-14 09:47:40 +0700
 
-
-Started GET "/" for 127.0.0.1 at 2016-09-13 20:10:15 +0700
-
-Mysql2::Error (Can't connect to local MySQL server through socket '/opt/lampp/var/mysql/mysql.sock' (2)):
-  mysql2 (0.4.4) lib/mysql2/client.rb:87:in `connect'
-  mysql2 (0.4.4) lib/mysql2/client.rb:87:in `initialize'
-  activerecord (4.2.6) lib/active_record/connection_adapters/mysql2_adapter.rb:18:in `new'
-  activerecord (4.2.6) lib/active_record/connection_adapters/mysql2_adapter.rb:18:in `mysql2_connection'
-  activerecord (4.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:438:in `new_connection'
-  activerecord (4.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:448:in `checkout_new_connection'
-  activerecord (4.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:422:in `acquire_connection'
-  activerecord (4.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:349:in `block in checkout'
-  /home/ilhamfi/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/monitor.rb:214:in `mon_synchronize'
-  activerecord (4.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:348:in `checkout'
-  activerecord (4.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:263:in `block in connection'
-  /home/ilhamfi/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/monitor.rb:214:in `mon_synchronize'
-  activerecord (4.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:262:in `connection'
-  activerecord (4.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:571:in `retrieve_connection'
-  activerecord (4.2.6) lib/active_record/connection_handling.rb:113:in `retrieve_connection'
-  activerecord (4.2.6) lib/active_record/connection_handling.rb:87:in `connection'
-  activerecord (4.2.6) lib/active_record/migration.rb:383:in `connection'
-  activerecord (4.2.6) lib/active_record/migration.rb:370:in `call'
-  actionpack (4.2.6) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
-  activesupport (4.2.6) lib/active_support/callbacks.rb:88:in `__run_callbacks__'
-  activesupport (4.2.6) lib/active_support/callbacks.rb:778:in `_run_call_callbacks'
-  activesupport (4.2.6) lib/active_support/callbacks.rb:81:in `run_callbacks'
-  actionpack (4.2.6) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
-  actionpack (4.2.6) lib/action_dispatch/middleware/reloader.rb:73:in `call'
-  actionpack (4.2.6) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
-  actionpack (4.2.6) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
-  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
-  web-console (2.3.0) lib/web_console/middleware.rb:18:in `catch'
-  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
-  actionpack (4.2.6) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
-  railties (4.2.6) lib/rails/rack/logger.rb:38:in `call_app'
-  railties (4.2.6) lib/rails/rack/logger.rb:20:in `block in call'
-  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `block in tagged'
-  activesupport (4.2.6) lib/active_support/tagged_logging.rb:26:in `tagged'
-  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `tagged'
-  railties (4.2.6) lib/rails/rack/logger.rb:20:in `call'
-  quiet_assets (1.1.0) lib/quiet_assets.rb:27:in `call_with_quiet_assets'
-  actionpack (4.2.6) lib/action_dispatch/middleware/request_id.rb:21:in `call'
-  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
-  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
-  activesupport (4.2.6) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
-  rack (1.6.4) lib/rack/lock.rb:17:in `call'
-  actionpack (4.2.6) lib/action_dispatch/middleware/static.rb:120:in `call'
-  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
-  railties (4.2.6) lib/rails/engine.rb:518:in `call'
-  railties (4.2.6) lib/rails/application.rb:165:in `call'
-  rack (1.6.4) lib/rack/lock.rb:17:in `call'
-  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
-  rack (1.6.4) lib/rack/handler/webrick.rb:88:in `service'
-  /home/ilhamfi/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:140:in `service'
-  /home/ilhamfi/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:96:in `run'
-  /home/ilhamfi/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/server.rb:296:in `block in start_thread'
-
-
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_source.erb (2.6ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.4ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.3ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (54.7ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.7ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.2ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (100.2ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.3ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (126.3ms)
-
-
-Started GET "/" for 127.0.0.1 at 2016-09-13 20:10:21 +0700
-
-Mysql2::Error (Can't connect to local MySQL server through socket '/opt/lampp/var/mysql/mysql.sock' (2)):
-  mysql2 (0.4.4) lib/mysql2/client.rb:87:in `connect'
-  mysql2 (0.4.4) lib/mysql2/client.rb:87:in `initialize'
-  activerecord (4.2.6) lib/active_record/connection_adapters/mysql2_adapter.rb:18:in `new'
-  activerecord (4.2.6) lib/active_record/connection_adapters/mysql2_adapter.rb:18:in `mysql2_connection'
-  activerecord (4.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:438:in `new_connection'
-  activerecord (4.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:448:in `checkout_new_connection'
-  activerecord (4.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:422:in `acquire_connection'
-  activerecord (4.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:349:in `block in checkout'
-  /home/ilhamfi/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/monitor.rb:214:in `mon_synchronize'
-  activerecord (4.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:348:in `checkout'
-  activerecord (4.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:263:in `block in connection'
-  /home/ilhamfi/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/monitor.rb:214:in `mon_synchronize'
-  activerecord (4.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:262:in `connection'
-  activerecord (4.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:571:in `retrieve_connection'
-  activerecord (4.2.6) lib/active_record/connection_handling.rb:113:in `retrieve_connection'
-  activerecord (4.2.6) lib/active_record/connection_handling.rb:87:in `connection'
-  activerecord (4.2.6) lib/active_record/migration.rb:383:in `connection'
-  activerecord (4.2.6) lib/active_record/migration.rb:370:in `call'
-  actionpack (4.2.6) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
-  activesupport (4.2.6) lib/active_support/callbacks.rb:88:in `__run_callbacks__'
-  activesupport (4.2.6) lib/active_support/callbacks.rb:778:in `_run_call_callbacks'
-  activesupport (4.2.6) lib/active_support/callbacks.rb:81:in `run_callbacks'
-  actionpack (4.2.6) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
-  actionpack (4.2.6) lib/action_dispatch/middleware/reloader.rb:73:in `call'
-  actionpack (4.2.6) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
-  actionpack (4.2.6) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
-  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
-  web-console (2.3.0) lib/web_console/middleware.rb:18:in `catch'
-  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
-  actionpack (4.2.6) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
-  railties (4.2.6) lib/rails/rack/logger.rb:38:in `call_app'
-  railties (4.2.6) lib/rails/rack/logger.rb:20:in `block in call'
-  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `block in tagged'
-  activesupport (4.2.6) lib/active_support/tagged_logging.rb:26:in `tagged'
-  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `tagged'
-  railties (4.2.6) lib/rails/rack/logger.rb:20:in `call'
-  quiet_assets (1.1.0) lib/quiet_assets.rb:27:in `call_with_quiet_assets'
-  actionpack (4.2.6) lib/action_dispatch/middleware/request_id.rb:21:in `call'
-  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
-  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
-  activesupport (4.2.6) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
-  rack (1.6.4) lib/rack/lock.rb:17:in `call'
-  actionpack (4.2.6) lib/action_dispatch/middleware/static.rb:120:in `call'
-  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
-  railties (4.2.6) lib/rails/engine.rb:518:in `call'
-  railties (4.2.6) lib/rails/application.rb:165:in `call'
-  rack (1.6.4) lib/rack/lock.rb:17:in `call'
-  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
-  rack (1.6.4) lib/rack/handler/webrick.rb:88:in `service'
-  /home/ilhamfi/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:140:in `service'
-  /home/ilhamfi/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:96:in `run'
-  /home/ilhamfi/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/server.rb:296:in `block in start_thread'
-
-
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_source.erb (2.8ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.3ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.6ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (18.0ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.4ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.2ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (17.8ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.2ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.6ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (34.4ms)
-
-
-Started GET "/" for 127.0.0.1 at 2016-09-13 20:11:53 +0700
-  [1m[36mActiveRecord::SchemaMigration Load (14.9ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
-Processing by Rails::WelcomeController#index as HTML
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/railties-4.2.6/lib/rails/templates/rails/welcome/index.html.erb (0.8ms)
-Completed 200 OK in 38ms (Views: 21.8ms | ActiveRecord: 0.0ms)
-
-
-Started GET "/job_page" for 127.0.0.1 at 2016-09-13 20:12:27 +0700
-
-ActionController::RoutingError (No route matches [GET] "/job_page"):
+ActionController::RoutingError (No route matches [GET] "/uploads/applicant/photo/1/thumb_42_big.jpg"):
   actionpack (4.2.6) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
   web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
   web-console (2.3.0) lib/web_console/middleware.rb:18:in `catch'
@@ -669,272 +64,963 @@ ActionController::RoutingError (No route matches [GET] "/job_page"):
   rack (1.6.4) lib/rack/lock.rb:17:in `call'
   rack (1.6.4) lib/rack/content_length.rb:15:in `call'
   rack (1.6.4) lib/rack/handler/webrick.rb:88:in `service'
-  /home/ilhamfi/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:140:in `service'
-  /home/ilhamfi/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:96:in `run'
-  /home/ilhamfi/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/server.rb:296:in `block in start_thread'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:140:in `service'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:96:in `run'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/server.rb:296:in `block in start_thread'
 
 
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.2ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.2ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/routes/_table.html.erb (188.8ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (241.6ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.4ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.2ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.2ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (15.7ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.2ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.3ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (31.5ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.0ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.6ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/routes/_table.html.erb (2.7ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (2.5ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (41.5ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.8ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (21.6ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (1.0ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (47.5ms)
 
 
-Started GET "/jobs_page" for 127.0.0.1 at 2016-09-13 20:12:43 +0700
-Processing by JobsController#index as HTML
-  [1m[35mJob Load (17.6ms)[0m  SELECT `jobs`.* FROM `jobs`
-  Rendered jobs/index.html.slim within layouts/application (43.3ms)
-Completed 500 Internal Server Error in 494ms (ActiveRecord: 18.1ms)
+Started GET "/uploads/applicant/photo/2/thumb_94_big.jpg" for 127.0.0.1 at 2016-09-14 09:47:40 +0700
 
-ActionView::Template::Error (require_self can only be called once per source file):
-    2: <html>
-    3: <head>
-    4:   <title>Teamhire</title>
-    5:   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-    6:   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-    7:   <%= csrf_meta_tags %>
-    8: </head>
-  app/assets/stylesheets/application.css:16
-  app/views/layouts/application.html.erb:5:in `_app_views_layouts_application_html_erb__3257063817876456932_69868082778340'
-
-
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_source.erb (6.3ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.5ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.4ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (25.1ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.3ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.2ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (15.8ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (33.4ms)
-
-
-Started POST "/__web_console/repl_sessions/6ad3073f691bf13885a0512e537cbc25/trace" for 127.0.0.1 at 2016-09-13 20:14:53 +0700
+ActionController::RoutingError (No route matches [GET] "/uploads/applicant/photo/2/thumb_94_big.jpg"):
+  actionpack (4.2.6) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `catch'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.6) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.6) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.6) lib/rails/rack/logger.rb:20:in `call'
+  quiet_assets (1.1.0) lib/quiet_assets.rb:27:in `call_with_quiet_assets'
+  actionpack (4.2.6) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.6) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/static.rb:120:in `call'
+  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.6) lib/rails/engine.rb:518:in `call'
+  railties (4.2.6) lib/rails/application.rb:165:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.4) lib/rack/handler/webrick.rb:88:in `service'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:140:in `service'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:96:in `run'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/server.rb:296:in `block in start_thread'
 
 
-Started POST "/__web_console/repl_sessions/6ad3073f691bf13885a0512e537cbc25/trace" for 127.0.0.1 at 2016-09-13 20:14:55 +0700
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.3ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.4ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/routes/_table.html.erb (2.9ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.8ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (34.7ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.4ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.9ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.6ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (21.9ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.4ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.5ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (42.4ms)
 
 
-Started GET "/jobs_page" for 127.0.0.1 at 2016-09-13 20:15:14 +0700
-Processing by JobsController#index as HTML
-  [1m[36mJob Load (0.4ms)[0m  [1mSELECT `jobs`.* FROM `jobs`[0m
-  Rendered jobs/index.html.slim within layouts/application (1.2ms)
-Completed 200 OK in 3862ms (Views: 3860.7ms | ActiveRecord: 0.4ms)
+Started GET "/uploads/applicant/photo/3/thumb_cs.jpg" for 127.0.0.1 at 2016-09-14 09:47:40 +0700
+
+ActionController::RoutingError (No route matches [GET] "/uploads/applicant/photo/3/thumb_cs.jpg"):
+  actionpack (4.2.6) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `catch'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.6) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.6) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.6) lib/rails/rack/logger.rb:20:in `call'
+  quiet_assets (1.1.0) lib/quiet_assets.rb:27:in `call_with_quiet_assets'
+  actionpack (4.2.6) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.6) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/static.rb:120:in `call'
+  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.6) lib/rails/engine.rb:518:in `call'
+  railties (4.2.6) lib/rails/application.rb:165:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.4) lib/rack/handler/webrick.rb:88:in `service'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:140:in `service'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:96:in `run'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/server.rb:296:in `block in start_thread'
 
 
-Started GET "/jobs_page" for 127.0.0.1 at 2016-09-13 20:15:26 +0700
-Processing by JobsController#index as HTML
-  [1m[35mJob Load (0.2ms)[0m  SELECT `jobs`.* FROM `jobs`
-  Rendered jobs/index.html.slim within layouts/application (0.9ms)
-Completed 200 OK in 65ms (Views: 64.3ms | ActiveRecord: 0.2ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.5ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.4ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/routes/_table.html.erb (1.2ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.8ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (32.4ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.4ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (1.1ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (23.8ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.5ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.6ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (46.2ms)
 
 
-Started GET "/jobs/new" for 127.0.0.1 at 2016-09-13 20:15:30 +0700
-Processing by JobsController#new as HTML
-  Rendered jobs/_form.html.slim (56.8ms)
-  Rendered jobs/new.html.slim within layouts/application (67.8ms)
-Completed 200 OK in 139ms (Views: 116.6ms | ActiveRecord: 0.8ms)
+Started GET "/uploads/applicant/photo/4/thumb_IMG_0524.JPG" for 127.0.0.1 at 2016-09-14 09:47:40 +0700
+
+ActionController::RoutingError (No route matches [GET] "/uploads/applicant/photo/4/thumb_IMG_0524.JPG"):
+  actionpack (4.2.6) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `catch'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.6) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.6) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.6) lib/rails/rack/logger.rb:20:in `call'
+  quiet_assets (1.1.0) lib/quiet_assets.rb:27:in `call_with_quiet_assets'
+  actionpack (4.2.6) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.6) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/static.rb:120:in `call'
+  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.6) lib/rails/engine.rb:518:in `call'
+  railties (4.2.6) lib/rails/application.rb:165:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.4) lib/rack/handler/webrick.rb:88:in `service'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:140:in `service'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:96:in `run'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/server.rb:296:in `block in start_thread'
 
 
-Started GET "/jobs" for 127.0.0.1 at 2016-09-13 20:15:35 +0700
-Processing by JobsController#index as HTML
-  [1m[36mJob Load (0.3ms)[0m  [1mSELECT `jobs`.* FROM `jobs`[0m
-  Rendered jobs/index.html.slim within layouts/application (0.8ms)
-Completed 200 OK in 51ms (Views: 50.0ms | ActiveRecord: 0.3ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.1ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.3ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/routes/_table.html.erb (2.4ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.2ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (31.3ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.9ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.5ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (20.2ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.9ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (43.1ms)
 
 
-Started GET "/applicants_page" for 127.0.0.1 at 2016-09-13 20:16:01 +0700
-Processing by ApplicantsController#index as HTML
-  [1m[35mApplicant Load (113.4ms)[0m  SELECT `applicants`.* FROM `applicants`
-  Rendered applicants/index.html.slim within layouts/application (120.9ms)
-Completed 200 OK in 309ms (Views: 140.1ms | ActiveRecord: 114.0ms)
-
-
-Started GET "/applicants_page" for 127.0.0.1 at 2016-09-13 20:29:40 +0700
-Processing by ApplicantsController#index as HTML
-  [1m[36mApplicant Load (0.2ms)[0m  [1mSELECT `applicants`.* FROM `applicants`[0m
-  Rendered applicants/index.html.slim within layouts/application (0.7ms)
-Completed 500 Internal Server Error in 7ms (ActiveRecord: 0.2ms)
-
-ActionView::Template::Error (Malformed indentation
-  /home/ilhamfi/Documents/PKL/Rails App/teammate-talent-system/app/views/layouts/application.html.slim, Line 4, Column 2
-    title Teamhire
-    ^
-):
-    1: doctype html
-    2: html
-    3: 	head
-    4:   title Teamhire
-    5:   = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
-    6:   = javascript_include_tag 'application', 'data-turbolinks-track' => true
-    7:   = csrf_meta_tags
-  app/views/layouts/application.html.slim:4
-
-
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_source.erb (5.0ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.4ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.7ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (23.6ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.4ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.5ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (18.2ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.4ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.5ms)
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (37.7ms)
-
-
-Started GET "/applicants_page" for 127.0.0.1 at 2016-09-13 20:29:49 +0700
-Processing by ApplicantsController#index as HTML
-  [1m[35mApplicant Load (0.2ms)[0m  SELECT `applicants`.* FROM `applicants`
-  Rendered applicants/index.html.slim within layouts/application (0.7ms)
-Completed 200 OK in 39ms (Views: 38.0ms | ActiveRecord: 0.2ms)
-
-
-Started GET "/applicants_page" for 127.0.0.1 at 2016-09-13 20:30:01 +0700
+Started GET "/applicants" for 127.0.0.1 at 2016-09-14 09:47:41 +0700
 Processing by ApplicantsController#index as HTML
   [1m[36mApplicant Load (0.5ms)[0m  [1mSELECT `applicants`.* FROM `applicants`[0m
-  Rendered applicants/index.html.slim within layouts/application (1.3ms)
-Completed 200 OK in 46ms (Views: 44.5ms | ActiveRecord: 0.5ms)
+  Rendered applicants/index.html.slim within layouts/application (10.6ms)
+Completed 200 OK in 61ms (Views: 59.0ms | ActiveRecord: 0.5ms)
 
 
-Started GET "/applicants/new" for 127.0.0.1 at 2016-09-13 20:30:03 +0700
-Processing by ApplicantsController#new as HTML
-  Rendered applicants/_form.html.slim (22.3ms)
-  Rendered applicants/new.html.slim within layouts/application (25.3ms)
-Completed 200 OK in 91ms (Views: 76.6ms | ActiveRecord: 0.2ms)
+Started GET "/uploads/applicant/photo/1/thumb_42_big.jpg" for 127.0.0.1 at 2016-09-14 09:47:41 +0700
+
+ActionController::RoutingError (No route matches [GET] "/uploads/applicant/photo/1/thumb_42_big.jpg"):
+  actionpack (4.2.6) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `catch'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.6) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.6) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.6) lib/rails/rack/logger.rb:20:in `call'
+  quiet_assets (1.1.0) lib/quiet_assets.rb:27:in `call_with_quiet_assets'
+  actionpack (4.2.6) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.6) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/static.rb:120:in `call'
+  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.6) lib/rails/engine.rb:518:in `call'
+  railties (4.2.6) lib/rails/application.rb:165:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.4) lib/rack/handler/webrick.rb:88:in `service'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:140:in `service'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:96:in `run'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/server.rb:296:in `block in start_thread'
 
 
-Started GET "/applicants_page" for 127.0.0.1 at 2016-09-13 20:41:49 +0700
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.3ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.6ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/routes/_table.html.erb (1.5ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.7ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (29.1ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.5ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (20.4ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.4ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.5ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (40.5ms)
+
+
+Started GET "/uploads/applicant/photo/2/thumb_94_big.jpg" for 127.0.0.1 at 2016-09-14 09:47:41 +0700
+
+ActionController::RoutingError (No route matches [GET] "/uploads/applicant/photo/2/thumb_94_big.jpg"):
+  actionpack (4.2.6) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `catch'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.6) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.6) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.6) lib/rails/rack/logger.rb:20:in `call'
+  quiet_assets (1.1.0) lib/quiet_assets.rb:27:in `call_with_quiet_assets'
+  actionpack (4.2.6) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.6) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/static.rb:120:in `call'
+  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.6) lib/rails/engine.rb:518:in `call'
+  railties (4.2.6) lib/rails/application.rb:165:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.4) lib/rack/handler/webrick.rb:88:in `service'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:140:in `service'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:96:in `run'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/server.rb:296:in `block in start_thread'
+
+
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.0ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.6ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/routes/_table.html.erb (3.9ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.6ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (35.2ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (1.4ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.8ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.5ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.5ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (22.7ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.4ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (1.4ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (50.9ms)
+
+
+Started GET "/uploads/applicant/photo/3/thumb_cs.jpg" for 127.0.0.1 at 2016-09-14 09:47:41 +0700
+
+ActionController::RoutingError (No route matches [GET] "/uploads/applicant/photo/3/thumb_cs.jpg"):
+  actionpack (4.2.6) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `catch'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.6) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.6) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.6) lib/rails/rack/logger.rb:20:in `call'
+  quiet_assets (1.1.0) lib/quiet_assets.rb:27:in `call_with_quiet_assets'
+  actionpack (4.2.6) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.6) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/static.rb:120:in `call'
+  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.6) lib/rails/engine.rb:518:in `call'
+  railties (4.2.6) lib/rails/application.rb:165:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.4) lib/rack/handler/webrick.rb:88:in `service'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:140:in `service'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:96:in `run'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/server.rb:296:in `block in start_thread'
+
+
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.8ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.7ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/routes/_table.html.erb (1.6ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.2ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (32.0ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.5ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.5ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (22.7ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.6ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (43.7ms)
+
+
+Started GET "/uploads/applicant/photo/4/thumb_IMG_0524.JPG" for 127.0.0.1 at 2016-09-14 09:47:41 +0700
+
+ActionController::RoutingError (No route matches [GET] "/uploads/applicant/photo/4/thumb_IMG_0524.JPG"):
+  actionpack (4.2.6) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `catch'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.6) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.6) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.6) lib/rails/rack/logger.rb:20:in `call'
+  quiet_assets (1.1.0) lib/quiet_assets.rb:27:in `call_with_quiet_assets'
+  actionpack (4.2.6) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.6) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/static.rb:120:in `call'
+  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.6) lib/rails/engine.rb:518:in `call'
+  railties (4.2.6) lib/rails/application.rb:165:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.4) lib/rack/handler/webrick.rb:88:in `service'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:140:in `service'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:96:in `run'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/server.rb:296:in `block in start_thread'
+
+
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.0ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.8ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/routes/_table.html.erb (1.7ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.3ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (30.0ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.9ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (19.0ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.2ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (1.2ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (39.0ms)
+
+
+Started GET "/applicants" for 127.0.0.1 at 2016-09-14 09:47:42 +0700
 Processing by ApplicantsController#index as HTML
-  [1m[35mApplicant Load (0.2ms)[0m  SELECT `applicants`.* FROM `applicants`
-  Rendered applicants/index.html.slim within layouts/application (7.8ms)
-Completed 200 OK in 40ms (Views: 39.0ms | ActiveRecord: 0.2ms)
+  [1m[35mApplicant Load (1.0ms)[0m  SELECT `applicants`.* FROM `applicants`
+  Rendered applicants/index.html.slim within layouts/application (8.5ms)
+Completed 200 OK in 58ms (Views: 56.6ms | ActiveRecord: 1.0ms)
 
 
-Started GET "/applicants_page" for 127.0.0.1 at 2016-09-13 21:23:35 +0700
+Started GET "/uploads/applicant/photo/1/thumb_42_big.jpg" for 127.0.0.1 at 2016-09-14 09:47:42 +0700
+
+ActionController::RoutingError (No route matches [GET] "/uploads/applicant/photo/1/thumb_42_big.jpg"):
+  actionpack (4.2.6) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `catch'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.6) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.6) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.6) lib/rails/rack/logger.rb:20:in `call'
+  quiet_assets (1.1.0) lib/quiet_assets.rb:27:in `call_with_quiet_assets'
+  actionpack (4.2.6) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.6) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/static.rb:120:in `call'
+  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.6) lib/rails/engine.rb:518:in `call'
+  railties (4.2.6) lib/rails/application.rb:165:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.4) lib/rack/handler/webrick.rb:88:in `service'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:140:in `service'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:96:in `run'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/server.rb:296:in `block in start_thread'
+
+
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.5ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/routes/_route.html.erb (2.2ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/routes/_table.html.erb (2.2ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.4ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (39.0ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.7ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.9ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (40.2ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.4ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.5ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (72.5ms)
+
+
+Started GET "/uploads/applicant/photo/2/thumb_94_big.jpg" for 127.0.0.1 at 2016-09-14 09:47:42 +0700
+
+ActionController::RoutingError (No route matches [GET] "/uploads/applicant/photo/2/thumb_94_big.jpg"):
+  actionpack (4.2.6) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `catch'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.6) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.6) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.6) lib/rails/rack/logger.rb:20:in `call'
+  quiet_assets (1.1.0) lib/quiet_assets.rb:27:in `call_with_quiet_assets'
+  actionpack (4.2.6) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.6) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/static.rb:120:in `call'
+  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.6) lib/rails/engine.rb:518:in `call'
+  railties (4.2.6) lib/rails/application.rb:165:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.4) lib/rack/handler/webrick.rb:88:in `service'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:140:in `service'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:96:in `run'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/server.rb:296:in `block in start_thread'
+
+
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.1ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.3ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/routes/_table.html.erb (1.8ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.6ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (32.0ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.7ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.9ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (19.9ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.4ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.5ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (52.6ms)
+
+
+Started GET "/uploads/applicant/photo/4/thumb_IMG_0524.JPG" for 127.0.0.1 at 2016-09-14 09:47:42 +0700
+
+ActionController::RoutingError (No route matches [GET] "/uploads/applicant/photo/4/thumb_IMG_0524.JPG"):
+  actionpack (4.2.6) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `catch'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.6) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.6) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.6) lib/rails/rack/logger.rb:20:in `call'
+  quiet_assets (1.1.0) lib/quiet_assets.rb:27:in `call_with_quiet_assets'
+  actionpack (4.2.6) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.6) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/static.rb:120:in `call'
+  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.6) lib/rails/engine.rb:518:in `call'
+  railties (4.2.6) lib/rails/application.rb:165:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.4) lib/rack/handler/webrick.rb:88:in `service'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:140:in `service'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:96:in `run'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/server.rb:296:in `block in start_thread'
+
+
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.6ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/routes/_route.html.erb (1.5ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/routes/_table.html.erb (1.2ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.2ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (29.2ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.7ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (17.2ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.2ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.7ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (38.0ms)
+
+
+Started GET "/uploads/applicant/photo/3/thumb_cs.jpg" for 127.0.0.1 at 2016-09-14 09:47:42 +0700
+
+ActionController::RoutingError (No route matches [GET] "/uploads/applicant/photo/3/thumb_cs.jpg"):
+  actionpack (4.2.6) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `catch'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.6) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.6) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.6) lib/rails/rack/logger.rb:20:in `call'
+  quiet_assets (1.1.0) lib/quiet_assets.rb:27:in `call_with_quiet_assets'
+  actionpack (4.2.6) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.6) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/static.rb:120:in `call'
+  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.6) lib/rails/engine.rb:518:in `call'
+  railties (4.2.6) lib/rails/application.rb:165:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.4) lib/rack/handler/webrick.rb:88:in `service'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:140:in `service'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:96:in `run'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/server.rb:296:in `block in start_thread'
+
+
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.7ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/routes/_route.html.erb (2.2ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/routes/_table.html.erb (1.2ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.2ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (28.4ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (1.0ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (17.4ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.4ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.8ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (37.9ms)
+
+
+Started GET "/applicants" for 127.0.0.1 at 2016-09-14 09:47:43 +0700
+Processing by ApplicantsController#index as HTML
+  [1m[36mApplicant Load (0.4ms)[0m  [1mSELECT `applicants`.* FROM `applicants`[0m
+  Rendered applicants/index.html.slim within layouts/application (6.2ms)
+Completed 200 OK in 51ms (Views: 49.0ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/uploads/applicant/photo/1/thumb_42_big.jpg" for 127.0.0.1 at 2016-09-14 09:47:43 +0700
+
+ActionController::RoutingError (No route matches [GET] "/uploads/applicant/photo/1/thumb_42_big.jpg"):
+  actionpack (4.2.6) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `catch'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.6) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.6) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.6) lib/rails/rack/logger.rb:20:in `call'
+  quiet_assets (1.1.0) lib/quiet_assets.rb:27:in `call_with_quiet_assets'
+  actionpack (4.2.6) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.6) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/static.rb:120:in `call'
+  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.6) lib/rails/engine.rb:518:in `call'
+  railties (4.2.6) lib/rails/application.rb:165:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.4) lib/rack/handler/webrick.rb:88:in `service'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:140:in `service'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:96:in `run'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/server.rb:296:in `block in start_thread'
+
+
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.8ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/routes/_route.html.erb (2.5ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/routes/_table.html.erb (2.1ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (2.2ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (47.5ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.9ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.7ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (25.3ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (47.4ms)
+
+
+Started GET "/uploads/applicant/photo/4/thumb_IMG_0524.JPG" for 127.0.0.1 at 2016-09-14 09:47:43 +0700
+
+ActionController::RoutingError (No route matches [GET] "/uploads/applicant/photo/4/thumb_IMG_0524.JPG"):
+  actionpack (4.2.6) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `catch'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.6) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.6) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.6) lib/rails/rack/logger.rb:20:in `call'
+  quiet_assets (1.1.0) lib/quiet_assets.rb:27:in `call_with_quiet_assets'
+  actionpack (4.2.6) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.6) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/static.rb:120:in `call'
+  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.6) lib/rails/engine.rb:518:in `call'
+  railties (4.2.6) lib/rails/application.rb:165:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.4) lib/rack/handler/webrick.rb:88:in `service'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:140:in `service'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:96:in `run'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/server.rb:296:in `block in start_thread'
+
+
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.4ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/routes/_route.html.erb (3.2ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/routes/_table.html.erb (2.3ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (2.3ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (37.1ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (1.5ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.7ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (20.7ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.4ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.6ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (46.0ms)
+
+
+Started GET "/uploads/applicant/photo/2/thumb_94_big.jpg" for 127.0.0.1 at 2016-09-14 09:47:43 +0700
+
+ActionController::RoutingError (No route matches [GET] "/uploads/applicant/photo/2/thumb_94_big.jpg"):
+  actionpack (4.2.6) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `catch'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.6) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.6) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.6) lib/rails/rack/logger.rb:20:in `call'
+  quiet_assets (1.1.0) lib/quiet_assets.rb:27:in `call_with_quiet_assets'
+  actionpack (4.2.6) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.6) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/static.rb:120:in `call'
+  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.6) lib/rails/engine.rb:518:in `call'
+  railties (4.2.6) lib/rails/application.rb:165:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.4) lib/rack/handler/webrick.rb:88:in `service'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:140:in `service'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:96:in `run'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/server.rb:296:in `block in start_thread'
+
+
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.6ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/routes/_route.html.erb (2.0ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/routes/_table.html.erb (1.0ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.3ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (28.7ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.4ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.6ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (18.0ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.4ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (37.0ms)
+
+
+Started GET "/uploads/applicant/photo/3/thumb_cs.jpg" for 127.0.0.1 at 2016-09-14 09:47:43 +0700
+
+ActionController::RoutingError (No route matches [GET] "/uploads/applicant/photo/3/thumb_cs.jpg"):
+  actionpack (4.2.6) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `catch'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.6) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.6) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.6) lib/rails/rack/logger.rb:20:in `call'
+  quiet_assets (1.1.0) lib/quiet_assets.rb:27:in `call_with_quiet_assets'
+  actionpack (4.2.6) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.6) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/static.rb:120:in `call'
+  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.6) lib/rails/engine.rb:518:in `call'
+  railties (4.2.6) lib/rails/application.rb:165:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.4) lib/rack/handler/webrick.rb:88:in `service'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:140:in `service'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:96:in `run'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/server.rb:296:in `block in start_thread'
+
+
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.3ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/routes/_route.html.erb (2.2ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/routes/_table.html.erb (1.7ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (2.2ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (29.8ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.5ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.5ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (19.0ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.5ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.6ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (40.5ms)
+
+
+Started GET "/applicants" for 127.0.0.1 at 2016-09-14 09:48:03 +0700
+Processing by ApplicantsController#index as HTML
+  [1m[35mApplicant Load (1.2ms)[0m  SELECT `applicants`.* FROM `applicants`
+  Rendered applicants/index.html.slim within layouts/application (3.5ms)
+Completed 200 OK in 67ms (Views: 64.6ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/applicants/new" for 127.0.0.1 at 2016-09-14 09:48:06 +0700
+Processing by ApplicantsController#new as HTML
+  Rendered applicants/_form.html.slim (16.8ms)
+  Rendered applicants/new.html.slim within layouts/application (18.6ms)
+Completed 200 OK in 63ms (Views: 61.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/applicants" for 127.0.0.1 at 2016-09-14 09:49:06 +0700
+Processing by ApplicantsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"j4rhQu12fg57VJwZFsP6pXcv5DUyNyGYH6qc9DcmXrjqn1BYH74/3g2MStFDH9xstIlTcKrH8yblRyQrdNsJaA==", "applicant"=>{"name"=>"Aditia Pratama", "gender"=>"Man", "date_birth(1i)"=>"2016", "date_birth(2i)"=>"9", "date_birth(3i)"=>"14", "email"=>"adotcyber@gmail.com", "headline"=>"im pro player for team liquid", "phone"=>"089614800388", "address"=>"jln rancabentang", "photo"=>#<ActionDispatch::Http::UploadedFile:0x007ff518eb1850 @tempfile=#<Tempfile:/tmp/RackMultipart20160914-12590-1as36n3.jpg>, @original_filename="94_big.jpg", @content_type="image/jpeg", @headers="Content-Disposition: form-data; name=\"applicant[photo]\"; filename=\"94_big.jpg\"\r\nContent-Type: image/jpeg\r\n">, "name_school"=>"stm ", "state_study"=>"sopwer", "degree"=>"bachelor", "company_name"=>"Voxel", "industry"=>"gaming", "title"=>"surga dunia", "summary"=>"im pro player", "resume"=>#<ActionDispatch::Http::UploadedFile:0x007ff518eb16e8 @tempfile=#<Tempfile:/tmp/RackMultipart20160914-12590-oj297y.pdf>, @original_filename="ruby_on_rails_tutorial_2nd_edition-preview.pdf", @content_type="application/pdf", @headers="Content-Disposition: form-data; name=\"applicant[resume]\"; filename=\"ruby_on_rails_tutorial_2nd_edition-preview.pdf\"\r\nContent-Type: application/pdf\r\n">, "status"=>"applied"}, "commit"=>"Create Applicant"}
+  [1m[36m (1.6ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+Completed 500 Internal Server Error in 178ms (ActiveRecord: 1.7ms)
+
+NameError (undefined local variable or method `image' for #<Applicant:0x007ff518eb8650>):
+  app/models/applicant.rb:10:in `image_size_validation'
+  app/controllers/applicants_controller.rb:30:in `block in create'
+  app/controllers/applicants_controller.rb:29:in `create'
+
+
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_source.erb (6.9ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (4.0ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.3ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (28.4ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.8ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.8ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (19.3ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.2ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.6ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (37.8ms)
+
+
+Started POST "/applicants" for 127.0.0.1 at 2016-09-14 09:49:21 +0700
+Processing by ApplicantsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"j4rhQu12fg57VJwZFsP6pXcv5DUyNyGYH6qc9DcmXrjqn1BYH74/3g2MStFDH9xstIlTcKrH8yblRyQrdNsJaA==", "applicant"=>{"name"=>"Aditia Pratama", "gender"=>"Man", "date_birth(1i)"=>"2016", "date_birth(2i)"=>"9", "date_birth(3i)"=>"14", "email"=>"adotcyber@gmail.com", "headline"=>"im pro player for team liquid", "phone"=>"089614800388", "address"=>"jln rancabentang", "photo"=>#<ActionDispatch::Http::UploadedFile:0x007ff520885bb8 @tempfile=#<Tempfile:/tmp/RackMultipart20160914-12590-2rcow8.jpg>, @original_filename="94_big.jpg", @content_type="image/jpeg", @headers="Content-Disposition: form-data; name=\"applicant[photo]\"; filename=\"94_big.jpg\"\r\nContent-Type: image/jpeg\r\n">, "name_school"=>"stm ", "state_study"=>"sopwer", "degree"=>"bachelor", "company_name"=>"Voxel", "industry"=>"gaming", "title"=>"surga dunia", "summary"=>"im pro player", "resume"=>#<ActionDispatch::Http::UploadedFile:0x007ff5208857f8 @tempfile=#<Tempfile:/tmp/RackMultipart20160914-12590-1l20xbk.pdf>, @original_filename="ruby_on_rails_tutorial_2nd_edition-preview.pdf", @content_type="application/pdf", @headers="Content-Disposition: form-data; name=\"applicant[resume]\"; filename=\"ruby_on_rails_tutorial_2nd_edition-preview.pdf\"\r\nContent-Type: application/pdf\r\n">, "status"=>"applied"}, "commit"=>"Create Applicant"}
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (27.7ms)[0m  INSERT INTO `applicants` (`name`, `gender`, `email`, `headline`, `phone`, `address`, `photo`, `name_school`, `state_study`, `degree`, `company_name`, `industry`, `title`, `summary`, `resume`, `status`, `date_birth`, `created_at`, `updated_at`) VALUES ('Aditia Pratama', 'Man', 'adotcyber@gmail.com', 'im pro player for team liquid', '089614800388', 'jln rancabentang', '94_big.jpg', 'stm ', 'sopwer', 'bachelor', 'Voxel', 'gaming', 'surga dunia', 'im pro player', 'ruby_on_rails_tutorial_2nd_edition-preview.pdf', 'applied', '2016-09-14', '2016-09-14 02:49:21', '2016-09-14 02:49:21')
+  [1m[36m (24.1ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/applicants/5
+Completed 302 Found in 141ms (ActiveRecord: 53.6ms)
+
+
+Started GET "/applicants/5" for 127.0.0.1 at 2016-09-14 09:49:21 +0700
+Processing by ApplicantsController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[35mApplicant Load (0.3ms)[0m  SELECT  `applicants`.* FROM `applicants` WHERE `applicants`.`id` = 5 LIMIT 1
+  Rendered applicants/show.html.slim within layouts/application (8.7ms)
+Completed 200 OK in 69ms (Views: 58.5ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/applicants" for 127.0.0.1 at 2016-09-14 09:49:24 +0700
+Processing by ApplicantsController#index as HTML
+  [1m[36mApplicant Load (0.4ms)[0m  [1mSELECT `applicants`.* FROM `applicants`[0m
+  Rendered applicants/index.html.slim within layouts/application (6.0ms)
+Completed 200 OK in 63ms (Views: 61.5ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/applicants" for 127.0.0.1 at 2016-09-14 09:49:27 +0700
+Processing by ApplicantsController#index as HTML
+  [1m[35mApplicant Load (0.5ms)[0m  SELECT `applicants`.* FROM `applicants`
+  Rendered applicants/index.html.slim within layouts/application (6.2ms)
+Completed 200 OK in 71ms (Views: 68.6ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/applicants" for 127.0.0.1 at 2016-09-14 09:49:42 +0700
 Processing by ApplicantsController#index as HTML
   [1m[36mApplicant Load (0.3ms)[0m  [1mSELECT `applicants`.* FROM `applicants`[0m
-  Rendered applicants/index.html.slim within layouts/application (1.0ms)
-Completed 200 OK in 36ms (Views: 35.0ms | ActiveRecord: 0.3ms)
+  Rendered applicants/index.html.slim within layouts/application (11.3ms)
+Completed 200 OK in 51ms (Views: 49.9ms | ActiveRecord: 0.3ms)
 
 
-Started GET "/applicants_page" for 127.0.0.1 at 2016-09-13 21:23:38 +0700
+Started GET "/applicants" for 127.0.0.1 at 2016-09-14 09:59:40 +0700
+  [1m[36mActiveRecord::SchemaMigration Load (1.1ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
 Processing by ApplicantsController#index as HTML
-  [1m[35mApplicant Load (0.4ms)[0m  SELECT `applicants`.* FROM `applicants`
-  Rendered applicants/index.html.slim within layouts/application (1.7ms)
-Completed 200 OK in 36ms (Views: 35.3ms | ActiveRecord: 0.4ms)
+  [1m[35mApplicant Load (0.7ms)[0m  SELECT `applicants`.* FROM `applicants`
+  Rendered applicants/index.html.slim within layouts/application (45.7ms)
+Completed 200 OK in 652ms (Views: 634.4ms | ActiveRecord: 2.5ms)
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Migrating to RemoveExperienceAndEducationColumn (20160914035256)
+  [1m[35m (635.0ms)[0m  ALTER TABLE `applicants` DROP `name_school`
+  [1m[36m (213.5ms)[0m  [1mALTER TABLE `applicants` DROP `state_study`[0m
+  [1m[35m (253.6ms)[0m  ALTER TABLE `applicants` DROP `degree`
+  [1m[36m (245.0ms)[0m  [1mALTER TABLE `applicants` DROP `company_name`[0m
+  [1m[35m (150.8ms)[0m  ALTER TABLE `applicants` DROP `industry`
+  [1m[36m (221.0ms)[0m  [1mALTER TABLE `applicants` DROP `title`[0m
+  [1m[35m (302.7ms)[0m  ALTER TABLE `applicants` DROP `summary`
+  [1m[36m (2.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20160914035256')
+  [1m[36m (16.5ms)[0m  [1mCOMMIT[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.4ms)[0m  SELECT `schema_migrations`.* FROM `schema_migrations`
+  [1m[36m (0.5ms)[0m  [1mSELECT fk.referenced_table_name as 'to_table'
+      ,fk.referenced_column_name as 'primary_key'
+      ,fk.column_name as 'column'
+      ,fk.constraint_name as 'name'
+FROM information_schema.key_column_usage fk
+WHERE fk.referenced_column_name is not null
+  AND fk.table_schema = 'teammate-talent-system_development'
+  AND fk.table_name = 'applicants'
+[0m
+  [1m[35m (0.3ms)[0m  SHOW CREATE TABLE `applicants`
+  [1m[36m (0.5ms)[0m  [1mSELECT fk.referenced_table_name as 'to_table'
+      ,fk.referenced_column_name as 'primary_key'
+      ,fk.column_name as 'column'
+      ,fk.constraint_name as 'name'
+FROM information_schema.key_column_usage fk
+WHERE fk.referenced_column_name is not null
+  AND fk.table_schema = 'teammate-talent-system_development'
+  AND fk.table_name = 'jobs'
+[0m
+  [1m[35m (0.3ms)[0m  SHOW CREATE TABLE `jobs`
+  [1m[36mActiveRecord::SchemaMigration Load (1.3ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Migrating to CreateExperiences (20160914040140)
+  [1m[35m (213.0ms)[0m  CREATE TABLE `experiences` (`id` int(11) auto_increment PRIMARY KEY, `name_company` varchar(255), `industry` varchar(255), `title` varchar(255), `summary` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20160914040140')
+  [1m[36m (31.7ms)[0m  [1mCOMMIT[0m
+Migrating to CreateEducations (20160914040217)
+  [1m[35m (139.4ms)[0m  CREATE TABLE `educations` (`id` int(11) auto_increment PRIMARY KEY, `name_school` varchar(255), `field_study` varchar(255), `degree` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20160914040217')
+  [1m[36m (9.6ms)[0m  [1mCOMMIT[0m
+Migrating to AddReferencesToApplicants (20160914040306)
+  [1m[35m (204.9ms)[0m  ALTER TABLE `applicants` ADD `experience_id` int(11)
+  [1m[36m (99.2ms)[0m  [1mCREATE  INDEX `index_applicants_on_experience_id`  ON `applicants` (`experience_id`) [0m
+  [1m[35m (259.2ms)[0m  ALTER TABLE `applicants` ADD CONSTRAINT `fk_rails_d472c2c6f7`
+FOREIGN KEY (`experience_id`)
+  REFERENCES `experiences` (`id`)
+
+  [1m[36m (249.7ms)[0m  [1mALTER TABLE `applicants` ADD `education_id` int(11)[0m
+  [1m[35m (199.8ms)[0m  CREATE  INDEX `index_applicants_on_education_id`  ON `applicants` (`education_id`) 
+  [1m[36m (461.1ms)[0m  [1mALTER TABLE `applicants` ADD CONSTRAINT `fk_rails_68e84910f5`
+FOREIGN KEY (`education_id`)
+  REFERENCES `educations` (`id`)
+[0m
+  [1m[35m (0.5ms)[0m  BEGIN
+  [1m[36mSQL (1.2ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20160914040306')[0m
+  [1m[35m (43.2ms)[0m  COMMIT
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  [1m[35m (0.6ms)[0m  SELECT fk.referenced_table_name as 'to_table'
+      ,fk.referenced_column_name as 'primary_key'
+      ,fk.column_name as 'column'
+      ,fk.constraint_name as 'name'
+FROM information_schema.key_column_usage fk
+WHERE fk.referenced_column_name is not null
+  AND fk.table_schema = 'teammate-talent-system_development'
+  AND fk.table_name = 'applicants'
+
+  [1m[36m (0.4ms)[0m  [1mSHOW CREATE TABLE `applicants`[0m
+  [1m[35m (0.5ms)[0m  SELECT fk.referenced_table_name as 'to_table'
+      ,fk.referenced_column_name as 'primary_key'
+      ,fk.column_name as 'column'
+      ,fk.constraint_name as 'name'
+FROM information_schema.key_column_usage fk
+WHERE fk.referenced_column_name is not null
+  AND fk.table_schema = 'teammate-talent-system_development'
+  AND fk.table_name = 'educations'
+
+  [1m[36m (0.3ms)[0m  [1mSHOW CREATE TABLE `educations`[0m
+  [1m[35m (0.5ms)[0m  SELECT fk.referenced_table_name as 'to_table'
+      ,fk.referenced_column_name as 'primary_key'
+      ,fk.column_name as 'column'
+      ,fk.constraint_name as 'name'
+FROM information_schema.key_column_usage fk
+WHERE fk.referenced_column_name is not null
+  AND fk.table_schema = 'teammate-talent-system_development'
+  AND fk.table_name = 'experiences'
+
+  [1m[36m (0.3ms)[0m  [1mSHOW CREATE TABLE `experiences`[0m
+  [1m[35m (0.5ms)[0m  SELECT fk.referenced_table_name as 'to_table'
+      ,fk.referenced_column_name as 'primary_key'
+      ,fk.column_name as 'column'
+      ,fk.constraint_name as 'name'
+FROM information_schema.key_column_usage fk
+WHERE fk.referenced_column_name is not null
+  AND fk.table_schema = 'teammate-talent-system_development'
+  AND fk.table_name = 'jobs'
+
+  [1m[36m (0.3ms)[0m  [1mSHOW CREATE TABLE `jobs`[0m
 
 
-Started GET "/applicants/new" for 127.0.0.1 at 2016-09-13 21:45:18 +0700
-Processing by ApplicantsController#new as HTML
-  Rendered applicants/_form.html.slim (8.1ms)
-  Rendered applicants/new.html.slim within layouts/application (9.0ms)
-Completed 200 OK in 57ms (Views: 56.1ms | ActiveRecord: 0.0ms)
+Started GET "/applicants" for 127.0.0.1 at 2016-09-14 11:08:51 +0700
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Processing by ApplicantsController#index as HTML
+Completed 500 Internal Server Error in 31ms (ActiveRecord: 0.0ms)
+
+NameError (undefined local variable or method `sdsd' for #<ApplicantsController:0x007f9554429be0>):
+  app/controllers/applicants_controller.rb:7:in `index'
 
 
-Started GET "/jobs" for 127.0.0.1 at 2016-09-13 21:45:21 +0700
-Processing by JobsController#index as HTML
-  [1m[36mJob Load (0.3ms)[0m  [1mSELECT `jobs`.* FROM `jobs`[0m
-  Rendered jobs/index.html.slim within layouts/application (0.9ms)
-Completed 200 OK in 37ms (Views: 35.9ms | ActiveRecord: 0.3ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_source.erb (5.2ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.8ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (34.8ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (1.0ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.5ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (32.0ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.3ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (58.0ms)
 
 
-Started GET "/jobs/new" for 127.0.0.1 at 2016-09-13 21:45:23 +0700
-Processing by JobsController#new as HTML
-  Rendered jobs/_form.html.slim (8.7ms)
-  Rendered jobs/new.html.slim within layouts/application (9.5ms)
-Completed 200 OK in 45ms (Views: 44.8ms | ActiveRecord: 0.0ms)
-
-
-Started GET "/" for 127.0.0.1 at 2016-09-13 21:45:57 +0700
-Processing by Rails::WelcomeController#index as HTML
-  Rendered /home/ilhamfi/.rvm/gems/ruby-2.3.0/gems/railties-4.2.6/lib/rails/templates/rails/welcome/index.html.erb (0.1ms)
-Completed 200 OK in 2ms (Views: 1.6ms | ActiveRecord: 0.0ms)
-
-
-Started GET "/jobs" for 127.0.0.1 at 2016-09-13 21:46:21 +0700
-Processing by JobsController#index as HTML
-  [1m[35mJob Load (0.2ms)[0m  SELECT `jobs`.* FROM `jobs`
-  Rendered jobs/index.html.slim within layouts/application (1.8ms)
-Completed 200 OK in 36ms (Views: 33.4ms | ActiveRecord: 0.8ms)
-
-
-Started GET "/jobs/new" for 127.0.0.1 at 2016-09-13 21:46:28 +0700
-Processing by JobsController#new as HTML
-  Rendered jobs/_form.html.slim (6.8ms)
-  Rendered jobs/new.html.slim within layouts/application (7.6ms)
-Completed 200 OK in 49ms (Views: 38.7ms | ActiveRecord: 0.4ms)
-
-
-Started GET "/jobs" for 127.0.0.1 at 2016-09-13 21:48:04 +0700
-Processing by JobsController#index as HTML
-  [1m[36mJob Load (0.3ms)[0m  [1mSELECT `jobs`.* FROM `jobs`[0m
-  Rendered jobs/index.html.slim within layouts/application (10.3ms)
-Completed 200 OK in 44ms (Views: 42.9ms | ActiveRecord: 0.3ms)
-
-
-Started GET "/jobs/new" for 127.0.0.1 at 2016-09-13 21:48:10 +0700
-Processing by JobsController#new as HTML
-  Rendered jobs/_form.html.slim (8.0ms)
-  Rendered jobs/new.html.slim within layouts/application (9.5ms)
-Completed 200 OK in 42ms (Views: 41.2ms | ActiveRecord: 0.0ms)
-
-
-Started POST "/jobs" for 127.0.0.1 at 2016-09-13 21:49:28 +0700
-Processing by JobsController#create as HTML
-  Parameters: {"utf8"=>"✓", "authenticity_token"=>"y7Ud9TdQxuBby2FcKO1R0Dypz5KDKyfdgzkegOOHJcpeHWHzXeMoEqwu7MXS/epIatOtwj3cuiLcUowNIFNbrw==", "job"=>{"job_title"=>"Web Analyst", "departement"=>"Web Programming", "job_code"=>"1220", "country"=>"Indonesia", "state"=>"Jawa Barat", "city"=>"Cimahi Small City", "zip_code"=>"14045", "min_salary"=>"500000", "max_salary"=>"600000", "curency"=>"Rp.", "job_description"=>"Its A job", "job_requirement"=>"Its A job requirement", "benefits"=>"many", "aplicant_experience"=>"", "aplicant_function"=>"", "aplicant_employment_type"=>"", "aplicant_industry"=>"", "aplicant_education"=>"", "job_search_keyword"=>""}, "commit"=>"Create Job"}
-  [1m[35m (0.4ms)[0m  BEGIN
-  [1m[36mSQL (37.6ms)[0m  [1mINSERT INTO `jobs` (`job_title`, `departement`, `job_code`, `country`, `state`, `city`, `zip_code`, `min_salary`, `max_salary`, `curency`, `job_description`, `job_requirement`, `benefits`, `created_at`, `updated_at`) VALUES ('Web Analyst', 'Web Programming', '1220', 'Indonesia', 'Jawa Barat', 'Cimahi Small City', '14045', 500000, 600000, 'Rp.', 'Its A job', 'Its A job requirement', 'many', '2016-09-13 14:49:28', '2016-09-13 14:49:28')[0m
-  [1m[35m (259.5ms)[0m  COMMIT
-Redirected to http://localhost:3000/jobs/1
-Completed 302 Found in 303ms (ActiveRecord: 297.5ms)
-
-
-Started GET "/jobs/1" for 127.0.0.1 at 2016-09-13 21:49:28 +0700
-Processing by JobsController#show as HTML
-  Parameters: {"id"=>"1"}
-  [1m[36mJob Load (0.3ms)[0m  [1mSELECT  `jobs`.* FROM `jobs` WHERE `jobs`.`id` = 1 LIMIT 1[0m
-  Rendered jobs/show.html.slim within layouts/application (6.6ms)
-Completed 200 OK in 129ms (Views: 36.6ms | ActiveRecord: 0.3ms)
-
-
-Started GET "/jobs" for 127.0.0.1 at 2016-09-13 21:49:34 +0700
-Processing by JobsController#index as HTML
-  [1m[35mJob Load (0.3ms)[0m  SELECT `jobs`.* FROM `jobs`
-  Rendered jobs/index.html.slim within layouts/application (1.3ms)
-Completed 200 OK in 39ms (Views: 38.6ms | ActiveRecord: 0.3ms)
-
-
-Started GET "/jobs" for 127.0.0.1 at 2016-09-13 21:49:55 +0700
-Processing by JobsController#index as HTML
-  [1m[36mJob Load (0.4ms)[0m  [1mSELECT `jobs`.* FROM `jobs`[0m
-  Rendered jobs/index.html.slim within layouts/application (9.5ms)
-Completed 200 OK in 39ms (Views: 38.3ms | ActiveRecord: 0.4ms)
-
-
-Started GET "/jobs" for 127.0.0.1 at 2016-09-13 21:50:09 +0700
-Processing by JobsController#index as HTML
-  [1m[35mJob Load (0.4ms)[0m  SELECT `jobs`.* FROM `jobs`
-  Rendered jobs/index.html.slim within layouts/application (9.0ms)
-Completed 200 OK in 44ms (Views: 42.9ms | ActiveRecord: 0.4ms)
-
-
-Started GET "/jobs/new" for 127.0.0.1 at 2016-09-13 21:50:18 +0700
-Processing by JobsController#new as HTML
-  Rendered jobs/_form.html.slim (8.4ms)
-  Rendered jobs/new.html.slim within layouts/application (9.1ms)
-Completed 200 OK in 37ms (Views: 36.9ms | ActiveRecord: 0.0ms)
+Started PUT "/__web_console/repl_sessions/f176a93a5488e6bc779101c79220c74a" for 127.0.0.1 at 2016-09-14 11:08:58 +0700
+  [1m[35mApplicant Load (0.6ms)[0m  SELECT `applicants`.* FROM `applicants`

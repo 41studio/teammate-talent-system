@@ -11,28 +11,43 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160913100602) do
+ActiveRecord::Schema.define(version: 20160914040306) do
 
   create_table "applicants", force: :cascade do |t|
-    t.string   "name",         limit: 255, default: "", null: false
-    t.string   "gender",       limit: 255, default: "", null: false
-    t.date     "date_birth",                            null: false
-    t.string   "email",        limit: 255, default: "", null: false
-    t.string   "headline",     limit: 255, default: "", null: false
-    t.string   "phone",        limit: 255, default: "", null: false
-    t.string   "address",      limit: 255, default: "", null: false
-    t.string   "photo",        limit: 255, default: "", null: false
-    t.string   "name_school",  limit: 255, default: "", null: false
-    t.string   "state_study",  limit: 255, default: "", null: false
-    t.string   "degree",       limit: 255, default: "", null: false
-    t.string   "company_name", limit: 255, default: "", null: false
-    t.string   "industry",     limit: 255, default: "", null: false
-    t.string   "title",        limit: 255, default: "", null: false
-    t.string   "summary",      limit: 255, default: "", null: false
-    t.string   "resume",       limit: 255, default: "", null: false
-    t.string   "status",       limit: 255, default: "", null: false
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
+    t.string   "name",          limit: 255, default: "", null: false
+    t.string   "gender",        limit: 255, default: "", null: false
+    t.date     "date_birth",                             null: false
+    t.string   "email",         limit: 255, default: "", null: false
+    t.string   "headline",      limit: 255, default: "", null: false
+    t.string   "phone",         limit: 255, default: "", null: false
+    t.string   "address",       limit: 255, default: "", null: false
+    t.string   "photo",         limit: 255, default: "", null: false
+    t.string   "resume",        limit: 255, default: "", null: false
+    t.string   "status",        limit: 255, default: "", null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.integer  "experience_id", limit: 4
+    t.integer  "education_id",  limit: 4
+  end
+
+  add_index "applicants", ["education_id"], name: "index_applicants_on_education_id", using: :btree
+  add_index "applicants", ["experience_id"], name: "index_applicants_on_experience_id", using: :btree
+
+  create_table "educations", force: :cascade do |t|
+    t.string   "name_school", limit: 255
+    t.string   "field_study", limit: 255
+    t.string   "degree",      limit: 255
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  create_table "experiences", force: :cascade do |t|
+    t.string   "name_company", limit: 255
+    t.string   "industry",     limit: 255
+    t.string   "title",        limit: 255
+    t.string   "summary",      limit: 255
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   create_table "jobs", force: :cascade do |t|
@@ -59,4 +74,6 @@ ActiveRecord::Schema.define(version: 20160913100602) do
     t.datetime "updated_at",                                          null: false
   end
 
+  add_foreign_key "applicants", "educations"
+  add_foreign_key "applicants", "experiences"
 end
