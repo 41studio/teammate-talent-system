@@ -4,7 +4,6 @@ class ApplicantsController < ApplicationController
   # GET /applicants
   # GET /applicants.json
   def index
-    sdsd
     @applicants = Applicant.all
   end
 
