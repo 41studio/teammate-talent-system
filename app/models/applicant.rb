@@ -1,4 +1,8 @@
 class Applicant < ActiveRecord::Base
+
+has_many :experiences
+has_many :educations
+
 mount_uploader :photo, PhotoUploader
 mount_uploader :resume, ResumeUploader
 

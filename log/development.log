@@ -888,3 +888,139 @@ Processing by ApplicantsController#index as HTML
   [1m[36mApplicant Load (0.3ms)[0m  [1mSELECT `applicants`.* FROM `applicants`[0m
   Rendered applicants/index.html.slim within layouts/application (11.3ms)
 Completed 200 OK in 51ms (Views: 49.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/applicants" for 127.0.0.1 at 2016-09-14 09:59:40 +0700
+  [1m[36mActiveRecord::SchemaMigration Load (1.1ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Processing by ApplicantsController#index as HTML
+  [1m[35mApplicant Load (0.7ms)[0m  SELECT `applicants`.* FROM `applicants`
+  Rendered applicants/index.html.slim within layouts/application (45.7ms)
+Completed 200 OK in 652ms (Views: 634.4ms | ActiveRecord: 2.5ms)
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Migrating to RemoveExperienceAndEducationColumn (20160914035256)
+  [1m[35m (635.0ms)[0m  ALTER TABLE `applicants` DROP `name_school`
+  [1m[36m (213.5ms)[0m  [1mALTER TABLE `applicants` DROP `state_study`[0m
+  [1m[35m (253.6ms)[0m  ALTER TABLE `applicants` DROP `degree`
+  [1m[36m (245.0ms)[0m  [1mALTER TABLE `applicants` DROP `company_name`[0m
+  [1m[35m (150.8ms)[0m  ALTER TABLE `applicants` DROP `industry`
+  [1m[36m (221.0ms)[0m  [1mALTER TABLE `applicants` DROP `title`[0m
+  [1m[35m (302.7ms)[0m  ALTER TABLE `applicants` DROP `summary`
+  [1m[36m (2.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20160914035256')
+  [1m[36m (16.5ms)[0m  [1mCOMMIT[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.4ms)[0m  SELECT `schema_migrations`.* FROM `schema_migrations`
+  [1m[36m (0.5ms)[0m  [1mSELECT fk.referenced_table_name as 'to_table'
+      ,fk.referenced_column_name as 'primary_key'
+      ,fk.column_name as 'column'
+      ,fk.constraint_name as 'name'
+FROM information_schema.key_column_usage fk
+WHERE fk.referenced_column_name is not null
+  AND fk.table_schema = 'teammate-talent-system_development'
+  AND fk.table_name = 'applicants'
+[0m
+  [1m[35m (0.3ms)[0m  SHOW CREATE TABLE `applicants`
+  [1m[36m (0.5ms)[0m  [1mSELECT fk.referenced_table_name as 'to_table'
+      ,fk.referenced_column_name as 'primary_key'
+      ,fk.column_name as 'column'
+      ,fk.constraint_name as 'name'
+FROM information_schema.key_column_usage fk
+WHERE fk.referenced_column_name is not null
+  AND fk.table_schema = 'teammate-talent-system_development'
+  AND fk.table_name = 'jobs'
+[0m
+  [1m[35m (0.3ms)[0m  SHOW CREATE TABLE `jobs`
+  [1m[36mActiveRecord::SchemaMigration Load (1.3ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Migrating to CreateExperiences (20160914040140)
+  [1m[35m (213.0ms)[0m  CREATE TABLE `experiences` (`id` int(11) auto_increment PRIMARY KEY, `name_company` varchar(255), `industry` varchar(255), `title` varchar(255), `summary` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20160914040140')
+  [1m[36m (31.7ms)[0m  [1mCOMMIT[0m
+Migrating to CreateEducations (20160914040217)
+  [1m[35m (139.4ms)[0m  CREATE TABLE `educations` (`id` int(11) auto_increment PRIMARY KEY, `name_school` varchar(255), `field_study` varchar(255), `degree` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20160914040217')
+  [1m[36m (9.6ms)[0m  [1mCOMMIT[0m
+Migrating to AddReferencesToApplicants (20160914040306)
+  [1m[35m (204.9ms)[0m  ALTER TABLE `applicants` ADD `experience_id` int(11)
+  [1m[36m (99.2ms)[0m  [1mCREATE  INDEX `index_applicants_on_experience_id`  ON `applicants` (`experience_id`) [0m
+  [1m[35m (259.2ms)[0m  ALTER TABLE `applicants` ADD CONSTRAINT `fk_rails_d472c2c6f7`
+FOREIGN KEY (`experience_id`)
+  REFERENCES `experiences` (`id`)
+
+  [1m[36m (249.7ms)[0m  [1mALTER TABLE `applicants` ADD `education_id` int(11)[0m
+  [1m[35m (199.8ms)[0m  CREATE  INDEX `index_applicants_on_education_id`  ON `applicants` (`education_id`) 
+  [1m[36m (461.1ms)[0m  [1mALTER TABLE `applicants` ADD CONSTRAINT `fk_rails_68e84910f5`
+FOREIGN KEY (`education_id`)
+  REFERENCES `educations` (`id`)
+[0m
+  [1m[35m (0.5ms)[0m  BEGIN
+  [1m[36mSQL (1.2ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20160914040306')[0m
+  [1m[35m (43.2ms)[0m  COMMIT
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  [1m[35m (0.6ms)[0m  SELECT fk.referenced_table_name as 'to_table'
+      ,fk.referenced_column_name as 'primary_key'
+      ,fk.column_name as 'column'
+      ,fk.constraint_name as 'name'
+FROM information_schema.key_column_usage fk
+WHERE fk.referenced_column_name is not null
+  AND fk.table_schema = 'teammate-talent-system_development'
+  AND fk.table_name = 'applicants'
+
+  [1m[36m (0.4ms)[0m  [1mSHOW CREATE TABLE `applicants`[0m
+  [1m[35m (0.5ms)[0m  SELECT fk.referenced_table_name as 'to_table'
+      ,fk.referenced_column_name as 'primary_key'
+      ,fk.column_name as 'column'
+      ,fk.constraint_name as 'name'
+FROM information_schema.key_column_usage fk
+WHERE fk.referenced_column_name is not null
+  AND fk.table_schema = 'teammate-talent-system_development'
+  AND fk.table_name = 'educations'
+
+  [1m[36m (0.3ms)[0m  [1mSHOW CREATE TABLE `educations`[0m
+  [1m[35m (0.5ms)[0m  SELECT fk.referenced_table_name as 'to_table'
+      ,fk.referenced_column_name as 'primary_key'
+      ,fk.column_name as 'column'
+      ,fk.constraint_name as 'name'
+FROM information_schema.key_column_usage fk
+WHERE fk.referenced_column_name is not null
+  AND fk.table_schema = 'teammate-talent-system_development'
+  AND fk.table_name = 'experiences'
+
+  [1m[36m (0.3ms)[0m  [1mSHOW CREATE TABLE `experiences`[0m
+  [1m[35m (0.5ms)[0m  SELECT fk.referenced_table_name as 'to_table'
+      ,fk.referenced_column_name as 'primary_key'
+      ,fk.column_name as 'column'
+      ,fk.constraint_name as 'name'
+FROM information_schema.key_column_usage fk
+WHERE fk.referenced_column_name is not null
+  AND fk.table_schema = 'teammate-talent-system_development'
+  AND fk.table_name = 'jobs'
+
+  [1m[36m (0.3ms)[0m  [1mSHOW CREATE TABLE `jobs`[0m
+
+
+Started GET "/applicants" for 127.0.0.1 at 2016-09-14 11:08:51 +0700
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Processing by ApplicantsController#index as HTML
+Completed 500 Internal Server Error in 31ms (ActiveRecord: 0.0ms)
+
+NameError (undefined local variable or method `sdsd' for #<ApplicantsController:0x007f9554429be0>):
+  app/controllers/applicants_controller.rb:7:in `index'
+
+
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_source.erb (5.2ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.8ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (34.8ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (1.0ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.5ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (32.0ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.3ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (58.0ms)
+
+
+Started PUT "/__web_console/repl_sessions/f176a93a5488e6bc779101c79220c74a" for 127.0.0.1 at 2016-09-14 11:08:58 +0700
+  [1m[35mApplicant Load (0.6ms)[0m  SELECT `applicants`.* FROM `applicants`
