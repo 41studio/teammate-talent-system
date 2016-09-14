@@ -46,6 +46,8 @@ gem 'slim-rails'
 gem 'nprogress-rails'
 gem 'friendly_id', '~> 5.1.0'
 gem 'dotenv-rails'
+gem 'better_errors'
+gem 'binding_of_caller'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
