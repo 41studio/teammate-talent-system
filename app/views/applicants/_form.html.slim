@@ -30,9 +30,8 @@
   .field
     = f.label :address
     = f.text_field :address
-  .field
-    = f.label :photo
-  .file_field :photo, accept: 'image/png,image/jpeg'
+  .file_field
+    = f.file_field :photo, accept: 'image/png,image/jpeg'
     - if f.object.photo?
       = image_tag f.object.photo.thumb.url
       = f.label :remove_photo
@@ -44,7 +43,6 @@
       = link_to "Preview Resume", f.object.resume.url, target: '_blank'
       = f.label :remove_resume
       = f.check_box :remove_resume
-  .field
   .field
     = f.label :status
     = f.text_field :status
