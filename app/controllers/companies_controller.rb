@@ -28,7 +28,9 @@ class CompaniesController < ApplicationController
 
     respond_to do |format|
       if @company.save
-        format.html { redirect_to dashboards, notice: 'Company was successfully created.' }
+        current_user.update_attribute(:company_id, @company.id)
+
+        format.html { redirect_to dashboards_path, notice: 'Company was successfully created.' }
         format.json { render :show, status: :created, location: @company }
       else
         format.html { render :new }

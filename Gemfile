@@ -76,5 +76,7 @@ group :development do
   gem 'bullet'
   gem 'quiet_assets'
   gem 'annotate', github: 'ctran/annotate_models'
+
+  gem 'letter_opener'
 end
 

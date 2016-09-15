@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
-
+	belongs_to :job
+		
   acts_as_token_authenticatable
 
   # Include default devise modules. Others available are:
