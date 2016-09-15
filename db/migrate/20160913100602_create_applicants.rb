@@ -17,7 +17,7 @@ class CreateApplicants < ActiveRecord::Migration
       t.string :title,            null: false, default: ""
       t.string :summary,          null: false, default: ""
       t.string :resume,           null: false, default: ""
-      t.string :status,           null: false, default: ""
+      t.string :status,           null: false, default: "Applied"
 
       t.timestamps null: false
     end
