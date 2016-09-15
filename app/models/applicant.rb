@@ -1,14 +1,13 @@
 class Applicant < ActiveRecord::Base
 
-has_many :experiences
-has_many :educations
 belongs_to :job
 
 mount_uploader :photo, PhotoUploader
 mount_uploader :resume, ResumeUploader
 
 validates :name, :gender, :date_birth, :email, :phone, :address, :photo, :resume,  presence: true
-
+validates :name, length: {in: 2..70}
+validates :gender, inclusion: { in: %w(Male Female), message: "%{value} is not a gender"}
 validates_processing_of :photo
 validate :image_size_validation
 

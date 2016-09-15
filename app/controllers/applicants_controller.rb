@@ -1,5 +1,6 @@
 class ApplicantsController < ApplicationController
   before_action :set_applicant, only: [:show, :edit, :update, :destroy]
+  before_action :set_job, only: [:new, :edit]
 
   # GET /applicants
   # GET /applicants.json
@@ -24,11 +25,12 @@ class ApplicantsController < ApplicationController
   # POST /applicants
   # POST /applicants.json
   def create
-    @applicant = Applicant.new(applicant_params)
-
+    @job = Job.find(params[:job_id])
+    @applicant = @job.applicants.new(applicant_params)
+    @applicant.status = "Candidate"
     respond_to do |format|
       if @applicant.save
-        format.html { redirect_to @applicant, notice: 'Applicant was successfully created.' }
+        format.html { redirect_to job_path(@job), notice: 'Applicant was successfully created.' }
         format.json { render :show, status: :created, location: @applicant }
       else
         format.html { render :new }
@@ -67,8 +69,12 @@ class ApplicantsController < ApplicationController
       @applicant = Applicant.find(params[:id])
     end
 
+    def set_job
+      @job = Job.find(params[:job_id])
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def applicant_params
-      params.require(:applicant).permit(:name, :gender, :date_birth, :email, :headline, :phone, :address, :photo, :name_school, :state_study, :degree, :company_name, :industry, :title, :summary, :resume, :status)
+      params.require(:applicant).permit(:name, :gender, :date_birth, :email, :headline, :phone, :address, :photo, :name_school, :state_study, :degree, :company_name, :industry, :title, :summary, :resume)
     end
 end

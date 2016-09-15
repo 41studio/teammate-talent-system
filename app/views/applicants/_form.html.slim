@@ -1,9 +1,9 @@
-= form_for @applicant do |f|
-  - if @applicant.errors.any?
+= form_for [@job, @job.applicants.build] do |f|
+  - if @job.errors.any?
     #error_explanation
-      h2 = "#{pluralize(@applicant.errors.count, "error")} prohibited this applicant from being saved:"
+      h2 = "#{pluralize(@job.errors.count, "error")} prohibited this applicant from being saved:"
       ul
-        - @applicant.errors.full_messages.each do |message|
+        - @job.errors.full_messages.each do |message|
           li = message
 
   .field
@@ -20,13 +20,13 @@
     = f.date_select :date_birth, order: [:day, :month, :year]
   .field
     = f.label :email
-    = f.text_field :email
+    = f.email_field :email
   .field
     = f.label :headline
     = f.text_field :headline
   .field
     = f.label :phone
-    = f.text_field :phone
+    = f.number_field :phone
   .field
     = f.label :address
     = f.text_field :address
@@ -43,7 +43,4 @@
       = link_to "Preview Resume", f.object.resume.url, target: '_blank'
       = f.label :remove_resume
       = f.check_box :remove_resume
-  .field
-    = f.label :status
-    = f.text_field :status
   .actions = f.submit

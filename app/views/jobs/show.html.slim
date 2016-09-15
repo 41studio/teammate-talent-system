@@ -61,3 +61,9 @@ p
 = link_to 'Edit', edit_job_path(@job)
 '|
 = link_to 'Back', jobs_path
+'|
+= link_to 'apply this job', new_job_applicant_path(@job)
+
+h3
+  | list of applied applicants
+=render @job.applicants

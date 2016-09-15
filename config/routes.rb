@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
-  resources :applicants
-  resources :jobs
+  resources :jobs do
+    resources :applicants, only: [:new, :create, :edit]
+  end
+  resources :applicants, only: [:show, :edit, :destroy]
   root 'landing_page#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -31,9 +31,9 @@ table border="1"
         td = link_to "Download Resume",  applicant.resume_url, target: '_blank'
         td = applicant.status
         td = link_to 'Show', applicant
-        td = link_to 'Edit', edit_applicant_path(applicant)
+        td = link_to 'Edit', edit_job_applicant_path(applicant.job_id,applicant)
         td = link_to 'Destroy', applicant, data: { confirm: 'Are you sure?' }, method: :delete
 
 br
 
-= link_to 'New Applicant', new_applicant_path
+= link_to 'Back', root_path
