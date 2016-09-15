@@ -3,9 +3,12 @@ h1
 	
 = link_to 'job', jobs_path
 '	|
-= link_to 'applicants', applicants_path
- 
- / - if user_signed_in?
-	/ = link_to 'logout', destroy_user_session_path, method: :delete
- / - else
-	/ = link_to 'Sign in', user_session_path
+= link_to 'applicants', applicants_path 
+- if user_signed_in?
+ br
+ br
+  = link_to 'logout', destroy_user_session_path, method: :delete
+- else
+  br
+  br
+  = link_to 'Sign in', user_session_path
