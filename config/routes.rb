@@ -13,7 +13,6 @@ Rails.application.routes.draw do
   resources :jobs
 
 
-
   get '/dashboards' => "dashboards#index", as: :user_root
 
   root 'landing_page#index'

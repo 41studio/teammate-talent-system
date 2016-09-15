@@ -7,4 +7,5 @@ class Job < ActiveRecord::Base
 	validates :job_description, :job_requirement, :benefits, length: {in: 100..500, message: 'Must be more than 100 and less than 500'}
 	validates :min_salary, :max_salary, numericality: { greater_than_or_equal_to: 1 }
 
+
 end

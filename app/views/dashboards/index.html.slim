@@ -1,2 +1,44 @@
+<<<<<<< HEAD
 h1 Dashboard#index
 p Find me in app/views/dashboard/index.html.slim
+=======
+h1 Welcome to dashboard 
+
+p = "welcome #{current_user.first_name} #{current_user.last_name}"
+
+
+table border="1"
+  thead
+    tr
+      th Name Company
+      th Website Company
+      th Email Company
+      th Phone Company
+      th Industry
+      th
+      th
+
+  tbody
+    - @companys.each do |company|
+      tr
+        td = company.company_name
+        td = company.company_website
+        td = company.company_email
+        td = company.company_phone
+        td = company.industry
+        td = link_to 'Edit', edit_company_path(company)
+br
+
+
+
+
+
+
+
+
+= link_to "Create New Job", new_job_path 
+br
+= link_to "Logout",destroy_user_session_path, method: :delete
+
+
+>>>>>>> 7383c316529866ccfb7359dbbb4a70093a3e9c3b
