@@ -10,4 +10,7 @@ class ApplicationController < ActionController::Base
   def previous_url
     session[:my_previous_url] = URI(request.referer || '').path
   end
+
+
+  
 end

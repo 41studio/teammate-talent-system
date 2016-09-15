@@ -47,15 +47,7 @@ class CompaniesController < ApplicationController
   def update
     respond_to do |format|
       if @company.update(company_params)
-<<<<<<< HEAD
-<<<<<<< HEAD
-        format.html { redirect_to @company, notice: 'Company was successfully updated.' }
-=======
         format.html { redirect_to dashboards_path, notice: 'Company was successfully updated.' }
->>>>>>> 7383c316529866ccfb7359dbbb4a70093a3e9c3b
-=======
-        format.html { redirect_to dashboards_path, notice: 'Company was successfully updated.' }
->>>>>>> 7383c316529866ccfb7359dbbb4a70093a3e9c3b
         format.json { render :show, status: :ok, location: @company }
       else
         format.html { render :edit }
@@ -69,15 +61,7 @@ class CompaniesController < ApplicationController
   def destroy
     @company.destroy
     respond_to do |format|
-<<<<<<< HEAD
-<<<<<<< HEAD
-      format.html { redirect_to companies_url, notice: 'Company was successfully destroyed.' }
-=======
       format.html { redirect_to dashboards_path, notice: 'Company was successfully destroyed.' }
->>>>>>> 7383c316529866ccfb7359dbbb4a70093a3e9c3b
-=======
-      format.html { redirect_to dashboards_path, notice: 'Company was successfully destroyed.' }
->>>>>>> 7383c316529866ccfb7359dbbb4a70093a3e9c3b
       format.json { head :no_content }
     end
   end

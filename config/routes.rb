@@ -5,7 +5,6 @@ Rails.application.routes.draw do
   end
   resources :applicants, only: [:show, :edit, :destroy]
 
-
   resources :dashboards
   resources :companies
   devise_for :users, :controllers => { registrations: 'registrations', confirmations: 'confirmations' }
