@@ -1,0 +1,21 @@
+p#notice = notice
+
+p
+  strong Company name:
+  = @company.company_name
+p
+  strong Company website:
+  = @company.company_website
+p
+  strong Company email:
+  = @company.company_email
+p
+  strong Company phone:
+  = @company.company_phone
+p
+  strong Industry:
+  = @company.industry
+
+= link_to 'Edit', edit_company_path(@company)
+'|
+= link_to 'Back', companies_path
