@@ -1,8 +1,9 @@
 class CompaniesController < ApplicationController
   before_action :set_company, only: [:show, :edit, :update, :destroy]
+  
   before_filter only: [:new] do 
     redirect_to previous_url, :status => 401 if current_user.company_id != nil
-  end
+  end  
   # GET /companies
   # GET /companies.json
   def index
@@ -47,7 +48,11 @@ class CompaniesController < ApplicationController
     respond_to do |format|
       if @company.update(company_params)
 <<<<<<< HEAD
+<<<<<<< HEAD
         format.html { redirect_to @company, notice: 'Company was successfully updated.' }
+=======
+        format.html { redirect_to dashboards_path, notice: 'Company was successfully updated.' }
+>>>>>>> 7383c316529866ccfb7359dbbb4a70093a3e9c3b
 =======
         format.html { redirect_to dashboards_path, notice: 'Company was successfully updated.' }
 >>>>>>> 7383c316529866ccfb7359dbbb4a70093a3e9c3b
@@ -65,7 +70,11 @@ class CompaniesController < ApplicationController
     @company.destroy
     respond_to do |format|
 <<<<<<< HEAD
+<<<<<<< HEAD
       format.html { redirect_to companies_url, notice: 'Company was successfully destroyed.' }
+=======
+      format.html { redirect_to dashboards_path, notice: 'Company was successfully destroyed.' }
+>>>>>>> 7383c316529866ccfb7359dbbb4a70093a3e9c3b
 =======
       format.html { redirect_to dashboards_path, notice: 'Company was successfully destroyed.' }
 >>>>>>> 7383c316529866ccfb7359dbbb4a70093a3e9c3b
