@@ -1,10 +1,14 @@
 Rails.application.routes.draw do
+  get 'dashboard/index'
+
+  resources :dashboards
   resources :companies
-  devise_for :users, :controllers => { registrations: 'registrations' }
+  devise_for :users, :controllers => { registrations: 'registrations', confirmations: 'confirmations' }
   resources :applicants
   resources :jobs
 
-  get '/companies/new' => "companies#show", as: :user_root
+
+  get '/dashboards' => "dashboards#index", as: :user_root
 
   root 'landing_page#index'
   # The priority is based upon order of creation: first created -> highest priority.
