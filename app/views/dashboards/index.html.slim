@@ -1,2 +1,7 @@
-h1 Dashboard#index
-p Find me in app/views/dashboard/index.html.slim
+h1 Welcome to dashboard 
+
+p = "welcome #{current_user.first_name} #{current_user.last_name} #{current_user.company_id}"
+
+= link_to "Create New Job", new_job_path 
+br
+= link_to "Logout",destroy_user_session_path, method: :delete
