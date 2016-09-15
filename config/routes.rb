@@ -1,13 +1,18 @@
 Rails.application.routes.draw do
+
   resources :jobs do
     resources :applicants, only: [:new, :create, :edit]
   end
   resources :applicants, only: [:show, :edit, :destroy]
+
+
   resources :dashboards
   resources :companies
   devise_for :users, :controllers => { registrations: 'registrations', confirmations: 'confirmations' }
   resources :applicants
   resources :jobs
+
+
 
   get '/dashboards' => "dashboards#index", as: :user_root
 
