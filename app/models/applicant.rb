@@ -1,7 +1,5 @@
 class Applicant < ActiveRecord::Base
 
-has_many :experiences
-has_many :educations
 belongs_to :job
 
 mount_uploader :photo, PhotoUploader
