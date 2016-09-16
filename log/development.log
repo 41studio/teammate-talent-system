@@ -9516,3 +9516,2389 @@ Processing by CompaniesController#new as HTML
   Rendered companies/_form.html.slim (16.5ms)
   Rendered companies/new.html.slim within layouts/application (21.1ms)
 Completed 200 OK in 89ms (Views: 67.7ms | ActiveRecord: 1.8ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-09-16 11:06:31 +0700
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Processing by LandingPageController#index as HTML
+  [1m[35mUser Load (0.4ms)[0m  SELECT  `users`.* FROM `users` WHERE `users`.`id` = 47  ORDER BY `users`.`id` ASC LIMIT 1
+  Rendered landing_page/index.html.slim within layouts/application (42.0ms)
+Completed 200 OK in 561ms (Views: 549.7ms | ActiveRecord: 1.8ms)
+
+
+Started DELETE "/users/sign_out" for 127.0.0.1 at 2016-09-16 11:06:35 +0700
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"agB9TYwHIyRyonhCjSwEEpWtmn5zQ+x5mX2kwXNbCx3yfqkUsAVJZss2oe36eOD9RC3kVFXkXLEXeZssW4Famw=="}
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 47  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 19ms (ActiveRecord: 0.8ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-09-16 11:06:35 +0700
+Processing by LandingPageController#index as HTML
+  Rendered landing_page/index.html.slim within layouts/application (3.9ms)
+Completed 200 OK in 64ms (Views: 62.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2016-09-16 11:06:36 +0700
+Processing by Devise::SessionsController#new as HTML
+  Rendered devise/shared/_links.html.erb (3.9ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (36.2ms)
+Completed 200 OK in 150ms (Views: 145.1ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2016-09-16 11:06:40 +0700
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"FnGIRWX/prF91o+gCkwtwKn+KNpH/zAVSYaHxbhMVQ4Ayl4kxbFhhyaIS8JmL+uhrnmyCXIWOXYT75onxHkwVA==", "user"=>{"email"=>"adotcyber@gmail.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[35mUser Load (0.4ms)[0m  SELECT  `users`.* FROM `users` WHERE `users`.`email` = 'adotcyber@gmail.com'  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36m (0.5ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (1.6ms)[0m  UPDATE `users` SET `current_sign_in_at` = '2016-09-16 04:06:40', `sign_in_count` = 2, `updated_at` = '2016-09-16 04:06:41' WHERE `users`.`id` = 47
+  [1m[36m (13.3ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/dashboards
+Completed 302 Found in 234ms (ActiveRecord: 15.8ms)
+
+
+Started GET "/dashboards" for 127.0.0.1 at 2016-09-16 11:06:41 +0700
+Processing by DashboardsController#index as HTML
+  [1m[35mUser Load (0.4ms)[0m  SELECT  `users`.* FROM `users` WHERE `users`.`id` = 47  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36mCompany Load (0.9ms)[0m  [1mSELECT `companies`.* FROM `companies` INNER JOIN `users` ON `users`.`company_id` = `companies`.`id` WHERE `companies`.`id` IS NULL[0m
+  Rendered dashboards/index.html.slim within layouts/application (24.5ms)
+Completed 200 OK in 98ms (Views: 78.5ms | ActiveRecord: 2.3ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2016-09-16 11:06:47 +0700
+Processing by Devise::SessionsController#new as HTML
+  [1m[35mUser Load (0.5ms)[0m  SELECT  `users`.* FROM `users` WHERE `users`.`id` = 47  ORDER BY `users`.`id` ASC LIMIT 1
+Redirected to http://localhost:3000/dashboards
+Filter chain halted as :require_no_authentication rendered or redirected
+Completed 302 Found in 6ms (ActiveRecord: 0.5ms)
+
+
+Started DELETE "/users/sign_out" for 127.0.0.1 at 2016-09-16 11:06:49 +0700
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"okauUZMDbiYvY55bZhx31dth/unNmgLZQZ+Z3gPEIN3+itOzd3tXnBrOlkzD8FQbPI1x4dLn5s21kh7WwcKt6w=="}
+  [1m[36mUser Load (0.6ms)[0m  [1mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 47  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 13ms (ActiveRecord: 1.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-09-16 11:06:49 +0700
+Processing by LandingPageController#index as HTML
+  Rendered landing_page/index.html.slim within layouts/application (0.7ms)
+Completed 200 OK in 50ms (Views: 49.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2016-09-16 11:06:51 +0700
+Processing by Devise::SessionsController#new as HTML
+  Rendered devise/shared/_links.html.erb (1.2ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (7.2ms)
+Completed 200 OK in 67ms (Views: 65.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2016-09-16 11:06:53 +0700
+Processing by RegistrationsController#new as HTML
+  Rendered devise/shared/_links.html.erb (0.5ms)
+  Rendered devise/registrations/new.html.erb within layouts/application (6.8ms)
+Completed 200 OK in 78ms (Views: 73.8ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2016-09-16 11:07:08 +0700
+Processing by RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Md2Wa2E2X983eKzzUBnIJHbkJwfu8q+ljWTkVPJGjlgv54XbfM0pniqq2Q43y1obGp3d/EPdYJV6+qHy5ZsT4w==", "user"=>{"first_name"=>"Domble", "last_name"=>"Dore", "email"=>"dumble@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mUser Exists (0.4ms)[0m  [1mSELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'dumble@gmail.com' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM `users` WHERE `users`.`authentication_token` = 'zaCcoqSz-e_QJsy719Ks'
+  [1m[36mSQL (6.5ms)[0m  [1mINSERT INTO `users` (`first_name`, `last_name`, `email`, `encrypted_password`, `authentication_token`, `created_at`, `updated_at`, `confirmation_token`, `confirmation_sent_at`) VALUES ('Domble', 'Dore', 'dumble@gmail.com', '$2a$11$wBtju1wkPf8s6qjpjbThiOvs1HraPZ.MnI1VT0d7ynh.SaJS9xSu6', 'zaCcoqSz-e_QJsy719Ks', '2016-09-16 04:07:08', '2016-09-16 04:07:08', 'bUEXg9NJijdQQAmFg-SS', '2016-09-16 04:07:08')[0m
+  [1m[35m (12.5ms)[0m  COMMIT
+  Rendered devise/mailer/confirmation_instructions.html.erb (0.8ms)
+
+Devise::Mailer#confirmation_instructions: processed outbound mail in 182.7ms
+
+Sent mail to dumble@gmail.com (21.3ms)
+Date: Fri, 16 Sep 2016 11:07:08 +0700
+From: teamhiredev@example.com
+Reply-To: teamhiredev@example.com
+To: dumble@gmail.com
+Message-ID: <57db6fecad3b3_6361128b4f46286e@aditia-SVF14A15SGS.mail>
+Subject: Confirmation instructions
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<p>Welcome dumble@gmail.com!</p>
+
+<p>You can confirm your account email through the link below:</p>
+
+<p><a href="http://localhost:3000/users/confirmation?confirmation_token=bUEXg9NJijdQQAmFg-SS">Confirm my account</a></p>
+
+Redirected to http://localhost:3000/
+Completed 302 Found in 463ms (ActiveRecord: 19.8ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-09-16 11:07:08 +0700
+Processing by LandingPageController#index as HTML
+  Rendered landing_page/index.html.slim within layouts/application (0.8ms)
+Completed 200 OK in 68ms (Views: 66.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/confirmation?confirmation_token=bUEXg9NJijdQQAmFg-SS" for 127.0.0.1 at 2016-09-16 11:07:10 +0700
+Processing by ConfirmationsController#show as HTML
+  Parameters: {"confirmation_token"=>"bUEXg9NJijdQQAmFg-SS"}
+  [1m[36mUser Load (0.6ms)[0m  [1mSELECT  `users`.* FROM `users` WHERE `users`.`confirmation_token` = 'bUEXg9NJijdQQAmFg-SS'  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (17.7ms)[0m  [1mUPDATE `users` SET `confirmed_at` = '2016-09-16 04:07:10', `updated_at` = '2016-09-16 04:07:10' WHERE `users`.`id` = 48[0m
+  [1m[35m (113.2ms)[0m  COMMIT
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (1.6ms)[0m  UPDATE `users` SET `last_sign_in_at` = '2016-09-16 04:07:10', `current_sign_in_at` = '2016-09-16 04:07:10', `last_sign_in_ip` = '127.0.0.1', `current_sign_in_ip` = '127.0.0.1', `sign_in_count` = 1, `updated_at` = '2016-09-16 04:07:10' WHERE `users`.`id` = 48
+  [1m[36m (10.5ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/companies/new
+Completed 302 Found in 161ms (ActiveRecord: 144.1ms)
+
+
+Started GET "/companies/new" for 127.0.0.1 at 2016-09-16 11:07:10 +0700
+Processing by CompaniesController#new as HTML
+  [1m[35mUser Load (0.4ms)[0m  SELECT  `users`.* FROM `users` WHERE `users`.`id` = 48  ORDER BY `users`.`id` ASC LIMIT 1
+  Rendered companies/_form.html.slim (12.5ms)
+  Rendered companies/new.html.slim within layouts/application (18.3ms)
+Completed 200 OK in 73ms (Views: 63.6ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/companies" for 127.0.0.1 at 2016-09-16 11:07:19 +0700
+Processing by CompaniesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"2wz+DuiNkiwR2AnIEmZKAPF6vzviSlHqUs61JtY2YhfFNu2+9XbkbQwKfDV1tNg/nQNFwE9lntqlUPCAwev/rA==", "company"=>{"company_name"=>"skjdksdjk", "company_website"=>"kdsjkdsjk", "company_email"=>"dskjdskjkjk@gmail.com", "company_phone"=>"892839283", "industry"=>"Advertising / Marketing / PR"}, "commit"=>"Create Company"}
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (1.3ms)[0m  INSERT INTO `companies` (`company_name`, `company_website`, `company_email`, `company_phone`, `industry`, `created_at`, `updated_at`) VALUES ('skjdksdjk', 'kdsjkdsjk', 'dskjdskjkjk@gmail.com', '892839283', 'Advertising / Marketing / PR', '2016-09-16 04:07:19', '2016-09-16 04:07:19')
+  [1m[36m (32.6ms)[0m  [1mCOMMIT[0m
+  [1m[35mUser Load (0.6ms)[0m  SELECT  `users`.* FROM `users` WHERE `users`.`id` = 48  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36m (0.4ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (58.1ms)[0m  UPDATE `users` SET `company_id` = 5, `updated_at` = '2016-09-16 04:07:19' WHERE `users`.`id` = 48
+  [1m[36m (20.2ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/dashboards
+Completed 302 Found in 131ms (ActiveRecord: 113.4ms)
+
+
+Started GET "/dashboards" for 127.0.0.1 at 2016-09-16 11:07:19 +0700
+Processing by DashboardsController#index as HTML
+  [1m[35mUser Load (0.4ms)[0m  SELECT  `users`.* FROM `users` WHERE `users`.`id` = 48  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36mCompany Load (0.4ms)[0m  [1mSELECT `companies`.* FROM `companies` INNER JOIN `users` ON `users`.`company_id` = `companies`.`id` WHERE `companies`.`id` = 5[0m
+  Rendered dashboards/index.html.slim within layouts/application (1.6ms)
+Completed 200 OK in 44ms (Views: 41.3ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/dashboards" for 127.0.0.1 at 2016-09-16 11:07:21 +0700
+Processing by DashboardsController#index as HTML
+  [1m[35mUser Load (0.4ms)[0m  SELECT  `users`.* FROM `users` WHERE `users`.`id` = 48  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36mCompany Load (0.4ms)[0m  [1mSELECT `companies`.* FROM `companies` INNER JOIN `users` ON `users`.`company_id` = `companies`.`id` WHERE `companies`.`id` = 5[0m
+  Rendered dashboards/index.html.slim within layouts/application (1.6ms)
+Completed 200 OK in 49ms (Views: 45.2ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/dashboards" for 127.0.0.1 at 2016-09-16 11:07:22 +0700
+Processing by DashboardsController#index as HTML
+  [1m[35mUser Load (0.5ms)[0m  SELECT  `users`.* FROM `users` WHERE `users`.`id` = 48  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36mCompany Load (0.5ms)[0m  [1mSELECT `companies`.* FROM `companies` INNER JOIN `users` ON `users`.`company_id` = `companies`.`id` WHERE `companies`.`id` = 5[0m
+  Rendered dashboards/index.html.slim within layouts/application (2.7ms)
+Completed 200 OK in 57ms (Views: 54.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/dashboards" for 127.0.0.1 at 2016-09-16 11:07:22 +0700
+Processing by DashboardsController#index as HTML
+  [1m[35mUser Load (0.3ms)[0m  SELECT  `users`.* FROM `users` WHERE `users`.`id` = 48  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36mCompany Load (0.4ms)[0m  [1mSELECT `companies`.* FROM `companies` INNER JOIN `users` ON `users`.`company_id` = `companies`.`id` WHERE `companies`.`id` = 5[0m
+  Rendered dashboards/index.html.slim within layouts/application (2.1ms)
+Completed 200 OK in 58ms (Views: 55.3ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/dashboards" for 127.0.0.1 at 2016-09-16 11:07:23 +0700
+Processing by DashboardsController#index as HTML
+  [1m[35mUser Load (0.4ms)[0m  SELECT  `users`.* FROM `users` WHERE `users`.`id` = 48  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36mCompany Load (0.4ms)[0m  [1mSELECT `companies`.* FROM `companies` INNER JOIN `users` ON `users`.`company_id` = `companies`.`id` WHERE `companies`.`id` = 5[0m
+  Rendered dashboards/index.html.slim within layouts/application (1.7ms)
+Completed 200 OK in 50ms (Views: 46.2ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2016-09-16 11:07:29 +0700
+Processing by Devise::SessionsController#new as HTML
+  [1m[35mUser Load (0.5ms)[0m  SELECT  `users`.* FROM `users` WHERE `users`.`id` = 48  ORDER BY `users`.`id` ASC LIMIT 1
+Redirected to http://localhost:3000/dashboards
+Filter chain halted as :require_no_authentication rendered or redirected
+Completed 302 Found in 4ms (ActiveRecord: 0.5ms)
+
+
+Started GET "/dashboards" for 127.0.0.1 at 2016-09-16 11:07:29 +0700
+Processing by DashboardsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 48  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35mCompany Load (1.3ms)[0m  SELECT `companies`.* FROM `companies` INNER JOIN `users` ON `users`.`company_id` = `companies`.`id` WHERE `companies`.`id` = 5
+  Rendered dashboards/index.html.slim within layouts/application (4.2ms)
+Completed 200 OK in 52ms (Views: 47.9ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/dashboards" for 127.0.0.1 at 2016-09-16 11:15:04 +0700
+Processing by DashboardsController#index as HTML
+  [1m[36mUser Load (0.8ms)[0m  [1mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 48  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35mCompany Load (0.4ms)[0m  SELECT `companies`.* FROM `companies` INNER JOIN `users` ON `users`.`company_id` = `companies`.`id` WHERE `companies`.`id` = 5
+  Rendered dashboards/index.html.slim within layouts/application (10.5ms)
+Completed 200 OK in 84ms (Views: 51.1ms | ActiveRecord: 4.9ms)
+
+
+Started DELETE "/users/sign_out" for 127.0.0.1 at 2016-09-16 11:17:06 +0700
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"txeniBZ2V+ursSnijOFiyn5f6m/N3Lzc5ImTOCYrzImpLbQ4C40hqrZjXB/rM/D1EiYQlGDzc+wTF9aeMfZRMg=="}
+  [1m[36mUser Load (1.5ms)[0m  [1mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 48  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 11ms (ActiveRecord: 1.7ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-09-16 11:17:06 +0700
+Processing by LandingPageController#index as HTML
+  Rendered landing_page/index.html.slim within layouts/application (1.1ms)
+Completed 200 OK in 58ms (Views: 56.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2016-09-16 11:17:08 +0700
+Processing by Devise::SessionsController#new as HTML
+  Rendered devise/shared/_links.html.erb (0.9ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (7.7ms)
+Completed 200 OK in 81ms (Views: 77.7ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2016-09-16 11:17:14 +0700
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"iAelRkSJi13ajfugvUN4HtaDlJkIKtPgAlAD9MhfjarqrOvGwXe1eM/W1fxEt9EoYk9H2y7jL60+2XPPPiHLVA==", "user"=>{"email"=>"adotcyber122@gmail.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[35mUser Load (3.6ms)[0m  SELECT  `users`.* FROM `users` WHERE `users`.`email` = 'adotcyber122@gmail.com'  ORDER BY `users`.`id` ASC LIMIT 1
+Completed 401 Unauthorized in 194ms (ActiveRecord: 3.6ms)
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"iAelRkSJi13ajfugvUN4HtaDlJkIKtPgAlAD9MhfjarqrOvGwXe1eM/W1fxEt9EoYk9H2y7jL60+2XPPPiHLVA==", "user"=>{"email"=>"adotcyber122@gmail.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  Rendered devise/shared/_links.html.erb (0.4ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (2.8ms)
+Completed 200 OK in 216ms (Views: 55.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2016-09-16 11:17:18 +0700
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"PjjYQLyp88bbq82DUrJ3Ogs+BLXWeBpUTrdvNqnuf/Rck5bAOVfN487w49+rRt4Mv/LX9/Cx5hlyPh8NX5A5Cg==", "user"=>{"email"=>"adotcyber122@gmail.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.6ms)[0m  [1mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'adotcyber122@gmail.com'  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+Completed 401 Unauthorized in 170ms (ActiveRecord: 1.2ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2016-09-16 11:17:18 +0700
+Processing by Devise::SessionsController#new as HTML
+  Rendered devise/shared/_links.html.erb (0.5ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 55ms (Views: 52.6ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2016-09-16 11:17:26 +0700
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"xQZAbecINsfkQUY4yh3s1/qG6Gi5OH65dPUZ+ENdoiqnrQ7tYvYI4vEaaGQz6UXhTko7Kp/xgvRIfGnDtSPk1A==", "user"=>{"email"=>"adotcyber122@gmail.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[35mUser Load (0.7ms)[0m  SELECT  `users`.* FROM `users` WHERE `users`.`email` = 'adotcyber122@gmail.com'  ORDER BY `users`.`id` ASC LIMIT 1
+Completed 401 Unauthorized in 188ms (ActiveRecord: 0.7ms)
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"xQZAbecINsfkQUY4yh3s1/qG6Gi5OH65dPUZ+ENdoiqnrQ7tYvYI4vEaaGQz6UXhTko7Kp/xgvRIfGnDtSPk1A==", "user"=>{"email"=>"adotcyber122@gmail.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  Rendered devise/shared/_links.html.erb (0.4ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 210ms (Views: 49.7ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2016-09-16 11:17:46 +0700
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"mx3r4rg1FF1oPlS9NUyo/n4hiddQ/fICFgZP0hS5Kfn5tqViPcsqeH1leuHMuAHIyu1alXY0Dk8qjz/p4sdvBw==", "user"=>{"email"=>"adotcyber1@gmail.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.7ms)[0m  [1mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'adotcyber1@gmail.com'  ORDER BY `users`.`id` ASC LIMIT 1[0m
+Completed 401 Unauthorized in 199ms (ActiveRecord: 0.7ms)
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"mx3r4rg1FF1oPlS9NUyo/n4hiddQ/fICFgZP0hS5Kfn5tqViPcsqeH1leuHMuAHIyu1alXY0Dk8qjz/p4sdvBw==", "user"=>{"email"=>"adotcyber1@gmail.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  Rendered devise/shared/_links.html.erb (0.4ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (2.8ms)
+Completed 200 OK in 210ms (Views: 51.1ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2016-09-16 11:17:50 +0700
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"TdXu4ebX3Z2lZCf0ldjcUVJAkrbVDWBZJC7UTiOOLxgvfqBhYynjuLA/CahsLHVn5oxB9PPEnBQYp6R11fBp5g==", "user"=>{"email"=>"adotcyber1@gmail.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[35mUser Load (1.6ms)[0m  SELECT  `users`.* FROM `users` WHERE `users`.`email` = 'adotcyber1@gmail.com'  ORDER BY `users`.`id` ASC LIMIT 1
+Completed 401 Unauthorized in 177ms (ActiveRecord: 1.6ms)
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"TdXu4ebX3Z2lZCf0ldjcUVJAkrbVDWBZJC7UTiOOLxgvfqBhYynjuLA/CahsLHVn5oxB9PPEnBQYp6R11fBp5g==", "user"=>{"email"=>"adotcyber1@gmail.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  Rendered devise/shared/_links.html.erb (0.7ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (4.5ms)
+Completed 200 OK in 216ms (Views: 54.5ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2016-09-16 11:17:52 +0700
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"7/PakcfavQPDDVWSJXkHwKZIfDznNKVOi1b8dAxLVnGNWJQRQiSDJtZWe87cja72EoSvfsH9WQO334xP+jUQjw==", "user"=>{"email"=>"adotcyber1@gmail.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.6ms)[0m  [1mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'adotcyber1@gmail.com'  ORDER BY `users`.`id` ASC LIMIT 1[0m
+Completed 401 Unauthorized in 174ms (ActiveRecord: 0.6ms)
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"7/PakcfavQPDDVWSJXkHwKZIfDznNKVOi1b8dAxLVnGNWJQRQiSDJtZWe87cja72EoSvfsH9WQO334xP+jUQjw==", "user"=>{"email"=>"adotcyber1@gmail.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  Rendered devise/shared/_links.html.erb (0.7ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (3.4ms)
+Completed 200 OK in 208ms (Views: 48.3ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2016-09-16 11:17:55 +0700
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"De3rg/VoF0lMieywSYkulBgPokvB76OMF608UL/kCGpvRqUDcJYpbFnSwuywfYeirMNxCecmX8ErJExrSZpOlA==", "user"=>{"email"=>"adotcyber1@gmail.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[35mUser Load (0.7ms)[0m  SELECT  `users`.* FROM `users` WHERE `users`.`email` = 'adotcyber1@gmail.com'  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  COMMIT
+Completed 401 Unauthorized in 168ms (ActiveRecord: 1.1ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2016-09-16 11:17:55 +0700
+Processing by Devise::SessionsController#new as HTML
+  Rendered devise/shared/_links.html.erb (0.4ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (2.8ms)
+Completed 200 OK in 44ms (Views: 42.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/confirmation/new" for 127.0.0.1 at 2016-09-16 13:29:26 +0700
+Processing by ConfirmationsController#new as HTML
+  Rendered devise/shared/_links.html.erb (0.4ms)
+  Rendered devise/confirmations/new.html.erb within layouts/application (3.5ms)
+Completed 200 OK in 71ms (Views: 69.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2016-09-16 13:29:37 +0700
+Processing by Devise::SessionsController#new as HTML
+  Rendered devise/shared/_links.html.erb (0.7ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (3.8ms)
+Completed 200 OK in 51ms (Views: 49.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2016-09-16 13:29:39 +0700
+Processing by Devise::SessionsController#new as HTML
+  Rendered devise/shared/_links.html.erb (0.9ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (5.1ms)
+Completed 200 OK in 77ms (Views: 73.3ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2016-09-16 13:29:40 +0700
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"TsTfp7n1cXL4vYUnlW6ngZGGQmMa1IQKO3PDzuszzmksb5EnPAtPV+3mq3tsmg63JUqRITwdeEcH+rP1HU2Ilw==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+Completed 401 Unauthorized in 4ms (ActiveRecord: 0.0ms)
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"TsTfp7n1cXL4vYUnlW6ngZGGQmMa1IQKO3PDzuszzmksb5EnPAtPV+3mq3tsmg63JUqRITwdeEcH+rP1HU2Ilw==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  Rendered devise/shared/_links.html.erb (0.5ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (3.2ms)
+Completed 200 OK in 48ms (Views: 46.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2016-09-16 13:29:40 +0700
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"f6nsxh5WNcNuYO95Xs/OpB7Obv4dbympKCnwBXzMy88dAqJGm6gL5ns7wSWnO2eSqgK9vDum1eQUoIA+irKNMQ==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms)
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"f6nsxh5WNcNuYO95Xs/OpB7Obv4dbympKCnwBXzMy88dAqJGm6gL5ns7wSWnO2eSqgK9vDum1eQUoIA+irKNMQ==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  Rendered devise/shared/_links.html.erb (0.4ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (3.5ms)
+Completed 200 OK in 73ms (Views: 71.1ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2016-09-16 13:29:40 +0700
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"f6nsxh5WNcNuYO95Xs/OpB7Obv4dbympKCnwBXzMy88dAqJGm6gL5ns7wSWnO2eSqgK9vDum1eQUoIA+irKNMQ==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+Completed 401 Unauthorized in 2ms (ActiveRecord: 0.0ms)
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"f6nsxh5WNcNuYO95Xs/OpB7Obv4dbympKCnwBXzMy88dAqJGm6gL5ns7wSWnO2eSqgK9vDum1eQUoIA+irKNMQ==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  Rendered devise/shared/_links.html.erb (0.7ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (3.5ms)
+Completed 200 OK in 68ms (Views: 66.1ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2016-09-16 13:29:41 +0700
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"//MmsWyF35AGcnRF2SIXnPcxkMXn6B8bGFWx6DcVDK2dWGgx6XvhtRMpWhkg1r6qQ/1Dh8Eh41Yk3MHTwWtKUw==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+Completed 401 Unauthorized in 2ms (ActiveRecord: 0.0ms)
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"//MmsWyF35AGcnRF2SIXnPcxkMXn6B8bGFWx6DcVDK2dWGgx6XvhtRMpWhkg1r6qQ/1Dh8Eh41Yk3MHTwWtKUw==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  Rendered devise/shared/_links.html.erb (0.5ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (3.2ms)
+Completed 200 OK in 55ms (Views: 53.0ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2016-09-16 13:29:41 +0700
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"8POFtcvndfHxJdxc69yp+t63t0PfLAxNhhNLKm+wkCaSWMs1ThlL1OR+8gASKADMantkAfnl8AC6mjsRmc7W2A==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms)
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"8POFtcvndfHxJdxc69yp+t63t0PfLAxNhhNLKm+wkCaSWMs1ThlL1OR+8gASKADMantkAfnl8AC6mjsRmc7W2A==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  Rendered devise/shared/_links.html.erb (0.8ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (4.6ms)
+Completed 200 OK in 61ms (Views: 59.1ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2016-09-16 13:29:41 +0700
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"7/9JzdcNhnG2+gxgngSmIIIZvVyex4uUTjMR4aDVDCuNVAdNUvO4VKOhIjxn8A8WNtVuHrgOd9lyumHaVqtK1Q==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+Completed 401 Unauthorized in 2ms (ActiveRecord: 0.0ms)
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"7/9JzdcNhnG2+gxgngSmIIIZvVyex4uUTjMR4aDVDCuNVAdNUvO4VKOhIjxn8A8WNtVuHrgOd9lyumHaVqtK1Q==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  Rendered devise/shared/_links.html.erb (0.4ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (2.8ms)
+Completed 200 OK in 52ms (Views: 49.5ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2016-09-16 13:29:42 +0700
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ZlILHnT/u6+mHr7/paIZkWxyPE6RypNGxLmBFwjeGHME+UWe8QGFirNFkKNcVrCn2L7vDLcDbwv4MPEs/qBejQ==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+Completed 401 Unauthorized in 3ms (ActiveRecord: 0.0ms)
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ZlILHnT/u6+mHr7/paIZkWxyPE6RypNGxLmBFwjeGHME+UWe8QGFirNFkKNcVrCn2L7vDLcDbwv4MPEs/qBejQ==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  Rendered devise/shared/_links.html.erb (1.7ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (8.8ms)
+Completed 200 OK in 95ms (Views: 92.5ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2016-09-16 13:29:42 +0700
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ZlILHnT/u6+mHr7/paIZkWxyPE6RypNGxLmBFwjeGHME+UWe8QGFirNFkKNcVrCn2L7vDLcDbwv4MPEs/qBejQ==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+Completed 401 Unauthorized in 3ms (ActiveRecord: 0.0ms)
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ZlILHnT/u6+mHr7/paIZkWxyPE6RypNGxLmBFwjeGHME+UWe8QGFirNFkKNcVrCn2L7vDLcDbwv4MPEs/qBejQ==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  Rendered devise/shared/_links.html.erb (1.0ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (5.6ms)
+Completed 200 OK in 73ms (Views: 70.7ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2016-09-16 13:29:42 +0700
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ZlILHnT/u6+mHr7/paIZkWxyPE6RypNGxLmBFwjeGHME+UWe8QGFirNFkKNcVrCn2L7vDLcDbwv4MPEs/qBejQ==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+Completed 401 Unauthorized in 2ms (ActiveRecord: 0.0ms)
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ZlILHnT/u6+mHr7/paIZkWxyPE6RypNGxLmBFwjeGHME+UWe8QGFirNFkKNcVrCn2L7vDLcDbwv4MPEs/qBejQ==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  Rendered devise/shared/_links.html.erb (0.9ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (6.4ms)
+Completed 200 OK in 85ms (Views: 83.6ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2016-09-16 13:29:42 +0700
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ZlILHnT/u6+mHr7/paIZkWxyPE6RypNGxLmBFwjeGHME+UWe8QGFirNFkKNcVrCn2L7vDLcDbwv4MPEs/qBejQ==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+Completed 401 Unauthorized in 2ms (ActiveRecord: 0.0ms)
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ZlILHnT/u6+mHr7/paIZkWxyPE6RypNGxLmBFwjeGHME+UWe8QGFirNFkKNcVrCn2L7vDLcDbwv4MPEs/qBejQ==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  Rendered devise/shared/_links.html.erb (0.6ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (4.2ms)
+Completed 200 OK in 84ms (Views: 81.8ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2016-09-16 13:29:42 +0700
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ZlILHnT/u6+mHr7/paIZkWxyPE6RypNGxLmBFwjeGHME+UWe8QGFirNFkKNcVrCn2L7vDLcDbwv4MPEs/qBejQ==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+Completed 401 Unauthorized in 2ms (ActiveRecord: 0.0ms)
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ZlILHnT/u6+mHr7/paIZkWxyPE6RypNGxLmBFwjeGHME+UWe8QGFirNFkKNcVrCn2L7vDLcDbwv4MPEs/qBejQ==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  Rendered devise/shared/_links.html.erb (1.4ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (9.2ms)
+Completed 200 OK in 79ms (Views: 76.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2016-09-16 13:29:42 +0700
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ZlILHnT/u6+mHr7/paIZkWxyPE6RypNGxLmBFwjeGHME+UWe8QGFirNFkKNcVrCn2L7vDLcDbwv4MPEs/qBejQ==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+Completed 401 Unauthorized in 3ms (ActiveRecord: 0.0ms)
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ZlILHnT/u6+mHr7/paIZkWxyPE6RypNGxLmBFwjeGHME+UWe8QGFirNFkKNcVrCn2L7vDLcDbwv4MPEs/qBejQ==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  Rendered devise/shared/_links.html.erb (0.9ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (5.3ms)
+Completed 200 OK in 73ms (Views: 71.1ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2016-09-16 13:29:42 +0700
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ZlILHnT/u6+mHr7/paIZkWxyPE6RypNGxLmBFwjeGHME+UWe8QGFirNFkKNcVrCn2L7vDLcDbwv4MPEs/qBejQ==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms)
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ZlILHnT/u6+mHr7/paIZkWxyPE6RypNGxLmBFwjeGHME+UWe8QGFirNFkKNcVrCn2L7vDLcDbwv4MPEs/qBejQ==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  Rendered devise/shared/_links.html.erb (0.4ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (4.7ms)
+Completed 200 OK in 79ms (Views: 76.8ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2016-09-16 13:29:43 +0700
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ZlILHnT/u6+mHr7/paIZkWxyPE6RypNGxLmBFwjeGHME+UWe8QGFirNFkKNcVrCn2L7vDLcDbwv4MPEs/qBejQ==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+Completed 401 Unauthorized in 2ms (ActiveRecord: 0.0ms)
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ZlILHnT/u6+mHr7/paIZkWxyPE6RypNGxLmBFwjeGHME+UWe8QGFirNFkKNcVrCn2L7vDLcDbwv4MPEs/qBejQ==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  Rendered devise/shared/_links.html.erb (1.3ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (5.8ms)
+Completed 200 OK in 55ms (Views: 53.7ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2016-09-16 13:29:43 +0700
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ZlILHnT/u6+mHr7/paIZkWxyPE6RypNGxLmBFwjeGHME+UWe8QGFirNFkKNcVrCn2L7vDLcDbwv4MPEs/qBejQ==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+Completed 401 Unauthorized in 2ms (ActiveRecord: 0.0ms)
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ZlILHnT/u6+mHr7/paIZkWxyPE6RypNGxLmBFwjeGHME+UWe8QGFirNFkKNcVrCn2L7vDLcDbwv4MPEs/qBejQ==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  Rendered devise/shared/_links.html.erb (1.0ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (4.6ms)
+Completed 200 OK in 52ms (Views: 50.8ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2016-09-16 13:29:43 +0700
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ZlILHnT/u6+mHr7/paIZkWxyPE6RypNGxLmBFwjeGHME+UWe8QGFirNFkKNcVrCn2L7vDLcDbwv4MPEs/qBejQ==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms)
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ZlILHnT/u6+mHr7/paIZkWxyPE6RypNGxLmBFwjeGHME+UWe8QGFirNFkKNcVrCn2L7vDLcDbwv4MPEs/qBejQ==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  Rendered devise/shared/_links.html.erb (0.4ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (2.7ms)
+Completed 200 OK in 47ms (Views: 46.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2016-09-16 13:29:43 +0700
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ZlILHnT/u6+mHr7/paIZkWxyPE6RypNGxLmBFwjeGHME+UWe8QGFirNFkKNcVrCn2L7vDLcDbwv4MPEs/qBejQ==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms)
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ZlILHnT/u6+mHr7/paIZkWxyPE6RypNGxLmBFwjeGHME+UWe8QGFirNFkKNcVrCn2L7vDLcDbwv4MPEs/qBejQ==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  Rendered devise/shared/_links.html.erb (0.5ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (3.8ms)
+Completed 200 OK in 50ms (Views: 49.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2016-09-16 13:29:43 +0700
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ZlILHnT/u6+mHr7/paIZkWxyPE6RypNGxLmBFwjeGHME+UWe8QGFirNFkKNcVrCn2L7vDLcDbwv4MPEs/qBejQ==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms)
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ZlILHnT/u6+mHr7/paIZkWxyPE6RypNGxLmBFwjeGHME+UWe8QGFirNFkKNcVrCn2L7vDLcDbwv4MPEs/qBejQ==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  Rendered devise/shared/_links.html.erb (0.5ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (4.0ms)
+Completed 200 OK in 51ms (Views: 49.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2016-09-16 13:29:43 +0700
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ZlILHnT/u6+mHr7/paIZkWxyPE6RypNGxLmBFwjeGHME+UWe8QGFirNFkKNcVrCn2L7vDLcDbwv4MPEs/qBejQ==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms)
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ZlILHnT/u6+mHr7/paIZkWxyPE6RypNGxLmBFwjeGHME+UWe8QGFirNFkKNcVrCn2L7vDLcDbwv4MPEs/qBejQ==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  Rendered devise/shared/_links.html.erb (0.4ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (4.7ms)
+Completed 200 OK in 49ms (Views: 47.6ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2016-09-16 13:29:43 +0700
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ZlILHnT/u6+mHr7/paIZkWxyPE6RypNGxLmBFwjeGHME+UWe8QGFirNFkKNcVrCn2L7vDLcDbwv4MPEs/qBejQ==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms)
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ZlILHnT/u6+mHr7/paIZkWxyPE6RypNGxLmBFwjeGHME+UWe8QGFirNFkKNcVrCn2L7vDLcDbwv4MPEs/qBejQ==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  Rendered devise/shared/_links.html.erb (0.8ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (3.9ms)
+Completed 200 OK in 62ms (Views: 60.7ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2016-09-16 13:29:43 +0700
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ZlILHnT/u6+mHr7/paIZkWxyPE6RypNGxLmBFwjeGHME+UWe8QGFirNFkKNcVrCn2L7vDLcDbwv4MPEs/qBejQ==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms)
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ZlILHnT/u6+mHr7/paIZkWxyPE6RypNGxLmBFwjeGHME+UWe8QGFirNFkKNcVrCn2L7vDLcDbwv4MPEs/qBejQ==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  Rendered devise/shared/_links.html.erb (0.5ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (3.2ms)
+Completed 200 OK in 56ms (Views: 54.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2016-09-16 13:29:43 +0700
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ZlILHnT/u6+mHr7/paIZkWxyPE6RypNGxLmBFwjeGHME+UWe8QGFirNFkKNcVrCn2L7vDLcDbwv4MPEs/qBejQ==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+Completed 401 Unauthorized in 2ms (ActiveRecord: 0.0ms)
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ZlILHnT/u6+mHr7/paIZkWxyPE6RypNGxLmBFwjeGHME+UWe8QGFirNFkKNcVrCn2L7vDLcDbwv4MPEs/qBejQ==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  Rendered devise/shared/_links.html.erb (0.4ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (3.1ms)
+Completed 200 OK in 51ms (Views: 48.6ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2016-09-16 13:29:43 +0700
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ZlILHnT/u6+mHr7/paIZkWxyPE6RypNGxLmBFwjeGHME+UWe8QGFirNFkKNcVrCn2L7vDLcDbwv4MPEs/qBejQ==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms)
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ZlILHnT/u6+mHr7/paIZkWxyPE6RypNGxLmBFwjeGHME+UWe8QGFirNFkKNcVrCn2L7vDLcDbwv4MPEs/qBejQ==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  Rendered devise/shared/_links.html.erb (0.4ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 52ms (Views: 50.7ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2016-09-16 13:29:43 +0700
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ZlILHnT/u6+mHr7/paIZkWxyPE6RypNGxLmBFwjeGHME+UWe8QGFirNFkKNcVrCn2L7vDLcDbwv4MPEs/qBejQ==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+Completed 401 Unauthorized in 2ms (ActiveRecord: 0.0ms)
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ZlILHnT/u6+mHr7/paIZkWxyPE6RypNGxLmBFwjeGHME+UWe8QGFirNFkKNcVrCn2L7vDLcDbwv4MPEs/qBejQ==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  Rendered devise/shared/_links.html.erb (0.4ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (2.9ms)
+Completed 200 OK in 52ms (Views: 48.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2016-09-16 13:29:43 +0700
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ZlILHnT/u6+mHr7/paIZkWxyPE6RypNGxLmBFwjeGHME+UWe8QGFirNFkKNcVrCn2L7vDLcDbwv4MPEs/qBejQ==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms)
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ZlILHnT/u6+mHr7/paIZkWxyPE6RypNGxLmBFwjeGHME+UWe8QGFirNFkKNcVrCn2L7vDLcDbwv4MPEs/qBejQ==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  Rendered devise/shared/_links.html.erb (0.5ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (3.7ms)
+Completed 200 OK in 79ms (Views: 77.7ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2016-09-16 13:29:43 +0700
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ZlILHnT/u6+mHr7/paIZkWxyPE6RypNGxLmBFwjeGHME+UWe8QGFirNFkKNcVrCn2L7vDLcDbwv4MPEs/qBejQ==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms)
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ZlILHnT/u6+mHr7/paIZkWxyPE6RypNGxLmBFwjeGHME+UWe8QGFirNFkKNcVrCn2L7vDLcDbwv4MPEs/qBejQ==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  Rendered devise/shared/_links.html.erb (0.4ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (3.2ms)
+Completed 200 OK in 57ms (Views: 55.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2016-09-16 13:29:43 +0700
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ZlILHnT/u6+mHr7/paIZkWxyPE6RypNGxLmBFwjeGHME+UWe8QGFirNFkKNcVrCn2L7vDLcDbwv4MPEs/qBejQ==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+Completed 401 Unauthorized in 2ms (ActiveRecord: 0.0ms)
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ZlILHnT/u6+mHr7/paIZkWxyPE6RypNGxLmBFwjeGHME+UWe8QGFirNFkKNcVrCn2L7vDLcDbwv4MPEs/qBejQ==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  Rendered devise/shared/_links.html.erb (0.4ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (3.1ms)
+Completed 200 OK in 52ms (Views: 50.5ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2016-09-16 13:29:43 +0700
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ZlILHnT/u6+mHr7/paIZkWxyPE6RypNGxLmBFwjeGHME+UWe8QGFirNFkKNcVrCn2L7vDLcDbwv4MPEs/qBejQ==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+Completed 401 Unauthorized in 2ms (ActiveRecord: 0.0ms)
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ZlILHnT/u6+mHr7/paIZkWxyPE6RypNGxLmBFwjeGHME+UWe8QGFirNFkKNcVrCn2L7vDLcDbwv4MPEs/qBejQ==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  Rendered devise/shared/_links.html.erb (0.5ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (3.1ms)
+Completed 200 OK in 56ms (Views: 54.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2016-09-16 14:15:04 +0700
+Processing by Devise::SessionsController#new as HTML
+  Rendered devise/shared/_links.html.erb (0.4ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (4.9ms)
+Completed 200 OK in 126ms (Views: 120.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2016-09-16 14:17:49 +0700
+Processing by Devise::SessionsController#new as HTML
+  Rendered devise/shared/_links.html.erb (0.6ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (5.0ms)
+Completed 200 OK in 65ms (Views: 62.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2016-09-16 14:17:50 +0700
+Processing by Devise::SessionsController#new as HTML
+  Rendered devise/shared/_links.html.erb (0.9ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (5.6ms)
+Completed 200 OK in 84ms (Views: 80.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2016-09-16 14:17:51 +0700
+Processing by Devise::SessionsController#new as HTML
+  Rendered devise/shared/_links.html.erb (0.9ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (3.7ms)
+Completed 200 OK in 52ms (Views: 50.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2016-09-16 14:17:52 +0700
+Processing by Devise::SessionsController#new as HTML
+  Rendered devise/shared/_links.html.erb (1.0ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (5.3ms)
+Completed 200 OK in 80ms (Views: 77.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2016-09-16 14:17:52 +0700
+Processing by Devise::SessionsController#new as HTML
+  Rendered devise/shared/_links.html.erb (0.7ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (4.9ms)
+Completed 200 OK in 71ms (Views: 69.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2016-09-16 14:17:53 +0700
+Processing by Devise::SessionsController#new as HTML
+  Rendered devise/shared/_links.html.erb (0.5ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (3.5ms)
+Completed 200 OK in 54ms (Views: 52.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2016-09-16 14:17:53 +0700
+Processing by Devise::SessionsController#new as HTML
+  Rendered devise/shared/_links.html.erb (0.3ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (3.1ms)
+Completed 200 OK in 49ms (Views: 47.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2016-09-16 14:34:00 +0700
+Processing by Devise::SessionsController#new as HTML
+  Rendered devise/shared/_links.html.erb (0.4ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (2.6ms)
+Completed 200 OK in 55ms (Views: 52.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/applicants" for 127.0.0.1 at 2016-09-16 14:35:35 +0700
+Processing by ApplicantsController#index as HTML
+Completed 401 Unauthorized in 2ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2016-09-16 14:35:35 +0700
+Processing by Devise::SessionsController#new as HTML
+  Rendered devise/shared/_links.html.erb (0.3ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (2.9ms)
+Completed 200 OK in 44ms (Views: 42.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2016-09-16 14:35:49 +0700
+Processing by Devise::SessionsController#new as HTML
+  Rendered devise/shared/_links.html.erb (0.3ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (2.7ms)
+Completed 200 OK in 71ms (Views: 45.6ms | ActiveRecord: 11.9ms)
+
+
+Started GET "/applicants" for 127.0.0.1 at 2016-09-16 14:35:52 +0700
+Processing by ApplicantsController#index as HTML
+  [1m[36mApplicant Load (0.6ms)[0m  [1mSELECT `applicants`.* FROM `applicants`[0m
+  Rendered applicants/index.html.slim within layouts/application (28.6ms)
+Completed 500 Internal Server Error in 78ms (ActiveRecord: 2.4ms)
+
+ActionController::UrlGenerationError - No route matches {:action=>"edit", :controller=>"applicants", :id=>"5", :job_id=>nil} missing required keys: [:job_id]:
+  actionpack (4.2.6) lib/action_dispatch/routing/route_set.rb:259:in `raise_generation_error'
+  actionpack (4.2.6) lib/action_dispatch/routing/route_set.rb:234:in `optimized_helper'
+  actionpack (4.2.6) lib/action_dispatch/routing/route_set.rb:220:in `call'
+  actionpack (4.2.6) lib/action_dispatch/routing/route_set.rb:345:in `block (2 levels) in define_url_helper'
+  app/views/applicants/index.html.slim:34:in `block in _app_views_applicants_index_html_slim___583575842372525126_70263849044580'
+  activerecord (4.2.6) lib/active_record/relation/delegation.rb:46:in `each'
+  app/views/applicants/index.html.slim:21:in `_app_views_applicants_index_html_slim___583575842372525126_70263849044580'
+  actionview (4.2.6) lib/action_view/template.rb:145:in `block in render'
+  activesupport (4.2.6) lib/active_support/notifications.rb:166:in `instrument'
+  actionview (4.2.6) lib/action_view/template.rb:333:in `instrument'
+  actionview (4.2.6) lib/action_view/template.rb:143:in `render'
+  actionview (4.2.6) lib/action_view/renderer/template_renderer.rb:54:in `block (2 levels) in render_template'
+  actionview (4.2.6) lib/action_view/renderer/abstract_renderer.rb:39:in `block in instrument'
+  activesupport (4.2.6) lib/active_support/notifications.rb:164:in `block in instrument'
+  activesupport (4.2.6) lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+  activesupport (4.2.6) lib/active_support/notifications.rb:164:in `instrument'
+  actionview (4.2.6) lib/action_view/renderer/abstract_renderer.rb:39:in `instrument'
+  actionview (4.2.6) lib/action_view/renderer/template_renderer.rb:53:in `block in render_template'
+  actionview (4.2.6) lib/action_view/renderer/template_renderer.rb:61:in `render_with_layout'
+  actionview (4.2.6) lib/action_view/renderer/template_renderer.rb:52:in `render_template'
+  actionview (4.2.6) lib/action_view/renderer/template_renderer.rb:14:in `render'
+  actionview (4.2.6) lib/action_view/renderer/renderer.rb:46:in `render_template'
+  actionview (4.2.6) lib/action_view/renderer/renderer.rb:27:in `render'
+  actionview (4.2.6) lib/action_view/rendering.rb:100:in `_render_template'
+  actionpack (4.2.6) lib/action_controller/metal/streaming.rb:217:in `_render_template'
+  actionview (4.2.6) lib/action_view/rendering.rb:83:in `render_to_body'
+  actionpack (4.2.6) lib/action_controller/metal/rendering.rb:32:in `render_to_body'
+  actionpack (4.2.6) lib/action_controller/metal/renderers.rb:37:in `render_to_body'
+  actionpack (4.2.6) lib/abstract_controller/rendering.rb:25:in `render'
+  actionpack (4.2.6) lib/action_controller/metal/rendering.rb:16:in `render'
+  actionpack (4.2.6) lib/action_controller/metal/instrumentation.rb:44:in `block (2 levels) in render'
+  activesupport (4.2.6) lib/active_support/core_ext/benchmark.rb:12:in `block in ms'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/benchmark.rb:308:in `realtime'
+  activesupport (4.2.6) lib/active_support/core_ext/benchmark.rb:12:in `ms'
+  actionpack (4.2.6) lib/action_controller/metal/instrumentation.rb:44:in `block in render'
+  actionpack (4.2.6) lib/action_controller/metal/instrumentation.rb:87:in `cleanup_view_runtime'
+  activerecord (4.2.6) lib/active_record/railties/controller_runtime.rb:25:in `cleanup_view_runtime'
+  actionpack (4.2.6) lib/action_controller/metal/instrumentation.rb:43:in `render'
+  actionpack (4.2.6) lib/action_controller/metal/implicit_render.rb:10:in `default_render'
+  actionpack (4.2.6) lib/action_controller/metal/implicit_render.rb:5:in `send_action'
+  actionpack (4.2.6) lib/abstract_controller/base.rb:198:in `process_action'
+  actionpack (4.2.6) lib/action_controller/metal/rendering.rb:10:in `process_action'
+  actionpack (4.2.6) lib/abstract_controller/callbacks.rb:20:in `block in process_action'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:117:in `call'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:555:in `block (2 levels) in compile'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:505:in `call'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:92:in `__run_callbacks__'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:778:in `_run_process_action_callbacks'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.6) lib/abstract_controller/callbacks.rb:19:in `process_action'
+  actionpack (4.2.6) lib/action_controller/metal/rescue.rb:29:in `process_action'
+  actionpack (4.2.6) lib/action_controller/metal/instrumentation.rb:32:in `block in process_action'
+  activesupport (4.2.6) lib/active_support/notifications.rb:164:in `block in instrument'
+  activesupport (4.2.6) lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+  activesupport (4.2.6) lib/active_support/notifications.rb:164:in `instrument'
+  actionpack (4.2.6) lib/action_controller/metal/instrumentation.rb:30:in `process_action'
+  actionpack (4.2.6) lib/action_controller/metal/params_wrapper.rb:250:in `process_action'
+  activerecord (4.2.6) lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+  actionpack (4.2.6) lib/abstract_controller/base.rb:137:in `process'
+  actionview (4.2.6) lib/action_view/rendering.rb:30:in `process'
+  actionpack (4.2.6) lib/action_controller/metal.rb:196:in `dispatch'
+  actionpack (4.2.6) lib/action_controller/metal/rack_delegation.rb:13:in `dispatch'
+  actionpack (4.2.6) lib/action_controller/metal.rb:237:in `block in action'
+  actionpack (4.2.6) lib/action_dispatch/routing/route_set.rb:74:in `dispatch'
+  actionpack (4.2.6) lib/action_dispatch/routing/route_set.rb:43:in `serve'
+  actionpack (4.2.6) lib/action_dispatch/journey/router.rb:43:in `block in serve'
+  actionpack (4.2.6) lib/action_dispatch/journey/router.rb:30:in `serve'
+  actionpack (4.2.6) lib/action_dispatch/routing/route_set.rb:817:in `call'
+  bullet (5.4.0) lib/bullet/rack.rb:10:in `call'
+  warden (1.2.6) lib/warden/manager.rb:35:in `block in call'
+  warden (1.2.6) lib/warden/manager.rb:34:in `call'
+  rack (1.6.4) lib/rack/etag.rb:24:in `call'
+  rack (1.6.4) lib/rack/conditionalget.rb:25:in `call'
+  rack (1.6.4) lib/rack/head.rb:13:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/flash.rb:260:in `call'
+  rack (1.6.4) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.6.4) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/cookies.rb:560:in `call'
+  activerecord (4.2.6) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:653:in `call'
+  activerecord (4.2.6) lib/active_record/migration.rb:377:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:88:in `__run_callbacks__'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:778:in `_run_call_callbacks'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.6) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:84:in `protected_app_call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:79:in `better_errors_call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:57:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.6) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.6) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.6) lib/rails/rack/logger.rb:20:in `call'
+  quiet_assets (1.1.0) lib/quiet_assets.rb:27:in `call_with_quiet_assets'
+  actionpack (4.2.6) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.6) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/static.rb:120:in `call'
+  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.6) lib/rails/engine.rb:518:in `call'
+  railties (4.2.6) lib/rails/application.rb:165:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.4) lib/rack/handler/webrick.rb:88:in `service'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:140:in `service'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:96:in `run'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/server.rb:296:in `block in start_thread'
+
+
+
+Started POST "/__better_errors/61b07c76b57fb08a/variables" for 127.0.0.1 at 2016-09-16 14:35:52 +0700
+
+
+Started GET "/applicants" for 127.0.0.1 at 2016-09-16 14:36:42 +0700
+Processing by ApplicantsController#index as HTML
+  [1m[35mApplicant Load (0.3ms)[0m  SELECT `applicants`.* FROM `applicants`
+  Rendered applicants/index.html.slim within layouts/application (0.9ms)
+Completed 200 OK in 42ms (Views: 40.1ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-09-16 14:36:44 +0700
+Processing by LandingPageController#index as HTML
+  Rendered landing_page/index.html.slim within layouts/application (1.1ms)
+Completed 200 OK in 50ms (Views: 49.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2016-09-16 14:36:45 +0700
+Processing by Devise::SessionsController#new as HTML
+  Rendered devise/shared/_links.html.erb (0.9ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (6.8ms)
+Completed 200 OK in 66ms (Views: 63.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2016-09-16 14:36:49 +0700
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ILQvcP+5CCMvl99Irs+I3UM7sfcxDl+uqNhxS+jMdLFCH2Hwekc2BjrM8RRXOyHr9/ditRfHo+OUUQFwHrIyTw==", "user"=>{"email"=>"adotcyber@gmail.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (2.0ms)[0m  [1mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'adotcyber@gmail.com'  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mUPDATE `users` SET `last_sign_in_at` = '2016-09-16 04:06:40', `current_sign_in_at` = '2016-09-16 07:36:49', `sign_in_count` = 3, `updated_at` = '2016-09-16 07:36:49' WHERE `users`.`id` = 47[0m
+  [1m[35m (23.1ms)[0m  COMMIT
+Redirected to http://localhost:3000/applicants
+Completed 302 Found in 239ms (ActiveRecord: 25.7ms)
+
+
+Started GET "/applicants" for 127.0.0.1 at 2016-09-16 14:36:50 +0700
+Processing by ApplicantsController#index as HTML
+  [1m[36mApplicant Load (0.3ms)[0m  [1mSELECT `applicants`.* FROM `applicants`[0m
+  Rendered applicants/index.html.slim within layouts/application (0.9ms)
+Completed 200 OK in 37ms (Views: 35.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/applicants" for 127.0.0.1 at 2016-09-16 14:36:51 +0700
+Processing by ApplicantsController#index as HTML
+  [1m[35mApplicant Load (0.4ms)[0m  SELECT `applicants`.* FROM `applicants`
+  Rendered applicants/index.html.slim within layouts/application (1.4ms)
+Completed 200 OK in 50ms (Views: 48.7ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-09-16 14:37:19 +0700
+Processing by LandingPageController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 47  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  Rendered landing_page/index.html.slim within layouts/application (2.5ms)
+Completed 200 OK in 60ms (Views: 58.2ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-09-16 14:37:20 +0700
+Processing by LandingPageController#index as HTML
+  Rendered landing_page/index.html.slim within layouts/application (0.8ms)
+Completed 200 OK in 62ms (Views: 60.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2016-09-16 14:37:23 +0700
+Processing by Devise::SessionsController#new as HTML
+  Rendered devise/shared/_links.html.erb (0.7ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (4.8ms)
+Completed 200 OK in 65ms (Views: 60.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2016-09-16 14:37:24 +0700
+Processing by RegistrationsController#new as HTML
+  Rendered devise/shared/_links.html.erb (0.3ms)
+  Rendered devise/registrations/new.html.erb within layouts/application (3.3ms)
+Completed 200 OK in 64ms (Views: 59.5ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2016-09-16 14:37:32 +0700
+Processing by RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"7Z67Miv+yMYsnXbwy1lIHHpCSoHkcJBD6XQCgWeg9A++l0Ly0LWYvR3Q5N8hP2d8N07vBQ2/o48zB/tDQlg/vQ==", "user"=>{"first_name"=>"Aditia", "last_name"=>"Pratama", "email"=>"adotcyber@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mUser Exists (0.5ms)[0m  [1mSELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'adotcyber@gmail.com' LIMIT 1[0m
+  [1m[35m (0.4ms)[0m  SELECT COUNT(*) FROM `users` WHERE `users`.`authentication_token` = 'zDzUxVPmyCGBsufdiG-2'
+  [1m[36mSQL (1.6ms)[0m  [1mINSERT INTO `users` (`first_name`, `last_name`, `email`, `encrypted_password`, `authentication_token`, `created_at`, `updated_at`, `confirmation_token`, `confirmation_sent_at`) VALUES ('Aditia', 'Pratama', 'adotcyber@gmail.com', '$2a$11$fgbsYdAuLjd9sHs7lBVkuOk38BZ1pjir8IhVzcJXxDU7D074ZL/Rm', 'zDzUxVPmyCGBsufdiG-2', '2016-09-16 07:37:32', '2016-09-16 07:37:32', 'uMKYzQW8QZZMhCkzQV5n', '2016-09-16 07:37:32')[0m
+  [1m[35m (11.1ms)[0m  COMMIT
+  Rendered devise/mailer/confirmation_instructions.html.erb (0.4ms)
+
+Devise::Mailer#confirmation_instructions: processed outbound mail in 31.2ms
+
+Sent mail to adotcyber@gmail.com (54.8ms)
+Date: Fri, 16 Sep 2016 14:37:32 +0700
+From: teamhiredev@example.com
+Reply-To: teamhiredev@example.com
+To: adotcyber@gmail.com
+Message-ID: <57dba13c5fe8e_63613fe79356adb462970@aditia-SVF14A15SGS.mail>
+Subject: Confirmation instructions
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<p>Welcome adotcyber@gmail.com!</p>
+
+<p>You can confirm your account email through the link below:</p>
+
+<p><a href="http://localhost:3000/users/confirmation?confirmation_token=uMKYzQW8QZZMhCkzQV5n">Confirm my account</a></p>
+
+Redirected to http://localhost:3000/
+Completed 302 Found in 318ms (ActiveRecord: 13.9ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-09-16 14:37:32 +0700
+Processing by LandingPageController#index as HTML
+  Rendered landing_page/index.html.slim within layouts/application (0.5ms)
+Completed 200 OK in 44ms (Views: 43.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/confirmation?confirmation_token=uMKYzQW8QZZMhCkzQV5n" for 127.0.0.1 at 2016-09-16 14:37:34 +0700
+Processing by ConfirmationsController#show as HTML
+  Parameters: {"confirmation_token"=>"uMKYzQW8QZZMhCkzQV5n"}
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT  `users`.* FROM `users` WHERE `users`.`confirmation_token` = 'uMKYzQW8QZZMhCkzQV5n'  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mUPDATE `users` SET `confirmed_at` = '2016-09-16 07:37:34', `updated_at` = '2016-09-16 07:37:34' WHERE `users`.`id` = 49[0m
+  [1m[35m (60.3ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (1.3ms)[0m  UPDATE `users` SET `last_sign_in_at` = '2016-09-16 07:37:34', `current_sign_in_at` = '2016-09-16 07:37:34', `last_sign_in_ip` = '127.0.0.1', `current_sign_in_ip` = '127.0.0.1', `sign_in_count` = 1, `updated_at` = '2016-09-16 07:37:34' WHERE `users`.`id` = 49
+  [1m[36m (9.9ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/companies/new
+Completed 302 Found in 83ms (ActiveRecord: 72.6ms)
+
+
+Started GET "/companies/new" for 127.0.0.1 at 2016-09-16 14:37:34 +0700
+Processing by CompaniesController#new as HTML
+  [1m[35mUser Load (0.4ms)[0m  SELECT  `users`.* FROM `users` WHERE `users`.`id` = 49  ORDER BY `users`.`id` ASC LIMIT 1
+  Rendered companies/_form.html.slim (7.6ms)
+  Rendered companies/new.html.slim within layouts/application (8.8ms)
+Completed 200 OK in 65ms (Views: 52.0ms | ActiveRecord: 1.3ms)
+
+
+Started POST "/companies" for 127.0.0.1 at 2016-09-16 14:37:54 +0700
+Processing by CompaniesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ARCDjWtHqIpHleYTtubUdPFMMXbnBKaSQ4LXEQy9y+hSGXpNkAz48XbYdDxcgPsUvECU8g7LlV6Z8S7TKUUAWg==", "company"=>{"company_name"=>"Woles Bro", "company_website"=>"wolesbro.com", "company_email"=>"wolesadmin@gmail.com", "company_phone"=>"0283827382", "industry"=>"Alternative Medicine"}, "commit"=>"Create Company"}
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (3.2ms)[0m  INSERT INTO `companies` (`company_name`, `company_website`, `company_email`, `company_phone`, `industry`, `created_at`, `updated_at`) VALUES ('Woles Bro', 'wolesbro.com', 'wolesadmin@gmail.com', '0283827382', 'Alternative Medicine', '2016-09-16 07:37:54', '2016-09-16 07:37:54')
+  [1m[36m (18.9ms)[0m  [1mCOMMIT[0m
+  [1m[35mUser Load (0.4ms)[0m  SELECT  `users`.* FROM `users` WHERE `users`.`id` = 49  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  UPDATE `users` SET `company_id` = 6, `updated_at` = '2016-09-16 07:37:54' WHERE `users`.`id` = 49
+  [1m[36m (46.5ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/dashboards
+Completed 302 Found in 79ms (ActiveRecord: 69.7ms)
+
+
+Started GET "/dashboards" for 127.0.0.1 at 2016-09-16 14:37:54 +0700
+Processing by DashboardsController#index as HTML
+  [1m[35mUser Load (0.4ms)[0m  SELECT  `users`.* FROM `users` WHERE `users`.`id` = 49  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36mCompany Load (0.5ms)[0m  [1mSELECT `companies`.* FROM `companies` INNER JOIN `users` ON `users`.`company_id` = `companies`.`id` WHERE `companies`.`id` = 6[0m
+  Rendered dashboards/index.html.slim within layouts/application (3.8ms)
+Completed 200 OK in 57ms (Views: 53.9ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/jobs/new" for 127.0.0.1 at 2016-09-16 14:37:56 +0700
+Processing by JobsController#new as HTML
+  [1m[35mUser Load (0.4ms)[0m  SELECT  `users`.* FROM `users` WHERE `users`.`id` = 49  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36mApplicantExperience Load (0.3ms)[0m  [1mSELECT `applicant_experiences`.* FROM `applicant_experiences`[0m
+  [1m[35mApplicantFunction Load (0.3ms)[0m  SELECT `applicant_functions`.* FROM `applicant_functions`
+  [1m[36mApplicantEmploymentType Load (0.3ms)[0m  [1mSELECT `applicant_employment_types`.* FROM `applicant_employment_types`[0m
+  [1m[35mApplicantIndustry Load (1.1ms)[0m  SELECT `applicant_industries`.* FROM `applicant_industries`
+  [1m[36mApplicantEducation Load (0.3ms)[0m  [1mSELECT `applicant_educations`.* FROM `applicant_educations`[0m
+  Rendered jobs/_form.html.slim (94.0ms)
+  Rendered jobs/new.html.slim within layouts/application (99.2ms)
+Completed 200 OK in 187ms (Views: 130.0ms | ActiveRecord: 20.0ms)
+
+
+Started POST "/jobs" for 127.0.0.1 at 2016-09-16 14:39:44 +0700
+Processing by JobsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"qVStC0y8HV5t5GP3JxWGCElEmAMFtKJ5/8LsC5uCYW76XVTLt/dNJVyp8djNc6loBEg9h+x7kbUlsRXJvnqq3A==", "job"=>{"job_title"=>"Midlanner", "departement"=>"jancok", "job_code"=>"2324", "country"=>"Indonesia", "state"=>"Jawa Barat", "city"=>"Bandung", "zip_code"=>"40525", "min_salary"=>"150000", "max_salary"=>"200000", "curency"=>"Rp", "job_description"=>"ksdjskjdskdkjsk", "job_requirement"=>"kjdsksjkjdskjk", "benefits"=>"sdjskdjskjdksjkd", "aplicant_experience"=>"New graduate", "aplicant_function"=>"Business Analyst", "aplicant_employment_type"=>"Full-time", "aplicant_industry"=>"Agricultural / Poultry/ Plantation / Fishery", "aplicant_education"=>"High School or equivalent", "job_search_keyword"=>"dota2"}, "commit"=>"Create Job"}
+  [1m[35mUser Load (0.6ms)[0m  SELECT  `users`.* FROM `users` WHERE `users`.`id` = 49  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36mApplicantExperience Load (0.4ms)[0m  [1mSELECT `applicant_experiences`.* FROM `applicant_experiences`[0m
+  [1m[35mApplicantFunction Load (0.3ms)[0m  SELECT `applicant_functions`.* FROM `applicant_functions`
+  [1m[36mApplicantEmploymentType Load (0.3ms)[0m  [1mSELECT `applicant_employment_types`.* FROM `applicant_employment_types`[0m
+  [1m[35mApplicantIndustry Load (0.5ms)[0m  SELECT `applicant_industries`.* FROM `applicant_industries`
+  [1m[36mApplicantEducation Load (0.5ms)[0m  [1mSELECT `applicant_educations`.* FROM `applicant_educations`[0m
+  Rendered jobs/_form.html.slim (31.1ms)
+  Rendered jobs/new.html.slim within layouts/application (32.0ms)
+Completed 200 OK in 87ms (Views: 71.2ms | ActiveRecord: 3.0ms)
+
+
+Started POST "/jobs" for 127.0.0.1 at 2016-09-16 14:40:22 +0700
+Processing by JobsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"YA5Vh1gjUEFvlSDs8mgrSPPxMMTDQzFxOFkZUbBPB4AzB6xHo2gAOl7YssMYDgQovv2VQCqMAr3iKuCTlbfMMg==", "job"=>{"job_title"=>"Midlanner", "departement"=>"jancok", "job_code"=>"2324", "country"=>"Indonesia", "state"=>"Jawa Barat", "city"=>"Bandung", "zip_code"=>"40525", "min_salary"=>"150000", "max_salary"=>"200000", "curency"=>"Rp", "job_description"=>"Quaerat senectus quis faucibus proident tincidunt tempore saepe quisque fermentum sequi hymenaeos sapien! Volutpat, velit, doloribus aliqua eius. Quisquam. Cursus deserunt morbi, facere molestie beatae lobortis? Egestas quos, qui quibusdam proin rem esse, adipisicing, eos! Libero turpis risus. Debitis dicta primis officia minima lobortis at facilisi? Morbi morbi! Dolorem impedit assumenda eget ante malesuada, non placeat primis facilisis dicta voluptatem. Quis inceptos exercitation sint suscipit? Error proin nonummy, temporibus ac eaque nec, velit iste ipsum facilis fermentum litora eu iaculis? Eos labore varius fugit accumsan arcu veritatis aptent hac eiusmod. Vel? Ipsum ante torquent, nascetur aliquip molestias semper, consequat tincidunt.", "job_requirement"=>"Quaerat senectus quis faucibus proident tincidunt tempore saepe quisque fermentum sequi hymenaeos sapien! Volutpat, velit, doloribus aliqua eius. Quisquam. Cursus deserunt morbi, facere molestie beatae lobortis? Egestas quos, qui quibusdam proin rem esse, adipisicing, eos! Libero turpis risus. Debitis dicta primis officia minima lobortis at facilisi? Morbi morbi! Dolorem impedit assumenda eget ante malesuada, non placeat primis facilisis dicta voluptatem. Quis inceptos exercitation sint suscipit? Error proin nonummy, temporibus ac eaque nec, velit iste ipsum facilis fermentum litora eu iaculis? Eos labore varius fugit accumsan arcu veritatis aptent hac eiusmod. Vel? Ipsum ante torquent, nascetur aliquip molestias semper, consequat tincidunt.", "benefits"=>"Quaerat senectus quis faucibus proident tincidunt tempore saepe quisque fermentum sequi hymenaeos sapien! Volutpat, velit, doloribus aliqua eius. Quisquam. Cursus deserunt morbi, facere molestie beatae lobortis? Egestas quos, qui quibusdam proin rem esse, adipisicing, eos! Libero turpis risus. Debitis dicta primis officia minima lobortis at facilisi? Morbi morbi! Dolorem impedit assumenda eget ante malesuada, non placeat primis facilisis dicta voluptatem. Quis inceptos exercitation sint suscipit? Error proin nonummy, temporibus ac eaque nec, velit iste ipsum facilis fermentum litora eu iaculis? Eos labore varius fugit accumsan arcu veritatis aptent hac eiusmod. Vel? Ipsum ante torquent, nascetur aliquip molestias semper, consequat tincidunt.", "aplicant_experience"=>"Entry level", "aplicant_function"=>"Advertising", "aplicant_employment_type"=>"Part-time", "aplicant_industry"=>"Advertising / Marketing / PR", "aplicant_education"=>"Certification", "job_search_keyword"=>"dota2"}, "commit"=>"Create Job"}
+  [1m[35mUser Load (0.5ms)[0m  SELECT  `users`.* FROM `users` WHERE `users`.`id` = 49  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36m (1.6ms)[0m  [1mBEGIN[0m
+  [1m[35m (1.7ms)[0m  ROLLBACK
+  [1m[36mApplicantExperience Load (0.3ms)[0m  [1mSELECT `applicant_experiences`.* FROM `applicant_experiences`[0m
+  [1m[35mApplicantFunction Load (0.4ms)[0m  SELECT `applicant_functions`.* FROM `applicant_functions`
+  [1m[36mApplicantEmploymentType Load (0.3ms)[0m  [1mSELECT `applicant_employment_types`.* FROM `applicant_employment_types`[0m
+  [1m[35mApplicantIndustry Load (0.3ms)[0m  SELECT `applicant_industries`.* FROM `applicant_industries`
+  [1m[36mApplicantEducation Load (0.3ms)[0m  [1mSELECT `applicant_educations`.* FROM `applicant_educations`[0m
+  Rendered jobs/_form.html.slim (24.3ms)
+  Rendered jobs/new.html.slim within layouts/application (25.2ms)
+Completed 200 OK in 74ms (Views: 60.4ms | ActiveRecord: 5.4ms)
+
+
+Started POST "/jobs" for 127.0.0.1 at 2016-09-16 14:40:40 +0700
+Processing by JobsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"SBNnRTmH9tFeo5HrMBLlmouLXrMnXuLss0/v3lMSV/EbGp6Fwsymqm/uA8TadMr6xof7N86R0SBpPBYcduqcQw==", "job"=>{"job_title"=>"Midlanner", "departement"=>"jancok", "job_code"=>"2324", "country"=>"Indonesia", "state"=>"Jawa Barat", "city"=>"Bandung", "zip_code"=>"40525", "min_salary"=>"150000", "max_salary"=>"200000", "curency"=>"Rp", "job_description"=>"Quaerat senectus quis faucibus proident Quaerat senectus quis faucibus proident tincidunt tempore saepe quisque fermentum sequi hymenaeos sapien! Volutpat, velit, doloribus aliqua eius. Quisquam. Cursus deserunt morbi, facere molestie beatae lobortis? Egestas quos, qui quibusdam proin rem esse, adipisicing, eos! Libero turpis risus. Debitis dicta primis officia minima lobortis at facilisi? Morbi morbi! Dolorem impedit assumenda eget ante malesuada, non placeat primis facilisis dicta voluptatem. Quis inceptos exercitation sint suscipit? Error proin nonummy, temporibus ac eaque nec, velit iste ipsum facilis fermentum litora eu iaculis? Eos labore varius fugit accumsan arcu veritatis aptent hac eiusmod. Vel? Ipsum ante torquent, nascetur aliquip molestias semper, consequat tincidunt.tincidunt tempore saepe quisque fermentum sequi hymenaeos sapien! Volutpat, velit, doloribus aliqua eius. Quisquam. Cursus deserunt morbi, facere molestie beatae lobortis? Egestas quos, qui quibusdam proin rem esse, adipisicing, eos! Libero turpis risus. Debitis dicta primis officia minima lobortis at facilisi? Morbi morbi! Dolorem impedit assumenda eget ante malesuada, non placeat primis facilisis dicta voluptatem. Quis inceptos exercitation sint suscipit? Error proin nonummy, temporibus ac eaque nec, velit iste ipsum facilis fermentum litora eu iaculis? Eos labore varius fugit accumsan arcu veritatis aptent hac eiusmod. Vel? Ipsum ante torquent, nascetur aliquip molestias semper, consequat tincidunt.", "job_requirement"=>"Quaerat senectus quis faucibus proident tincidunt tempore saepe quisque fermentum sequi hymenaeos sapien! Volutpat, velit, doloribus aliqua eius. Quisquam. Cursus deserunt morbi, facere molestie beatae lobortis? Egestas quos, qui quibusdam proin rem esse, adipisicing, eos! Libero turpis risus. Debitis dicta primis officia minima lobortis at facilisi? Morbi morbi! Dolorem impedit assumenda eget ante malesuada, non placeat primis facilisis dicta voluptatem. Quis inceptos exercitation sint suscipit? Error proin nonummy, temporibus ac eaque nec, velit iste ipsum facilis fermentum litora eu iaculis? Eos labore varius fugit accumsan arcu veritatis aptent hac eiusmod. Vel? Ipsum ante torquent, nascetur aliquip molestias semper, consequat tincidunt.Quaerat senectus quis faucibus proident tincidunt tempore saepe quisque fermentum sequi hymenaeos sapien! Volutpat, velit, doloribus aliqua eius. Quisquam. Cursus deserunt morbi, facere molestie beatae lobortis? Egestas quos, qui quibusdam proin rem esse, adipisicing, eos! Libero turpis risus. Debitis dicta primis officia minima lobortis at facilisi? Morbi morbi! Dolorem impedit assumenda eget ante malesuada, non placeat primis facilisis dicta voluptatem. Quis inceptos exercitation sint suscipit? Error proin nonummy, temporibus ac eaque nec, velit iste ipsum facilis fermentum litora eu iaculis? Eos labore varius fugit accumsan arcu veritatis aptent hac eiusmod. Vel? Ipsum ante torquent, nascetur aliquip molestias semper, consequat tincidunt.", "benefits"=>"Quaerat senectus quis faucibus proident tincidunt tempore saepe quisque fermentum sequi hymenaeos sapien! Volutpat, velit, doloribus aliqua eius. Quisquam. Cursus deserunt morbi, facere molestie beatae lobortis? Egestas quos, qui quibusdam proin rem esse, adipisicing, eos! Libero turpis risus. Debitis dicta primis officia minima lobortis at facilisi? Morbi morbi! Dolorem impedit assumenda eget ante malesuada, non placeat primis facilisis dicta voluptatem. Quis inceptos exercitation sint suscipit? Error proin nonummy, temporibus ac eaque nec, velit iste ipsum facilis fermentum litora eu iaculis? Eos labore varius fugit accumsan arcu veritatis aptent hac eiusmod. Vel? Ipsum ante torquent, nascetur aliquip molestias semper, consequat tincidunt.Quaerat senectus quis faucibus proident tincidunt tempore saepe quisque fermentum sequi hymenaeos sapien! Volutpat, velit, doloribus aliqua eius. Quisquam. Cursus deserunt morbi, facere molestie beatae lobortis? Egestas quos, qui quibusdam proin rem esse, adipisicing, eos! Libero turpis risus. Debitis dicta primis officia minima lobortis at facilisi? Morbi morbi! Dolorem impedit assumenda eget ante malesuada, non placeat primis facilisis dicta voluptatem. Quis inceptos exercitation sint suscipit? Error proin nonummy, temporibus ac eaque nec, velit iste ipsum facilis fermentum litora eu iaculis? Eos labore varius fugit accumsan arcu veritatis aptent hac eiusmod. Vel? Ipsum ante torquent, nascetur aliquip molestias semper, consequat tincidunt.", "aplicant_experience"=>"New graduate", "aplicant_function"=>"Advertising", "aplicant_employment_type"=>"Contract", "aplicant_industry"=>"Advertising / Marketing / PR", "aplicant_education"=>"High School or equivalent", "job_search_keyword"=>"dota2"}, "commit"=>"Create Job"}
+  [1m[35mUser Load (0.4ms)[0m  SELECT  `users`.* FROM `users` WHERE `users`.`id` = 49  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36mApplicantExperience Load (0.3ms)[0m  [1mSELECT `applicant_experiences`.* FROM `applicant_experiences`[0m
+  [1m[35mApplicantFunction Load (0.2ms)[0m  SELECT `applicant_functions`.* FROM `applicant_functions`
+  [1m[36mApplicantEmploymentType Load (0.2ms)[0m  [1mSELECT `applicant_employment_types`.* FROM `applicant_employment_types`[0m
+  [1m[35mApplicantIndustry Load (0.2ms)[0m  SELECT `applicant_industries`.* FROM `applicant_industries`
+  [1m[36mApplicantEducation Load (0.2ms)[0m  [1mSELECT `applicant_educations`.* FROM `applicant_educations`[0m
+  Rendered jobs/_form.html.slim (20.6ms)
+  Rendered jobs/new.html.slim within layouts/application (21.7ms)
+Completed 200 OK in 69ms (Views: 58.3ms | ActiveRecord: 1.7ms)
+
+
+Started POST "/jobs" for 127.0.0.1 at 2016-09-16 14:41:23 +0700
+Processing by JobsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"CrcRnad8CJBZvoC9fPEpJ7Yr4TTvQbNKtEXNbkySN8BZvuhdXDdY62jzEpKWlwZH+ydEsAaOgIZuNjSsaWr8cg==", "job"=>{"job_title"=>"Midlanner", "departement"=>"jancok", "job_code"=>"2324", "country"=>"Indonesia", "state"=>"Jawa Barat", "city"=>"Bandung", "zip_code"=>"40525", "min_salary"=>"150000", "max_salary"=>"200000", "curency"=>"Rp", "job_description"=>"Quaerat senectus quis faucibus proident tincidunt tempore saepe quisque fermentum sequi hymenaeos sapien! Volutpat, velit, doloribus aliqua eius. Quisquam. Cursus deserunt morbi, facere molestie beatae lobortis? Egestas quos, qui quibusdam proin rem esse, adipisicing, eos! Libero turpis risus. Debitis dicta primis officia minima lobortis at facilisi? Morbi morbi! Dolorem impedit assumenda eget ante malesuada, non placeat primis facilisis dicta voluptatem. Quis inceptos exercitation sint suscipit? Error proin nonummy, temporibus ac eaque nec, velit iste ipsum facilis fermentum litora eu iaculis? Eos labore varius fugit accumsan arcu veritatis aptent hac eiusmod. Vel? Ipsum ante torquent, nascetur aliquip molestias semper, consequat tincidunt.\r\nQuaerat senectus quis faucibus proident tincidunt tempore saepe quisque fermentum sequi hymenaeos sapien! Volutpat, velit, doloribus aliqua eius. Quisquam. Cursus deserunt morbi, facere molestie beatae lobortis? Egestas quos, qui quibusdam proin rem esse, adipisicing, eos! Libero turpis risus. Debitis dicta primis officia minima lobortis at facilisi? Morbi morbi! Dolorem impedit assumenda eget ante malesuada, non placeat primis facilisis dicta voluptatem. Quis inceptos exercitation sint suscipit? Error proin nonummy, temporibus ac eaque nec, velit iste ipsum facilis fermentum litora eu iaculis? Eos labore varius fugit accumsan arcu veritatis aptent hac eiusmod. Vel? Ipsum ante torquent, nascetur aliquip molestias semper, consequat tincidunt.\r\nQuaerat senectus quis faucibus proident tincidunt tempore saepe quisque fermentum sequi hymenaeos sapien! Volutpat, velit, doloribus aliqua eius. Quisquam. Cursus deserunt morbi, facere molestie beatae lobortis? Egestas quos, qui quibusdam proin rem esse, adipisicing, eos! Libero turpis risus. Debitis dicta primis officia minima lobortis at facilisi? Morbi morbi! Dolorem impedit assumenda eget ante malesuada, non placeat primis facilisis dicta voluptatem. Quis inceptos exercitation sint suscipit? Error proin nonummy, temporibus ac eaque nec, velit iste ipsum facilis fermentum litora eu iaculis? Eos labore varius fugit accumsan arcu veritatis aptent hac eiusmod. Vel? Ipsum ante torquent, nascetur aliquip molestias semper, consequat tincidunt.", "job_requirement"=>"Quaerat senectus quis faucibus proident tincidunt tempore saepe quisque fermentum sequi hymenaeos sapien! Volutpat, velit, doloribus aliqua eius. Quisquam. Cursus deserunt morbi, facere molestie beatae lobortis? Egestas quos, qui quibusdam proin rem esse, adipisicing, eos! Libero turpis risus. Debitis dicta primis officia minima lobortis at facilisi? Morbi morbi! Dolorem impedit assumenda eget ante malesuada, non placeat primis facilisis dicta voluptatem. Quis inceptos exercitation sint suscipit? Error proin nonummy, temporibus ac eaque nec, velit iste ipsum facilis fermentum litora eu iaculis? Eos labore varius fugit accumsan arcu veritatis aptent hac eiusmod. Vel? Ipsum ante torquent, nascetur aliquip molestias semper, consequat tincidunt.\r\nQuaerat senectus quis faucibus proident tincidunt tempore saepe quisque fermentum sequi hymenaeos sapien! Volutpat, velit, doloribus aliqua eius. Quisquam. Cursus deserunt morbi, facere molestie beatae lobortis? Egestas quos, qui quibusdam proin rem esse, adipisicing, eos! Libero turpis risus. Debitis dicta primis officia minima lobortis at facilisi? Morbi morbi! Dolorem impedit assumenda eget ante malesuada, non placeat primis facilisis dicta voluptatem. Quis inceptos exercitation sint suscipit? Error proin nonummy, temporibus ac eaque nec, velit iste ipsum facilis fermentum litora eu iaculis? Eos labore varius fugit accumsan arcu veritatis aptent hac eiusmod. Vel? Ipsum ante torquent, nascetur aliquip molestias semper, consequat tincidunt.\r\nQuaerat senectus quis faucibus proident tincidunt tempore saepe quisque fermentum sequi hymenaeos sapien! Volutpat, velit, doloribus aliqua eius. Quisquam. Cursus deserunt morbi, facere molestie beatae lobortis? Egestas quos, qui quibusdam proin rem esse, adipisicing, eos! Libero turpis risus. Debitis dicta primis officia minima lobortis at facilisi? Morbi morbi! Dolorem impedit assumenda eget ante malesuada, non placeat primis facilisis dicta voluptatem. Quis inceptos exercitation sint suscipit? Error proin nonummy, temporibus ac eaque nec, velit iste ipsum facilis fermentum litora eu iaculis? Eos labore varius fugit accumsan arcu veritatis aptent hac eiusmod. Vel? Ipsum ante torquent, nascetur aliquip molestias semper, consequat tincidunt.", "benefits"=>"Quaerat senectus quis faucibus proident tincidunt tempore saepe quisque fermentum sequi hymenaeos sapien! Volutpat, velit, doloribus aliqua eius. Quisquam. Cursus deserunt morbi, facere molestie beatae lobortis? Egestas quos, qui quibusdam proin rem esse, adipisicing, eos! Libero turpis risus. Debitis dicta primis officia minima lobortis at facilisi? Morbi morbi! Dolorem impedit assumenda eget ante malesuada, non placeat primis facilisis dicta voluptatem. Quis inceptos exercitation sint suscipit? Error proin nonummy, temporibus ac eaque nec, velit iste ipsum facilis fermentum litora eu iaculis? Eos labore varius fugit accumsan arcu veritatis aptent hac eiusmod. Vel? Ipsum ante torquent, nascetur aliquip molestias semper, consequat tincidunt.\r\nQuaerat senectus quis faucibus proident tincidunt tempore saepe quisque fermentum sequi hymenaeos sapien! Volutpat, velit, doloribus aliqua eius. Quisquam. Cursus deserunt morbi, facere molestie beatae lobortis? Egestas quos, qui quibusdam proin rem esse, adipisicing, eos! Libero turpis risus. Debitis dicta primis officia minima lobortis at facilisi? Morbi morbi! Dolorem impedit assumenda eget ante malesuada, non placeat primis facilisis dicta voluptatem. Quis inceptos exercitation sint suscipit? Error proin nonummy, temporibus ac eaque nec, velit iste ipsum facilis fermentum litora eu iaculis? Eos labore varius fugit accumsan arcu veritatis aptent hac eiusmod. Vel? Ipsum ante torquent, nascetur aliquip molestias semper, consequat tincidunt.\r\nQuaerat senectus quis faucibus proident tincidunt tempore saepe quisque fermentum sequi hymenaeos sapien! Volutpat, velit, doloribus aliqua eius. Quisquam. Cursus deserunt morbi, facere molestie beatae lobortis? Egestas quos, qui quibusdam proin rem esse, adipisicing, eos! Libero turpis risus. Debitis dicta primis officia minima lobortis at facilisi? Morbi morbi! Dolorem impedit assumenda eget ante malesuada, non placeat primis facilisis dicta voluptatem. Quis inceptos exercitation sint suscipit? Error proin nonummy, temporibus ac eaque nec, velit iste ipsum facilis fermentum litora eu iaculis? Eos labore varius fugit accumsan arcu veritatis aptent hac eiusmod. Vel? Ipsum ante torquent, nascetur aliquip molestias semper, consequat tincidunt.", "aplicant_experience"=>"Internship", "aplicant_function"=>"Administrative", "aplicant_employment_type"=>"Part-time", "aplicant_industry"=>"Advertising / Marketing / PR", "aplicant_education"=>"High School or equivalent", "job_search_keyword"=>"dota2"}, "commit"=>"Create Job"}
+  [1m[35mUser Load (1.0ms)[0m  SELECT  `users`.* FROM `users` WHERE `users`.`id` = 49  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.4ms)[0m  ROLLBACK
+  [1m[36mApplicantExperience Load (0.5ms)[0m  [1mSELECT `applicant_experiences`.* FROM `applicant_experiences`[0m
+  [1m[35mApplicantFunction Load (0.3ms)[0m  SELECT `applicant_functions`.* FROM `applicant_functions`
+  [1m[36mApplicantEmploymentType Load (0.2ms)[0m  [1mSELECT `applicant_employment_types`.* FROM `applicant_employment_types`[0m
+  [1m[35mApplicantIndustry Load (0.2ms)[0m  SELECT `applicant_industries`.* FROM `applicant_industries`
+  [1m[36mApplicantEducation Load (0.2ms)[0m  [1mSELECT `applicant_educations`.* FROM `applicant_educations`[0m
+  Rendered jobs/_form.html.slim (20.5ms)
+  Rendered jobs/new.html.slim within layouts/application (21.1ms)
+Completed 200 OK in 69ms (Views: 56.6ms | ActiveRecord: 2.9ms)
+
+
+Started POST "/jobs" for 127.0.0.1 at 2016-09-16 14:42:48 +0700
+Processing by JobsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"V8NHy0nSEg+VHK/sOfCLTT7QVpO/ubgu95L1Z7vOP/4Eyr4LsplCdKRRPcPTlqQtc9zzF1Z2i+It4Qylnjb0TA==", "job"=>{"job_title"=>"Midlanner", "departement"=>"jancok", "job_code"=>"2324", "country"=>"Indonesia", "state"=>"Jawa Barat", "city"=>"Bandung", "zip_code"=>"40525", "min_salary"=>"150000", "max_salary"=>"200000", "curency"=>"Rp", "job_description"=>"Quaerat senectus quis faucibus proident tincidunt tempore saepe quisque fermentum sequi hymenaeos sapien! Volutpat, velit, doloribus aliqua eius. Quisquam. Cursus deserunt morbi, facere molestie beatae lobortis? Egestas quos, qui quibusdam proin rem esse, adipisicing, eos! Libero turpis risus. Debitis dicta primis officia minima lobortis at facilisi? Morbi morbi! Dolorem impedit assumenda eget ante malesuada, non placeat primis facilisis dicta voluptatem. Quis inceptos exercitation sint suscipit? Error proin nonummy, temporibus ac eaque nec, velit iste ipsum facilis fermentum litora eu iaculis? Eos labore varius fugit accumsan arcu veritatis aptent hac eiusmod. Vel? Ipsum ante torquent, nascetur aliquip molestias semper, consequat tincidunt.\r\nQuaerat senectus quis faucibus proident tincidunt tempore saepe quisque fermentum sequi hymenaeos sapien! Volutpat, velit, doloribus aliqua eius. Quisquam. Cursus deserunt morbi, facere molestie beatae lobortis? Egestas quos, qui quibusdam proin rem esse, adipisicing, eos! Libero turpis risus. Debitis dicta primis officia minima lobortis at facilisi? Morbi morbi! Dolorem impedit assumenda eget ante malesuada, non placeat primis facilisis dicta voluptatem. Quis inceptos exercitation sint suscipit? Error proin nonummy, temporibus ac eaque nec, velit iste ipsum facilis fermentum litora eu iaculis? Eos labore varius fugit accumsan arcu veritatis aptent hac eiusmod. Vel? Ipsum ante torquent, nascetur aliquip molestias semper, consequat tincidunt.\r\nQuaerat senectus quis faucibus proident tincidunt tempore saepe quisque fermentum sequi hymenaeos sapien! Volutpat, velit, doloribus aliqua eius. Quisquam. Cursus deserunt morbi, facere molestie beatae lobortis? Egestas quos, qui quibusdam proin rem esse, adipisicing, eos! Libero turpis risus. Debitis dicta primis officia minima lobortis at facilisi? Morbi morbi! Dolorem impedit assumenda eget ante malesuada, non placeat primis facilisis dicta voluptatem. Quis inceptos exercitation sint suscipit? Error proin nonummy, temporibus ac eaque nec, velit iste ipsum facilis fermentum litora eu iaculis? Eos labore varius fugit accumsan arcu veritatis aptent hac eiusmod. Vel? Ipsum ante torquent, nascetur aliquip molestias semper, consequat tincidunt.", "job_requirement"=>"Quaerat senectus quis faucibus proident tincidunt tempore saepe quisque fermentum sequi hymenaeos sapien! Volutpat, velit, doloribus aliqua eius. Quisquam. Cursus deserunt morbi, facere molestie beatae lobortis? Egestas quos, qui quibusdam proin rem esse, adipisicing, eos! Libero turpis risus. Debitis dicta primis officia minima lobortis at facilisi? Morbi morbi! Dolorem impedit assumenda eget ante malesuada, non placeat primis facilisis dicta voluptatem. Quis inceptos exercitation sint suscipit? Error proin nonummy, temporibus ac eaque nec, velit iste ipsum facilis fermentum litora eu iaculis? Eos labore varius fugit accumsan arcu veritatis aptent hac eiusmod. Vel? Ipsum ante torquent, nascetur aliquip molestias semper, consequat tincidunt.\r\nQuaerat senectus quis faucibus proident tincidunt tempore saepe quisque fermentum sequi hymenaeos sapien! Volutpat, velit, doloribus aliqua eius. Quisquam. Cursus deserunt morbi, facere molestie beatae lobortis? Egestas quos, qui quibusdam proin rem esse, adipisicing, eos! Libero turpis risus. Debitis dicta primis officia minima lobortis at facilisi? Morbi morbi! Dolorem impedit assumenda eget ante malesuada, non placeat primis facilisis dicta voluptatem. Quis inceptos exercitation sint suscipit? Error proin nonummy, temporibus ac eaque nec, velit iste ipsum facilis fermentum litora eu iaculis? Eos labore varius fugit accumsan arcu veritatis aptent hac eiusmod. Vel? Ipsum ante torquent, nascetur aliquip molestias semper, consequat tincidunt.\r\nQuaerat senectus quis faucibus proident tincidunt tempore saepe quisque fermentum sequi hymenaeos sapien! Volutpat, velit, doloribus aliqua eius. Quisquam. Cursus deserunt morbi, facere molestie beatae lobortis? Egestas quos, qui quibusdam proin rem esse, adipisicing, eos! Libero turpis risus. Debitis dicta primis officia minima lobortis at facilisi? Morbi morbi! Dolorem impedit assumenda eget ante malesuada, non placeat primis facilisis dicta voluptatem. Quis inceptos exercitation sint suscipit? Error proin nonummy, temporibus ac eaque nec, velit iste ipsum facilis fermentum litora eu iaculis? Eos labore varius fugit accumsan arcu veritatis aptent hac eiusmod. Vel? Ipsum ante torquent, nascetur aliquip molestias semper, consequat tincidunt.", "benefits"=>"Quaerat senectus quis faucibus proident tincidunt tempore saepe quisque fermentum sequi hymenaeos sapien! Volutpat, velit, doloribus aliqua eius. Quisquam. Cursus deserunt morbi, facere molestie beatae lobortis? Egestas quos, qui quibusdam proin rem esse, adipisicing, eos! Libero turpis risus. Debitis dicta primis officia minima lobortis at facilisi? Morbi morbi! Dolorem impedit assumenda eget ante malesuada, non placeat primis facilisis dicta voluptatem. Quis inceptos exercitation sint suscipit? Error proin nonummy, temporibus ac eaque nec, velit iste ipsum facilis fermentum litora eu iaculis? Eos labore varius fugit accumsan arcu veritatis aptent hac eiusmod. Vel? Ipsum ante torquent, nascetur aliquip molestias semper, consequat tincidunt.\r\nQuaerat senectus quis faucibus proident tincidunt tempore saepe quisque fermentum sequi hymenaeos sapien! Volutpat, velit, doloribus aliqua eius. Quisquam. Cursus deserunt morbi, facere molestie beatae lobortis? Egestas quos, qui quibusdam proin rem esse, adipisicing, eos! Libero turpis risus. Debitis dicta primis officia minima lobortis at facilisi? Morbi morbi! Dolorem impedit assumenda eget ante malesuada, non placeat primis facilisis dicta voluptatem. Quis inceptos exercitation sint suscipit? Error proin nonummy, temporibus ac eaque nec, velit iste ipsum facilis fermentum litora eu iaculis? Eos labore varius fugit accumsan arcu veritatis aptent hac eiusmod. Vel? Ipsum ante torquent, nascetur aliquip molestias semper, consequat tincidunt.\r\nQuaerat senectus quis faucibus proident tincidunt tempore saepe quisque fermentum sequi hymenaeos sapien! Volutpat, velit, doloribus aliqua eius. Quisquam. Cursus deserunt morbi, facere molestie beatae lobortis? Egestas quos, qui quibusdam proin rem esse, adipisicing, eos! Libero turpis risus. Debitis dicta primis officia minima lobortis at facilisi? Morbi morbi! Dolorem impedit assumenda eget ante malesuada, non placeat primis facilisis dicta voluptatem. Quis inceptos exercitation sint suscipit? Error proin nonummy, temporibus ac eaque nec, velit iste ipsum facilis fermentum litora eu iaculis? Eos labore varius fugit accumsan arcu veritatis aptent hac eiusmod. Vel? Ipsum ante torquent, nascetur aliquip molestias semper, consequat tincidunt.", "aplicant_experience"=>"Not applicable", "aplicant_function"=>"Accounting/Auditing", "aplicant_employment_type"=>"Full-time", "aplicant_industry"=>"Accounting", "aplicant_education"=>"Unspecified", "job_search_keyword"=>"dota2"}, "commit"=>"Create Job"}
+  [1m[35mUser Load (0.5ms)[0m  SELECT  `users`.* FROM `users` WHERE `users`.`id` = 49  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36mApplicantExperience Load (0.4ms)[0m  [1mSELECT `applicant_experiences`.* FROM `applicant_experiences`[0m
+  [1m[35mApplicantFunction Load (0.3ms)[0m  SELECT `applicant_functions`.* FROM `applicant_functions`
+  [1m[36mApplicantEmploymentType Load (0.4ms)[0m  [1mSELECT `applicant_employment_types`.* FROM `applicant_employment_types`[0m
+  [1m[35mApplicantIndustry Load (0.5ms)[0m  SELECT `applicant_industries`.* FROM `applicant_industries`
+  [1m[36mApplicantEducation Load (0.4ms)[0m  [1mSELECT `applicant_educations`.* FROM `applicant_educations`[0m
+  Rendered jobs/_form.html.slim (29.4ms)
+  Rendered jobs/new.html.slim within layouts/application (30.4ms)
+Completed 200 OK in 82ms (Views: 69.7ms | ActiveRecord: 2.7ms)
+
+
+Started POST "/jobs" for 127.0.0.1 at 2016-09-16 14:43:30 +0700
+Processing by JobsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ixauZMwu3a3Fwmg3zIISkec0gZehYcvIO3WRefzd1/jYH1ekN2WN1vSP+hgm5D3xqjgkE0iu+AThBmi72SUcSg==", "job"=>{"job_title"=>"Midlanner", "departement"=>"jancok", "job_code"=>"2324", "country"=>"Indonesia", "state"=>"Jawa Barat", "city"=>"Bandung", "zip_code"=>"40525", "min_salary"=>"150000", "max_salary"=>"200000", "curency"=>"Rp", "job_description"=>"Quaerat senectus quis faucibus proident tincidunt tempore saepe quisque fermentum sequi hymenaeos sapien! Volutpat, velit, doloribus aliqua eius. Quisquam. Cursus deserunt morbi, facere molestie beatae lobortis? Egestas quos, qui quibusdam proin rem esse, adipisicing, eos! Libero turpis risus. Debitis dicta primis officia minima lobortis at facilisi? Morbi morbi! Dolorem impedit assumenda eget ante malesuada, non placeat primis facilisis dicta voluptatem. Quis inceptos exercitation sint suscipit? Error proin nonummy, temporibus ac eaque nec, velit iste ipsum facilis fermentum litora eu iaculis? Eos labore varius fugit accumsan arcu veritatis aptent hac eiusmod. Vel? Ipsum ante torquent, nascetur aliquip molestias semper, consequat tincidunt.", "job_requirement"=>"Quaerat senectus quis faucibus proident tincidunt tempore saepe quisque fermentum sequi hymenaeos sapien! Volutpat, velit, doloribus aliqua eius. Quisquam. Cursus deserunt morbi, facere molestie beatae lobortis? Egestas quos, qui quibusdam proin rem esse, adipisicing, eos! Libero turpis risus. Debitis dicta primis officia minima lobortis at facilisi? Morbi morbi! Dolorem impedit assumenda eget ante malesuada, non placeat primis facilisis dicta voluptatem. Quis inceptos exercitation sint suscipit? Error proin nonummy, temporibus ac eaque nec, velit iste ipsum facilis fermentum litora eu iaculis? Eos labore varius fugit accumsan arcu veritatis aptent hac eiusmod. Vel? Ipsum ante torquent, nascetur aliquip molestias semper, consequat tincidunt.", "benefits"=>"Quaerat senectus quis faucibus proident tincidunt tempore saepe quisque fermentum sequi hymenaeos sapien! Volutpat, velit, doloribus aliqua eius. Quisquam. Cursus deserunt morbi, facere molestie beatae lobortis? Egestas quos, qui quibusdam proin rem esse, adipisicing, eos! Libero turpis risus. Debitis dicta primis officia minima lobortis at facilisi? Morbi morbi! Dolorem impedit assumenda eget ante malesuada, non placeat primis facilisis dicta voluptatem. Quis inceptos exercitation sint suscipit? Error proin nonummy, temporibus ac eaque nec, velit iste ipsum facilis fermentum litora eu iaculis? Eos labore varius fugit accumsan arcu veritatis aptent hac eiusmod. Vel? Ipsum ante torquent, nascetur aliquip molestias semper, consequat tincidunt.", "aplicant_experience"=>"Not applicable", "aplicant_function"=>"Accounting/Auditing", "aplicant_employment_type"=>"Full-time", "aplicant_industry"=>"Accounting", "aplicant_education"=>"Unspecified", "job_search_keyword"=>"dota2"}, "commit"=>"Create Job"}
+  [1m[35mUser Load (0.5ms)[0m  SELECT  `users`.* FROM `users` WHERE `users`.`id` = 49  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.3ms)[0m  ROLLBACK
+  [1m[36mApplicantExperience Load (0.4ms)[0m  [1mSELECT `applicant_experiences`.* FROM `applicant_experiences`[0m
+  [1m[35mApplicantFunction Load (0.3ms)[0m  SELECT `applicant_functions`.* FROM `applicant_functions`
+  [1m[36mApplicantEmploymentType Load (0.3ms)[0m  [1mSELECT `applicant_employment_types`.* FROM `applicant_employment_types`[0m
+  [1m[35mApplicantIndustry Load (0.4ms)[0m  SELECT `applicant_industries`.* FROM `applicant_industries`
+  [1m[36mApplicantEducation Load (0.4ms)[0m  [1mSELECT `applicant_educations`.* FROM `applicant_educations`[0m
+  Rendered jobs/_form.html.slim (29.7ms)
+  Rendered jobs/new.html.slim within layouts/application (30.9ms)
+Completed 200 OK in 91ms (Views: 77.8ms | ActiveRecord: 2.8ms)
+
+
+Started POST "/jobs" for 127.0.0.1 at 2016-09-16 14:43:56 +0700
+Processing by JobsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"gdRuKSs0r1xPvzTkHs79Qvfn7e1AQPWewkLNPH4xuaXS3Zfp0H//J37ypsv0qNIiuutIaamPxlIYMTT+W8lyFw==", "job"=>{"job_title"=>"Midlanner", "departement"=>"jancok", "job_code"=>"2324", "country"=>"Indonesia", "state"=>"Jawa Barat", "city"=>"Bandung", "zip_code"=>"40525", "min_salary"=>"150000", "max_salary"=>"200000", "curency"=>"Rp", "job_description"=>"Quaerat senectus quis faucibus proident tincidunt tempore saepe quisque fermentum sequi hymenaeos sapien! Volutpat, velit, doloribus aliqua eius. Quisquam. Cursus deserunt morbi, facere molestie beatae lobortis? Egestas quos, qui quibusdam proin rem esse, adipisicing, eos! Libero turpis risus. Debitis dicta primis officia minima lobortis at facilisi? Morbi morbi! Dolorem impedit assumenda eget ante malesuada, non placeat primis facilisis dicta voluptatem.", "job_requirement"=>"Quaerat senectus quis faucibus proident tincidunt tempore saepe quisque fermentum sequi hymenaeos sapien! Volutpat, velit, doloribus aliqua eius. Quisquam. Cursus deserunt morbi, facere molestie beatae lobortis? Egestas quos, qui quibusdam proin rem esse, adipisicing, eos! Libero turpis risus. Debitis dicta primis officia minima lobortis at facilisi? Morbi morbi! Dolorem impedit assumenda eget ante malesuada, non placeat primis facilisis dicta voluptatem.", "benefits"=>"Quaerat senectus quis faucibus proident tincidunt tempore saepe quisque fermentum sequi hymenaeos sapien! Volutpat, velit, doloribus aliqua eius. Quisquam. Cursus deserunt morbi, facere molestie beatae lobortis? Egestas quos, qui quibusdam proin rem esse, adipisicing, eos! Libero turpis risus. Debitis dicta primis officia minima lobortis at facilisi? Morbi morbi! Dolorem impedit assumenda eget ante malesuada, non placeat primis facilisis dicta voluptatem.", "aplicant_experience"=>"Not applicable", "aplicant_function"=>"Accounting/Auditing", "aplicant_employment_type"=>"Full-time", "aplicant_industry"=>"Accounting", "aplicant_education"=>"Unspecified", "job_search_keyword"=>"dota2"}, "commit"=>"Create Job"}
+  [1m[35mUser Load (0.9ms)[0m  SELECT  `users`.* FROM `users` WHERE `users`.`id` = 49  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (1.9ms)[0m  INSERT INTO `jobs` (`job_title`, `departement`, `job_code`, `country`, `state`, `city`, `zip_code`, `min_salary`, `max_salary`, `curency`, `job_description`, `job_requirement`, `benefits`, `aplicant_experience`, `aplicant_function`, `aplicant_employment_type`, `aplicant_industry`, `aplicant_education`, `job_search_keyword`, `created_at`, `updated_at`) VALUES ('Midlanner', 'jancok', '2324', 'Indonesia', 'Jawa Barat', 'Bandung', '40525', 150000, 200000, 'Rp', 'Quaerat senectus quis faucibus proident tincidunt tempore saepe quisque fermentum sequi hymenaeos sapien! Volutpat, velit, doloribus aliqua eius. Quisquam. Cursus deserunt morbi, facere molestie beatae lobortis? Egestas quos, qui quibusdam proin rem esse, adipisicing, eos! Libero turpis risus. Debitis dicta primis officia minima lobortis at facilisi? Morbi morbi! Dolorem impedit assumenda eget ante malesuada, non placeat primis facilisis dicta voluptatem.', 'Quaerat senectus quis faucibus proident tincidunt tempore saepe quisque fermentum sequi hymenaeos sapien! Volutpat, velit, doloribus aliqua eius. Quisquam. Cursus deserunt morbi, facere molestie beatae lobortis? Egestas quos, qui quibusdam proin rem esse, adipisicing, eos! Libero turpis risus. Debitis dicta primis officia minima lobortis at facilisi? Morbi morbi! Dolorem impedit assumenda eget ante malesuada, non placeat primis facilisis dicta voluptatem.', 'Quaerat senectus quis faucibus proident tincidunt tempore saepe quisque fermentum sequi hymenaeos sapien! Volutpat, velit, doloribus aliqua eius. Quisquam. Cursus deserunt morbi, facere molestie beatae lobortis? Egestas quos, qui quibusdam proin rem esse, adipisicing, eos! Libero turpis risus. Debitis dicta primis officia minima lobortis at facilisi? Morbi morbi! Dolorem impedit assumenda eget ante malesuada, non placeat primis facilisis dicta voluptatem.', 'Not applicable', 'Accounting/Auditing', 'Full-time', 'Accounting', 'Unspecified', 'dota2', '2016-09-16 07:43:56', '2016-09-16 07:43:56')
+  [1m[36m (323.1ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/jobs/1
+Completed 302 Found in 338ms (ActiveRecord: 326.1ms)
+
+
+Started GET "/jobs/1" for 127.0.0.1 at 2016-09-16 14:43:57 +0700
+Processing by JobsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mUser Load (0.5ms)[0m  SELECT  `users`.* FROM `users` WHERE `users`.`id` = 49  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36mJob Load (0.5ms)[0m  [1mSELECT  `jobs`.* FROM `jobs` WHERE `jobs`.`id` = 1 LIMIT 1[0m
+  [1m[35mApplicant Load (0.8ms)[0m  SELECT `applicants`.* FROM `applicants` WHERE `applicants`.`job_id` = 1
+  Rendered collection (0.0ms)
+  Rendered jobs/show.html.slim within layouts/application (55.3ms)
+Completed 200 OK in 108ms (Views: 97.0ms | ActiveRecord: 1.8ms)
+
+
+Started GET "/jobs" for 127.0.0.1 at 2016-09-16 14:44:22 +0700
+Processing by JobsController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 49  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35mJob Load (0.3ms)[0m  SELECT `jobs`.* FROM `jobs`
+  Rendered jobs/index.html.slim within layouts/application (17.3ms)
+Completed 200 OK in 66ms (Views: 60.8ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/applicants" for 127.0.0.1 at 2016-09-16 14:45:00 +0700
+Processing by ApplicantsController#index as HTML
+  [1m[36mApplicant Load (1.0ms)[0m  [1mSELECT `applicants`.* FROM `applicants`[0m
+  Rendered applicants/index.html.slim within layouts/application (3.0ms)
+Completed 200 OK in 57ms (Views: 54.7ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/applicants/new" for 127.0.0.1 at 2016-09-16 14:45:04 +0700
+Processing by ApplicantsController#show as HTML
+  Parameters: {"id"=>"new"}
+  [1m[35mApplicant Load (0.4ms)[0m  SELECT  `applicants`.* FROM `applicants` WHERE `applicants`.`id` = 0 LIMIT 1
+Completed 404 Not Found in 4ms (ActiveRecord: 0.4ms)
+
+ActiveRecord::RecordNotFound - Couldn't find Applicant with 'id'=new:
+  activerecord (4.2.6) lib/active_record/core.rb:155:in `find'
+  app/controllers/applicants_controller.rb:70:in `set_applicant'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:432:in `block in make_lambda'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:145:in `block in halting_and_conditional'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:504:in `block in call'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:504:in `call'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:92:in `__run_callbacks__'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:778:in `_run_process_action_callbacks'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.6) lib/abstract_controller/callbacks.rb:19:in `process_action'
+  actionpack (4.2.6) lib/action_controller/metal/rescue.rb:29:in `process_action'
+  actionpack (4.2.6) lib/action_controller/metal/instrumentation.rb:32:in `block in process_action'
+  activesupport (4.2.6) lib/active_support/notifications.rb:164:in `block in instrument'
+  activesupport (4.2.6) lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+  activesupport (4.2.6) lib/active_support/notifications.rb:164:in `instrument'
+  actionpack (4.2.6) lib/action_controller/metal/instrumentation.rb:30:in `process_action'
+  actionpack (4.2.6) lib/action_controller/metal/params_wrapper.rb:250:in `process_action'
+  activerecord (4.2.6) lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+  actionpack (4.2.6) lib/abstract_controller/base.rb:137:in `process'
+  actionview (4.2.6) lib/action_view/rendering.rb:30:in `process'
+  actionpack (4.2.6) lib/action_controller/metal.rb:196:in `dispatch'
+  actionpack (4.2.6) lib/action_controller/metal/rack_delegation.rb:13:in `dispatch'
+  actionpack (4.2.6) lib/action_controller/metal.rb:237:in `block in action'
+  actionpack (4.2.6) lib/action_dispatch/routing/route_set.rb:74:in `dispatch'
+  actionpack (4.2.6) lib/action_dispatch/routing/route_set.rb:43:in `serve'
+  actionpack (4.2.6) lib/action_dispatch/journey/router.rb:43:in `block in serve'
+  actionpack (4.2.6) lib/action_dispatch/journey/router.rb:30:in `serve'
+  actionpack (4.2.6) lib/action_dispatch/routing/route_set.rb:817:in `call'
+  bullet (5.4.0) lib/bullet/rack.rb:10:in `call'
+  warden (1.2.6) lib/warden/manager.rb:35:in `block in call'
+  warden (1.2.6) lib/warden/manager.rb:34:in `call'
+  rack (1.6.4) lib/rack/etag.rb:24:in `call'
+  rack (1.6.4) lib/rack/conditionalget.rb:25:in `call'
+  rack (1.6.4) lib/rack/head.rb:13:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/flash.rb:260:in `call'
+  rack (1.6.4) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.6.4) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/cookies.rb:560:in `call'
+  activerecord (4.2.6) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:653:in `call'
+  activerecord (4.2.6) lib/active_record/migration.rb:377:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:88:in `__run_callbacks__'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:778:in `_run_call_callbacks'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.6) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:84:in `protected_app_call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:79:in `better_errors_call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:57:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.6) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.6) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.6) lib/rails/rack/logger.rb:20:in `call'
+  quiet_assets (1.1.0) lib/quiet_assets.rb:27:in `call_with_quiet_assets'
+  actionpack (4.2.6) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.6) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/static.rb:120:in `call'
+  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.6) lib/rails/engine.rb:518:in `call'
+  railties (4.2.6) lib/rails/application.rb:165:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.4) lib/rack/handler/webrick.rb:88:in `service'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:140:in `service'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:96:in `run'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/server.rb:296:in `block in start_thread'
+
+
+
+Started POST "/__better_errors/6063eb84b65b751d/variables" for 127.0.0.1 at 2016-09-16 14:45:05 +0700
+
+
+Started GET "/applicants/new" for 127.0.0.1 at 2016-09-16 14:45:14 +0700
+Processing by ApplicantsController#show as HTML
+  Parameters: {"id"=>"new"}
+  [1m[36mApplicant Load (0.4ms)[0m  [1mSELECT  `applicants`.* FROM `applicants` WHERE `applicants`.`id` = 0 LIMIT 1[0m
+Completed 404 Not Found in 3ms (ActiveRecord: 0.4ms)
+
+ActiveRecord::RecordNotFound - Couldn't find Applicant with 'id'=new:
+  activerecord (4.2.6) lib/active_record/core.rb:155:in `find'
+  app/controllers/applicants_controller.rb:70:in `set_applicant'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:432:in `block in make_lambda'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:145:in `block in halting_and_conditional'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:504:in `block in call'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:504:in `call'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:92:in `__run_callbacks__'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:778:in `_run_process_action_callbacks'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.6) lib/abstract_controller/callbacks.rb:19:in `process_action'
+  actionpack (4.2.6) lib/action_controller/metal/rescue.rb:29:in `process_action'
+  actionpack (4.2.6) lib/action_controller/metal/instrumentation.rb:32:in `block in process_action'
+  activesupport (4.2.6) lib/active_support/notifications.rb:164:in `block in instrument'
+  activesupport (4.2.6) lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+  activesupport (4.2.6) lib/active_support/notifications.rb:164:in `instrument'
+  actionpack (4.2.6) lib/action_controller/metal/instrumentation.rb:30:in `process_action'
+  actionpack (4.2.6) lib/action_controller/metal/params_wrapper.rb:250:in `process_action'
+  activerecord (4.2.6) lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+  actionpack (4.2.6) lib/abstract_controller/base.rb:137:in `process'
+  actionview (4.2.6) lib/action_view/rendering.rb:30:in `process'
+  actionpack (4.2.6) lib/action_controller/metal.rb:196:in `dispatch'
+  actionpack (4.2.6) lib/action_controller/metal/rack_delegation.rb:13:in `dispatch'
+  actionpack (4.2.6) lib/action_controller/metal.rb:237:in `block in action'
+  actionpack (4.2.6) lib/action_dispatch/routing/route_set.rb:74:in `dispatch'
+  actionpack (4.2.6) lib/action_dispatch/routing/route_set.rb:43:in `serve'
+  actionpack (4.2.6) lib/action_dispatch/journey/router.rb:43:in `block in serve'
+  actionpack (4.2.6) lib/action_dispatch/journey/router.rb:30:in `serve'
+  actionpack (4.2.6) lib/action_dispatch/routing/route_set.rb:817:in `call'
+  bullet (5.4.0) lib/bullet/rack.rb:10:in `call'
+  warden (1.2.6) lib/warden/manager.rb:35:in `block in call'
+  warden (1.2.6) lib/warden/manager.rb:34:in `call'
+  rack (1.6.4) lib/rack/etag.rb:24:in `call'
+  rack (1.6.4) lib/rack/conditionalget.rb:25:in `call'
+  rack (1.6.4) lib/rack/head.rb:13:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/flash.rb:260:in `call'
+  rack (1.6.4) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.6.4) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/cookies.rb:560:in `call'
+  activerecord (4.2.6) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:653:in `call'
+  activerecord (4.2.6) lib/active_record/migration.rb:377:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:88:in `__run_callbacks__'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:778:in `_run_call_callbacks'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.6) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:84:in `protected_app_call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:79:in `better_errors_call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:57:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.6) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.6) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.6) lib/rails/rack/logger.rb:20:in `call'
+  quiet_assets (1.1.0) lib/quiet_assets.rb:27:in `call_with_quiet_assets'
+  actionpack (4.2.6) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.6) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/static.rb:120:in `call'
+  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.6) lib/rails/engine.rb:518:in `call'
+  railties (4.2.6) lib/rails/application.rb:165:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.4) lib/rack/handler/webrick.rb:88:in `service'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:140:in `service'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:96:in `run'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/server.rb:296:in `block in start_thread'
+
+
+
+Started POST "/__better_errors/4f0bc64bd51d50da/variables" for 127.0.0.1 at 2016-09-16 14:45:14 +0700
+
+
+Started GET "/applicants" for 127.0.0.1 at 2016-09-16 14:45:29 +0700
+Processing by ApplicantsController#index as HTML
+  [1m[35mApplicant Load (0.3ms)[0m  SELECT `applicants`.* FROM `applicants`
+  Rendered applicants/index.html.slim within layouts/application (1.9ms)
+Completed 200 OK in 45ms (Views: 37.9ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/applicants/new" for 127.0.0.1 at 2016-09-16 14:45:39 +0700
+Processing by ApplicantsController#show as HTML
+  Parameters: {"id"=>"new"}
+  [1m[36mApplicant Load (0.3ms)[0m  [1mSELECT  `applicants`.* FROM `applicants` WHERE `applicants`.`id` = 0 LIMIT 1[0m
+Completed 404 Not Found in 4ms (ActiveRecord: 0.8ms)
+
+ActiveRecord::RecordNotFound - Couldn't find Applicant with 'id'=new:
+  activerecord (4.2.6) lib/active_record/core.rb:155:in `find'
+  app/controllers/applicants_controller.rb:70:in `set_applicant'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:432:in `block in make_lambda'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:145:in `block in halting_and_conditional'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:504:in `block in call'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:504:in `call'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:92:in `__run_callbacks__'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:778:in `_run_process_action_callbacks'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.6) lib/abstract_controller/callbacks.rb:19:in `process_action'
+  actionpack (4.2.6) lib/action_controller/metal/rescue.rb:29:in `process_action'
+  actionpack (4.2.6) lib/action_controller/metal/instrumentation.rb:32:in `block in process_action'
+  activesupport (4.2.6) lib/active_support/notifications.rb:164:in `block in instrument'
+  activesupport (4.2.6) lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+  activesupport (4.2.6) lib/active_support/notifications.rb:164:in `instrument'
+  actionpack (4.2.6) lib/action_controller/metal/instrumentation.rb:30:in `process_action'
+  actionpack (4.2.6) lib/action_controller/metal/params_wrapper.rb:250:in `process_action'
+  activerecord (4.2.6) lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+  actionpack (4.2.6) lib/abstract_controller/base.rb:137:in `process'
+  actionview (4.2.6) lib/action_view/rendering.rb:30:in `process'
+  actionpack (4.2.6) lib/action_controller/metal.rb:196:in `dispatch'
+  actionpack (4.2.6) lib/action_controller/metal/rack_delegation.rb:13:in `dispatch'
+  actionpack (4.2.6) lib/action_controller/metal.rb:237:in `block in action'
+  actionpack (4.2.6) lib/action_dispatch/routing/route_set.rb:74:in `dispatch'
+  actionpack (4.2.6) lib/action_dispatch/routing/route_set.rb:43:in `serve'
+  actionpack (4.2.6) lib/action_dispatch/journey/router.rb:43:in `block in serve'
+  actionpack (4.2.6) lib/action_dispatch/journey/router.rb:30:in `serve'
+  actionpack (4.2.6) lib/action_dispatch/routing/route_set.rb:817:in `call'
+  bullet (5.4.0) lib/bullet/rack.rb:10:in `call'
+  warden (1.2.6) lib/warden/manager.rb:35:in `block in call'
+  warden (1.2.6) lib/warden/manager.rb:34:in `call'
+  rack (1.6.4) lib/rack/etag.rb:24:in `call'
+  rack (1.6.4) lib/rack/conditionalget.rb:25:in `call'
+  rack (1.6.4) lib/rack/head.rb:13:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/flash.rb:260:in `call'
+  rack (1.6.4) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.6.4) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/cookies.rb:560:in `call'
+  activerecord (4.2.6) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:653:in `call'
+  activerecord (4.2.6) lib/active_record/migration.rb:377:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:88:in `__run_callbacks__'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:778:in `_run_call_callbacks'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.6) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:84:in `protected_app_call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:79:in `better_errors_call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:57:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.6) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.6) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.6) lib/rails/rack/logger.rb:20:in `call'
+  quiet_assets (1.1.0) lib/quiet_assets.rb:27:in `call_with_quiet_assets'
+  actionpack (4.2.6) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.6) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/static.rb:120:in `call'
+  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.6) lib/rails/engine.rb:518:in `call'
+  railties (4.2.6) lib/rails/application.rb:165:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.4) lib/rack/handler/webrick.rb:88:in `service'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:140:in `service'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:96:in `run'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/server.rb:296:in `block in start_thread'
+
+
+
+Started POST "/__better_errors/8d405e29d15b1046/variables" for 127.0.0.1 at 2016-09-16 14:45:39 +0700
+
+
+Started GET "/applicants/new" for 127.0.0.1 at 2016-09-16 14:46:04 +0700
+Processing by ApplicantsController#show as HTML
+  Parameters: {"id"=>"new"}
+  [1m[35mApplicant Load (0.3ms)[0m  SELECT  `applicants`.* FROM `applicants` WHERE `applicants`.`id` = 0 LIMIT 1
+Completed 404 Not Found in 23ms (ActiveRecord: 13.5ms)
+
+ActiveRecord::RecordNotFound - Couldn't find Applicant with 'id'=new:
+  activerecord (4.2.6) lib/active_record/core.rb:155:in `find'
+  app/controllers/applicants_controller.rb:70:in `set_applicant'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:432:in `block in make_lambda'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:145:in `block in halting_and_conditional'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:504:in `block in call'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:504:in `call'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:92:in `__run_callbacks__'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:778:in `_run_process_action_callbacks'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.6) lib/abstract_controller/callbacks.rb:19:in `process_action'
+  actionpack (4.2.6) lib/action_controller/metal/rescue.rb:29:in `process_action'
+  actionpack (4.2.6) lib/action_controller/metal/instrumentation.rb:32:in `block in process_action'
+  activesupport (4.2.6) lib/active_support/notifications.rb:164:in `block in instrument'
+  activesupport (4.2.6) lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+  activesupport (4.2.6) lib/active_support/notifications.rb:164:in `instrument'
+  actionpack (4.2.6) lib/action_controller/metal/instrumentation.rb:30:in `process_action'
+  actionpack (4.2.6) lib/action_controller/metal/params_wrapper.rb:250:in `process_action'
+  activerecord (4.2.6) lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+  actionpack (4.2.6) lib/abstract_controller/base.rb:137:in `process'
+  actionview (4.2.6) lib/action_view/rendering.rb:30:in `process'
+  actionpack (4.2.6) lib/action_controller/metal.rb:196:in `dispatch'
+  actionpack (4.2.6) lib/action_controller/metal/rack_delegation.rb:13:in `dispatch'
+  actionpack (4.2.6) lib/action_controller/metal.rb:237:in `block in action'
+  actionpack (4.2.6) lib/action_dispatch/routing/route_set.rb:74:in `dispatch'
+  actionpack (4.2.6) lib/action_dispatch/routing/route_set.rb:43:in `serve'
+  actionpack (4.2.6) lib/action_dispatch/journey/router.rb:43:in `block in serve'
+  actionpack (4.2.6) lib/action_dispatch/journey/router.rb:30:in `serve'
+  actionpack (4.2.6) lib/action_dispatch/routing/route_set.rb:817:in `call'
+  bullet (5.4.0) lib/bullet/rack.rb:10:in `call'
+  warden (1.2.6) lib/warden/manager.rb:35:in `block in call'
+  warden (1.2.6) lib/warden/manager.rb:34:in `call'
+  rack (1.6.4) lib/rack/etag.rb:24:in `call'
+  rack (1.6.4) lib/rack/conditionalget.rb:25:in `call'
+  rack (1.6.4) lib/rack/head.rb:13:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/flash.rb:260:in `call'
+  rack (1.6.4) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.6.4) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/cookies.rb:560:in `call'
+  activerecord (4.2.6) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:653:in `call'
+  activerecord (4.2.6) lib/active_record/migration.rb:377:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:88:in `__run_callbacks__'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:778:in `_run_call_callbacks'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.6) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:84:in `protected_app_call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:79:in `better_errors_call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:57:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.6) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.6) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.6) lib/rails/rack/logger.rb:20:in `call'
+  quiet_assets (1.1.0) lib/quiet_assets.rb:27:in `call_with_quiet_assets'
+  actionpack (4.2.6) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.6) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/static.rb:120:in `call'
+  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.6) lib/rails/engine.rb:518:in `call'
+  railties (4.2.6) lib/rails/application.rb:165:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.4) lib/rack/handler/webrick.rb:88:in `service'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:140:in `service'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:96:in `run'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/server.rb:296:in `block in start_thread'
+
+
+
+Started POST "/__better_errors/80514731b347d2b0/variables" for 127.0.0.1 at 2016-09-16 14:46:04 +0700
+
+
+Started GET "/applicants/new" for 127.0.0.1 at 2016-09-16 14:46:06 +0700
+Processing by ApplicantsController#show as HTML
+  Parameters: {"id"=>"new"}
+  [1m[36mApplicant Load (1.2ms)[0m  [1mSELECT  `applicants`.* FROM `applicants` WHERE `applicants`.`id` = 0 LIMIT 1[0m
+Completed 404 Not Found in 4ms (ActiveRecord: 1.2ms)
+
+ActiveRecord::RecordNotFound - Couldn't find Applicant with 'id'=new:
+  activerecord (4.2.6) lib/active_record/core.rb:155:in `find'
+  app/controllers/applicants_controller.rb:70:in `set_applicant'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:432:in `block in make_lambda'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:145:in `block in halting_and_conditional'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:504:in `block in call'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:504:in `call'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:92:in `__run_callbacks__'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:778:in `_run_process_action_callbacks'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.6) lib/abstract_controller/callbacks.rb:19:in `process_action'
+  actionpack (4.2.6) lib/action_controller/metal/rescue.rb:29:in `process_action'
+  actionpack (4.2.6) lib/action_controller/metal/instrumentation.rb:32:in `block in process_action'
+  activesupport (4.2.6) lib/active_support/notifications.rb:164:in `block in instrument'
+  activesupport (4.2.6) lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+  activesupport (4.2.6) lib/active_support/notifications.rb:164:in `instrument'
+  actionpack (4.2.6) lib/action_controller/metal/instrumentation.rb:30:in `process_action'
+  actionpack (4.2.6) lib/action_controller/metal/params_wrapper.rb:250:in `process_action'
+  activerecord (4.2.6) lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+  actionpack (4.2.6) lib/abstract_controller/base.rb:137:in `process'
+  actionview (4.2.6) lib/action_view/rendering.rb:30:in `process'
+  actionpack (4.2.6) lib/action_controller/metal.rb:196:in `dispatch'
+  actionpack (4.2.6) lib/action_controller/metal/rack_delegation.rb:13:in `dispatch'
+  actionpack (4.2.6) lib/action_controller/metal.rb:237:in `block in action'
+  actionpack (4.2.6) lib/action_dispatch/routing/route_set.rb:74:in `dispatch'
+  actionpack (4.2.6) lib/action_dispatch/routing/route_set.rb:43:in `serve'
+  actionpack (4.2.6) lib/action_dispatch/journey/router.rb:43:in `block in serve'
+  actionpack (4.2.6) lib/action_dispatch/journey/router.rb:30:in `serve'
+  actionpack (4.2.6) lib/action_dispatch/routing/route_set.rb:817:in `call'
+  bullet (5.4.0) lib/bullet/rack.rb:10:in `call'
+  warden (1.2.6) lib/warden/manager.rb:35:in `block in call'
+  warden (1.2.6) lib/warden/manager.rb:34:in `call'
+  rack (1.6.4) lib/rack/etag.rb:24:in `call'
+  rack (1.6.4) lib/rack/conditionalget.rb:25:in `call'
+  rack (1.6.4) lib/rack/head.rb:13:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/flash.rb:260:in `call'
+  rack (1.6.4) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.6.4) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/cookies.rb:560:in `call'
+  activerecord (4.2.6) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:653:in `call'
+  activerecord (4.2.6) lib/active_record/migration.rb:377:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:88:in `__run_callbacks__'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:778:in `_run_call_callbacks'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.6) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:84:in `protected_app_call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:79:in `better_errors_call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:57:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.6) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.6) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.6) lib/rails/rack/logger.rb:20:in `call'
+  quiet_assets (1.1.0) lib/quiet_assets.rb:27:in `call_with_quiet_assets'
+  actionpack (4.2.6) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.6) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/static.rb:120:in `call'
+  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.6) lib/rails/engine.rb:518:in `call'
+  railties (4.2.6) lib/rails/application.rb:165:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.4) lib/rack/handler/webrick.rb:88:in `service'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:140:in `service'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:96:in `run'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/server.rb:296:in `block in start_thread'
+
+
+
+Started POST "/__better_errors/1fc060f6f3607ee1/variables" for 127.0.0.1 at 2016-09-16 14:46:06 +0700
+
+
+Started GET "/jobs/applicants/new" for 127.0.0.1 at 2016-09-16 14:46:25 +0700
+
+ActionController::RoutingError (No route matches [GET] "/jobs/applicants/new"):
+  actionpack (4.2.6) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `catch'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.6) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.6) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.6) lib/rails/rack/logger.rb:20:in `call'
+  quiet_assets (1.1.0) lib/quiet_assets.rb:27:in `call_with_quiet_assets'
+  actionpack (4.2.6) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.6) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/static.rb:120:in `call'
+  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.6) lib/rails/engine.rb:518:in `call'
+  railties (4.2.6) lib/rails/application.rb:165:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.4) lib/rack/handler/webrick.rb:88:in `service'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:140:in `service'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:96:in `run'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/server.rb:296:in `block in start_thread'
+
+
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.5ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/routes/_route.html.erb (3.7ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/routes/_table.html.erb (2.6ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.3ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (50.6ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.3ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.5ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (21.3ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (40.2ms)
+
+
+Started GET "/jobs/applicants/" for 127.0.0.1 at 2016-09-16 14:46:36 +0700
+Processing by JobsController#show as HTML
+  Parameters: {"id"=>"applicants"}
+  [1m[35mUser Load (0.3ms)[0m  SELECT  `users`.* FROM `users` WHERE `users`.`id` = 49  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36mJob Load (0.6ms)[0m  [1mSELECT  `jobs`.* FROM `jobs` WHERE `jobs`.`id` = 0 LIMIT 1[0m
+Completed 404 Not Found in 28ms (ActiveRecord: 3.3ms)
+
+ActiveRecord::RecordNotFound - Couldn't find Job with 'id'=applicants:
+  activerecord (4.2.6) lib/active_record/core.rb:155:in `find'
+  app/controllers/jobs_controller.rb:68:in `set_job'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:432:in `block in make_lambda'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:145:in `block in halting_and_conditional'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:504:in `block in call'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:504:in `call'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:92:in `__run_callbacks__'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:778:in `_run_process_action_callbacks'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.6) lib/abstract_controller/callbacks.rb:19:in `process_action'
+  actionpack (4.2.6) lib/action_controller/metal/rescue.rb:29:in `process_action'
+  actionpack (4.2.6) lib/action_controller/metal/instrumentation.rb:32:in `block in process_action'
+  activesupport (4.2.6) lib/active_support/notifications.rb:164:in `block in instrument'
+  activesupport (4.2.6) lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+  activesupport (4.2.6) lib/active_support/notifications.rb:164:in `instrument'
+  actionpack (4.2.6) lib/action_controller/metal/instrumentation.rb:30:in `process_action'
+  actionpack (4.2.6) lib/action_controller/metal/params_wrapper.rb:250:in `process_action'
+  activerecord (4.2.6) lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+  actionpack (4.2.6) lib/abstract_controller/base.rb:137:in `process'
+  actionview (4.2.6) lib/action_view/rendering.rb:30:in `process'
+  actionpack (4.2.6) lib/action_controller/metal.rb:196:in `dispatch'
+  actionpack (4.2.6) lib/action_controller/metal/rack_delegation.rb:13:in `dispatch'
+  actionpack (4.2.6) lib/action_controller/metal.rb:237:in `block in action'
+  actionpack (4.2.6) lib/action_dispatch/routing/route_set.rb:74:in `dispatch'
+  actionpack (4.2.6) lib/action_dispatch/routing/route_set.rb:43:in `serve'
+  actionpack (4.2.6) lib/action_dispatch/journey/router.rb:43:in `block in serve'
+  actionpack (4.2.6) lib/action_dispatch/journey/router.rb:30:in `serve'
+  actionpack (4.2.6) lib/action_dispatch/routing/route_set.rb:817:in `call'
+  bullet (5.4.0) lib/bullet/rack.rb:10:in `call'
+  warden (1.2.6) lib/warden/manager.rb:35:in `block in call'
+  warden (1.2.6) lib/warden/manager.rb:34:in `call'
+  rack (1.6.4) lib/rack/etag.rb:24:in `call'
+  rack (1.6.4) lib/rack/conditionalget.rb:25:in `call'
+  rack (1.6.4) lib/rack/head.rb:13:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/flash.rb:260:in `call'
+  rack (1.6.4) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.6.4) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/cookies.rb:560:in `call'
+  activerecord (4.2.6) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:653:in `call'
+  activerecord (4.2.6) lib/active_record/migration.rb:377:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:88:in `__run_callbacks__'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:778:in `_run_call_callbacks'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.6) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:84:in `protected_app_call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:79:in `better_errors_call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:57:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.6) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.6) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.6) lib/rails/rack/logger.rb:20:in `call'
+  quiet_assets (1.1.0) lib/quiet_assets.rb:27:in `call_with_quiet_assets'
+  actionpack (4.2.6) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.6) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/static.rb:120:in `call'
+  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.6) lib/rails/engine.rb:518:in `call'
+  railties (4.2.6) lib/rails/application.rb:165:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.4) lib/rack/handler/webrick.rb:88:in `service'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:140:in `service'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:96:in `run'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/server.rb:296:in `block in start_thread'
+
+
+
+Started POST "/__better_errors/fcb1104e628d0ce2/variables" for 127.0.0.1 at 2016-09-16 14:46:37 +0700
+
+
+Started GET "/jobs/applicants/new" for 127.0.0.1 at 2016-09-16 14:46:44 +0700
+
+ActionController::RoutingError (No route matches [GET] "/jobs/applicants/new"):
+  actionpack (4.2.6) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `catch'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.6) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.6) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.6) lib/rails/rack/logger.rb:20:in `call'
+  quiet_assets (1.1.0) lib/quiet_assets.rb:27:in `call_with_quiet_assets'
+  actionpack (4.2.6) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.6) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/static.rb:120:in `call'
+  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.6) lib/rails/engine.rb:518:in `call'
+  railties (4.2.6) lib/rails/application.rb:165:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.4) lib/rack/handler/webrick.rb:88:in `service'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:140:in `service'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:96:in `run'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/server.rb:296:in `block in start_thread'
+
+
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.0ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/routes/_route.html.erb (3.5ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/routes/_table.html.erb (2.2ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.3ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (44.4ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.5ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (1.4ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (19.2ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /home/aditia/.rvm/gems/ruby-2.3.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (36.6ms)
+
+
+Started GET "/jobs" for 127.0.0.1 at 2016-09-16 14:47:21 +0700
+Processing by JobsController#index as HTML
+  [1m[35mUser Load (0.4ms)[0m  SELECT  `users`.* FROM `users` WHERE `users`.`id` = 49  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36mJob Load (0.3ms)[0m  [1mSELECT `jobs`.* FROM `jobs`[0m
+  Rendered jobs/index.html.slim within layouts/application (14.3ms)
+Completed 200 OK in 57ms (Views: 53.5ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/applicants" for 127.0.0.1 at 2016-09-16 14:49:00 +0700
+Processing by ApplicantsController#index as HTML
+  [1m[35mApplicant Load (0.7ms)[0m  SELECT `applicants`.* FROM `applicants`
+  Rendered applicants/index.html.slim within layouts/application (4.4ms)
+Completed 200 OK in 77ms (Views: 66.5ms | ActiveRecord: 1.8ms)
+
+
+Started GET "/applicants" for 127.0.0.1 at 2016-09-16 14:49:02 +0700
+Processing by ApplicantsController#index as HTML
+  [1m[36mApplicant Load (0.8ms)[0m  [1mSELECT `applicants`.* FROM `applicants`[0m
+  Rendered applicants/index.html.slim within layouts/application (2.1ms)
+Completed 200 OK in 56ms (Views: 54.4ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/applicants" for 127.0.0.1 at 2016-09-16 14:49:03 +0700
+Processing by ApplicantsController#index as HTML
+  [1m[35mApplicant Load (1.0ms)[0m  SELECT `applicants`.* FROM `applicants`
+  Rendered applicants/index.html.slim within layouts/application (2.7ms)
+Completed 200 OK in 59ms (Views: 56.7ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/applicants" for 127.0.0.1 at 2016-09-16 14:49:03 +0700
+Processing by ApplicantsController#index as HTML
+  [1m[36mApplicant Load (0.4ms)[0m  [1mSELECT `applicants`.* FROM `applicants`[0m
+  Rendered applicants/index.html.slim within layouts/application (1.7ms)
+Completed 200 OK in 81ms (Views: 79.2ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/jobs/1" for 127.0.0.1 at 2016-09-16 14:49:26 +0700
+Processing by JobsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mUser Load (0.7ms)[0m  SELECT  `users`.* FROM `users` WHERE `users`.`id` = 49  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36mJob Load (0.3ms)[0m  [1mSELECT  `jobs`.* FROM `jobs` WHERE `jobs`.`id` = 1 LIMIT 1[0m
+  [1m[35mApplicant Load (3.0ms)[0m  SELECT `applicants`.* FROM `applicants` WHERE `applicants`.`job_id` = 1
+  Rendered collection (0.0ms)
+  Rendered jobs/show.html.slim within layouts/application (8.6ms)
+Completed 200 OK in 64ms (Views: 56.8ms | ActiveRecord: 4.0ms)
+
+
+Started GET "/jobs/1/applicants/new" for 127.0.0.1 at 2016-09-16 14:49:30 +0700
+Processing by ApplicantsController#new as HTML
+  Parameters: {"job_id"=>"1"}
+  [1m[36mJob Load (0.7ms)[0m  [1mSELECT  `jobs`.* FROM `jobs` WHERE `jobs`.`id` = 1 LIMIT 1[0m
+  Rendered applicants/_form.html.slim (59.6ms)
+  Rendered applicants/new.html.slim within layouts/application (65.5ms)
+Completed 200 OK in 152ms (Views: 124.7ms | ActiveRecord: 1.2ms)
+
+
+Started POST "/jobs/1/applicants" for 127.0.0.1 at 2016-09-16 14:50:53 +0700
+Processing by ApplicantsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"lx90JUg3wOb94DQtMSnhbRr50cubLswPCQCNfr4ONUfEFo3ls3yQncytpgLbT84NV/V0T3Lh/8PTc3S8m/b+9Q==", "applicant"=>{"name"=>"Aditia Pratama", "gender"=>"Female", "date_birth(3i)"=>"16", "date_birth(2i)"=>"9", "date_birth(1i)"=>"2016", "email"=>"adotcyber@gmail.com", "headline"=>"evil geniuses pro", "phone"=>"089614800388", "address"=>"jln rancabentang", "photo"=>#<ActionDispatch::Http::UploadedFile:0x007fcf27a8a838 @tempfile=#<Tempfile:/tmp/RackMultipart20160916-25441-eojjjn.jpg>, @original_filename="94_big.jpg", @content_type="image/jpeg", @headers="Content-Disposition: form-data; name=\"applicant[photo]\"; filename=\"94_big.jpg\"\r\nContent-Type: image/jpeg\r\n">, "resume"=>#<ActionDispatch::Http::UploadedFile:0x007fcf27a8a7e8 @tempfile=#<Tempfile:/tmp/RackMultipart20160916-25441-1766q7n.pdf>, @original_filename="ruby_on_rails_tutorial_2nd_edition-preview.pdf", @content_type="application/pdf", @headers="Content-Disposition: form-data; name=\"applicant[resume]\"; filename=\"ruby_on_rails_tutorial_2nd_edition-preview.pdf\"\r\nContent-Type: application/pdf\r\n">}, "commit"=>"Create Applicant", "job_id"=>"1"}
+  [1m[35mJob Load (0.6ms)[0m  SELECT  `jobs`.* FROM `jobs` WHERE `jobs`.`id` = 1 LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (1.3ms)[0m  INSERT INTO `applicants` (`name`, `gender`, `email`, `headline`, `phone`, `address`, `photo`, `resume`, `date_birth`, `job_id`, `status`, `created_at`, `updated_at`) VALUES ('Aditia Pratama', 'Female', 'adotcyber@gmail.com', 'evil geniuses pro', '089614800388', 'jln rancabentang', '94_big.jpg', 'ruby_on_rails_tutorial_2nd_edition-preview.pdf', '2016-09-16', 1, 'Candidate', '2016-09-16 07:50:53', '2016-09-16 07:50:53')
+  [1m[36m (52.1ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/jobs/1
+Completed 302 Found in 680ms (ActiveRecord: 54.2ms)
+
+
+Started GET "/jobs/1" for 127.0.0.1 at 2016-09-16 14:50:53 +0700
+Processing by JobsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mUser Load (0.4ms)[0m  SELECT  `users`.* FROM `users` WHERE `users`.`id` = 49  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36mJob Load (0.3ms)[0m  [1mSELECT  `jobs`.* FROM `jobs` WHERE `jobs`.`id` = 1 LIMIT 1[0m
+  [1m[35mApplicant Load (0.4ms)[0m  SELECT `applicants`.* FROM `applicants` WHERE `applicants`.`job_id` = 1
+  Rendered applicants/_applicant.html.slim (3.1ms)
+  Rendered jobs/show.html.slim within layouts/application (8.2ms)
+Completed 200 OK in 49ms (Views: 46.3ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/jobs" for 127.0.0.1 at 2016-09-16 14:50:59 +0700
+Processing by JobsController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 49  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35mJob Load (0.4ms)[0m  SELECT `jobs`.* FROM `jobs`
+  Rendered jobs/index.html.slim within layouts/application (2.7ms)
+Completed 200 OK in 59ms (Views: 54.6ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/applicants" for 127.0.0.1 at 2016-09-16 14:51:03 +0700
+Processing by ApplicantsController#index as HTML
+  [1m[36mApplicant Load (0.3ms)[0m  [1mSELECT `applicants`.* FROM `applicants`[0m
+  Rendered applicants/index.html.slim within layouts/application (2.5ms)
+Completed 200 OK in 41ms (Views: 39.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/jobs" for 127.0.0.1 at 2016-09-16 14:54:16 +0700
+Processing by JobsController#index as HTML
+  [1m[35mUser Load (0.5ms)[0m  SELECT  `users`.* FROM `users` WHERE `users`.`id` = 49  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36mJob Load (0.4ms)[0m  [1mSELECT `jobs`.* FROM `jobs`[0m
+  Rendered jobs/index.html.slim within layouts/application (2.4ms)
+Completed 200 OK in 61ms (Views: 57.5ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-09-16 15:40:11 +0700
+Processing by LandingPageController#index as HTML
+  [1m[35mUser Load (5.2ms)[0m  SELECT  `users`.* FROM `users` WHERE `users`.`id` = 49  ORDER BY `users`.`id` ASC LIMIT 1
+  Rendered landing_page/index.html.slim within layouts/application (7.2ms)
+Completed 200 OK in 145ms (Views: 135.7ms | ActiveRecord: 5.2ms)
+
+
+Started GET "/jobs" for 127.0.0.1 at 2016-09-16 15:40:14 +0700
+Processing by JobsController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 49  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35mJob Load (1.5ms)[0m  SELECT `jobs`.* FROM `jobs`
+  Rendered jobs/index.html.slim within layouts/application (3.6ms)
+Completed 200 OK in 74ms (Views: 68.9ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/applicants" for 127.0.0.1 at 2016-09-16 15:40:17 +0700
+Processing by ApplicantsController#index as HTML
+  [1m[36mApplicant Load (0.9ms)[0m  [1mSELECT `applicants`.* FROM `applicants`[0m
+  Rendered applicants/index.html.slim within layouts/application (10.1ms)
+Completed 200 OK in 62ms (Views: 59.8ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/jobs" for 127.0.0.1 at 2016-09-16 15:40:23 +0700
+Processing by JobsController#index as HTML
+  [1m[35mUser Load (0.5ms)[0m  SELECT  `users`.* FROM `users` WHERE `users`.`id` = 49  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36mJob Load (0.4ms)[0m  [1mSELECT `jobs`.* FROM `jobs`[0m
+  Rendered jobs/index.html.slim within layouts/application (2.4ms)
+Completed 200 OK in 62ms (Views: 58.5ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/jobs/new" for 127.0.0.1 at 2016-09-16 15:40:27 +0700
+Processing by JobsController#new as HTML
+  [1m[35mUser Load (0.6ms)[0m  SELECT  `users`.* FROM `users` WHERE `users`.`id` = 49  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36mApplicantExperience Load (0.5ms)[0m  [1mSELECT `applicant_experiences`.* FROM `applicant_experiences`[0m
+  [1m[35mApplicantFunction Load (0.3ms)[0m  SELECT `applicant_functions`.* FROM `applicant_functions`
+  [1m[36mApplicantEmploymentType Load (0.3ms)[0m  [1mSELECT `applicant_employment_types`.* FROM `applicant_employment_types`[0m
+  [1m[35mApplicantIndustry Load (0.5ms)[0m  SELECT `applicant_industries`.* FROM `applicant_industries`
+  [1m[36mApplicantEducation Load (0.3ms)[0m  [1mSELECT `applicant_educations`.* FROM `applicant_educations`[0m
+  Rendered jobs/_form.html.slim (78.8ms)
+  Rendered jobs/new.html.slim within layouts/application (80.3ms)
+Completed 200 OK in 126ms (Views: 106.0ms | ActiveRecord: 16.9ms)
+
+
+Started GET "/jobs/1" for 127.0.0.1 at 2016-09-16 15:40:31 +0700
+Processing by JobsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mUser Load (0.7ms)[0m  SELECT  `users`.* FROM `users` WHERE `users`.`id` = 49  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36mJob Load (0.6ms)[0m  [1mSELECT  `jobs`.* FROM `jobs` WHERE `jobs`.`id` = 1 LIMIT 1[0m
+  [1m[35mApplicant Load (1.7ms)[0m  SELECT `applicants`.* FROM `applicants` WHERE `applicants`.`job_id` = 1
+  Rendered applicants/_applicant.html.slim (0.4ms)
+  Rendered jobs/show.html.slim within layouts/application (8.3ms)
+Completed 200 OK in 64ms (Views: 54.5ms | ActiveRecord: 3.0ms)
+
+
+Started GET "/jobs/1" for 127.0.0.1 at 2016-09-16 15:41:19 +0700
+Processing by JobsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 49  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35mJob Load (0.3ms)[0m  SELECT  `jobs`.* FROM `jobs` WHERE `jobs`.`id` = 1 LIMIT 1
+  [1m[36mApplicant Load (0.4ms)[0m  [1mSELECT `applicants`.* FROM `applicants` WHERE `applicants`.`job_id` = 1[0m
+  Rendered applicants/_applicant.html.slim (0.1ms)
+  Rendered jobs/show.html.slim within layouts/application (16.3ms)
+Completed 200 OK in 57ms (Views: 54.2ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/jobs" for 127.0.0.1 at 2016-09-16 15:41:50 +0700
+Processing by JobsController#index as HTML
+  [1m[35mUser Load (0.8ms)[0m  SELECT  `users`.* FROM `users` WHERE `users`.`id` = 49  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36mJob Load (0.6ms)[0m  [1mSELECT `jobs`.* FROM `jobs`[0m
+  Rendered jobs/index.html.slim within layouts/application (3.6ms)
+Completed 200 OK in 72ms (Views: 67.4ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-09-16 15:42:27 +0700
+Processing by LandingPageController#index as HTML
+  [1m[35mUser Load (0.6ms)[0m  SELECT  `users`.* FROM `users` WHERE `users`.`id` = 49  ORDER BY `users`.`id` ASC LIMIT 1
+  Rendered landing_page/index.html.slim within layouts/application (4.0ms)
+Completed 200 OK in 70ms (Views: 67.8ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/jobs" for 127.0.0.1 at 2016-09-16 15:42:30 +0700
+Processing by JobsController#index as HTML
+  [1m[36mUser Load (1.3ms)[0m  [1mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 49  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35mJob Load (0.6ms)[0m  SELECT `jobs`.* FROM `jobs`
+  Rendered jobs/index.html.slim within layouts/application (4.9ms)
+Completed 200 OK in 87ms (Views: 79.4ms | ActiveRecord: 1.9ms)
+
+
+Started GET "/jobs/1/edit" for 127.0.0.1 at 2016-09-16 15:43:25 +0700
+Processing by JobsController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.7ms)[0m  [1mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 49  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35mJob Load (0.7ms)[0m  SELECT  `jobs`.* FROM `jobs` WHERE `jobs`.`id` = 1 LIMIT 1
+  [1m[36mApplicantExperience Load (0.4ms)[0m  [1mSELECT `applicant_experiences`.* FROM `applicant_experiences`[0m
+  [1m[35mApplicantFunction Load (0.4ms)[0m  SELECT `applicant_functions`.* FROM `applicant_functions`
+  [1m[36mApplicantEmploymentType Load (0.6ms)[0m  [1mSELECT `applicant_employment_types`.* FROM `applicant_employment_types`[0m
+  [1m[35mApplicantIndustry Load (0.4ms)[0m  SELECT `applicant_industries`.* FROM `applicant_industries`
+  [1m[36mApplicantEducation Load (0.7ms)[0m  [1mSELECT `applicant_educations`.* FROM `applicant_educations`[0m
+  Rendered jobs/_form.html.slim (35.7ms)
+  Rendered jobs/edit.html.slim within layouts/application (46.8ms)
+Completed 200 OK in 116ms (Views: 105.1ms | ActiveRecord: 3.8ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-09-16 15:43:59 +0700
+Processing by LandingPageController#index as HTML
+  [1m[35mUser Load (0.4ms)[0m  SELECT  `users`.* FROM `users` WHERE `users`.`id` = 49  ORDER BY `users`.`id` ASC LIMIT 1
+  Rendered landing_page/index.html.slim within layouts/application (6.6ms)
+Completed 200 OK in 55ms (Views: 53.7ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/applicants" for 127.0.0.1 at 2016-09-16 15:44:02 +0700
+Processing by ApplicantsController#index as HTML
+  [1m[36mApplicant Load (0.4ms)[0m  [1mSELECT `applicants`.* FROM `applicants`[0m
+  Rendered applicants/index.html.slim within layouts/application (3.4ms)
+Completed 200 OK in 63ms (Views: 61.6ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/applicants/10" for 127.0.0.1 at 2016-09-16 15:44:16 +0700
+Processing by ApplicantsController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[35mApplicant Load (0.3ms)[0m  SELECT  `applicants`.* FROM `applicants` WHERE `applicants`.`id` = 10 LIMIT 1
+  Rendered applicants/show.html.slim within layouts/application (20.2ms)
+Completed 500 Internal Server Error in 28ms (ActiveRecord: 0.3ms)
+
+NoMethodError - undefined method `map' for nil:NilClass
+Did you mean?  tap:
+  actionview (4.2.6) lib/action_view/helpers/form_options_helper.rb:394:in `options_from_collection_for_select'
+  app/views/applicants/show.html.slim:34:in `_app_views_applicants_show_html_slim___2413386334301877028_70263850509860'
+  actionview (4.2.6) lib/action_view/template.rb:145:in `block in render'
+  activesupport (4.2.6) lib/active_support/notifications.rb:166:in `instrument'
+  actionview (4.2.6) lib/action_view/template.rb:333:in `instrument'
+  actionview (4.2.6) lib/action_view/template.rb:143:in `render'
+  actionview (4.2.6) lib/action_view/renderer/template_renderer.rb:54:in `block (2 levels) in render_template'
+  actionview (4.2.6) lib/action_view/renderer/abstract_renderer.rb:39:in `block in instrument'
+  activesupport (4.2.6) lib/active_support/notifications.rb:164:in `block in instrument'
+  activesupport (4.2.6) lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+  activesupport (4.2.6) lib/active_support/notifications.rb:164:in `instrument'
+  actionview (4.2.6) lib/action_view/renderer/abstract_renderer.rb:39:in `instrument'
+  actionview (4.2.6) lib/action_view/renderer/template_renderer.rb:53:in `block in render_template'
+  actionview (4.2.6) lib/action_view/renderer/template_renderer.rb:61:in `render_with_layout'
+  actionview (4.2.6) lib/action_view/renderer/template_renderer.rb:52:in `render_template'
+  actionview (4.2.6) lib/action_view/renderer/template_renderer.rb:14:in `render'
+  actionview (4.2.6) lib/action_view/renderer/renderer.rb:46:in `render_template'
+  actionview (4.2.6) lib/action_view/renderer/renderer.rb:27:in `render'
+  actionview (4.2.6) lib/action_view/rendering.rb:100:in `_render_template'
+  actionpack (4.2.6) lib/action_controller/metal/streaming.rb:217:in `_render_template'
+  actionview (4.2.6) lib/action_view/rendering.rb:83:in `render_to_body'
+  actionpack (4.2.6) lib/action_controller/metal/rendering.rb:32:in `render_to_body'
+  actionpack (4.2.6) lib/action_controller/metal/renderers.rb:37:in `render_to_body'
+  actionpack (4.2.6) lib/abstract_controller/rendering.rb:25:in `render'
+  actionpack (4.2.6) lib/action_controller/metal/rendering.rb:16:in `render'
+  actionpack (4.2.6) lib/action_controller/metal/instrumentation.rb:44:in `block (2 levels) in render'
+  activesupport (4.2.6) lib/active_support/core_ext/benchmark.rb:12:in `block in ms'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/benchmark.rb:308:in `realtime'
+  activesupport (4.2.6) lib/active_support/core_ext/benchmark.rb:12:in `ms'
+  actionpack (4.2.6) lib/action_controller/metal/instrumentation.rb:44:in `block in render'
+  actionpack (4.2.6) lib/action_controller/metal/instrumentation.rb:87:in `cleanup_view_runtime'
+  activerecord (4.2.6) lib/active_record/railties/controller_runtime.rb:25:in `cleanup_view_runtime'
+  actionpack (4.2.6) lib/action_controller/metal/instrumentation.rb:43:in `render'
+  actionpack (4.2.6) lib/action_controller/metal/implicit_render.rb:10:in `default_render'
+  actionpack (4.2.6) lib/action_controller/metal/implicit_render.rb:5:in `send_action'
+  actionpack (4.2.6) lib/abstract_controller/base.rb:198:in `process_action'
+  actionpack (4.2.6) lib/action_controller/metal/rendering.rb:10:in `process_action'
+  actionpack (4.2.6) lib/abstract_controller/callbacks.rb:20:in `block in process_action'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:117:in `call'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:555:in `block (2 levels) in compile'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:505:in `call'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:92:in `__run_callbacks__'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:778:in `_run_process_action_callbacks'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.6) lib/abstract_controller/callbacks.rb:19:in `process_action'
+  actionpack (4.2.6) lib/action_controller/metal/rescue.rb:29:in `process_action'
+  actionpack (4.2.6) lib/action_controller/metal/instrumentation.rb:32:in `block in process_action'
+  activesupport (4.2.6) lib/active_support/notifications.rb:164:in `block in instrument'
+  activesupport (4.2.6) lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+  activesupport (4.2.6) lib/active_support/notifications.rb:164:in `instrument'
+  actionpack (4.2.6) lib/action_controller/metal/instrumentation.rb:30:in `process_action'
+  actionpack (4.2.6) lib/action_controller/metal/params_wrapper.rb:250:in `process_action'
+  activerecord (4.2.6) lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+  actionpack (4.2.6) lib/abstract_controller/base.rb:137:in `process'
+  actionview (4.2.6) lib/action_view/rendering.rb:30:in `process'
+  actionpack (4.2.6) lib/action_controller/metal.rb:196:in `dispatch'
+  actionpack (4.2.6) lib/action_controller/metal/rack_delegation.rb:13:in `dispatch'
+  actionpack (4.2.6) lib/action_controller/metal.rb:237:in `block in action'
+  actionpack (4.2.6) lib/action_dispatch/routing/route_set.rb:74:in `dispatch'
+  actionpack (4.2.6) lib/action_dispatch/routing/route_set.rb:43:in `serve'
+  actionpack (4.2.6) lib/action_dispatch/journey/router.rb:43:in `block in serve'
+  actionpack (4.2.6) lib/action_dispatch/journey/router.rb:30:in `serve'
+  actionpack (4.2.6) lib/action_dispatch/routing/route_set.rb:817:in `call'
+  bullet (5.4.0) lib/bullet/rack.rb:10:in `call'
+  warden (1.2.6) lib/warden/manager.rb:35:in `block in call'
+  warden (1.2.6) lib/warden/manager.rb:34:in `call'
+  rack (1.6.4) lib/rack/etag.rb:24:in `call'
+  rack (1.6.4) lib/rack/conditionalget.rb:25:in `call'
+  rack (1.6.4) lib/rack/head.rb:13:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/flash.rb:260:in `call'
+  rack (1.6.4) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.6.4) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/cookies.rb:560:in `call'
+  activerecord (4.2.6) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.2.6) lib/active_record/connection_adapters/abstract/connection_pool.rb:653:in `call'
+  activerecord (4.2.6) lib/active_record/migration.rb:377:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:88:in `__run_callbacks__'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:778:in `_run_call_callbacks'
+  activesupport (4.2.6) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.6) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:84:in `protected_app_call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:79:in `better_errors_call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:57:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  web-console (2.3.0) lib/web_console/middleware.rb:28:in `block in call'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.6) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.6) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.6) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.6) lib/rails/rack/logger.rb:20:in `call'
+  quiet_assets (1.1.0) lib/quiet_assets.rb:27:in `call_with_quiet_assets'
+  actionpack (4.2.6) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.6) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.6) lib/action_dispatch/middleware/static.rb:120:in `call'
+  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.6) lib/rails/engine.rb:518:in `call'
+  railties (4.2.6) lib/rails/application.rb:165:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.4) lib/rack/handler/webrick.rb:88:in `service'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:140:in `service'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:96:in `run'
+  /home/aditia/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/server.rb:296:in `block in start_thread'
+
+
+
+Started POST "/__better_errors/821f90ecf666e59d/variables" for 127.0.0.1 at 2016-09-16 15:44:16 +0700
+
+
+Started GET "/applicants" for 127.0.0.1 at 2016-09-16 15:45:45 +0700
+Processing by ApplicantsController#index as HTML
+  [1m[36mApplicant Load (0.7ms)[0m  [1mSELECT `applicants`.* FROM `applicants`[0m
+  Rendered applicants/index.html.slim within layouts/application (3.1ms)
+Completed 200 OK in 43ms (Views: 41.3ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/applicants/10" for 127.0.0.1 at 2016-09-16 15:45:47 +0700
+Processing by ApplicantsController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[35mApplicant Load (0.7ms)[0m  SELECT  `applicants`.* FROM `applicants` WHERE `applicants`.`id` = 10 LIMIT 1
+  Rendered applicants/show.html.slim within layouts/application (15.3ms)
+Completed 200 OK in 64ms (Views: 60.9ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/jobs" for 127.0.0.1 at 2016-09-16 15:45:51 +0700
+Processing by JobsController#index as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 49  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35mJob Load (0.6ms)[0m  SELECT `jobs`.* FROM `jobs`
+  Rendered jobs/index.html.slim within layouts/application (6.8ms)
+Completed 200 OK in 76ms (Views: 68.9ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/jobs" for 127.0.0.1 at 2016-09-16 15:46:13 +0700
+Processing by JobsController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 49  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35mJob Load (0.5ms)[0m  SELECT `jobs`.* FROM `jobs`
+  Rendered jobs/index.html.slim within layouts/application (2.9ms)
+Completed 200 OK in 68ms (Views: 63.3ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/jobs" for 127.0.0.1 at 2016-09-16 15:46:59 +0700
+Processing by JobsController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 49  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35mJob Load (0.4ms)[0m  SELECT `jobs`.* FROM `jobs`
+  Rendered jobs/index.html.slim within layouts/application (2.1ms)
+Completed 200 OK in 68ms (Views: 65.5ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/applicants/10" for 127.0.0.1 at 2016-09-16 15:47:09 +0700
+Processing by ApplicantsController#show as HTML
+  Parameters: {"id"=>"10"}
+  [1m[36mApplicant Load (0.4ms)[0m  [1mSELECT  `applicants`.* FROM `applicants` WHERE `applicants`.`id` = 10 LIMIT 1[0m
+  Rendered applicants/show.html.slim within layouts/application (14.4ms)
+Completed 200 OK in 60ms (Views: 57.6ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/jobs" for 127.0.0.1 at 2016-09-16 15:47:11 +0700
+Processing by JobsController#index as HTML
+  [1m[35mUser Load (0.5ms)[0m  SELECT  `users`.* FROM `users` WHERE `users`.`id` = 49  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36mJob Load (0.5ms)[0m  [1mSELECT `jobs`.* FROM `jobs`[0m
+  Rendered jobs/index.html.slim within layouts/application (3.1ms)
+Completed 200 OK in 63ms (Views: 59.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-09-16 15:47:15 +0700
+Processing by LandingPageController#index as HTML
+  [1m[35mUser Load (0.4ms)[0m  SELECT  `users`.* FROM `users` WHERE `users`.`id` = 49  ORDER BY `users`.`id` ASC LIMIT 1
+  Rendered landing_page/index.html.slim within layouts/application (1.8ms)
+Completed 200 OK in 40ms (Views: 38.7ms | ActiveRecord: 0.4ms)
+
+
+Started DELETE "/users/sign_out" for 127.0.0.1 at 2016-09-16 15:47:17 +0700
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"kCrAlWmsQwUcpkeGTA03JQpPPdTqxZslx4BZ9/Mue+LDIzlVkucTfi3r1ammaxhFR0OYUAMKqOkd86A11tawUA=="}
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 49  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 7ms (ActiveRecord: 0.8ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-09-16 15:47:17 +0700
+Processing by LandingPageController#index as HTML
+  Rendered landing_page/index.html.slim within layouts/application (0.4ms)
+Completed 200 OK in 37ms (Views: 36.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2016-09-16 15:47:18 +0700
+Processing by Devise::SessionsController#new as HTML
+  Rendered devise/shared/_links.html.erb (0.4ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (5.0ms)
+Completed 200 OK in 67ms (Views: 64.6ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2016-09-16 15:47:22 +0700
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"nM5OWHMP+ymx+cIZThRTUg3nBrnh0Rs9n4GrIKqgwXp8FSut/cdv0jg6129QEMydEHWi2GAt8skzHpt/arYN5Q==", "user"=>{"email"=>"adotcyber@gmail.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[35mUser Load (0.6ms)[0m  SELECT  `users`.* FROM `users` WHERE `users`.`email` = 'adotcyber@gmail.com'  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (4.0ms)[0m  UPDATE `users` SET `current_sign_in_at` = '2016-09-16 08:47:22', `sign_in_count` = 2, `updated_at` = '2016-09-16 08:47:22' WHERE `users`.`id` = 49
+  [1m[36m (10.8ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/dashboards
+Completed 302 Found in 217ms (ActiveRecord: 15.5ms)
+
+
+Started GET "/dashboards" for 127.0.0.1 at 2016-09-16 15:47:22 +0700
+Processing by DashboardsController#index as HTML
+  [1m[35mUser Load (0.4ms)[0m  SELECT  `users`.* FROM `users` WHERE `users`.`id` = 49  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36mCompany Load (0.4ms)[0m  [1mSELECT `companies`.* FROM `companies` INNER JOIN `users` ON `users`.`company_id` = `companies`.`id` WHERE `companies`.`id` = 6[0m
+  Rendered dashboards/index.html.slim within layouts/application (10.0ms)
+Completed 200 OK in 57ms (Views: 49.2ms | ActiveRecord: 1.9ms)
+
+
+Started GET "/companies/6/edit" for 127.0.0.1 at 2016-09-16 15:50:31 +0700
+Processing by CompaniesController#edit as HTML
+  Parameters: {"id"=>"6"}
+  [1m[35mCompany Load (0.3ms)[0m  SELECT  `companies`.* FROM `companies` WHERE `companies`.`id` = 6 LIMIT 1
+  Rendered companies/_form.html.slim (5.9ms)
+  Rendered companies/edit.html.slim within layouts/application (12.6ms)
+Completed 200 OK in 76ms (Views: 59.5ms | ActiveRecord: 5.3ms)
+
+
+Started GET "/companies/6" for 127.0.0.1 at 2016-09-16 15:50:56 +0700
+Processing by CompaniesController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mCompany Load (0.4ms)[0m  [1mSELECT  `companies`.* FROM `companies` WHERE `companies`.`id` = 6 LIMIT 1[0m
+  Rendered companies/show.html.slim within layouts/application (5.4ms)
+Completed 200 OK in 63ms (Views: 60.4ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/companies" for 127.0.0.1 at 2016-09-16 15:50:58 +0700
+Processing by CompaniesController#index as HTML
+Redirected to http://localhost:3000/companies/new
+Completed 302 Found in 2ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/companies/new" for 127.0.0.1 at 2016-09-16 15:50:58 +0700
+Processing by CompaniesController#new as HTML
+  [1m[35mUser Load (0.5ms)[0m  SELECT  `users`.* FROM `users` WHERE `users`.`id` = 49  ORDER BY `users`.`id` ASC LIMIT 1
+Redirected to http://localhost:3000/companies/6
+Filter chain halted as #<Proc:0x007fcf26677760@/home/aditia/teamhire/teammate-talent-system/app/controllers/companies_controller.rb:4> rendered or redirected
+Completed 401 Unauthorized in 30ms (ActiveRecord: 1.5ms)
+
+
+Started GET "/companies/6" for 127.0.0.1 at 2016-09-16 15:51:00 +0700
+Processing by CompaniesController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mCompany Load (0.4ms)[0m  [1mSELECT  `companies`.* FROM `companies` WHERE `companies`.`id` = 6 LIMIT 1[0m
+  Rendered companies/show.html.slim within layouts/application (0.6ms)
+Completed 200 OK in 68ms (Views: 65.6ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/companies/6/edit" for 127.0.0.1 at 2016-09-16 15:51:02 +0700
+Processing by CompaniesController#edit as HTML
+  Parameters: {"id"=>"6"}
+  [1m[35mCompany Load (1.5ms)[0m  SELECT  `companies`.* FROM `companies` WHERE `companies`.`id` = 6 LIMIT 1
+  Rendered companies/_form.html.slim (8.9ms)
+  Rendered companies/edit.html.slim within layouts/application (10.6ms)
+Completed 200 OK in 62ms (Views: 58.9ms | ActiveRecord: 1.5ms)
+
+
+Started PATCH "/companies/6" for 127.0.0.1 at 2016-09-16 15:51:11 +0700
+Processing by CompaniesController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"1vYHtabxCl7La7FW5PKDBbYoUocPsLfEo6ZYwARXexqs6LOgX5s2kSlS0UdJbIg8XarrqIXvtBULLbdH2M0LBw==", "company"=>{"company_name"=>"Poison Papyrus", "company_website"=>"poison.com", "company_email"=>"wolesadmin@gmail.com", "company_phone"=>"0283827382", "industry"=>"Advertising / Marketing / PR"}, "commit"=>"Update Company", "id"=>"6"}
+  [1m[36mCompany Load (0.3ms)[0m  [1mSELECT  `companies`.* FROM `companies` WHERE `companies`.`id` = 6 LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mUPDATE `companies` SET `company_name` = 'Poison Papyrus', `company_website` = 'poison.com', `industry` = 'Advertising / Marketing / PR', `updated_at` = '2016-09-16 08:51:11' WHERE `companies`.`id` = 6[0m
+  [1m[35m (16.7ms)[0m  COMMIT
+Redirected to http://localhost:3000/dashboards
+Completed 302 Found in 23ms (ActiveRecord: 17.5ms)
+
+
+Started GET "/dashboards" for 127.0.0.1 at 2016-09-16 15:51:11 +0700
+Processing by DashboardsController#index as HTML
+  [1m[36mUser Load (1.0ms)[0m  [1mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 49  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35mCompany Load (0.3ms)[0m  SELECT `companies`.* FROM `companies` INNER JOIN `users` ON `users`.`company_id` = `companies`.`id` WHERE `companies`.`id` = 6
+  Rendered dashboards/index.html.slim within layouts/application (2.9ms)
+Completed 200 OK in 57ms (Views: 46.2ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/dashboards" for 127.0.0.1 at 2016-09-16 15:51:13 +0700
+Processing by DashboardsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 49  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35mCompany Load (1.3ms)[0m  SELECT `companies`.* FROM `companies` INNER JOIN `users` ON `users`.`company_id` = `companies`.`id` WHERE `companies`.`id` = 6
+  Rendered dashboards/index.html.slim within layouts/application (3.2ms)
+Completed 200 OK in 42ms (Views: 38.5ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/jobs/new" for 127.0.0.1 at 2016-09-16 15:57:59 +0700
+Processing by JobsController#new as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 49  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35mApplicantExperience Load (0.3ms)[0m  SELECT `applicant_experiences`.* FROM `applicant_experiences`
+  [1m[36mApplicantFunction Load (0.3ms)[0m  [1mSELECT `applicant_functions`.* FROM `applicant_functions`[0m
+  [1m[35mApplicantEmploymentType Load (0.2ms)[0m  SELECT `applicant_employment_types`.* FROM `applicant_employment_types`
+  [1m[36mApplicantIndustry Load (0.6ms)[0m  [1mSELECT `applicant_industries`.* FROM `applicant_industries`[0m
+  [1m[35mApplicantEducation Load (0.3ms)[0m  SELECT `applicant_educations`.* FROM `applicant_educations`
+  Rendered jobs/_form.html.slim (72.4ms)
+  Rendered jobs/new.html.slim within layouts/application (73.2ms)
+Completed 200 OK in 157ms (Views: 91.1ms | ActiveRecord: 32.3ms)
+
+
+Started GET "/jobs/new" for 127.0.0.1 at 2016-09-16 15:58:03 +0700
+Processing by JobsController#new as HTML
+  [1m[36mUser Load (0.8ms)[0m  [1mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 49  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35mApplicantExperience Load (0.5ms)[0m  SELECT `applicant_experiences`.* FROM `applicant_experiences`
+  [1m[36mApplicantFunction Load (0.5ms)[0m  [1mSELECT `applicant_functions`.* FROM `applicant_functions`[0m
+  [1m[35mApplicantEmploymentType Load (0.4ms)[0m  SELECT `applicant_employment_types`.* FROM `applicant_employment_types`
+  [1m[36mApplicantIndustry Load (0.7ms)[0m  [1mSELECT `applicant_industries`.* FROM `applicant_industries`[0m
+  [1m[35mApplicantEducation Load (0.4ms)[0m  SELECT `applicant_educations`.* FROM `applicant_educations`
+  Rendered jobs/_form.html.slim (43.1ms)
+  Rendered jobs/new.html.slim within layouts/application (44.7ms)
+Completed 200 OK in 95ms (Views: 86.5ms | ActiveRecord: 3.2ms)
