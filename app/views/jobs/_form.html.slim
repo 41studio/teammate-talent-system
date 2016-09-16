@@ -47,19 +47,19 @@
     = f.text_area :benefits
   .field
     = f.label :aplicant_experience
-    = f.select 'aplicant_experience', options_for_select(@job.experience.collect {|p| [ p[1], p[1] ] })
+    = f.select 'aplicant_experience', options_from_collection_for_select(ApplicantExperience.all, :experience, :experience), prompt: "Select Applicant Level"
   .field
     = f.label :aplicant_function
-    = f.select 'aplicant_function', options_for_select(@job.function.collect {|p| [ p[1], p[1] ] })
+    = f.select 'aplicant_function', options_from_collection_for_select(ApplicantFunction.all, :function, :function), prompt: "Select Applicant Level"
   .field
     = f.label :aplicant_employment_type
-    = f.select 'aplicant_employment_type', options_for_select(@job.employment_type.collect {|p| [ p[1], p[1] ] })
+    = f.select 'aplicant_employment_type', options_from_collection_for_select(ApplicantEmploymentType.all, :employment_type, :employment_type), prompt: "Select Applicant Employment Type"
   .field
     = f.label :aplicant_industry
-    = f.select 'aplicant_industry', options_for_select(@job.industry.collect {|p| [ p[1], p[1] ] })
+    = f.select 'aplicant_industry', options_from_collection_for_select(ApplicantIndustry.all, :industry, :industry), prompt: "Select Applicant Industry"
   .field
     = f.label :aplicant_education
-    = f.select 'aplicant_education', options_for_select(@job.education.collect {|p| [ p[1], p[1] ] })
+    = f.select 'aplicant_education', options_from_collection_for_select(ApplicantEducation.all, :education, :education), prompt: "Select Applicant Education"
   .field
     = f.label :job_search_keyword
     = f.text_field :job_search_keyword

@@ -31,6 +31,8 @@ p
   strong Status:
   = @applicant.status
 
-= link_to 'Edit', edit_applicant_path(@applicant)
-'|
-= link_to 'Back', applicants_path
+# = select_tag "profile", options_from_collection_for_select(@profile, "new_method_name",'profile_blip'),:onchange => "window.location.replace('/'+this.value);"
+br
+= link_to 'Disqualified Him/Her'
+br
+= link_to 'Back', jobs_path
