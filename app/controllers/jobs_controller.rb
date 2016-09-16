@@ -1,6 +1,7 @@
 class JobsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_job, only: [:show, :edit, :update, :destroy]
+  before_action :set_company, only: [:new, :edit]
 
   # GET /jobs
   # GET /jobs.json
@@ -25,8 +26,7 @@ class JobsController < ApplicationController
   # POST /jobs
   # POST /jobs.json
   def create
-    @job = Job.new(job_params)
-
+    @job = set_company.jobs.new(job_params)
     respond_to do |format|
       if @job.save
         format.html { redirect_to @job, notice: 'Job was successfully created.' }
@@ -68,8 +68,13 @@ class JobsController < ApplicationController
       @job = Job.find(params[:id])
     end
 
+    def set_company
+      @company = Company.find(params[:company_id])
+    end
+
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def job_params
-      params.require(:job).permit(:job_title, :departement, :job_code, :country, :state, :city, :zip_code, :min_salary, :max_salary, :curency, :job_description, :job_requirement, :benefits, :aplicant_experience, :aplicant_function, :aplicant_employment_type, :aplicant_industry, :aplicant_education, :job_search_keyword)
+      params.require(:job).permit(:job_title, :departement, :job_code, :country, :state, :city, :zip_code, :min_salary, :max_salary, :curency, :job_description, :job_requirement, :benefits, :experience_list_id, :function_list_id, :employment_type_list_id, :industry_list_id, :education_list_id, :job_search_keyword)
     end
 end
