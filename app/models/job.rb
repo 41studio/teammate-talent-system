@@ -1,5 +1,5 @@
 class Job < ActiveRecord::Base
-	has_many :applicants
+	has_many :applicants, dependent: :destroy
 	belongs_to :company
 
 	validates :job_title, :departement, :job_code, :country, :state, :city, :zip_code, :min_salary, :max_salary, :curency, :job_description, :job_requirement, :benefits, :aplicant_experience, :aplicant_function, :aplicant_employment_type, :aplicant_industry, :aplicant_education, :job_search_keyword,  presence: true
