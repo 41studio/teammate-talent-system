@@ -22,4 +22,10 @@
     = f.label :industry
     = f.select 'industry', options_for_select(@company.industry_.collect {|p| [ p[1], p[1] ] })
   .field
+    = f.file_field :photo_company, accept: 'image/png,image/jpeg'
+    - if f.object.photo_company?
+      = image_tag f.object.photo_company.thumb.url
+      = f.label :remove_photo
+      = f.check_box :remove_photo
+  .field
   .actions = f.submit

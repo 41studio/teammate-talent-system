@@ -1,4 +1,5 @@
 class ApplicantsController < ApplicationController
+
   skip_before_filter :authenticate_user!, only: [:create]
   before_action :set_applicant, only: [:show, :edit, :update, :destroy]
   before_action :set_job, only: [:new, :edit]

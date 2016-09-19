@@ -32,6 +32,7 @@ p
   = @applicant.status
 
 /= select_tag "profile", options_from_collection_for_select(@profile, "new_method_name",'profile_blip'),:onchange => "window.location.replace('/'+this.value);"
+
 br
 = link_to 'Disqualified Him/Her'
 br
