@@ -13,6 +13,7 @@ class ApplicantsController < ApplicationController
   # GET /applicants/1
   # GET /applicants/1.json
   def show
+    
   end
 
   # GET /applicants/new

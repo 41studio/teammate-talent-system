@@ -46,28 +46,9 @@
 
     - for education in @applicant.educations  
       = f.fields_for :educations, Education.new do |education|
-        p
-         = education.label :name_school
-         = education.text_field :name_school
-        p
-         = education.label :field_study
-         = education.text_field :field_study
-        p 
-         = education.label :degree
-         = education.text_field :degree
+       = render 'education_form', f: education
 
     - for education in @applicant.experiences
       = f.fields_for :experiences, Experience.new do |experience|
-        p
-         = experience.label :name_company
-         = experience.text_field :name_company
-        p
-         = experience.label :industry
-         = experience.text_field :industry
-        p
-         = experience.label :title
-         = experience.text_field :title
-        p
-         = experience.label :summary
-         = experience.text_field :summary 
+       = render 'experience_form', f: experience
   .actions = f.submit

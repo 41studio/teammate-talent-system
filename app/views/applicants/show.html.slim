@@ -30,6 +30,27 @@ p
 p
   strong Status:
   = @applicant.status
+p
+  strong Name School:
+  = @applicant.educations.map {|c| c.name_school}.join(',')
+p
+  strong Field Study:
+  = @applicant.educations.map {|c| c.field_study}.join(',')
+p
+  strong Degree:
+  = @applicant.educations.map {|c| c.degree}.join(',')
+p
+  strong Name Company:
+  = @applicant.experiences.map {|c| c.name_company}.join(',')
+p
+  strong Industry:
+  = @applicant.experiences.map {|c| c.industry}.join(',')
+p 
+  strong Title:
+  = @applicant.experiences.map {|c| c.title}.join(',')
+p
+  strong Summary:
+  = @applicant.experiences.map {|c| c.summary}.join(',')
 
 /= select_tag "profile", options_from_collection_for_select(@profile, "new_method_name",'profile_blip'),:onchange => "window.location.replace('/'+this.value);"
 
