@@ -3,6 +3,8 @@ class Applicant < ActiveRecord::Base
 	has_and_belongs_to_many :educations
 	has_and_belongs_to_many :experiences
 
+	accepts_nested_attributes_for :educations, :experiences
+
 	before_destroy {|applicant| applicant.experiences.clear}
 	before_destroy {|applicant| applicant.educations.clear}
 

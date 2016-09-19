@@ -13,7 +13,7 @@ table border="1"
       th
 
   tbody
-    - @companys.each do |company|
+    - @companies.each do |company|
       tr
         td = company.company_name
         td = company.company_website
@@ -23,5 +23,6 @@ table border="1"
         td = image_tag company.photo_company.thumb.url
         td = link_to 'Show', company
         td = link_to 'Edit', edit_company_path(company)
+        td = link_to "Create New Job", new_company_job_path(company)
 br
 = link_to 'Back', root_path

@@ -18,6 +18,9 @@ class ApplicantsController < ApplicationController
   # GET /applicants/new
   def new
     @applicant = Applicant.new
+    @applicant.educations.build
+    @applicant.experiences.build
+
   end
 
   # GET /applicants/1/edit
@@ -28,8 +31,10 @@ class ApplicantsController < ApplicationController
   # POST /applicants.json
   def create
     @job = Job.find(params[:job_id])
+    # @applicant = Education.new(params[:education])
     @applicant = @job.applicants.new(applicant_params)
     @applicant.status = "Candidate"
+    # @applicant.education << education 
     respond_to do |format|
       if @applicant.save
         format.html { redirect_to job_path(@job), notice: 'Applicant was successfully created.' }
@@ -77,6 +82,6 @@ class ApplicantsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def applicant_params
-      params.require(:applicant).permit(:name, :gender, :date_birth, :email, :headline, :phone, :address, :photo, :name_school, :state_study, :degree, :company_name, :industry, :title, :summary, :resume)
+      params.require(:applicant).permit(:name, :gender, :date_birth, :email, :headline, :phone, :address, :photo, :name_school, :state_study, :degree, :company_name, :industry, :title, :summary, :resume, educations_attributes: [:name_school, :field_study, :degree], experiences_attributes: [:name_company, :industry, :title, :summary])
     end
 end
