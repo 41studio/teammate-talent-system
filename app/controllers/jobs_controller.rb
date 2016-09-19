@@ -16,11 +16,14 @@ class JobsController < ApplicationController
 
   # GET /jobs/new
   def new
-    @job = Job.new
+    @company = Company.find(params[:company_id])
+    @job = @company.jobs.build
   end
 
   # GET /jobs/1/edit
   def edit
+    @company = Company.find(params[:company_id])
+    @job = @company.jobs.find(params[:id])
   end
 
   # POST /jobs
