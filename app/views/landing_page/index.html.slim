@@ -1,14 +1,15 @@
 h1
 	| Welcome
 
-p = "welcome #{current_user.first_name} #{current_user.last_name}"
-	
-= link_to 'dashboard', dashboards_path
 - if user_signed_in?
- br
- br
-  = link_to 'logout', destroy_user_session_path, method: :delete
+	| welcome #{current_user.first_name} #{current_user.last_name}
+	br	
+		= link_to 'dashboard', dashboards_path
+		br
+  	= link_to 'logout', destroy_user_session_path, method: :delete
 - else
-  br
-  br
-  = link_to 'Sign in', user_session_path
+	= link_to 'Sign in', user_session_path
+	hr
+	h3 Related jobs
+	- @companies.each do |company|
+		= render company.jobs

@@ -1,25 +1,7 @@
 h1 Dashboard 
-
-table border="1"
-  thead
-    tr
-      th Name Company
-      th Website Company
-      th Email Company
-      th Phone Company
-      th Industry
-      th
-      th
-
-  tbody
-    - @companys.each do |company|
-      tr
-        td = company.company_name
-        td = company.company_website
-        td = company.company_email
-        td = company.company_phone
-        td = company.industry
-        td = link_to 'Show', company
-        td = link_to 'Edit', edit_company_path(company)
-br
+hr
+p Companies
+- @companys.each do |company|
+  = link_to company.company_name, company
+hr
 = link_to 'Back', root_path

@@ -1,10 +1,9 @@
 class CompaniesController < ApplicationController
   before_action :set_company, only: [:show, :edit, :update, :destroy]
-  skip_before_filter :authenticate_user!, only: [:index, :show]
-  
-  before_filter only: [:new, :index] do 
+  before_filter only: [:new, :index] do
     redirect_to previous_url, :status => 401 if current_user.company_id != nil
-  end  
+  end
+  skip_before_filter :authenticate_user!, only: [:index, :show]
 
   # GET /companies
   # GET /companies.json
