@@ -1,9 +1,11 @@
 class CompaniesController < ApplicationController
   before_action :set_company, only: [:show, :edit, :update, :destroy]
+  skip_before_filter :authenticate_user!, only: [:index, :show]
   
   before_filter only: [:new] do 
     redirect_to previous_url, :status => 401 if current_user.company_id != nil
   end  
+
   # GET /companies
   # GET /companies.json
   def index
@@ -74,6 +76,6 @@ class CompaniesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def company_params
-      params.require(:company).permit(:company_name, :company_website, :company_email, :company_phone, :industry)
+      params.require(:company).permit(:company_name, :company_website, :company_email, :company_phone, :industry, :photo_company)
     end
 end

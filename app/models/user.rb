@@ -1,5 +1,4 @@
 class User < ActiveRecord::Base
-	belongs_to :job
 	belongs_to :company
 	
   acts_as_token_authenticatable
@@ -8,8 +7,6 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, 
-         :confirmable, :confirmable
-
-         
+         :confirmable, :confirmable         
   validates :first_name, :last_name, presence: true
 end

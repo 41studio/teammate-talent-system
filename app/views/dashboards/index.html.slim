@@ -11,6 +11,7 @@ table border="1"
       th Email Company
       th Phone Company
       th Industry
+      th Photo Company
       th
       th
 
@@ -22,6 +23,7 @@ table border="1"
         td = company.company_email
         td = company.company_phone
         td = company.industry
+        td = image_tag company.photo_company.thumb.url
         td = link_to 'Edit', edit_company_path(company)
 br
 = link_to "Create New Job", new_job_path 

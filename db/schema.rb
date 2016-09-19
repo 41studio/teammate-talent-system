@@ -11,27 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160915070810) do
-
-  create_table "applicant_educations", force: :cascade do |t|
-    t.string "education", limit: 255
-  end
-
-  create_table "applicant_employment_types", force: :cascade do |t|
-    t.string "employment_type", limit: 255
-  end
-
-  create_table "applicant_experiences", force: :cascade do |t|
-    t.string "experience", limit: 255
-  end
-
-  create_table "applicant_functions", force: :cascade do |t|
-    t.string "function", limit: 255
-  end
-
-  create_table "applicant_industries", force: :cascade do |t|
-    t.string "industry", limit: 255
-  end
+ActiveRecord::Schema.define(version: 20160916092436) do
 
   create_table "applicants", force: :cascade do |t|
     t.string   "name",       limit: 255, default: "", null: false
@@ -51,6 +31,22 @@ ActiveRecord::Schema.define(version: 20160915070810) do
 
   add_index "applicants", ["job_id"], name: "index_applicants_on_job_id", using: :btree
 
+  create_table "applicants_educations", id: false, force: :cascade do |t|
+    t.integer "applicant_id", limit: 4, null: false
+    t.integer "education_id", limit: 4, null: false
+  end
+
+  add_index "applicants_educations", ["applicant_id", "education_id"], name: "index_applicants_educations_on_applicant_id_and_education_id", using: :btree
+  add_index "applicants_educations", ["education_id", "applicant_id"], name: "index_applicants_educations_on_education_id_and_applicant_id", using: :btree
+
+  create_table "applicants_experiences", id: false, force: :cascade do |t|
+    t.integer "applicant_id",  limit: 4, null: false
+    t.integer "experience_id", limit: 4, null: false
+  end
+
+  add_index "applicants_experiences", ["applicant_id", "experience_id"], name: "index_applicants_experiences_on_applicant_id_and_experience_id", using: :btree
+  add_index "applicants_experiences", ["experience_id", "applicant_id"], name: "index_applicants_experiences_on_experience_id_and_applicant_id", using: :btree
+
   create_table "companies", force: :cascade do |t|
     t.string   "company_name",    limit: 255
     t.string   "company_website", limit: 255
@@ -59,6 +55,11 @@ ActiveRecord::Schema.define(version: 20160915070810) do
     t.string   "industry",        limit: 255
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
+    t.string   "photo_company",   limit: 255
+  end
+
+  create_table "education_lists", force: :cascade do |t|
+    t.string "education", limit: 255
   end
 
   create_table "educations", force: :cascade do |t|
@@ -69,6 +70,14 @@ ActiveRecord::Schema.define(version: 20160915070810) do
     t.datetime "updated_at",              null: false
   end
 
+  create_table "employment_type_lists", force: :cascade do |t|
+    t.string "employment_type", limit: 255
+  end
+
+  create_table "experience_lists", force: :cascade do |t|
+    t.string "experience", limit: 255
+  end
+
   create_table "experiences", force: :cascade do |t|
     t.string   "name_company", limit: 255
     t.string   "industry",     limit: 255
@@ -76,6 +85,14 @@ ActiveRecord::Schema.define(version: 20160915070810) do
     t.string   "summary",      limit: 255
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+  end
+
+  create_table "function_lists", force: :cascade do |t|
+    t.string "function", limit: 255
+  end
+
+  create_table "industry_lists", force: :cascade do |t|
+    t.string "industry", limit: 255
   end
 
   create_table "jobs", force: :cascade do |t|

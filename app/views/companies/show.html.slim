@@ -15,6 +15,9 @@ p
 p
   strong Industry:
   = @company.industry
+p
+  strong Photo Company
+  = image_tag @company.photo_company.thumb.url
 
 = link_to 'Edit', edit_company_path(@company)
 '|
