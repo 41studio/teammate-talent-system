@@ -50,6 +50,8 @@ gem 'binding_of_caller'
 
 ## API
 gem 'simple_token_authentication', '~> 1.0'
+gem 'grape'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

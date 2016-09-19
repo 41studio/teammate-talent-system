@@ -15,4 +15,6 @@ Rails.application.routes.draw do
   get '/dashboards' => "dashboards#index", as: :user_root
 
   root 'landing_page#index'
+
+  mount API::Root => '/'
 end
