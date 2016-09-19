@@ -1,4 +1,4 @@
-= form_for @job do |f|
+= form_for [@company, @company.jobs.build] do |f|
   - if @job.errors.any?
     #error_explanation
       h2 = "#{pluralize(@job.errors.count, "error")} prohibited this job from being saved:"
@@ -47,19 +47,19 @@
     = f.text_area :benefits
   .field
     = f.label :aplicant_experience
-    = f.select 'aplicant_experience', options_from_collection_for_select(ApplicantExperience.all, :experience, :experience), prompt: "Select Applicant Level"
+    = f.select :experience_list_id, options_from_collection_for_select(ExperienceList.all, :id, :experience), prompt: "Select Applicant Level"
   .field
     = f.label :aplicant_function
-    = f.select 'aplicant_function', options_from_collection_for_select(ApplicantFunction.all, :function, :function), prompt: "Select Applicant Level"
+    = f.select :function_list_id, options_from_collection_for_select(FunctionList.all, :id, :function), prompt: "Select Applicant Level"
   .field
     = f.label :aplicant_employment_type
-    = f.select 'aplicant_employment_type', options_from_collection_for_select(ApplicantEmploymentType.all, :employment_type, :employment_type), prompt: "Select Applicant Employment Type"
+    = f.select :employment_type_list_id, options_from_collection_for_select(EmploymentTypeList.all, :id, :employment_type), prompt: "Select Applicant Employment Type"
   .field
     = f.label :aplicant_industry
-    = f.select 'aplicant_industry', options_from_collection_for_select(ApplicantIndustry.all, :industry, :industry), prompt: "Select Applicant Industry"
+    = f.select :industry_list_id, options_from_collection_for_select(IndustryList.all, :id, :industry), prompt: "Select Applicant Industry"
   .field
     = f.label :aplicant_education
-    = f.select 'aplicant_education', options_from_collection_for_select(ApplicantEducation.all, :education, :education), prompt: "Select Applicant Education"
+    = f.select :education_list_id, options_from_collection_for_select(EducationList.all, :id, :education), prompt: "Select Applicant Education"
   .field
     = f.label :job_search_keyword
     = f.text_field :job_search_keyword

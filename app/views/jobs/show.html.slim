@@ -41,26 +41,26 @@ p
   = @job.benefits
 p
   strong Aplicant experience:
-  = @job.aplicant_experience
+  = @job.experience_list_id
 p
   strong Aplicant function:
-  = @job.aplicant_function
+  = @job.function_list_id
 p
   strong Aplicant employment type:
-  = @job.aplicant_employment_type
+  = @job.employment_type_list_id
 p
   strong Aplicant industry:
-  = @job.aplicant_industry
+  = @job.industry_list_id
 p
   strong Aplicant education:
-  = @job.aplicant_education
+  = @job.education_list_id
 p
   strong Job search keyword:
   = @job.job_search_keyword
 
-= link_to 'Edit', edit_job_path(@job)
+= link_to 'Edit', edit_company_job_path(@job.company_id,@job)
 '|
-= link_to 'Back', jobs_path
+= link_to 'Back', company_path(@job.company_id)
 '|
 = link_to 'apply this job', new_job_applicant_path(@job)
 

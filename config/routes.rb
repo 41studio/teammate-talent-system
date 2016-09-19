@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
-
-  resources :jobs do
+  resources :companies do
+    resources :jobs, only: [:new, :create, :edit]
+  end
+  resources :jobs, only: [:show, :destroy] do 
     resources :applicants, only: [:new, :create, :edit]
   end
   resources :applicants, only: [:show, :edit, :destroy]
   resources :dashboards
-  resources :companies
   devise_for :users, :controllers => { registrations: 'registrations', confirmations: 'confirmations' }
   resources :applicants
   resources :jobs
