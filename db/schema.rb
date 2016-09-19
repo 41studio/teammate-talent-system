@@ -96,31 +96,36 @@ ActiveRecord::Schema.define(version: 20160916092436) do
   end
 
   create_table "jobs", force: :cascade do |t|
-    t.string   "job_title",                limit: 255,   default: "", null: false
-    t.string   "departement",              limit: 255,   default: "", null: false
-    t.string   "job_code",                 limit: 255,   default: "", null: false
-    t.string   "country",                  limit: 255,   default: "", null: false
-    t.string   "state",                    limit: 255,   default: "", null: false
-    t.string   "city",                     limit: 255,   default: "", null: false
-    t.string   "zip_code",                 limit: 255,   default: "", null: false
-    t.integer  "min_salary",               limit: 4,     default: 0,  null: false
-    t.integer  "max_salary",               limit: 4,     default: 0,  null: false
-    t.string   "curency",                  limit: 255,   default: "", null: false
-    t.text     "job_description",          limit: 65535,              null: false
-    t.text     "job_requirement",          limit: 65535,              null: false
-    t.text     "benefits",                 limit: 65535,              null: false
-    t.string   "aplicant_experience",      limit: 255,   default: "", null: false
-    t.string   "aplicant_function",        limit: 255,   default: "", null: false
-    t.string   "aplicant_employment_type", limit: 255,   default: "", null: false
-    t.string   "aplicant_industry",        limit: 255,   default: "", null: false
-    t.string   "aplicant_education",       limit: 255,   default: "", null: false
-    t.string   "job_search_keyword",       limit: 255,   default: "", null: false
-    t.datetime "created_at",                                          null: false
-    t.datetime "updated_at",                                          null: false
-    t.integer  "company_id",               limit: 4
+    t.string   "job_title",               limit: 255,   default: "", null: false
+    t.string   "departement",             limit: 255,   default: "", null: false
+    t.string   "job_code",                limit: 255,   default: "", null: false
+    t.string   "country",                 limit: 255,   default: "", null: false
+    t.string   "state",                   limit: 255,   default: "", null: false
+    t.string   "city",                    limit: 255,   default: "", null: false
+    t.string   "zip_code",                limit: 255,   default: "", null: false
+    t.integer  "min_salary",              limit: 4,     default: 0,  null: false
+    t.integer  "max_salary",              limit: 4,     default: 0,  null: false
+    t.string   "curency",                 limit: 255,   default: "", null: false
+    t.text     "job_description",         limit: 65535,              null: false
+    t.text     "job_requirement",         limit: 65535,              null: false
+    t.text     "benefits",                limit: 65535,              null: false
+    t.string   "job_search_keyword",      limit: 255,   default: "", null: false
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
+    t.integer  "company_id",              limit: 4
+    t.integer  "education_list_id",       limit: 4
+    t.integer  "employment_type_list_id", limit: 4
+    t.integer  "experience_list_id",      limit: 4
+    t.integer  "function_list_id",        limit: 4
+    t.integer  "industry_list_id",        limit: 4
   end
 
   add_index "jobs", ["company_id"], name: "index_jobs_on_company_id", using: :btree
+  add_index "jobs", ["education_list_id"], name: "index_jobs_on_education_list_id", using: :btree
+  add_index "jobs", ["employment_type_list_id"], name: "index_jobs_on_employment_type_list_id", using: :btree
+  add_index "jobs", ["experience_list_id"], name: "index_jobs_on_experience_list_id", using: :btree
+  add_index "jobs", ["function_list_id"], name: "index_jobs_on_function_list_id", using: :btree
+  add_index "jobs", ["industry_list_id"], name: "index_jobs_on_industry_list_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
@@ -155,5 +160,10 @@ ActiveRecord::Schema.define(version: 20160916092436) do
 
   add_foreign_key "applicants", "jobs"
   add_foreign_key "jobs", "companies"
+  add_foreign_key "jobs", "education_lists"
+  add_foreign_key "jobs", "employment_type_lists"
+  add_foreign_key "jobs", "experience_lists"
+  add_foreign_key "jobs", "function_lists"
+  add_foreign_key "jobs", "industry_lists"
   add_foreign_key "users", "companies"
 end

@@ -1,0 +1,5 @@
+= link_to job.job_title, job_path(job)
+' | 
+= link_to 'Edit', edit_job_path(job)
+' | 
+= link_to 'Destroy', job, data: { confirm: 'Are you sure?' }, method: :delete

@@ -14158,3 +14158,174 @@ Processing by DashboardsController#index as HTML
   [1m[36mCompany Load (0.4ms)[0m  [1mSELECT `companies`.* FROM `companies` INNER JOIN `users` ON `users`.`company_id` = `companies`.`id` WHERE `companies`.`id` = 15[0m
   Rendered dashboards/index.html.slim within layouts/application (5.5ms)
 Completed 200 OK in 84ms (Views: 58.6ms | ActiveRecord: 2.1ms)
+  [1m[36mActiveRecord::SchemaMigration Load (22.3ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Migrating to DropColumnFromJobsTableAndAddReferenceToJobsTable (20160916074126)
+  [1m[35m (341.1ms)[0m  ALTER TABLE `jobs` DROP `aplicant_experience`
+  [1m[36m (153.5ms)[0m  [1mALTER TABLE `jobs` DROP `aplicant_function`[0m
+  [1m[35m (211.1ms)[0m  ALTER TABLE `jobs` DROP `aplicant_employment_type`
+  [1m[36m (217.0ms)[0m  [1mALTER TABLE `jobs` DROP `aplicant_industry`[0m
+  [1m[35m (158.7ms)[0m  ALTER TABLE `jobs` DROP `aplicant_education`
+  [1m[36m (188.0ms)[0m  [1mALTER TABLE `jobs` ADD `education_list_id` int(11)[0m
+  [1m[35m (122.3ms)[0m  CREATE  INDEX `index_jobs_on_education_list_id`  ON `jobs` (`education_list_id`) 
+  [1m[36m (256.3ms)[0m  [1mALTER TABLE `jobs` ADD CONSTRAINT `fk_rails_0df21dc4e0`
+FOREIGN KEY (`education_list_id`)
+  REFERENCES `education_lists` (`id`)
+[0m
+  [1m[35m (186.3ms)[0m  ALTER TABLE `jobs` ADD `employment_type_list_id` int(11)
+  [1m[36m (70.7ms)[0m  [1mCREATE  INDEX `index_jobs_on_employment_type_list_id`  ON `jobs` (`employment_type_list_id`) [0m
+  [1m[35m (309.0ms)[0m  ALTER TABLE `jobs` ADD CONSTRAINT `fk_rails_ef9bbb1753`
+FOREIGN KEY (`employment_type_list_id`)
+  REFERENCES `employment_type_lists` (`id`)
+
+  [1m[36m (399.7ms)[0m  [1mALTER TABLE `jobs` ADD `experience_list_id` int(11)[0m
+  [1m[35m (73.1ms)[0m  CREATE  INDEX `index_jobs_on_experience_list_id`  ON `jobs` (`experience_list_id`) 
+  [1m[36m (212.9ms)[0m  [1mALTER TABLE `jobs` ADD CONSTRAINT `fk_rails_74a2b19f8c`
+FOREIGN KEY (`experience_list_id`)
+  REFERENCES `experience_lists` (`id`)
+[0m
+  [1m[35m (320.8ms)[0m  ALTER TABLE `jobs` ADD `function_list_id` int(11)
+  [1m[36m (105.8ms)[0m  [1mCREATE  INDEX `index_jobs_on_function_list_id`  ON `jobs` (`function_list_id`) [0m
+  [1m[35m (1165.5ms)[0m  ALTER TABLE `jobs` ADD CONSTRAINT `fk_rails_21a7898706`
+FOREIGN KEY (`function_list_id`)
+  REFERENCES `function_lists` (`id`)
+
+  [1m[36m (933.5ms)[0m  [1mALTER TABLE `jobs` ADD `industry_list_id` int(11)[0m
+  [1m[35m (69.7ms)[0m  CREATE  INDEX `index_jobs_on_industry_list_id`  ON `jobs` (`industry_list_id`) 
+  [1m[36m (420.8ms)[0m  [1mALTER TABLE `jobs` ADD CONSTRAINT `fk_rails_deab2bf8cd`
+FOREIGN KEY (`industry_list_id`)
+  REFERENCES `industry_lists` (`id`)
+[0m
+  [1m[35m (0.4ms)[0m  BEGIN
+  [1m[36mSQL (10.5ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20160916074126')[0m
+  [1m[35m (17.6ms)[0m  COMMIT
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  [1m[35m (15.7ms)[0m  SELECT fk.referenced_table_name as 'to_table'
+      ,fk.referenced_column_name as 'primary_key'
+      ,fk.column_name as 'column'
+      ,fk.constraint_name as 'name'
+FROM information_schema.key_column_usage fk
+WHERE fk.referenced_column_name is not null
+  AND fk.table_schema = 'teammate-talent-system_development'
+  AND fk.table_name = 'applicants'
+
+  [1m[36m (0.2ms)[0m  [1mSHOW CREATE TABLE `applicants`[0m
+  [1m[35m (0.2ms)[0m  SELECT fk.referenced_table_name as 'to_table'
+      ,fk.referenced_column_name as 'primary_key'
+      ,fk.column_name as 'column'
+      ,fk.constraint_name as 'name'
+FROM information_schema.key_column_usage fk
+WHERE fk.referenced_column_name is not null
+  AND fk.table_schema = 'teammate-talent-system_development'
+  AND fk.table_name = 'applicants_educations'
+
+  [1m[36m (0.1ms)[0m  [1mSHOW CREATE TABLE `applicants_educations`[0m
+  [1m[35m (0.2ms)[0m  SELECT fk.referenced_table_name as 'to_table'
+      ,fk.referenced_column_name as 'primary_key'
+      ,fk.column_name as 'column'
+      ,fk.constraint_name as 'name'
+FROM information_schema.key_column_usage fk
+WHERE fk.referenced_column_name is not null
+  AND fk.table_schema = 'teammate-talent-system_development'
+  AND fk.table_name = 'applicants_experiences'
+
+  [1m[36m (0.1ms)[0m  [1mSHOW CREATE TABLE `applicants_experiences`[0m
+  [1m[35m (0.2ms)[0m  SELECT fk.referenced_table_name as 'to_table'
+      ,fk.referenced_column_name as 'primary_key'
+      ,fk.column_name as 'column'
+      ,fk.constraint_name as 'name'
+FROM information_schema.key_column_usage fk
+WHERE fk.referenced_column_name is not null
+  AND fk.table_schema = 'teammate-talent-system_development'
+  AND fk.table_name = 'companies'
+
+  [1m[36m (0.1ms)[0m  [1mSHOW CREATE TABLE `companies`[0m
+  [1m[35m (0.2ms)[0m  SELECT fk.referenced_table_name as 'to_table'
+      ,fk.referenced_column_name as 'primary_key'
+      ,fk.column_name as 'column'
+      ,fk.constraint_name as 'name'
+FROM information_schema.key_column_usage fk
+WHERE fk.referenced_column_name is not null
+  AND fk.table_schema = 'teammate-talent-system_development'
+  AND fk.table_name = 'education_lists'
+
+  [1m[36m (0.1ms)[0m  [1mSHOW CREATE TABLE `education_lists`[0m
+  [1m[35m (0.2ms)[0m  SELECT fk.referenced_table_name as 'to_table'
+      ,fk.referenced_column_name as 'primary_key'
+      ,fk.column_name as 'column'
+      ,fk.constraint_name as 'name'
+FROM information_schema.key_column_usage fk
+WHERE fk.referenced_column_name is not null
+  AND fk.table_schema = 'teammate-talent-system_development'
+  AND fk.table_name = 'educations'
+
+  [1m[36m (0.1ms)[0m  [1mSHOW CREATE TABLE `educations`[0m
+  [1m[35m (0.2ms)[0m  SELECT fk.referenced_table_name as 'to_table'
+      ,fk.referenced_column_name as 'primary_key'
+      ,fk.column_name as 'column'
+      ,fk.constraint_name as 'name'
+FROM information_schema.key_column_usage fk
+WHERE fk.referenced_column_name is not null
+  AND fk.table_schema = 'teammate-talent-system_development'
+  AND fk.table_name = 'employment_type_lists'
+
+  [1m[36m (0.1ms)[0m  [1mSHOW CREATE TABLE `employment_type_lists`[0m
+  [1m[35m (0.2ms)[0m  SELECT fk.referenced_table_name as 'to_table'
+      ,fk.referenced_column_name as 'primary_key'
+      ,fk.column_name as 'column'
+      ,fk.constraint_name as 'name'
+FROM information_schema.key_column_usage fk
+WHERE fk.referenced_column_name is not null
+  AND fk.table_schema = 'teammate-talent-system_development'
+  AND fk.table_name = 'experience_lists'
+
+  [1m[36m (0.1ms)[0m  [1mSHOW CREATE TABLE `experience_lists`[0m
+  [1m[35m (0.2ms)[0m  SELECT fk.referenced_table_name as 'to_table'
+      ,fk.referenced_column_name as 'primary_key'
+      ,fk.column_name as 'column'
+      ,fk.constraint_name as 'name'
+FROM information_schema.key_column_usage fk
+WHERE fk.referenced_column_name is not null
+  AND fk.table_schema = 'teammate-talent-system_development'
+  AND fk.table_name = 'experiences'
+
+  [1m[36m (0.1ms)[0m  [1mSHOW CREATE TABLE `experiences`[0m
+  [1m[35m (0.2ms)[0m  SELECT fk.referenced_table_name as 'to_table'
+      ,fk.referenced_column_name as 'primary_key'
+      ,fk.column_name as 'column'
+      ,fk.constraint_name as 'name'
+FROM information_schema.key_column_usage fk
+WHERE fk.referenced_column_name is not null
+  AND fk.table_schema = 'teammate-talent-system_development'
+  AND fk.table_name = 'function_lists'
+
+  [1m[36m (0.1ms)[0m  [1mSHOW CREATE TABLE `function_lists`[0m
+  [1m[35m (0.2ms)[0m  SELECT fk.referenced_table_name as 'to_table'
+      ,fk.referenced_column_name as 'primary_key'
+      ,fk.column_name as 'column'
+      ,fk.constraint_name as 'name'
+FROM information_schema.key_column_usage fk
+WHERE fk.referenced_column_name is not null
+  AND fk.table_schema = 'teammate-talent-system_development'
+  AND fk.table_name = 'industry_lists'
+
+  [1m[36m (0.1ms)[0m  [1mSHOW CREATE TABLE `industry_lists`[0m
+  [1m[35m (0.2ms)[0m  SELECT fk.referenced_table_name as 'to_table'
+      ,fk.referenced_column_name as 'primary_key'
+      ,fk.column_name as 'column'
+      ,fk.constraint_name as 'name'
+FROM information_schema.key_column_usage fk
+WHERE fk.referenced_column_name is not null
+  AND fk.table_schema = 'teammate-talent-system_development'
+  AND fk.table_name = 'jobs'
+
+  [1m[36m (0.2ms)[0m  [1mSHOW CREATE TABLE `jobs`[0m
+  [1m[35m (0.2ms)[0m  SELECT fk.referenced_table_name as 'to_table'
+      ,fk.referenced_column_name as 'primary_key'
+      ,fk.column_name as 'column'
+      ,fk.constraint_name as 'name'
+FROM information_schema.key_column_usage fk
+WHERE fk.referenced_column_name is not null
+  AND fk.table_schema = 'teammate-talent-system_development'
+  AND fk.table_name = 'users'
+
+  [1m[36m (0.2ms)[0m  [1mSHOW CREATE TABLE `users`[0m

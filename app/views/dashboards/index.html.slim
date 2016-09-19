@@ -1,7 +1,4 @@
-h1 Welcome to dashboard 
-
-p = "welcome #{current_user.first_name} #{current_user.last_name}"
-
+h1 Dashboard 
 
 table border="1"
   thead
@@ -24,8 +21,7 @@ table border="1"
         td = company.company_phone
         td = company.industry
         td = image_tag company.photo_company.thumb.url
+        td = link_to 'Show', company
         td = link_to 'Edit', edit_company_path(company)
 br
-= link_to "Create New Job", new_job_path 
-br
-= link_to "Logout",destroy_user_session_path, method: :delete
+= link_to 'Back', root_path
