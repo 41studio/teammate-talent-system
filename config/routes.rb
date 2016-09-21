@@ -4,8 +4,11 @@ Rails.application.routes.draw do
   end
   resources :jobs, only: [:show, :destroy] do 
     resources :applicants, only: [:new, :create, :edit]
+    get '/applicant/:status', to: 'applicants#applicant_status', as: 'applicant_status'
   end
-  resources :applicants, only: [:show, :edit, :destroy]
+  resources :applicants, only: [:show, :edit, :destroy] do
+    get '/:phase', to: 'applicants#phase', as: 'phase'
+  end
   resources :dashboards
   devise_for :users, :controllers => { registrations: 'registrations', confirmations: 'confirmations' }
   resources :applicants

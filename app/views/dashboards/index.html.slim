@@ -5,4 +5,30 @@ p Companies
 - @companies.each do |company|
   = link_to company.company_name, company
 hr
+p Published Jobs
+- @published_jobs.each do |job|
+  = link_to job.job_title, job
+  br
+  = link_to "edit #{job.job_title}", edit_company_job_path(job.company_id,job)
+  p
+  	|	Applicants :
+  	= job.applicants_count
+  p
+  	| Created 
+   	= time_ago_in_words(job.created_at)
+   	|  ago
+  table border="1"
+  	tr align="center"
+  		td Applied
+  		td Phone Call
+  		td Interview
+  		td Offer
+  		td Hired
+  	tr align="center"
+  		td = link_to job.applied_count, job_applicant_status_path(job, "applied")
+  		td = link_to job.phone_call_count, job_applicant_status_path(job, "phonescreen")
+  		td = link_to job.interview_count, job_applicant_status_path(job, "interview")
+  		td = link_to job.offer_count, job_applicant_status_path(job, "offer")
+  		td = link_to job.hired_count, job_applicant_status_path(job, "hired")
+hr
 = link_to 'Back', root_path
