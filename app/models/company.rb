@@ -1,7 +1,7 @@
 class Company < ActiveRecord::Base
 	has_many :jobs, dependent: :destroy
 	has_many :users
-
+	
 	mount_uploader :photo_company, PhotoCompanyUploader
 	
     validates_processing_of :photo_company
