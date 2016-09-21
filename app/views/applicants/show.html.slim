@@ -31,8 +31,29 @@ p
   strong Status:
   = @applicant.status
 p
-  = select_tag :status, options_for_select([["Applied","applied"],["Phone Screen","phonescreen"],["Interview","interview"],["Offer","offer"],["Hired","hired"]]), id: 'status', selected: @applicant.status.downcase.gsub(/\s+/, "")
-    / option = status, applicant_phase_path(@applicant.id,status.downcase.gsub(/\s+/, "")), data: { confirm: 'Are you sure to change applicant phase to '+ status +' ?' }
+  = select_tag :status, options_for_select([["Applied","applied"],["Phone Screen","phonescreen"],["Interview","interview"],["Offer","offer"],["Hired","hired"]], selected: @applicant.status.downcase.gsub(/\s+/, "")), id: 'status'
+p
+  strong Name School:
+  = @applicant.educations.map {|c| c.name_school}.join(',')
+p
+  strong Field Study:
+  = @applicant.educations.map {|c| c.field_study}.join(',')
+p
+  strong Degree:
+  = @applicant.educations.map {|c| c.degree}.join(',')
+p
+  strong Name Company:
+  = @applicant.experiences.map {|c| c.name_company}.join(',')
+p
+  strong Industry:
+  = @applicant.experiences.map {|c| c.industry}.join(',')
+p 
+  strong Title:
+  = @applicant.experiences.map {|c| c.title}.join(',')
+p
+  strong Summary:
+  = @applicant.experiences.map {|c| c.summary}.join(',')
+
 br
 = link_to 'Disqualify Him/Her'
 br

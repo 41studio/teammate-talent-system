@@ -1,7 +1,8 @@
 h1 Dashboard 
+
 hr
 p Companies
-- @companys.each do |company|
+- @companies.each do |company|
   = link_to company.company_name, company
 hr
 p Published Jobs
@@ -25,7 +26,7 @@ p Published Jobs
   		td Hired
   	tr align="center"
   		td = link_to job.applied_count, job_applicant_status_path(job, "applied")
-  		td = link_to job.phone_call_count, job_applicant_status_path(job, "phonecall")
+  		td = link_to job.phone_call_count, job_applicant_status_path(job, "phonescreen")
   		td = link_to job.interview_count, job_applicant_status_path(job, "interview")
   		td = link_to job.offer_count, job_applicant_status_path(job, "offer")
   		td = link_to job.hired_count, job_applicant_status_path(job, "hired")

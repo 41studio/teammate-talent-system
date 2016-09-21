@@ -13,11 +13,14 @@ class ApplicantsController < ApplicationController
   # GET /applicants/1
   # GET /applicants/1.json
   def show
+
   end
 
   # GET /applicants/new
   def new
     @applicant = Applicant.new
+    @applicant.educations.build
+    @applicant.experiences.build
   end
 
   # GET /applicants/1/edit
@@ -92,6 +95,6 @@ class ApplicantsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def applicant_params
-      params.require(:applicant).permit(:name, :gender, :date_birth, :email, :headline, :phone, :address, :photo, :name_school, :state_study, :degree, :company_name, :industry, :title, :summary, :resume)
+      params.require(:applicant).permit(:name, :gender, :date_birth, :email, :headline, :phone, :address, :photo, :resume, educations_attributes: [:name_school, :field_study, :degree], experiences_attributes: [:name_company, :industry, :title, :summary])
     end
 end

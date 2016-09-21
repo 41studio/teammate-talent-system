@@ -20,7 +20,7 @@ class Job < ActiveRecord::Base
 	end
 
 	def phone_call_count
-		applicants.where(status: "phonecall").count
+		applicants.where(status: "phonescreen").count
 	end
 	
 	def interview_count

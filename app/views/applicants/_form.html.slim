@@ -43,4 +43,12 @@
       = link_to "Preview Resume", f.object.resume.url, target: '_blank'
       = f.label :remove_resume
       = f.check_box :remove_resume
+
+    - for education in @applicant.educations  
+      = f.fields_for :educations, Education.new do |education|
+       = render 'education_form', f: education
+
+    - for education in @applicant.experiences
+      = f.fields_for :experiences, Experience.new do |experience|
+       = render 'experience_form', f: experience
   .actions = f.submit
