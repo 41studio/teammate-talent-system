@@ -173,6 +173,7 @@ GEM
     nprogress-rails (0.2.0.2)
     orm_adapter (0.5.0)
     pkg-config (1.1.7)
+    puma (3.6.0)
     pushmeup (0.3.0)
       httparty
       json
@@ -297,6 +298,7 @@ DEPENDENCIES
   mini_magick
   mysql2
   nprogress-rails
+  puma
   pushmeup
   quiet_assets
   rails (= 4.2.6)
