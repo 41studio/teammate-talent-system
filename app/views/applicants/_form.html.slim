@@ -46,9 +46,14 @@
 
     - for education in @applicant.educations  
       = f.fields_for :educations, Education.new do |education|
-       = render 'education_form', f: education
-
+        = render 'education_fields', f: education  
+  .link
+    = link_to_add_association 'Add form education', f, :educations
+    
     - for education in @applicant.experiences
       = f.fields_for :experiences, Experience.new do |experience|
-       = render 'experience_form', f: experience
+       = render 'experience_fields', f: experience
+  .link
+    = link_to_add_association 'Add form experience', f, :experiences
+        
   .actions = f.submit
