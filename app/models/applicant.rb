@@ -17,7 +17,15 @@ class Applicant < ActiveRecord::Base
 
 	validates_processing_of :resume
 	validate :resume_size_validation
-	 
+
+	# def self.applicant_stage
+	# 	@stages = [["Applied","applied"],["Phone Screen","phonescreen"],["Interview","interview"],["Offer","offer"],["Hired","hired"]]
+	# end
+	
+	def method_name
+		
+	end
+
 	private
 	  def image_size_validation
 	    errors[:photo] << "should be less than 500KB" if photo.size > 0.5.megabytes

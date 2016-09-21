@@ -3,6 +3,7 @@ class DashboardsController < ApplicationController
   
   def index
   	@companys = Company.joins(:users).where(id: current_user.company_id)
+  	@published_jobs = Job.joins(:company).where(company_id: @companys)
   end
 
   def show

@@ -10,4 +10,28 @@ class Job < ActiveRecord::Base
 	validates :job_title, length: {in: 3..100}
 	validates :job_description, :job_requirement, :benefits, length: {in: 100..500, message: 'Must be more than 100 and less than 500'}
 	validates :min_salary, :max_salary, numericality: { greater_than_or_equal_to: 1 }
+
+	def applicants_count
+		applicants.count
+	end
+	
+	def applied_count
+		applicants.where(status: "applied").count
+	end
+
+	def phone_call_count
+		applicants.where(status: "phonecall").count
+	end
+	
+	def interview_count
+		applicants.where(status: "interview").count
+	end
+	
+	def offer_count
+		applicants.where(status: "offer").count
+	end
+	
+	def hired_count
+		applicants.where(status: "hired").count
+	end
 end

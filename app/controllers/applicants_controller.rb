@@ -1,6 +1,6 @@
 class ApplicantsController < ApplicationController
 
-  skip_before_filter :authenticate_user!, only: [:create]
+  skip_before_filter :authenticate_user!, only: [:create, :new]
   before_action :set_applicant, only: [:show, :edit, :update, :destroy]
   before_action :set_job, only: [:new, :edit]
   
@@ -29,7 +29,7 @@ class ApplicantsController < ApplicationController
   def create
     @job = Job.find(params[:job_id])
     @applicant = @job.applicants.new(applicant_params)
-    @applicant.status = "Candidate"
+    @applicant.status = "applied"
     respond_to do |format|
       if @applicant.save
         format.html { redirect_to job_path(@job), notice: 'Applicant was successfully created.' }
@@ -62,6 +62,21 @@ class ApplicantsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to applicants_url, notice: 'Applicant was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def applicant_status
+    status = params[:status]
+    @job = Job.joins(:applicants).where(applicants: { status: status }).find_by(id: params[:job_id])
+  end
+
+  def phase
+    @applicant = Applicant.find(params[:applicant_id])
+    @applicant.status = params[:phase]
+    if @applicant.save!
+      respond_to do |format|
+        format.html { redirect_to applicant_path(@applicant.id) }
+      end
     end
   end
 

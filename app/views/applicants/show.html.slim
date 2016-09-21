@@ -30,10 +30,23 @@ p
 p
   strong Status:
   = @applicant.status
-
-/= select_tag "profile", options_from_collection_for_select(@profile, "new_method_name",'profile_blip'),:onchange => "window.location.replace('/'+this.value);"
-
+p
+  = select_tag :status, options_for_select([["Applied","applied"],["Phone Screen","phonescreen"],["Interview","interview"],["Offer","offer"],["Hired","hired"]]), id: 'status', selected: @applicant.status.downcase.gsub(/\s+/, "")
+    / option = status, applicant_phase_path(@applicant.id,status.downcase.gsub(/\s+/, "")), data: { confirm: 'Are you sure to change applicant phase to '+ status +' ?' }
 br
-= link_to 'Disqualified Him/Her'
+= link_to 'Disqualify Him/Her'
 br
 = link_to 'Back', job_path(@applicant.job_id) 
+- content_for :javascript_in_file do
+  javascript:
+    $('#status').on('click', function(){
+      $.ajax({
+        // url: '/applicants/' + #{@applicant.id} + '/'+$(this).val(),
+        url: Routes.applicant_phase_path("#{@applicant.id}", $(this).val()),
+        method: 'get',
+        success: function(result){
+          alert("Berhasil coy!");
+          location.reload();
+        }
+      });
+    });

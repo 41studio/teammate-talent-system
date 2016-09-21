@@ -47,6 +47,7 @@ gem 'friendly_id', '~> 5.1.0'
 gem 'dotenv-rails'
 gem 'better_errors'
 gem 'binding_of_caller'
+gem "js-routes"
 
 ## API
 gem 'simple_token_authentication', '~> 1.0'
