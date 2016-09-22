@@ -29,9 +29,7 @@ p
   = link_to "Download Resume", @applicant.resume_url, target: '_blank'
 p
   strong Status:
-  = @applicant.status
-p
-  = select_tag :status, options_for_select([["Applied","applied"],["Phone Screen","phonescreen"],["Interview","interview"],["Offer","offer"],["Hired","hired"]], selected: @applicant.status.downcase.gsub(/\s+/, "")), id: 'status'
+  = @applicant.status.gsub('_',' ').capitalize
 p
   strong Name School:
   = @applicant.educations.map {|c| c.name_school}.join(',')
@@ -53,10 +51,13 @@ p
 p
   strong Summary:
   = @applicant.experiences.map {|c| c.summary}.join(',')
-p
-  = @applicant.job_id
 p 
   = link_to "Send email", :controller => "applicants", :action => "send_email", :id => @applicant.id
+p  
+  | Action
+  br
+  = select_tag :status, options_for_select([["Applied","applied"],["Phone Screen","phone_screen"],["Interview","interview"],["Offer","offer"],["Hired","hired"]], selected: @applicant.status.downcase.gsub(/\s+/, "")), id: 'status'
+
 
 br
 = link_to 'Disqualify Him/Her'
@@ -66,11 +67,11 @@ br
   javascript:
     $('#status').on('click', function(){
       $.ajax({
-        // url: '/applicants/' + #{@applicant.id} + '/'+$(this).val(),
-        url: Routes.applicant_phase_path("#{@applicant.id}", $(this).val()),
+        url: Routes.job_applicant_phase_path("#{@applicant.job_id}", "#{@applicant.id}", $(this).val()),
         method: 'get',
         success: function(result){
-          alert("Berhasil coy!");
+          //alert("Applicant upgraded to " + $(this).val());
+          alert("Applicant status changed");
           location.reload();
         }
       });

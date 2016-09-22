@@ -19,8 +19,8 @@ class Job < ActiveRecord::Base
 		applicants.where(status: "applied").count
 	end
 
-	def phone_call_count
-		applicants.where(status: "phonescreen").count
+	def phone_screen_count
+		applicants.where(status: "phone_screen").count
 	end
 	
 	def interview_count
@@ -33,5 +33,25 @@ class Job < ActiveRecord::Base
 	
 	def hired_count
 		applicants.where(status: "hired").count
+	end
+
+	def	get_experience_name
+		ExperienceList.select(:experience).find(self.experience_list_id)
+	end
+
+	def	get_function_name
+		FunctionList.select(:function).find(self.function_list_id)
+	end
+
+	def	get_employment_type_name
+		EmploymentTypeList.select(:employment_type).find(self.employment_type_list_id)
+	end
+
+	def	get_industry_name
+		IndustryList.select(:industry).find(self.industry_list_id)
+	end
+
+	def	get_education_name
+		EducationList.select(:education).find(self.education_list_id)
 	end
 end

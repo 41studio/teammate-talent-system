@@ -33,6 +33,3 @@ br
 h3
   | list of jobs
 = render @company.jobs
-br
-- if user_signed_in? and current_user.company_id == @company.id
-  = link_to "Create New Job", new_company_job_path(@company)
