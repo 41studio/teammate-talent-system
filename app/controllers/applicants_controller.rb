@@ -13,7 +13,8 @@ class ApplicantsController < ApplicationController
   # GET /applicants/1
   # GET /applicants/1.json
   def show
-
+    @job = Job.find(params[:job_id])
+     # @job = Job.joins(:applicants)
   end
 
   # GET /applicants/new
@@ -27,6 +28,13 @@ class ApplicantsController < ApplicationController
   def edit
   end
 
+  def send_email
+    @applicant = Applicant.find(params[:id])
+    # @job = Job.find(params[:job_id])
+    SendMail.sample_email(@applicant).deliver
+    redirect_to applicant_path(@applicant)
+  end
+
   # POST /applicants
   # POST /applicants.json
   def create
@@ -35,6 +43,7 @@ class ApplicantsController < ApplicationController
     @applicant.status = "applied"
     respond_to do |format|
       if @applicant.save
+        SendMail.sample_email(@applicant).deliver
         format.html { redirect_to job_path(@job), notice: 'Applicant was successfully created.' }
         format.json { render :show, status: :created, location: @applicant }
       else

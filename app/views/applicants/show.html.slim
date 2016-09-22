@@ -53,6 +53,10 @@ p
 p
   strong Summary:
   = @applicant.experiences.map {|c| c.summary}.join(',')
+p
+  = @applicant.job_id
+p 
+  = link_to "Send email", :controller => "applicants", :action => "send_email", :id => @applicant.id
 
 br
 = link_to 'Disqualify Him/Her'
