@@ -48,8 +48,3 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
-production:
-  <<: *default
-  database: teammate-talent-system_production
-  username: teammate-talent-system
-  password: <%= ENV['COBA_DATABASE_PASSWORD'] %>

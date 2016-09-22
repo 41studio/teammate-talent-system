@@ -1,3 +1,4 @@
+ .nested-fields
    p
     = f.label :name_school
     = f.text_field :name_school
@@ -7,5 +8,6 @@
     br
     = f.label :degree
     = f.text_field :degree
+    = link_to_remove_association "Remove form Education", f
     / = f.check_box :_destroy
     / = f.label :_destroy, "Remove Education"
