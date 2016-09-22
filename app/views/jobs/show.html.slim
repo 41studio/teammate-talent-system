@@ -1,5 +1,13 @@
 p#notice = notice
 
+- if @job.status == "draft"
+  = link_to "Publish job", upgrade_status_path(@job.id,"published")
+- else
+  = link_to "Close job"
+hr 
+p
+  strong Job status 
+  = @job.status
 p
   strong Job title:
   = @job.job_title
@@ -39,24 +47,25 @@ p
 p
   strong Benefits:
   = @job.benefits
-p
-  strong Aplicant experience:
-  = @job.experience_list_id
-p
-  strong Aplicant function:
-  = @job.function_list_id
-p
-  strong Aplicant employment type:
-  = @job.employment_type_list_id
-p
-  strong Aplicant industry:
-  = @job.industry_list_id
-p
-  strong Aplicant education:
-  = @job.education_list_id
-p
-  strong Job search keyword:
-  = @job.job_search_keyword
+- if user_signed_in?
+  p
+    strong Aplicant experience:
+    = @job.get_experience_name.experience
+  p
+    strong Aplicant function:
+    = @job.get_function_name.function
+  p
+    strong Aplicant employment type:
+    = @job.get_employment_type_name.employment_type
+  p
+    strong Aplicant industry:
+    = @job.get_industry_name.industry
+  p
+    strong Aplicant education:
+    = @job.get_education_name.education
+  p
+    strong Job search keyword:
+    = @job.job_search_keyword
 - if user_signed_in?
   = link_to 'Edit', edit_company_job_path(@job.company_id,@job)
   '|

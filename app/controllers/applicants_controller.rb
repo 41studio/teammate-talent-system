@@ -74,11 +74,13 @@ class ApplicantsController < ApplicationController
   end
 
   def phase
+    @job = Job.find(params[:job_id])
     @applicant = Applicant.find(params[:applicant_id])
     @applicant.status = params[:phase]
     if @applicant.save!
       respond_to do |format|
-        format.html { redirect_to applicant_path(@applicant.id) }
+        format.html { redirect_to job_applicant_path(@job, @applicant) }
+        format.js {}
       end
     end
   end

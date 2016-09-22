@@ -17,7 +17,7 @@
     = f.label :Female
   .field
     = f.label :date_birth
-    = f.date_select :date_birth, order: [:day, :month, :year]
+    = f.date_select :date_birth, order: [:day, :month, :year], start_year: (Date.today.year) - 50, end_year: (Date.today.year)-18, prompt: { day: 'Select day', month: 'Select month', year: 'Select year' }
   .field
     = f.label :email
     = f.email_field :email
