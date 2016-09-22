@@ -51,13 +51,14 @@ p
 p
   strong Summary:
   = @applicant.experiences.map {|c| c.summary}.join(',')
-p
-  | Action
+- unless @applicant.status == "disqualified"
+  p
+    | Action
+    br
+    = select_tag :status, options_for_select([["Applied","applied"],["Phone Screen","phone_screen"],["Interview","interview"],["Offer","offer"],["Hired","hired"]], selected: @applicant.status.downcase.gsub(/\s+/, "")), id: 'status'
   br
-  = select_tag :status, options_for_select([["Applied","applied"],["Phone Screen","phone_screen"],["Interview","interview"],["Offer","offer"],["Hired","hired"]], selected: @applicant.status.downcase.gsub(/\s+/, "")), id: 'status'
+  = link_to 'Disqualify Him/Her', job_applicant_phase_path(@applicant.job_id, @applicant.id, "disqualified")
 
-br
-= link_to 'Disqualify Him/Her'
 br
 = link_to 'Back', job_path(@applicant.job_id) 
 - content_for :javascript_in_file do

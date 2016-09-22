@@ -77,12 +77,19 @@ class ApplicantsController < ApplicationController
     @job = Job.find(params[:job_id])
     @applicant = Applicant.find(params[:applicant_id])
     @applicant.status = params[:phase]
-    if @applicant.save!
+    if @applicant.status == "applied" or @applicant.status == "phone_screen" or @applicant.status == "interview" or @applicant.status == "offer" or @applicant.status == "hired" or @applicant.status == "disqualified"
+      if @applicant.save!
+        respond_to do |format|
+          format.html { redirect_to job_applicant_path(@job, @applicant) }
+          format.js {}
+        end
+      end
+    else
       respond_to do |format|
-        format.html { redirect_to job_applicant_path(@job, @applicant) }
+        format.html { redirect_to job_applicant_path(@job, @applicant), notice: "invalid!" }
         format.js {}
       end
-    end
+    end 
   end
 
   private
