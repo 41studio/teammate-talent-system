@@ -29,6 +29,11 @@ test:
   <<: *default
   database: teammate-talent-system_test
 
+staging:
+  adapter: mysql2
+  pool: 5
+  url: <%= ENV['DATABASE_URL'] %>
+
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
 # ever seen by anyone, they now have access to your database.
@@ -47,5 +52,6 @@ test:
 #
 production:
   adapter: mysql2
+  pool: 5
   url: <%= ENV['DATABASE_URL'] %>
 #
