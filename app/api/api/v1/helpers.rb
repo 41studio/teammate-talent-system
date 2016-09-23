@@ -2,7 +2,7 @@ module API
   module V1
 		module Helpers
 		  def fullname
-		    "check fullname"
+		    current_user.first_name + " " + current_user.last_name
 		  end
 
 		  def warden
@@ -19,8 +19,12 @@ module API
 		  end
 
 		  def authenticate!
-        error!('Unauthorized. Invalid or expired token.', 401) unless authenticated
-      end
+       	error!('Unauthorized. Invalid or expired token.', 401) unless authenticated
+     	end
+
+      def applicant_statuses
+        ["applied", "phonescreen", "interview", "offer", "hired"]
+      end      
 		end
 	end
 end
