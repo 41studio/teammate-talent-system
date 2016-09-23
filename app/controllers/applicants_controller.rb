@@ -13,8 +13,7 @@ class ApplicantsController < ApplicationController
   # GET /applicants/1
   # GET /applicants/1.json
   def show
-    @job = Job.find(params[:job_id])
-     # @job = Job.joins(:applicants)
+
   end
 
   # GET /applicants/new
@@ -26,13 +25,15 @@ class ApplicantsController < ApplicationController
 
   # GET /applicants/1/edit
   def edit
+
   end
+  
 
   def send_email
     @applicant = Applicant.find(params[:id])
-    # @job = Job.find(params[:job_id])
+    @job = Job.find(params[:job_id])
     SendMail.sample_email(@applicant).deliver
-    redirect_to applicant_path(@applicant)
+    redirect_to job_applicant_path(@job, @applicant.id)
   end
 
   # POST /applicants
