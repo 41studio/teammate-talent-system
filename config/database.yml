@@ -46,5 +46,6 @@ test:
 # You can use this database configuration with:
 #
 production:
+  adapter: mysql2
   url: <%= ENV['DATABASE_URL'] %>
 #
