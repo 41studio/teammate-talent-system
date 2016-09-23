@@ -16,17 +16,21 @@ class JobsController < ApplicationController
 
   # GET /jobs/new
   def new
-    @job = Job.new
+    @company = Company.find(params[:company_id])
+    @job = @company.jobs.build
   end
 
   # GET /jobs/1/edit
   def edit
+    @company = Company.find(params[:company_id])
+    @job = @company.jobs.find(params[:id])
   end
 
   # POST /jobs
   # POST /jobs.json
   def create
     @job = set_company.jobs.new(job_params)
+    @job.status = "draft"
     respond_to do |format|
       if @job.save
         format.html { redirect_to @job, notice: 'Job was successfully created.' }
@@ -59,6 +63,22 @@ class JobsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to jobs_url, notice: 'Job was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def upgrade_status
+    @job = Job.find(params[:id])
+    @job.status = params[:status]
+    if @job.status == "published" or @job.status == "closed"
+      if @job.save!
+        respond_to do |format|
+          format.html { redirect_to job_path(@job.id), notice: 'Job was successfully '+@job.status+'.' }
+        end
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to job_path(@job.id), notice: 'Invalid command!' }
+      end
     end
   end
 

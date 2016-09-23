@@ -1,6 +1,10 @@
 class ApplicantsController < ApplicationController
 
+<<<<<<< HEAD
   skip_before_filter :authenticate_user!, only: [:new, :create]
+=======
+  skip_before_filter :authenticate_user!, only: [:create, :new]
+>>>>>>> c87a16876ade3580f886258e278a581318d93c1d
   before_action :set_applicant, only: [:show, :edit, :update, :destroy]
   before_action :set_job, only: [:new, :edit]
   
@@ -14,6 +18,8 @@ class ApplicantsController < ApplicationController
   # GET /applicants/1.json
   def show
 
+    @job = Job.find(params[:job_id])
+     # @job = Job.joins(:applicants)
   end
 
   # GET /applicants/new
@@ -27,14 +33,22 @@ class ApplicantsController < ApplicationController
   def edit
   end
 
+  def send_email
+    @applicant = Applicant.find(params[:id])
+    # @job = Job.find(params[:job_id])
+    SendMail.sample_email(@applicant).deliver
+    redirect_to applicant_path(@applicant)
+  end
+
   # POST /applicants
   # POST /applicants.json
   def create
     @job = Job.find(params[:job_id])
     @applicant = @job.applicants.new(applicant_params)
-    @applicant.status = "Candidate" 
+    @applicant.status = "applied"
     respond_to do |format|
       if @applicant.save
+        SendMail.sample_email(@applicant).deliver
         format.html { redirect_to job_path(@job), notice: 'Applicant was successfully created.' }
         format.json { render :show, status: :created, location: @applicant }
       else
@@ -65,6 +79,23 @@ class ApplicantsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to applicants_url, notice: 'Applicant was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def applicant_status
+    status = params[:status]
+    @job = Job.joins(:applicants).where(applicants: { status: status }).find_by(id: params[:job_id])
+  end
+
+  def phase
+    @job = Job.find(params[:job_id])
+    @applicant = Applicant.find(params[:applicant_id])
+    @applicant.status = params[:phase]
+    if @applicant.save!
+      respond_to do |format|
+        format.html { redirect_to job_applicant_path(@job, @applicant) }
+        format.js {}
+      end
     end
   end
 

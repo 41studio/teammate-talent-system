@@ -1,0 +1,11 @@
+ .nested-fields
+   p
+    = f.label :name_school
+    = f.text_field :name_school
+    br
+    = f.label :field_study
+    = f.text_field :field_study
+    br
+    = f.label :degree
+    = f.text_field :degree
+    = link_to_remove_association "Remove form Education", f

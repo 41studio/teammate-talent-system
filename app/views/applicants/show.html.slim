@@ -29,11 +29,50 @@ p
   = link_to "Download Resume", @applicant.resume_url, target: '_blank'
 p
   strong Status:
-  = @applicant.status
+  = @applicant.status.gsub('_',' ').capitalize
+p
+  strong Name School:
+  = @applicant.educations.map {|c| c.name_school}.join(',')
+p
+  strong Field Study:
+  = @applicant.educations.map {|c| c.field_study}.join(',')
+p
+  strong Degree:
+  = @applicant.educations.map {|c| c.degree}.join(',')
+p
+  strong Name Company:
+  = @applicant.experiences.map {|c| c.name_company}.join(',')
+p
+  strong Industry:
+  = @applicant.experiences.map {|c| c.industry}.join(',')
+p 
+  strong Title:
+  = @applicant.experiences.map {|c| c.title}.join(',')
+p
+  strong Summary:
+  = @applicant.experiences.map {|c| c.summary}.join(',')
+p 
+  = link_to "Send email", :controller => "applicants", :action => "send_email", :id => @applicant.id
+p  
+  | Action
+  br
+  = select_tag :status, options_for_select([["Applied","applied"],["Phone Screen","phone_screen"],["Interview","interview"],["Offer","offer"],["Hired","hired"]], selected: @applicant.status.downcase.gsub(/\s+/, "")), id: 'status'
 
-/= select_tag "profile", options_from_collection_for_select(@profile, "new_method_name",'profile_blip'),:onchange => "window.location.replace('/'+this.value);"
 
 br
-= link_to 'Disqualified Him/Her'
+= link_to 'Disqualify Him/Her'
 br
 = link_to 'Back', job_path(@applicant.job_id) 
+- content_for :javascript_in_file do
+  javascript:
+    $('#status').on('click', function(){
+      $.ajax({
+        url: Routes.job_applicant_phase_path("#{@applicant.job_id}", "#{@applicant.id}", $(this).val()),
+        method: 'get',
+        success: function(result){
+          //alert("Applicant upgraded to " + $(this).val());
+          alert("Applicant status changed");
+          location.reload();
+        }
+      });
+    });

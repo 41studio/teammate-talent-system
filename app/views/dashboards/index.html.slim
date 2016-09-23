@@ -1,27 +1,77 @@
 h1 Dashboard 
 
-table border="1"
-  thead
-    tr
-      th Name Company
-      th Website Company
-      th Email Company
-      th Phone Company
-      th Industry
-      th Photo Company
-      th
-      th
-
-  tbody
-    - @companys.each do |company|
-      tr
-        td = company.company_name
-        td = company.company_website
-        td = company.company_email
-        td = company.company_phone
-        td = company.industry
-        td = image_tag company.photo_company.thumb.url
-        td = link_to 'Show', company
-        td = link_to 'Edit', edit_company_path(company)
-br
+hr style="height:1px; background-color:black;"
+p Companies
+- @companies.each do |company|
+  = link_to company.company_name, company
+hr style="height:1px; background-color:black;"
+p Drafted Jobs
+- @drafted_jobs.each do |job|
+  = link_to job.job_title, job
+  br
+  = link_to "edit #{job.job_title}", edit_company_job_path(job.company_id,job)
+  p
+  	| Created 
+   	= time_ago_in_words(job.created_at)
+   	|  ago
+  br
+hr style="height:1px; background-color:black;"
+p Published Jobs
+- @published_jobs.each do |job|
+  = link_to job.job_title, job
+  br
+  = link_to "edit #{job.job_title}", edit_company_job_path(job.company_id,job)
+  p
+    | Applicants :
+    = job.applicants_count
+  p
+    | Publised 
+    = time_ago_in_words(job.updated_at)
+    |  ago
+  table border="1"
+    tr align="center"
+      td Applied
+      td Phone Call
+      td Interview
+      td Offer
+      td Hired
+    tr align="center"
+      td
+        - if job.applied_count > 0
+          = link_to job.applied_count, job_applicant_status_path(job, "applied")
+        - else
+          | -
+      td
+        - if job.phone_screen_count > 0
+          = link_to job.phone_screen_count, job_applicant_status_path(job, "phone_screen")
+        - else
+          | -
+      td
+        - if job.interview_count > 0
+          = link_to job.interview_count, job_applicant_status_path(job, "interview")
+        - else
+          | -
+      td
+        - if job.offer_count > 0
+          = link_to job.offer_count, job_applicant_status_path(job, "offer")
+        - else
+          | -
+      td
+        - if job.hired_count > 0
+          = link_to job.hired_count, job_applicant_status_path(job, "hired")
+        - else
+          | -
+  br
+hr style="height:1px; background-color:black;"
+p Closed Jobs
+- @closed_jobs.each do |job|
+  = link_to job.job_title, job
+  br
+  = link_to "edit #{job.job_title}", edit_company_job_path(job.company_id,job)
+  p
+    | Closed 
+    = time_ago_in_words(job.updated_at)
+    |  ago
+  br
+hr style="height:1px; background-color:black;"
 = link_to 'Back', root_path

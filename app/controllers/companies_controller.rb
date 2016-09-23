@@ -1,10 +1,7 @@
 class CompaniesController < ApplicationController
   before_action :set_company, only: [:show, :edit, :update, :destroy]
+  before_filter :redirect_url, only: [:new, :index]
   skip_before_filter :authenticate_user!, only: [:index, :show]
-  
-  before_filter only: [:new, :index] do 
-    redirect_to previous_url, :status => 401 if current_user.company_id != nil
-  end  
 
   # GET /companies
   # GET /companies.json
@@ -69,6 +66,10 @@ class CompaniesController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def redirect_url
+      redirect_to previous_url, :status => 401 if current_user.company_id != nil
+    end
+
     def set_company
       @company = Company.find(params[:id])
     end

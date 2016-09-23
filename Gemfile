@@ -23,6 +23,11 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
+group :staging do 
+  gem 'puma'
+  gem 'rails_12factor'
+end
+
 ## library for push notification
 gem 'pushmeup'
 
@@ -47,6 +52,7 @@ gem 'friendly_id', '~> 5.1.0'
 gem 'dotenv-rails'
 gem 'better_errors'
 gem 'binding_of_caller'
+gem "js-routes"
 
 ## API
 gem 'simple_token_authentication', '~> 1.0'
