@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { registrations: 'registrations', confirmations: 'confirmations' }
   resources :jobs
 
-
+  post '/:job_id/:id/email_to_applicant', to: 'applicants#send_email', as: :email_to_applicant
   get '/dashboards' => "dashboards#index", as: :user_root
 
   root 'landing_page#index'
