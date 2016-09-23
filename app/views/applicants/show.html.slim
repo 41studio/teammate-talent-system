@@ -51,16 +51,29 @@ p
 p
   strong Summary:
   = @applicant.experiences.map {|c| c.summary}.join(',')
-p 
-  = link_to "Send email", :controller => "applicants", :action => "send_email", :id => @applicant.id
-p  
-  | Action
-  br
-  = select_tag :status, options_for_select([["Applied","applied"],["Phone Screen","phone_screen"],["Interview","interview"],["Offer","offer"],["Hired","hired"]], selected: @applicant.status.downcase.gsub(/\s+/, "")), id: 'status'
+  / = link_to "Send email", controller: "applicants", action: "send_email", id: @applicant.id, job_id: @applicant.job_id
+p
+  | 
+  strong email to applicant :
+  = form_tag email_to_applicant_path(@applicant.job_id,@applicant), method: :post
+    div.field
+      = label_tag :subject
+      = text_field_tag :subject
+    div.field
+      = label_tag :body
+      = text_area_tag :body
+    = button_tag "send"
 
+- unless @applicant.status == "disqualified"
+  p
+    | Action
+    br
+    = select_tag :status, options_for_select([["Applied","applied"],["Phone Screen","phone_screen"],["Interview","interview"],["Offer","offer"],["Hired","hired"]], selected: @applicant.status.downcase.gsub(/\s+/, "")), id: 'status'
+  p  
+    | Action
+    br
+    = link_to 'Disqualify Him/Her', job_applicant_phase_path(@applicant.job_id, @applicant.id, "disqualified")
 
-br
-= link_to 'Disqualify Him/Her'
 br
 = link_to 'Back', job_path(@applicant.job_id) 
 - content_for :javascript_in_file do
