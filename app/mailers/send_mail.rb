@@ -1,8 +1,10 @@
 class SendMail < ApplicationMailer
 	default from: "teamhiredev@gmail.com"
 
-	def sample_email(applicant)
+	def sample_email(applicant, subject, body)
 		@applicant = applicant
-		mail(to: @applicant.email, subject: 'Thanks for applied this job')
+		@subject = subject
+		@body = body
+		mail(to: @applicant.email, subject: @subject)
 	end
 end

@@ -5,18 +5,19 @@ module API
       format :json 
  
       resource :companies do
-        desc "Return list of companies"
+        desc "User By token", {
+          :notes => <<-NOTE
+          Get User By token
+          -------------------
+          NOTE
+        } 
         get do
-          Company.all
-        end
+          begin
+          current_user.company
 
-        desc "Return a company"
-        params do
-          requires :id, type: Integer, desc: "ID of the company"        
-        end
-
-        get ":id", root: "company" do
-          Company.where(id: params[:id]).first!
+          rescue ActiveRecord::RecordNotFound
+            error!({status: :not_found}, 404)
+           end
         end
       end
 
