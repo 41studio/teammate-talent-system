@@ -13,6 +13,7 @@ class ApplicantsController < ApplicationController
   # GET /applicants/1
   # GET /applicants/1.json
   def show
+
     @job = Job.find(params[:job_id])
      # @job = Job.joins(:applicants)
   end
