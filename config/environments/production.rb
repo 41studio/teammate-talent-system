@@ -45,7 +45,7 @@ Rails.application.configure do
     user_name:      ENV['SENDMAIL_USERNAME'],
     password:       ENV['SENDMAIL_PASSWORD'],
     domain:         ENV['MAIL_HOST'],
-    address:       'smtp.gmail.com',
+    address:       'smtp.sendgrid.net',
     port:          '587',
     authentication: 'plain',
     enable_starttls_auto: true
@@ -93,4 +93,6 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  config.action_mailer.default_url_options = { host: ENV['MAIL_HOST'] }
 end
