@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   post '/:job_id/:id/email_to_applicant', to: 'applicants#send_email', as: :email_to_applicant
   get '/dashboards' => "dashboards#index", as: :user_root
 
+  get '/applicants' => "dashboards#applicant", as: 'applicant'
   root 'landing_page#index'
 
   mount API::Root => '/'

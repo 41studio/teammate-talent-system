@@ -1,6 +1,9 @@
 h1 Dashboard 
 
 hr style="height:1px; background-color:black;"
+p = link_to "APPLICANTS", applicant_path
+
+hr style="height:1px; background-color:black;"
 p Companies
 - @companies.each do |company|
   = link_to company.company_name, company

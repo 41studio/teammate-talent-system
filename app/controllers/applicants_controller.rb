@@ -46,7 +46,7 @@ class ApplicantsController < ApplicationController
     @applicant.status = "applied"
     respond_to do |format|
       if @applicant.save
-        SendMail.sample_email(@applicant).deliver
+        SendMail.send_email_after_apply(@applicant, @job).deliver
         format.html { redirect_to job_path(@job), notice: 'Applicant was successfully created.' }
         format.json { render :show, status: :created, location: @applicant }
       else
