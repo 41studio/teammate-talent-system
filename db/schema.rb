@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160916092436) do
+ActiveRecord::Schema.define(version: 20160921022129) do
 
   create_table "applicants", force: :cascade do |t|
     t.string   "name",       limit: 255, default: "", null: false
@@ -118,6 +118,7 @@ ActiveRecord::Schema.define(version: 20160916092436) do
     t.integer  "experience_list_id",      limit: 4
     t.integer  "function_list_id",        limit: 4
     t.integer  "industry_list_id",        limit: 4
+    t.string   "status",                  limit: 255
   end
 
   add_index "jobs", ["company_id"], name: "index_jobs_on_company_id", using: :btree
