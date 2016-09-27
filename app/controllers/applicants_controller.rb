@@ -14,6 +14,7 @@ class ApplicantsController < ApplicationController
   # GET /applicants/1
   # GET /applicants/1.json
   def show
+
     @job = Job.find(params[:job_id])
     applicant = Applicant.find(params[:id])
     @recruitment_level = applicant.applicant_recruitment_level
@@ -29,7 +30,9 @@ class ApplicantsController < ApplicationController
 
   # GET /applicants/1/edit
   def edit
+
   end
+  
 
   def send_email
     @applicant = Applicant.find(params[:id])
