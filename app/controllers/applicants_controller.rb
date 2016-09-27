@@ -1,3 +1,4 @@
+
 class ApplicantsController < ApplicationController
 
   skip_before_filter :authenticate_user!, only: [:create, :new]
@@ -14,7 +15,9 @@ class ApplicantsController < ApplicationController
   # GET /applicants/1.json
   def show
     @job = Job.find(params[:job_id])
-     # @job = Job.joins(:applicants)
+    applicant = Applicant.find(params[:id])
+    @recruitment_level = applicant.applicant_recruitment_level
+    @disabled_level = applicant.disable_level(params[:id])
   end
 
   # GET /applicants/new

@@ -1,9 +1,8 @@
 h1 Dashboard 
 
 hr style="height:1px; background-color:black;"
-p Companies
-- @companies.each do |company|
-  = link_to company.company_name, company
+p Company
+= link_to @company.company_name, @company
 hr style="height:1px; background-color:black;"
 p Drafted Jobs
 - @drafted_jobs.each do |job|
