@@ -6,7 +6,7 @@ class SchedulerApplicantWorker
 	
 		schedules.each do |schedule|
 			applicant = schedule.applicant
-			ScheduleMailer.notify_applicant_email(applicant.email, applicant.name, schedule.description, schedule.date).deliver
+			ScheduleMailer.notify_applicant_email(applicant.email, applicant.name, schedule.category, schedule.date).deliver
 		end
 	end
 end
