@@ -14,7 +14,6 @@ class ApplicantsController < ApplicationController
   # GET /applicants/1
   # GET /applicants/1.json
   def show
-
     @job = Job.find(params[:job_id])
     applicant = Applicant.find(params[:id])
     @recruitment_level = applicant.applicant_recruitment_level
@@ -30,9 +29,7 @@ class ApplicantsController < ApplicationController
 
   # GET /applicants/1/edit
   def edit
-
   end
-  
 
   def send_email
     @applicant = Applicant.find(params[:id])
@@ -85,7 +82,7 @@ class ApplicantsController < ApplicationController
 
   def applicant_status
     status = params[:status]
-    @job = Job.joins(:applicants).where(applicants: { status: status }).find_by(id: params[:job_id])
+    @applicants = Applicant.where(applicants: { status: status, job_id: params[:job_id] })
   end
 
   def phase

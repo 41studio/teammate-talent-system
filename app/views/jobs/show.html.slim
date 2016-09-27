@@ -69,8 +69,9 @@ p
     = @job.job_search_keyword
 
 - if user_signed_in?
+  = link_to 'Back', root_path
   h3
-    | list of applied applicants
+    | list of applicants
   =render @job.applicants
   
 - else
