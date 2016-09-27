@@ -47,7 +47,7 @@ Rails.application.configure do
     domain:        'teamhire.herokuapp.com',
     address:       'smtp.sendgrid.net',
     port:          '587',
-    authentication: 'plain',
+    authentication: 'login',
     enable_starttls_auto: true
   }
   # Print deprecation notices to the Rails logger.

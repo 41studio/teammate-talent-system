@@ -48,10 +48,10 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     user_name:      ENV['SENDMAIL_USERNAME'],
     password:       ENV['SENDMAIL_PASSWORD'],
-    domain:         'teamhire.herokuuapp.com',
+    domain:        'teamhire.herokuapp.com',
     address:       'smtp.sendgrid.net',
     port:          '587',
-    authentication: 'plain',
+    authentication: 'login',
     enable_starttls_auto: true
   }
 
