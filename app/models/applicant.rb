@@ -24,6 +24,21 @@ class Applicant < ActiveRecord::Base
 	# 	@stages = [["Applied","applied"],["Phone Screen","phonescreen"],["Interview","interview"],["Offer","offer"],["Hired","hired"]]
 	# end
 	
+	def disable_level(id)
+		applicant = Applicant.find(id)
+		arr = []
+		@hashh.each do |key, value|
+			if @hashh[applicant.status.to_sym] >= value
+				arr << key.to_s
+			end
+		end
+		return arr
+	end
+
+	def applicant_recruitment_level
+		@hashh = {"applied": 1,"phone_screen": 2,"interview": 3,"offer": 4,"hired": 5}
+	end
+
 	private
 	  def image_size_validation
 	    errors[:photo] << "should be less than 500KB" if photo.size > 0.5.megabytes
