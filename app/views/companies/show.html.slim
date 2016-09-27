@@ -20,13 +20,15 @@ p
   strong Photo Company
   = image_tag @company.photo_company.thumb.url
 br
-- if user_signed_in?
+
+- if user_signed_in? and current_user.company_id == @company.id
   br
   = link_to "Create New Job", new_company_job_path(@company)
   br
   = link_to 'Edit', edit_company_path(@company)
   '|
   = link_to 'Back', dashboards_path
+  
 - else
   = link_to 'Back', root_path
 

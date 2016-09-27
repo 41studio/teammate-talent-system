@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   get '/applicants/:id/schedules/new' => 'schedules#new', as: 'new_applicant_schedule'
   post '/applicants/:id/schedules/' => 'schedules#create', as: 'applicant_schedules'
 
+  get '/applicants' => "dashboards#applicant", as: 'applicant'
   root 'landing_page#index'
 
   mount API::Root => '/'

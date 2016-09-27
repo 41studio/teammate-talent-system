@@ -67,12 +67,11 @@ p
   p
     strong Job search keyword:
     = @job.job_search_keyword
+
 - if user_signed_in?
-  = link_to 'Edit', edit_company_job_path(@job.company_id,@job)
-  '|
-  = link_to 'Back', company_path(@job.company_id)
+  = link_to 'Back', root_path
   h3
-    | list of applied applicants
+    | list of applicants
   =render @job.applicants
   
 - else

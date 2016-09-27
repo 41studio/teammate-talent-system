@@ -50,8 +50,6 @@ gem 'slim-rails'
 gem 'nprogress-rails'
 gem 'friendly_id', '~> 5.1.0'
 gem 'dotenv-rails'
-gem 'better_errors'
-gem 'binding_of_caller'
 gem "js-routes"
 
 ## API
@@ -84,5 +82,7 @@ group :development do
   gem 'quiet_assets'
   gem 'annotate', github: 'ctran/annotate_models'
   gem 'letter_opener'
+  gem 'better_errors'
+  gem 'binding_of_caller'
 end
 

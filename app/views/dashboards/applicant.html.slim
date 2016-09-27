@@ -1,0 +1,7 @@
+h1 welcome
+
+= "We have #{pluralize(@applicants.count, "applicant")}"
+br
+- @applicants.each do |applicant|
+	br
+	= link_to applicant.name, job_applicant_path(applicant.job_id,applicant.id)

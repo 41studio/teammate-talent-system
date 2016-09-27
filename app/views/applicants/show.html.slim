@@ -73,7 +73,7 @@ p
   p
     | Action
     br
-    = select_tag :status, options_for_select([["Applied","applied"],["Phone Screen","phone_screen"],["Interview","interview"],["Offer","offer"],["Hired","hired"]], selected: @applicant.status.downcase.gsub(/\s+/, "")), id: 'status'
+    = select_tag :status, options_from_collection_for_select(@recruitment_level, :first, :first, {selected: @applicant.status, disabled: @disabled_level }), id: 'status'
   p  
     | Action
     br
@@ -92,6 +92,6 @@ br
           alert("Applicant status changed");
           location.reload();
         }
-      });
+      });  
     });
 
