@@ -1,6 +1,5 @@
 class SendMail < ApplicationMailer
-	default from: "teamhiredev@gmail.com"
-
+	
 	def sample_email(applicant, subject, body)
 		@applicant = applicant
 		@subject = subject

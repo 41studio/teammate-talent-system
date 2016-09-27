@@ -52,6 +52,11 @@ p
   strong Summary:
   = @applicant.experiences.map {|c| c.summary}.join(',')
   / = link_to "Send email", controller: "applicants", action: "send_email", id: @applicant.id, job_id: @applicant.job_id
+
+hr
+  p
+hr
+
 p
   | 
   strong email to applicant :
@@ -89,3 +94,4 @@ br
         }
       });  
     });
+
