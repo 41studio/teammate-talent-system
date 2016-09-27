@@ -16,6 +16,10 @@ Rails.application.routes.draw do
   post '/:job_id/:id/email_to_applicant', to: 'applicants#send_email', as: :email_to_applicant
   get '/dashboards' => "dashboards#index", as: :user_root
 
+  resources :schedules, except: [:new, :create]
+  get '/applicants/:id/schedules/new' => 'schedules#new', as: 'new_applicant_schedule'
+  post '/applicants/:id/schedules/' => 'schedules#create', as: 'applicant_schedules'
+
   root 'landing_page#index'
 
   mount API::Root => '/'

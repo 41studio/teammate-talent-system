@@ -11,24 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160916092436) do
+ActiveRecord::Schema.define(version: 20160926171608) do
 
   create_table "applicants", force: :cascade do |t|
-    t.string   "name",       limit: 255, default: "", null: false
-    t.string   "gender",     limit: 255, default: "", null: false
-    t.date     "date_birth",                          null: false
-    t.string   "email",      limit: 255, default: "", null: false
-    t.string   "headline",   limit: 255, default: "", null: false
-    t.string   "phone",      limit: 255, default: "", null: false
-    t.string   "address",    limit: 255, default: "", null: false
-    t.string   "photo",      limit: 255, default: "", null: false
-    t.string   "resume",     limit: 255, default: "", null: false
-    t.string   "status",     limit: 255, default: "", null: false
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.integer  "job_id",     limit: 4
+    t.string   "name",         limit: 255, default: "", null: false
+    t.string   "gender",       limit: 255, default: "", null: false
+    t.date     "date_birth",                            null: false
+    t.string   "email",        limit: 255, default: "", null: false
+    t.string   "headline",     limit: 255, default: "", null: false
+    t.string   "phone",        limit: 255, default: "", null: false
+    t.string   "address",      limit: 255, default: "", null: false
+    t.string   "photo",        limit: 255, default: "", null: false
+    t.string   "resume",       limit: 255, default: "", null: false
+    t.string   "status",       limit: 255, default: "", null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.integer  "education_id", limit: 4
+    t.integer  "job_id",       limit: 4
   end
 
+  add_index "applicants", ["education_id"], name: "index_applicants_on_education_id", using: :btree
   add_index "applicants", ["job_id"], name: "index_applicants_on_job_id", using: :btree
 
   create_table "applicants_educations", id: false, force: :cascade do |t|
@@ -118,6 +120,7 @@ ActiveRecord::Schema.define(version: 20160916092436) do
     t.integer  "experience_list_id",      limit: 4
     t.integer  "function_list_id",        limit: 4
     t.integer  "industry_list_id",        limit: 4
+    t.string   "status",                  limit: 255
   end
 
   add_index "jobs", ["company_id"], name: "index_jobs_on_company_id", using: :btree
@@ -126,6 +129,16 @@ ActiveRecord::Schema.define(version: 20160916092436) do
   add_index "jobs", ["experience_list_id"], name: "index_jobs_on_experience_list_id", using: :btree
   add_index "jobs", ["function_list_id"], name: "index_jobs_on_function_list_id", using: :btree
   add_index "jobs", ["industry_list_id"], name: "index_jobs_on_industry_list_id", using: :btree
+
+  create_table "schedules", force: :cascade do |t|
+    t.datetime "date",                                                null: false
+    t.string   "description",  limit: 255, default: "Interview Date", null: false
+    t.datetime "created_at",                                          null: false
+    t.datetime "updated_at",                                          null: false
+    t.integer  "applicant_id", limit: 4
+  end
+
+  add_index "schedules", ["applicant_id"], name: "index_schedules_on_applicant_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
@@ -147,14 +160,15 @@ ActiveRecord::Schema.define(version: 20160916092436) do
     t.datetime "locked_at"
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
+    t.string   "authentication_token",   limit: 255,              null: false
     t.string   "first_name",             limit: 255
     t.string   "last_name",              limit: 255
-    t.string   "authentication_token",   limit: 255,              null: false
     t.integer  "company_id",             limit: 4
   end
 
   add_index "users", ["authentication_token"], name: "index_users_on_authentication_token", unique: true, using: :btree
   add_index "users", ["company_id"], name: "index_users_on_company_id", using: :btree
+  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
@@ -165,5 +179,6 @@ ActiveRecord::Schema.define(version: 20160916092436) do
   add_foreign_key "jobs", "experience_lists"
   add_foreign_key "jobs", "function_lists"
   add_foreign_key "jobs", "industry_lists"
+  add_foreign_key "schedules", "applicants"
   add_foreign_key "users", "companies"
 end

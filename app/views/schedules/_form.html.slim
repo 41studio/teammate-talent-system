@@ -1,0 +1,17 @@
+= form_for ([@applicant, @applicant.schedules.build]) do |f|
+  - if @applicant.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@applicant.errors.count, "error")} prohibited this schedule from being saved:"
+      ul
+        - @applicant.errors.full_messages.each do |message|
+          li = message
+
+  .field
+  	= f.label :date
+    = f.datetime_select :date, order: [:day, :month, :year], start_year: (Date.today.year), end_year: (Date.today.year)+5, prompt: { day: 'Select day', month: 'Select month', year: 'Select year' }
+
+  .field
+  	= f.label :description
+  	= f.select :description, options_for_select([["Interview", "Interview"], ["Offer", "Offer"], ["Hired", "Hired"]]), {include_blank: 'Select Schedule'}
+
+  .actions = f.submit

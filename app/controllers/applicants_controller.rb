@@ -1,10 +1,6 @@
 class ApplicantsController < ApplicationController
 
-<<<<<<< HEAD
-  skip_before_filter :authenticate_user!, only: [:new, :create]
-=======
   skip_before_filter :authenticate_user!, only: [:create, :new]
->>>>>>> c87a16876ade3580f886258e278a581318d93c1d
   before_action :set_applicant, only: [:show, :edit, :update, :destroy]
   before_action :set_job, only: [:new, :edit]
   
@@ -48,7 +44,7 @@ class ApplicantsController < ApplicationController
     @applicant.status = "applied"
     respond_to do |format|
       if @applicant.save
-        SendMail.sample_email(@applicant).deliver
+        SendMail.send_email_after_apply(@applicant, @job).deliver
         format.html { redirect_to job_path(@job), notice: 'Applicant was successfully created.' }
         format.json { render :show, status: :created, location: @applicant }
       else
