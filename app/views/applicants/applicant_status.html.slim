@@ -1,6 +1,6 @@
-- if @job.present?
-	- @job.applicants.each do |applicant|
-		= link_to applicant.name, job_applicant_path(@job,applicant)
+- if @applicants.present?
+	- @applicants.each do |applicant|
+		= link_to applicant.name, job_applicant_path(applicant.job_id,applicant)
 		br
 -else
 	p No data!
