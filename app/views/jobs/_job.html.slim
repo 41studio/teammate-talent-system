@@ -1,9 +1,6 @@
-- if job.status == "published"
+-	if job.status == "published"
 	= link_to job.job_title, job_path(job)
 	p
 		| from 
 		= link_to job.company.company_name, company_path(job.company)
 	hr
-- else
-	h3
-		| No Jobs

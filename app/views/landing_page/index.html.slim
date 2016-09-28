@@ -14,7 +14,11 @@ h1
 
 	= link_to 'Sign in', user_session_path
 	hr
-	- @jobs.each do |job|
-		= link_to job.job_title, job_path(job)
-		br
-		= render job.company
+	- if @jobs.present?
+		h3 Related Jobs
+		- @jobs.each do |job|
+			= link_to job.job_title, job_path(job)
+			br
+			= render job.company
+	- else
+		h3 No Jobs
