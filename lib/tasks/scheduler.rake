@@ -9,6 +9,7 @@ task :notify_applicants => :environment do
 	schedules.each do |schedule|
 		applicant = schedule.applicant
 		ScheduleMailer.notify_applicant_email(applicant.email, applicant.name, schedule.category, schedule.date).deliver
+		schedule.applicant_notified!
 	end
 	puts "Done! "
 end
