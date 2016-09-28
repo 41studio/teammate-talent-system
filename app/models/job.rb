@@ -101,8 +101,8 @@ class Job < ActiveRecord::Base
 	def self.closed_jobs
 		where(status: "closed")
 	end
-
+	
 	def self.search(search)
-		where("status = \"published\" and job_title LIKE ? OR job_search_keyword LIKE ? ", "%#{search}%", "%#{search}%")
+		where("status = \"published\" and (job_title LIKE ? OR job_search_keyword LIKE ?)", "%#{search}%", "%#{search}%")
 	end
 end

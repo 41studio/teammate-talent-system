@@ -13,6 +13,8 @@ h1
 		= submit_tag "search"
 
 	= link_to 'Sign in', user_session_path
-	
-	- @companies.each do |company|
-		= render company.jobs
+	hr
+	- @jobs.each do |job|
+		= link_to job.job_title, job_path(job)
+		br
+		= render job.company
