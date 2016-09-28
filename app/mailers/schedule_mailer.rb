@@ -1,4 +1,5 @@
 class ScheduleMailer < ApplicationMailer
+	
   	def notify_applicant_email(email, applicant, subject, date)
 		mail(to: @email, subject: "Nama Aplikasi - #{@subject}")
 
