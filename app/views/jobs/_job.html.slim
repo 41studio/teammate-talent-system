@@ -1,14 +1,11 @@
-- if user_signed_in? and current_user.company_id == @company.id
-	= link_to job.job_title, job_path(job)
-	' | 
-	= link_to 'Edit', edit_company_job_path(job.company.id,job)
-	' | 
-	= link_to 'Destroy', job, data: { confirm: 'Are you sure?' }, method: :delete
-	br
-	
-- else
+- if job.status == "published"
+	hr
+	h3 Related jobs
 	= link_to job.job_title, job_path(job)
 	p
 		| from 
 		= link_to job.company.company_name, company_path(job.company)
 	hr
+- else
+	h3
+		| No Jobs
