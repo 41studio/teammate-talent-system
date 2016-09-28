@@ -5,7 +5,6 @@ class Company < ActiveRecord::Base
 	mount_uploader :photo_company, PhotoCompanyUploader
 	
 	validates :company_name, :company_website, :company_email, :company_phone, :industry, :photo_company, presence: true
-
     validates_processing_of :photo_company
 	validate :image_size_validation
  
