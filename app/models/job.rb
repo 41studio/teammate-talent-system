@@ -14,7 +14,8 @@ class Job < ActiveRecord::Base
 	validates :job_description, :job_requirement, :benefits, 
 	length: {in: 100..500, message: 'Must be more than 100 character and less than 500 character'}
 	validates :min_salary, :max_salary, numericality: { greater_than_or_equal_to: 1 }
-	validate :salary_regulation
+	validate :salary_regulation, :experience_collection_validation,:function_collection_validation,
+		:employment_type_collection_validation,:industry_collection_validation,:education_collection_validation
 
 	def applicants_count
 		applicants.count
@@ -64,6 +65,31 @@ class Job < ActiveRecord::Base
 		errors.add(:max_salary, " cannot less than min salary") if self.max_salary <= self.min_salary
 	end
 
+	def experience_collection_validation
+		find_experience = ExperienceList.find_by(id: self.experience_list_id)
+		errors.add(:experience_list_id, " wrong option") if find_experience.nil?
+	end
+
+	def function_collection_validation
+		find_function = FunctionList.find_by(id: self.function_list_id)
+		errors.add(:function_list_id, " wrong option") if find_function.nil?
+	end
+
+	def employment_type_collection_validation
+		find_employment_type = EmploymentTypeList.find_by(id: self.employment_type_list_id)
+		errors.add(:employment_type_list_id, " wrong option") if find_employment_type.nil?
+	end
+
+	def industry_collection_validation
+		find_industry = IndustryList.find_by(id: self.industry_list_id)
+		errors.add(:industry_list_id, " wrong option") if find_industry.nil?
+	end
+
+	def education_collection_validation
+		find_education = EducationList.find_by(id: self.education_list_id)
+		errors.add(:education_list_id, " wrong option") if find_education.nil?
+	end
+
 	def self.drafted_jobs
 		where(status: "draft")
 	end
@@ -77,6 +103,6 @@ class Job < ActiveRecord::Base
 	end
 
 	def self.search(search)
-		where("job_title LIKE ? OR job_search_keyword LIKE ? ", "%#{search}%", "%#{search}%")
+		where("status = \"published\" and job_title LIKE ? OR job_search_keyword LIKE ? ", "%#{search}%", "%#{search}%")
 	end
 end

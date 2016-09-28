@@ -72,10 +72,10 @@ p
   = link_to 'Back', root_path
   '|
   = link_to 'Delete', @job, data: { confirm: 'Are you sure?' }, method: :delete
-
-  h3
-    | list of applicants
-  =render @job.applicants
+  - if @job.status == "published"
+    h3
+      | list of applicants
+    =render @job.applicants
   
 - else
   = link_to 'apply this job', new_job_applicant_path(@job)

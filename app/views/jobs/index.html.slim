@@ -53,8 +53,6 @@ table border="1"
         td = job.education_list_id
         td = job.job_search_keyword
         td = link_to 'Show', job
-        td = link_to 'Edit', edit_job_path(job)
-        td = link_to 'Destroy', job, data: { confirm: 'Are you sure?' }, method: :delete
 
 br
 = link_to 'Back', root_path
