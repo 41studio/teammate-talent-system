@@ -7,6 +7,11 @@ class JobsController < ApplicationController
   # GET /jobs.json
   def index
     @jobs = Job.all
+    if params[:search]
+      @jobs = Job.search(params[:search]).order("created_at DESC")
+    else
+      @jobs = Job.all.order('created_at DESC')
+    end
   end
 
   # GET /jobs/1

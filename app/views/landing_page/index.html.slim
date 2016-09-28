@@ -8,6 +8,10 @@ h1
 		br
   	= link_to 'logout', destroy_user_session_path, method: :delete
 - else
+	= form_tag(jobs_path, method: 'get', id: 'search-form') do
+		= text_field_tag :search, params[:search], placeholder: 'search job'
+		= submit_tag "search"
+
 	= link_to 'Sign in', user_session_path
 	hr
 	h3 Related jobs
