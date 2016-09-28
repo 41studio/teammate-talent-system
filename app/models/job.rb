@@ -12,7 +12,7 @@ class Job < ActiveRecord::Base
 		:education_list_id, :job_search_keyword,  presence: true
 	validates :job_title, length: {in: 3..100}
 	validates :job_description, :job_requirement, :benefits, 
-	length: {in: 100..500, message: 'Must be more than 100 and less than 500'}
+	length: {in: 100..500, message: 'Must be more than 100 character and less than 500 character'}
 	validates :min_salary, :max_salary, numericality: { greater_than_or_equal_to: 1 }
 	validate :salary_regulation
 

@@ -1,9 +1,9 @@
 p#notice = notice
-
-- if @job.status == "draft"
-  = link_to "Publish job", upgrade_status_path(@job.id,"published")
-- else
-  = link_to "Close job"
+- if user_signed_in?
+  - if @job.status == "draft"
+    = link_to "Publish job", upgrade_status_path(@job.id,"published")
+  - else
+    = link_to "Close job"
 hr 
 p
   strong Job status 
@@ -70,6 +70,9 @@ p
 
 - if user_signed_in?
   = link_to 'Back', root_path
+  '|
+  = link_to 'Delete', @job, data: { confirm: 'Are you sure?' }, method: :delete
+
   h3
     | list of applicants
   =render @job.applicants

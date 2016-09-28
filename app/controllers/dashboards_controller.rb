@@ -3,9 +3,13 @@ class DashboardsController < ApplicationController
   
   def index
     @company = current_user.company
-    @drafted_jobs = current_user.company.jobs.drafted_jobs
-    @published_jobs = current_user.company.jobs.published_jobs
-    @closed_jobs = current_user.company.jobs.closed_jobs
+    if @company.present?
+      @drafted_jobs = current_user.company.jobs.drafted_jobs
+      @published_jobs = current_user.company.jobs.published_jobs
+      @closed_jobs = current_user.company.jobs.closed_jobs
+    else
+      redirect_to new_company_path
+    end
   end
 
   def applicant
