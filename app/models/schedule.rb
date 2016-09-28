@@ -4,7 +4,7 @@ class Schedule < ActiveRecord::Base
 	validates_presence_of :date, :category
 
 	after_create :send_notify_applicant_email
-	after_update :send_apologize_applicant_email
+	after_update :send_update_notify_applicant_email
 
 	private
 		def date_schedule_check
@@ -17,9 +17,9 @@ class Schedule < ActiveRecord::Base
 			end
 		end
 
-		def send_apologize_applicant_email
+		def send_update_notify_applicant_email
 			if date_schedule_check
-				ScheduleMailer.apologize_applicant_email(self.applicant.email, self.applicant.name, self.category, self.date).deliver
+				ScheduleMailer.update_notify_applicant_email(self.applicant.email, self.applicant.name, self.category, self.date).deliver
 			end
 		end
 end
