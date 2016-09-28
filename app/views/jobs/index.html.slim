@@ -1,5 +1,9 @@
 h1 Listing jobs
 
+= form_tag(jobs_path, method: 'get', id: 'search-form') do
+  = text_field_tag :search, params[:search], placeholder: 'search job'
+  = submit_tag "search"
+br
 table border="1"
   thead
     tr
@@ -49,8 +53,6 @@ table border="1"
         td = job.education_list_id
         td = job.job_search_keyword
         td = link_to 'Show', job
-        td = link_to 'Edit', edit_job_path(job)
-        td = link_to 'Destroy', job, data: { confirm: 'Are you sure?' }, method: :delete
 
 br
 = link_to 'Back', root_path

@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :companies do
     resources :jobs, only: [:new, :create, :edit, :update]
   end
-  resources :jobs, only: [:show, :destroy] do 
+  resources :jobs, only: [:show, :destroy, :index] do 
     resources :applicants, only: [:new, :create, :edit, :show] do
       get '/:phase', to: 'applicants#phase', as: 'phase'
     end
@@ -11,7 +11,6 @@ Rails.application.routes.draw do
   get '/jobs/:id/:status', to: 'jobs#upgrade_status', as:'upgrade_status'
   resources :dashboards
   devise_for :users, :controllers => { registrations: 'registrations', confirmations: 'confirmations' }
-  resources :jobs
 
   post '/:job_id/:id/email_to_applicant', to: 'applicants#send_email', as: :email_to_applicant
   get '/dashboards' => "dashboards#index", as: :user_root
