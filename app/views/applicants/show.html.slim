@@ -78,6 +78,10 @@ p
     | Action
     br
     = link_to 'Disqualify Him/Her', job_applicant_phase_path(@applicant.job_id, @applicant.id, "disqualified")
+  p  
+    | Action
+    br
+    = link_to 'Set Schedule', new_applicant_schedule_path(@applicant)
 
 br
 = link_to 'Back', job_path(@applicant.job_id) 
@@ -94,4 +98,6 @@ br
         }
       });  
     });
+
+
 
