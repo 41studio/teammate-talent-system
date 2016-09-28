@@ -11,7 +11,6 @@ Rails.application.routes.draw do
   get '/jobs/:id/:status', to: 'jobs#upgrade_status', as:'upgrade_status'
   resources :dashboards
   devise_for :users, :controllers => { registrations: 'registrations', confirmations: 'confirmations' }
-  resources :jobs
 
   post '/:job_id/:id/email_to_applicant', to: 'applicants#send_email', as: :email_to_applicant
   get '/dashboards' => "dashboards#index", as: :user_root

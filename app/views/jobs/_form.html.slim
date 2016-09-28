@@ -46,20 +46,20 @@
     = f.label :benefits
     = f.text_area :benefits
   .field
-    = f.label :aplicant_experience
-    = f.select :experience_list_id, options_from_collection_for_select(ExperienceList.all, :id, :experience), prompt: "Select Applicant Level"
+    = f.label :experience_list_id, "Applicant Experience"
+    = f.select :experience_list_id, @experience_collection, include_blank:  "Select Applicant Level"
   .field
-    = f.label :aplicant_function
-    = f.select :function_list_id, options_from_collection_for_select(FunctionList.all, :id, :function), prompt: "Select Applicant Level"
+    = f.label :function_list_id, "Applicant Function"
+    = f.select :function_list_id, @function_collection, include_blank: "Select Applicant Level"
   .field
-    = f.label :aplicant_employment_type
-    = f.select :employment_type_list_id, options_from_collection_for_select(EmploymentTypeList.all, :id, :employment_type), prompt: "Select Applicant Employment Type"
+    = f.label :employment_type_list_id, "Applicant Employment Type"
+    = f.select :employment_type_list_id, @employment_type_collection, include_blank: "Select Applicant Employment Type"
   .field
-    = f.label :aplicant_industry
-    = f.select :industry_list_id, options_from_collection_for_select(IndustryList.all, :id, :industry), prompt: "Select Applicant Industry"
+    = f.label :industry_list_id, "Applicant Industry"
+    = f.select :industry_list_id, @industry_collection, include_blank: "Select Applicant Industry"
   .field
-    = f.label :aplicant_education
-    = f.select :education_list_id, options_from_collection_for_select(EducationList.all, :id, :education), prompt: "Select Applicant Education"
+    = f.label :education_list_id, "Applicant Education"
+    = f.select :education_list_id, @education_collection, include_blank: "Select Applicant Education"
   .field
     = f.label :job_search_keyword
     = f.text_field :job_search_keyword

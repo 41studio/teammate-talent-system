@@ -2,6 +2,7 @@ class JobsController < ApplicationController
   skip_before_filter :authenticate_user!, only: [:index, :show]
   before_action :set_job, only: [:show, :edit, :update, :destroy]
   before_action :set_company, only: [:new, :edit]
+  before_action :set_collection, only: [:new, :edit, :create, :update]
 
   # GET /jobs
   # GET /jobs.json
@@ -61,7 +62,7 @@ class JobsController < ApplicationController
   def destroy
     @job.destroy
     respond_to do |format|
-      format.html { redirect_to jobs_url, notice: 'Job was successfully destroyed.' }
+      format.html { redirect_to company_path(@job.company_id), notice: 'Job was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -90,6 +91,14 @@ class JobsController < ApplicationController
 
     def set_company
       @company = Company.find(params[:company_id])
+    end
+
+    def set_collection
+      @experience_collection = ExperienceList.all.collect {|i| [i.experience, i.id]}
+      @function_collection = FunctionList.all.collect {|i| [i.function, i.id]}
+      @employment_type_collection = EmploymentTypeList.all.collect {|i| [i.employment_type, i.id]}
+      @industry_collection = IndustryList.all.collect {|i| [i.industry, i.id]}
+      @education_collection = EducationList.all.collect {|i| [i.education, i.id]}
     end
 
 
