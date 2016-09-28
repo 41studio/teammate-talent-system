@@ -50,8 +50,8 @@ Rails.application.configure do
     password:       ENV['SENDMAIL_PASSWORD'],
     domain:        'teamhire.herokuapp.com',
     address:       'smtp.sendgrid.net',
-    port:          '587',
-    authentication: 'login',
+    port:          587,
+    authentication: 'plain',
     enable_starttls_auto: true
   }
 
@@ -91,5 +91,4 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
-  config.action_mailer.default_url_options = { :host => 'teamhire.herokuapp.com' }
 end

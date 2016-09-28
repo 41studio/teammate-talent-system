@@ -250,20 +250,20 @@ applicant_industries_list = [
 ]
 
 applicant_educations_list.each do |list|
-  ApplicantEducation.create( education: list)
+  EducationList.create( education: list)
 end
 applicant_employment_types_list.each do |list|
-  ApplicantEmploymentType.create( employment_type: list)
+  EmploymentTypeList.create( employment_type: list)
 end
 
 applicant_experiences_list.each do |list|
-  ApplicantExperience.create( experience: list)
+  ExperienceList.create( experience: list)
 end
 
 applicant_functions_list.each do |list|
-  ApplicantFunction.create( function: list)
+  FunctionList.create( function: list)
 end
 
 applicant_industries_list.each do |list|
-  ApplicantIndustry.create( industry: list)
+  IndustryList.create( industry: list)
 end
