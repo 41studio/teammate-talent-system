@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :companies do
     resources :jobs, only: [:new, :create, :edit, :update]
   end
-  resources :jobs, only: [:show, :destroy] do 
+  resources :jobs, only: [:show, :destroy, :index] do 
     resources :applicants, only: [:new, :create, :edit, :show] do
       get '/:phase', to: 'applicants#phase', as: 'phase'
     end
