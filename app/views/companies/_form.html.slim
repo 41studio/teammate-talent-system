@@ -20,7 +20,7 @@
     = f.text_field :company_phone
   .field
     = f.label :industry
-    = f.select 'industry', options_for_select(@company.industry_.collect {|p| [ p[1], p[1] ] })
+    = f.select 'industry', @industries, include_blank:  "Select Industry"
   .field
     = f.file_field :photo_company, accept: 'image/png,image/jpeg'
     - if f.object.photo_company?
