@@ -1,13 +1,14 @@
 Rails.application.routes.draw do
   resources :companies, except: [:index] do
-    resources :jobs
+    resources :jobs, only: [:new, :create]
   end
-  resources :jobs, only: [:show, :destroy, :index] do 
+  resources :jobs, except: [:new, :create] do 
     resources :applicants, only: [:new, :create, :show] do
       get '/:phase', to: 'applicants#phase', as: 'phase'
     end
     get '/applicant/:status', to: 'applicants#applicant_status', as: 'applicant_status'
   end
+  # ===================================================================================================
   # applicant comment
   post '/applicant/:id/comments/', to: 'comments#create', as: 'applicant_comments'
   get '/applicant/:id/comments/new', to: 'comments#new', as: 'new_applicant_comments'

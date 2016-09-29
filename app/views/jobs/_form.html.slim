@@ -1,4 +1,4 @@
-= form_for [@company, @job] do |f|
+= form_for @form do |f|
   - if @job.errors.any?
     #error_explanation
       h2 = "#{pluralize(@job.errors.count, "error")} prohibited this job from being saved:"
