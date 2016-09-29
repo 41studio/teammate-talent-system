@@ -58,7 +58,6 @@ hr
 hr
 
 p
-  | 
   strong email to applicant :
   = form_tag email_to_applicant_path(@applicant.job_id,@applicant), method: :post
     div.field
@@ -68,7 +67,20 @@ p
       = label_tag :body
       = text_area_tag :body
     = button_tag "send"
-
+p
+  strong add comments : 
+  = render 'comments/form'
+p
+  strong comments :
+  - @comments.each do |c|
+    p
+      h4
+        = c.get_user_name(c.user_id).email
+      h5
+        = c.body
+      = time_ago_in_words(c.created_at)
+      |  ago
+hr
 - unless @applicant.status == "disqualified"
   p
     | Action

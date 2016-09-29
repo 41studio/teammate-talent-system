@@ -2,6 +2,7 @@ class CompaniesController < ApplicationController
   before_action :set_company, only: [:show, :edit, :update, :destroy]
   before_filter :redirect_url, only: [:new, :index]
   skip_before_filter :authenticate_user!, only: [:index, :show]
+  before_action :set_collection, only: [:new, :create, :edit, :update]
 
   # GET /companies
   # GET /companies.json
@@ -72,6 +73,10 @@ class CompaniesController < ApplicationController
 
     def set_company
       @company = Company.find(params[:id])
+    end
+
+    def set_collection
+      @industries = Company.industry.collect {|p| [ p[1], p[1] ] }
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

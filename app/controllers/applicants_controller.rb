@@ -18,6 +18,8 @@ class ApplicantsController < ApplicationController
     applicant = Applicant.find(params[:id])
     @recruitment_level = applicant.applicant_recruitment_level
     @disabled_level = applicant.disable_level(params[:id])
+    @comment = @applicant.comments.build
+    @comments = Comment.all
   end
 
   # GET /applicants/new
