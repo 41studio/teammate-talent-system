@@ -56,6 +56,8 @@ gem "js-routes"
 gem 'simple_token_authentication', '~> 1.0'
 gem 'grape'
 
+## error catcher
+gem 'airbrake', '~> 5.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
