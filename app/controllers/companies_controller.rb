@@ -67,7 +67,11 @@ class CompaniesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def redirect_url
-      redirect_to previous_url, :status => 401 if current_user.company_id != nil
+      if user_signed_in?
+        redirect_to previous_url, :status => 401 if current_user.company_id != nil
+      else
+        redirect_to new_user_session_path
+      end
     end
 
     def set_company
