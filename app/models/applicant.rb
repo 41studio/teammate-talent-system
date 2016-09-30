@@ -2,7 +2,7 @@ class Applicant < ActiveRecord::Base
 	belongs_to :job
 	has_and_belongs_to_many :educations
 	has_and_belongs_to_many :experiences
-	has_many :schedules
+	has_many :schedules, dependent: :destroy
 	has_many :comments
 
 	accepts_nested_attributes_for :educations, :experiences

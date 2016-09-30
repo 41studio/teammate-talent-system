@@ -6,17 +6,17 @@ class Schedule < ActiveRecord::Base
 	after_create :send_notify_applicant_email
 	after_update :send_update_notify_applicant_email
 
-	def applicant_notified!
-		update_attribute(:notify_applicant_flag, true)
-	end
-
 	def time_exist
-		errors.add(:date, " is exist for this applicant")  if Schedule.where.not(self).include?self.time
+		errors.add(:date, " is exist for this applicant")  if Schedule.where.not(date: self.date).include?self.date
 	end
 
-	# def schedule_available
-	# 	errors.add(:category, " schedule doesn't available for this applicant")  if self.applicant.schedules.count >= 3
-	# end
+	def applicant_total
+		applicants.count	
+	end
+
+	def self.get_schedule
+		self.joins(applicant: :job).where(jobs: { company_id: current_user.company_id, status: "published" } )
+	end
 
 	private
 		def date_schedule_check
@@ -26,12 +26,11 @@ class Schedule < ActiveRecord::Base
 		def send_notify_applicant_email
 			if date_schedule_check
 		 		ScheduleMailer.notify_applicant_email(self.applicant, self).deliver
-				self.applicant_notified!
 			end
 		end
 
 		def send_update_notify_applicant_email
-			if date_schedule_check || (self.notify_applicant_flag == true)
+			if date_schedule_check || (self.notify_applicant_flag == "true")
 				ScheduleMailer.update_notify_applicant_email(self.applicant, self).deliver
 			end
 		end

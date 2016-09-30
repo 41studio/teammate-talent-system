@@ -8,7 +8,7 @@ class SchedulesController < ApplicationController
   # GET /schedules
   # GET /schedules.json
   def index
-    @schedules = Schedule.all
+    @schedules = Schedule.get_schedule
   end
 
   # GET /schedules/1
@@ -27,8 +27,10 @@ class SchedulesController < ApplicationController
   # POST /schedules
   # POST /schedules.json
   def create
-    @schedule = @applicant.schedules.new(schedule_params)
 
+    @schedule = @applicant.schedules.new(schedule_params)
+    @schedule.notify_applicant_flag = "true"
+    
     respond_to do |format|
       if @schedule.save
         format.html { redirect_to job_applicant_path(@applicant.job_id, @applicant), notice: 'Schedule was successfully created.' }
