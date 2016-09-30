@@ -54,11 +54,21 @@ p
   / = link_to "Send email", controller: "applicants", action: "send_email", id: @applicant.id, job_id: @applicant.job_id
 
 hr
-  p
+  h3  
+    | Schedule of Applicant
+    br
+    = link_to 'Set Schedule', new_applicant_schedule_path(@applicant)
+
+  table 
+    tr 
+      th Category 
+      th Date 
+      th Send notify email? 
+      th
+    = render @applicant.schedules
 hr
 
 p
-  | 
   strong email to applicant :
   = form_tag email_to_applicant_path(@applicant.job_id,@applicant), method: :post
     div.field
@@ -68,7 +78,20 @@ p
       = label_tag :body
       = text_area_tag :body
     = button_tag "send"
-
+p
+  strong add comments : 
+  = render 'comments/form'
+p
+  strong comments :
+  - @comments.each do |c|
+    p
+      h4
+        = c.get_user_name(c.user_id).email
+      h5
+        = c.body
+      = time_ago_in_words(c.created_at)
+      |  ago
+hr
 - unless @applicant.status == "disqualified"
   p
     | Action
@@ -78,10 +101,7 @@ p
     | Action
     br
     = link_to 'Disqualify Him/Her', job_applicant_phase_path(@applicant.job_id, @applicant.id, "disqualified")
-  p  
-    | Action
-    br
-    = link_to 'Set Schedule', new_applicant_schedule_path(@applicant)
+
 
 br
 = link_to 'Back', job_path(@applicant.job_id) 
