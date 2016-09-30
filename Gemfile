@@ -40,6 +40,7 @@ gem 'whenever', require: false
 ## make easy for nested form
 gem "cocoon"
 
+gem 'ransack'
 gem 'mini_magick'
 gem 'carrierwave'
 gem 'kaminari'
