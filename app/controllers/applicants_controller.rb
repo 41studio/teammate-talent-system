@@ -73,9 +73,7 @@ class ApplicantsController < ApplicationController
     respond_to do |format|
       if @applicant.save
         SendMail.send_email_after_apply(@applicant, @job).deliver
-<<<<<<< HEAD
         format.html { redirect_to company_job_path(@job.company_id, @job), notice: 'Applicant was successfully created.' }
-=======
 
         #push notification
 
