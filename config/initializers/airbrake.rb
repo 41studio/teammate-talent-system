@@ -7,3 +7,11 @@ Airbrake.configure do |config|
   config.environment = Rails.env
   config.ignore_environments = %w(development test)
 end
+
+if Rails.env.staging? || Rails.env.production?
+  Airbrake.add_filter do |notice|
+    if notice[:errors].any? { |error| error[:type] == 'ActiveRecord::RecordNotFound' || error[:type] =='ActionController::RoutingError' }
+      notice.ignore!
+    end
+  end
+end
