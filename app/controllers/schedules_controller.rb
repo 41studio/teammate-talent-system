@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: schedules
+#
+#  id                    :integer          not null, primary key
+#  date                  :datetime         not null
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
+#  applicant_id          :integer
+#  category              :string(255)      not null
+#  notify_applicant_flag :string(255)      default("false"), not null
+#
+
 class SchedulesController < ApplicationController
   before_action :get_applicant, only: [:new, :create]
   before_action :set_schedule, only: [:new, :create]
@@ -8,7 +21,7 @@ class SchedulesController < ApplicationController
   # GET /schedules
   # GET /schedules.json
   def index
-    @schedules = Schedule.all
+    @schedules = current_user.get_schedules
   end
 
   # GET /schedules/1
@@ -27,8 +40,10 @@ class SchedulesController < ApplicationController
   # POST /schedules
   # POST /schedules.json
   def create
-    @schedule = @applicant.schedules.new(schedule_params)
 
+    @schedule = @applicant.schedules.new(schedule_params)
+    @schedule.notify_applicant_flag = "true"
+    
     respond_to do |format|
       if @schedule.save
         format.html { redirect_to job_applicant_path(@applicant.job_id, @applicant), notice: 'Schedule was successfully created.' }

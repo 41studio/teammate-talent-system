@@ -1,22 +1,20 @@
 h1 Listing schedules
 
-table
-  thead
-    tr
-      th Applicant
-      th Description
-      th Date
-      th
-      th
-
-  tbody
-    - @schedules.each do |schedule|
-      tr
-        td = schedule.applicant.name
-        td = schedule.category
-        td = schedule.date
-        td = link_to 'Edit', edit_schedule_path(schedule)
-        td = link_to 'Destroy', schedule, data: { confirm: 'Are you sure?' }, method: :delete
-
-br
+- unless current_user.company_id
+  
+- else
+    table
+      thead
+        tr
+          th Job
+          th Applicant
+          th Schedule
+          th Category
+      tbody  
+      - @schedules.each do |schedule|
+        	tr
+            td = " #{schedule.applicant.job.job_title}"  
+          	td = " #{schedule.applicant.name}"  
+            td = " #{schedule.date.to_formatted_s(:long_ordinal)}"
+            td = " #{schedule.category}"
 
