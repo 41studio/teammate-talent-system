@@ -12,13 +12,16 @@
 #
 
 class SchedulesController < ApplicationController
-  before_action :set_schedule, only: [:show, :destroy]
-  before_action :set_applicant, only: [:new, :create, :edit, :update]
+  before_action :get_applicant, only: [:new, :create]
+  before_action :set_schedule, only: [:new, :create]
+  before_action :get_schedule, only: [:show, :destroy, :edit, :update]
+  before_action :set_applicant, only: [:edit, :update]
+  before_action :collection
 
   # GET /schedules
   # GET /schedules.json
   def index
-    @schedules = Schedule.all
+    @schedules = current_user.get_schedules
   end
 
   # GET /schedules/1
@@ -28,7 +31,6 @@ class SchedulesController < ApplicationController
 
   # GET /schedules/new
   def new
-    
   end
 
   # GET /schedules/1/edit
@@ -38,8 +40,10 @@ class SchedulesController < ApplicationController
   # POST /schedules
   # POST /schedules.json
   def create
-    @schedule = @applicant.schedules.new(schedule_params)
 
+    @schedule = @applicant.schedules.new(schedule_params)
+    @schedule.notify_applicant_flag = "true"
+    
     respond_to do |format|
       if @schedule.save
         format.html { redirect_to job_applicant_path(@applicant.job_id, @applicant), notice: 'Schedule was successfully created.' }
@@ -56,7 +60,7 @@ class SchedulesController < ApplicationController
   def update
     respond_to do |format|
       if @schedule.update(schedule_params)
-        format.html { redirect_to @schedule, notice: 'Schedule was successfully updated.' }
+        format.html { redirect_to job_applicant_path(@applicant.job_id, @applicant), notice: 'Schedule was successfully updated.' }
         format.json { render :show, status: :ok, location: @schedule }
       else
         format.html { render :edit }
@@ -77,12 +81,24 @@ class SchedulesController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def set_applicant
+      @applicant = @schedule.applicant
+    end
+
+    def get_applicant
+      @applicant = Applicant.find(params[:id])
+    end
+
     def set_schedule
+      @schedule = @applicant.schedules.build
+    end
+
+    def get_schedule
       @schedule = Schedule.find(params[:id])
     end
 
-    def set_applicant
-      @applicant = Applicant.find(params[:id])
+    def collection
+      @collection = [["Interview", "Interview"], ["Offer", "Offer"], ["Hired", "Hired"]].collect {|i| [i[1], i[1]]}
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

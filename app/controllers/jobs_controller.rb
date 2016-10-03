@@ -70,7 +70,7 @@ class JobsController < ApplicationController
     @job.status = "draft"
     respond_to do |format|
       if @job.save
-        format.html { redirect_to @job, notice: 'Job was successfully created.' }
+        format.html { redirect_to job_path(@job), notice: 'Job was successfully created.' }
         format.json { render :show, status: :created, location: @job }
       else
         format.html { redirect_to new_company_job_path(@job.company_id), :flash => { :error => @job.errors.full_messages } }

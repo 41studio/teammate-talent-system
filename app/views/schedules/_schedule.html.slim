@@ -1,0 +1,12 @@
+tr
+	td
+		= schedule.category
+	td
+		= schedule.date
+	td
+		- if schedule.notify_applicant_flag == "true"
+			p Notified
+		- else
+			p Waiting for due date
+	td 	
+		= link_to "Edit Schedule", edit_applicant_schedule_path(schedule.applicant_id, schedule)	
