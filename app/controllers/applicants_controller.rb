@@ -99,7 +99,6 @@ class ApplicantsController < ApplicationController
         #end of push notification
 
         format.html { redirect_to job_path(@job), notice: 'Applicant was successfully created.' }
->>>>>>> 06894d0e45a2a9f7c089b17c73c5b3358703ff61
         format.json { render :show, status: :created, location: @applicant }
       else
         format.html { redirect_to new_company_job_applicant_path(@job.company_id, @job), :flash => { :error => @applicant.errors.full_messages } }
