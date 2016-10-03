@@ -1,18 +1,20 @@
 h1 Listing schedules
 
-table border=1
-  thead
-    tr
-      th Job
-      th Applicant
-      th Schedule
-  tbody
-    tr
-      td rowspan = 1
-      td rowspan = 1
-      td 
+- unless current_user.company_id
+  
+- else
+    table
+      thead
+        tr
+          th Job
+          th Applicant
+          th Schedule
+          th Category
+      tbody  
+      - @schedules.each do |schedule|
+        	tr
+            td = " #{schedule.applicant.job.job_title}"  
+          	td = " #{schedule.applicant.name}"  
+            td = " #{schedule.date.to_formatted_s(:long_ordinal)}"
+            td = " #{schedule.category}"
 
-- @schedules.each do |schedule|
-	= "JOB #{schedule.applicant.job.job_title}"  
-	= "APPLICANT #{schedule.applicant.name}"  
-	= "SCHEDULE #{schedule.date}"

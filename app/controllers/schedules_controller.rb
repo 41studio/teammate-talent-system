@@ -8,7 +8,7 @@ class SchedulesController < ApplicationController
   # GET /schedules
   # GET /schedules.json
   def index
-    @schedules = Schedule.get_schedule
+    @schedules = current_user.get_schedules
   end
 
   # GET /schedules/1

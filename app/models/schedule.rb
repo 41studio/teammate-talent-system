@@ -14,10 +14,6 @@ class Schedule < ActiveRecord::Base
 		applicants.count	
 	end
 
-	def self.get_schedule
-		self.joins(applicant: :job).where(jobs: { company_id: current_user.company_id, status: "published" } )
-	end
-
 	private
 		def date_schedule_check
 			self.date.in_time_zone.to_date == Date.tomorrow.in_time_zone.to_date && (Time.now.in_time_zone.hour >= 9 && Time.now.in_time_zone.min > 0) 
