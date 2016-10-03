@@ -73,6 +73,11 @@ class ApplicantsController < ApplicationController
     respond_to do |format|
       if @applicant.save
         SendMail.send_email_after_apply(@applicant, @job).deliver
+<<<<<<< HEAD
+=======
+        format.html { redirect_to company_job_path(@job.company_id, @job), notice: 'Applicant was successfully created.' }
+
+>>>>>>> e8a64f193e515a64860c788ac3a48d8a9f29f4a8
         #push notification
 
         app = Rpush::Gcm::App.new
