@@ -13,8 +13,7 @@ class DashboardsController < ApplicationController
   end
 
   def applicant
-  	@companies = Company.joins(:users).where(id: current_user.company_id)
-    @jobs = Job.joins(:company).where(company_id: @companies)
-    @applicants = Applicant.joins(:job).where(job_id: @jobs)
+    @jobs = current_user.company.jobs
+    @applicants = Applicant.where(job_id: @jobs)
   end
 end

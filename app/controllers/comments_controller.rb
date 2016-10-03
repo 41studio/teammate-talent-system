@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: comments
+#
+#  id           :integer          not null, primary key
+#  body         :text(65535)
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  applicant_id :integer
+#  user_id      :integer
+#
+
 class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
   before_action :set_applicant, only: [:new, :edit]
@@ -14,8 +26,6 @@ class CommentsController < ApplicationController
 
   # GET /comments/new
   def new
-    @applicant = Applicant.find(params[:id])
-    @comment = @applicant.comments.build
   end
 
   # GET /comments/1/edit
@@ -31,10 +41,10 @@ class CommentsController < ApplicationController
     @comment.user_id = current_user.id
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to job_applicant_path(@applicant.job_id,@applicant), notice: 'Comment was successfully created.' }
+        format.html { redirect_to company_job_applicant_path(current_user.company_id, @applicant.job_id, @applicant), notice: 'Comment was successfully created.' }
         format.json { render :show, status: :created, location: @comment }
       else
-        format.html { render :new }
+        format.html { redirect_to company_job_applicant_path(current_user.company_id, @applicant.job_id, @applicant), :flash => { :error => @comment.errors.full_messages[0] } }
         format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
     end
@@ -71,7 +81,7 @@ class CommentsController < ApplicationController
     end
 
     def set_applicant
-      @applicant = Applicant.find(params[:id])
+      @applicant = Applicant.find(params[:applicant_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

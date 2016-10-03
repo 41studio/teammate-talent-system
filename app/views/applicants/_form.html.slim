@@ -1,10 +1,11 @@
-= form_for [@job, @job.applicants.build] do |f|
-  - if @job.errors.any?
+= form_for @form, url: @url do |f|
+  - if flash.any?
     #error_explanation
-      h2 = "#{pluralize(@job.errors.count, "error")} prohibited this applicant from being saved:"
+    - flash.each do |key, message|
+      h2 = "#{pluralize(message.count, "error")} prohibited this applicant from being saved:"
       ul
-        - @job.errors.full_messages.each do |message|
-          li = message
+        - message.each do |value|
+          li = value
 
   .field
     = f.label :name

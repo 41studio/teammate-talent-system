@@ -8,9 +8,9 @@ p Company
 hr style="height:1px; background-color:black;"
 p Drafted Jobs
 - @drafted_jobs.each do |job|
-  = link_to job.job_title, job
+  = link_to job.job_title, company_job_path(@company, job)
   br
-  = link_to "edit #{job.job_title}", edit_job_path(job)
+  = link_to "edit #{job.job_title}", edit_company_job_path(@company, job)
   p
   	| Created 
    	= time_ago_in_words(job.created_at)
@@ -19,7 +19,7 @@ p Drafted Jobs
 hr style="height:1px; background-color:black;"
 p Published Jobs
 - @published_jobs.each do |job|
-  = link_to job.job_title, job
+  = link_to job.job_title, company_job_path(@company, job)
   p
     | Applicants :
     = job.applicants_count
@@ -37,27 +37,27 @@ p Published Jobs
     tr align="center"
       td
         - if job.applied_count > 0
-          = link_to job.applied_count, job_applicant_status_path(job, "applied")
+          = link_to job.applied_count, company_job_applicant_status_path(@company, job, "applied")
         - else
           | -
       td
         - if job.phone_screen_count > 0
-          = link_to job.phone_screen_count, job_applicant_status_path(job, "phone_screen")
+          = link_to job.phone_screen_count, company_job_applicant_status_path(@company, job, "phone_screen")
         - else
           | -
       td
         - if job.interview_count > 0
-          = link_to job.interview_count, job_applicant_status_path(job, "interview")
+          = link_to job.interview_count, company_job_applicant_status_path(@company, job, "interview")
         - else
           | -
       td
         - if job.offer_count > 0
-          = link_to job.offer_count, job_applicant_status_path(job, "offer")
+          = link_to job.offer_count, company_job_applicant_status_path(@company, job, "offer")
         - else
           | -
       td
         - if job.hired_count > 0
-          = link_to job.hired_count, job_applicant_status_path(job, "hired")
+          = link_to job.hired_count, company_job_applicant_status_path(@company, job, "hired")
         - else
           | -
   br

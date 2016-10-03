@@ -1,12 +1,12 @@
-= form_for [@applicant, @comment] do |f|
-  - if @comment.errors.any?
+= form_for @form, url: @url do |f|
+  - if flash.any?
     #error_explanation
-      h2 = "#{pluralize(@comment.errors.count, "error")} prohibited this comment from being saved:"
+      h2 = "#{pluralize(flash.count, "error")} prohibited this comment from being saved:"
       ul
-        - @comment.errors.full_messages.each do |message|
+        - flash.each do |key,message|
           li = message
 
   .field
     = f.label :body
-    = f.text_area :body
+    = f.text_area :body, required: false
   .actions = f.submit
