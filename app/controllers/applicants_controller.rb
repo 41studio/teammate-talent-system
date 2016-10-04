@@ -38,9 +38,9 @@ class ApplicantsController < ApplicationController
     applicant = Applicant.find(params[:id])
     @recruitment_level = applicant.applicant_recruitment_level
     @disabled_level = applicant.disable_level(params[:id])
+    @new_comment = Comment.build_from(applicant, current_user.id, "")
     @url = company_job_applicant_comments_path(params[:company_id], params[:job_id], params[:id])
-    @form = set_company.jobs.find(params[:job_id]).applicants.find(params[:id]).comments.new
-    @comments = applicant.comments
+    @comments = applicant.comment_threads
   end
 
   # GET /applicants/new
@@ -50,7 +50,7 @@ class ApplicantsController < ApplicationController
     @applicant = Applicant.new
     @applicant.educations.build
     @applicant.experiences.build
-    @url = url_for(:controller => 'applicants', :action => 'create')
+    @url = company_job_applicants_path(params[:company_id], params[:job_id])
   end
 
   # GET /applicants/1/edit
@@ -69,6 +69,7 @@ class ApplicantsController < ApplicationController
   def create
     @job = Job.find(params[:job_id])
     @applicant = @job.applicants.new(applicant_params)
+    @form = @applicant
     @applicant.status = "applied"
     respond_to do |format|
       if @applicant.save
@@ -98,7 +99,7 @@ class ApplicantsController < ApplicationController
 
         #end of push notification
 
-        format.html { redirect_to job_path(@job), notice: 'Applicant was successfully created.' }
+        format.html { redirect_to company_job_path(@job.company_id, @job), notice: 'Applicant was successfully created.' }
         format.json { render :show, status: :created, location: @applicant }
       else
         format.html { render :new }

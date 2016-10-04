@@ -18,4 +18,6 @@
 //= require nprogress-turbolinks
 //= require nprogress-ajax
 //= require cocoon
+//= require moment
+//= require bootstrap-datetimepicker
 //= require js-routes

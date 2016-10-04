@@ -19,6 +19,7 @@
 #
 
 class Applicant < ActiveRecord::Base
+	acts_as_commentable
 	belongs_to :job
 	has_and_belongs_to_many :educations
 	has_and_belongs_to_many :experiences
@@ -36,6 +37,7 @@ class Applicant < ActiveRecord::Base
 	validates :name, :gender, :date_birth, :email, :phone, :address, :photo, :resume,  presence: true
 	validates :name, length: {in: 2..70}
 	validates :gender, inclusion: { in: %w(Male Female), message: "%{value} is not a gender"}
+	validates :phone, numericality: true
 	validates_processing_of :photo
 	validate :image_size_validation
 

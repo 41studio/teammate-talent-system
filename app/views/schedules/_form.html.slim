@@ -5,13 +5,22 @@
       ul
         - @applicant.errors.full_messages.each do |message|
           li = message
-
-  .field
-  	= f.label :date
-    = f.datetime_select :date, order: [:day, :month, :year], start_year: (Date.today.year), end_year: (Date.today.year)+1, prompt: { day: 'Select day', month: 'Select month', year: 'Select year' }
+  div.row
+    div.col-md-4
+      div.form-group
+        div.input-group.date#datetimepicker1
+          = f.text_field :date, class: "form-control"
+          = content_tag(:span, content_tag(:span, "", class: "glyphicon glyphicon-calendar"), class: "input-group-addon")
 
   .field
   	= f.label :category
   	= f.select :category, @collection, include_blank: 'Select Schedule'
 
   .actions = f.submit
+- content_for :javascript_in_file do
+  javascript:
+    $(function () {
+      $('#datetimepicker1').datetimepicker({
+        format: 'DD-MM-YYYY HH:mm'
+      });
+    });
