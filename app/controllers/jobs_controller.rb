@@ -1,7 +1,37 @@
+# == Schema Information
+#
+# Table name: jobs
+#
+#  id                      :integer          not null, primary key
+#  job_title               :string(255)      default(""), not null
+#  departement             :string(255)      default(""), not null
+#  job_code                :string(255)      default(""), not null
+#  country                 :string(255)      default(""), not null
+#  state                   :string(255)      default(""), not null
+#  city                    :string(255)      default(""), not null
+#  zip_code                :string(255)      default(""), not null
+#  min_salary              :integer          default(0), not null
+#  max_salary              :integer          default(0), not null
+#  curency                 :string(255)      default(""), not null
+#  job_description         :text(65535)      not null
+#  job_requirement         :text(65535)      not null
+#  benefits                :text(65535)      not null
+#  job_search_keyword      :string(255)      default(""), not null
+#  created_at              :datetime         not null
+#  updated_at              :datetime         not null
+#  company_id              :integer
+#  education_list_id       :integer
+#  employment_type_list_id :integer
+#  experience_list_id      :integer
+#  function_list_id        :integer
+#  industry_list_id        :integer
+#  status                  :string(255)
+#
+
 class JobsController < ApplicationController
   skip_before_filter :authenticate_user!, only: [:index, :show]
   before_action :set_job, only: [:show, :edit, :update, :destroy]
-  before_action :set_company, only: [:new, :edit]
+  before_action :set_company, only: [:new]
   before_action :set_collection, only: [:new, :edit, :create, :update]
 
   # GET /jobs
@@ -22,16 +52,15 @@ class JobsController < ApplicationController
 
   # GET /jobs/new
   def new
-    @company = Company.find(params[:company_id])
-    @job = @company.jobs.build
-    @form = [@company,@job]
+    @job = set_company.jobs.new
+    @url = url_for(:controller => 'jobs', :action => 'create')
   end
 
   # GET /jobs/1/edit
   def edit
-    @company = Company.find(set_job.company_id)
-    @job = @company.jobs.find(params[:id])
-    @form = @job
+    # @company = Company.find(set_job.company_id)
+    @job = set_company.jobs.find(set_job)
+    @url = url_for(:controller => 'jobs', :action => 'update')
   end
 
   # POST /jobs
@@ -44,7 +73,7 @@ class JobsController < ApplicationController
         format.html { redirect_to job_path(@job), notice: 'Job was successfully created.' }
         format.json { render :show, status: :created, location: @job }
       else
-        format.html { render :new }
+        format.html { redirect_to new_company_job_path(@job.company_id), :flash => { :error => @job.errors.full_messages } }
         format.json { render json: @job.errors, status: :unprocessable_entity }
       end
     end
@@ -58,7 +87,7 @@ class JobsController < ApplicationController
         format.html { redirect_to @job, notice: 'Job was successfully updated.' }
         format.json { render :show, status: :ok, location: @job }
       else
-        format.html { render :edit }
+        format.html { redirect_to edit_company_job_path(@job.company_id, @job), :flash => { :error => @job.errors.full_messages } }
         format.json { render json: @job.errors, status: :unprocessable_entity }
       end
     end
@@ -80,12 +109,12 @@ class JobsController < ApplicationController
     if @job.status == "published" or @job.status == "closed"
       if @job.save!
         respond_to do |format|
-          format.html { redirect_to job_path(@job.id), notice: 'Job was successfully '+@job.status+'.' }
+          format.html { redirect_to company_job_path(@job.company_id, @job), notice: 'Job was successfully '+@job.status+'.' }
         end
       end
     else
       respond_to do |format|
-        format.html { redirect_to job_path(@job.id), notice: 'Invalid command!' }
+        format.html { redirect_to company_job_path(@job.company_id, @job), notice: 'Invalid command!' }
       end
     end
   end

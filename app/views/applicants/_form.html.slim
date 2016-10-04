@@ -1,9 +1,9 @@
-= form_for [@job, @job.applicants.build] do |f|
-  - if @job.errors.any?
+= form_for @form, url: company_job_applicants_path(params[:company_id], params[:job_id]) do |f|
+  - if @applicant.errors.any?
     #error_explanation
-      h2 = "#{pluralize(@job.errors.count, "error")} prohibited this applicant from being saved:"
+      h2 = "#{pluralize(@applicant.errors.count, "error")} prohibited this applicant from being saved:"
       ul
-        - @job.errors.full_messages.each do |message|
+        - @applicant.errors.full_messages.each do |message|
           li = message
 
   .field

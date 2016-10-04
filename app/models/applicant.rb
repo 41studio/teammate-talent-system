@@ -1,4 +1,25 @@
+# == Schema Information
+#
+# Table name: applicants
+#
+#  id         :integer          not null, primary key
+#  name       :string(255)      default(""), not null
+#  gender     :string(255)      default(""), not null
+#  date_birth :date             not null
+#  email      :string(255)      default(""), not null
+#  headline   :string(255)      default(""), not null
+#  phone      :string(255)      default(""), not null
+#  address    :string(255)      default(""), not null
+#  photo      :string(255)      default(""), not null
+#  resume     :string(255)      default(""), not null
+#  status     :string(255)      default("Applied"), not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  job_id     :integer
+#
+
 class Applicant < ActiveRecord::Base
+	acts_as_commentable
 	belongs_to :job
 	has_and_belongs_to_many :educations
 	has_and_belongs_to_many :experiences
@@ -16,6 +37,7 @@ class Applicant < ActiveRecord::Base
 	validates :name, :gender, :date_birth, :email, :phone, :address, :photo, :resume,  presence: true
 	validates :name, length: {in: 2..70}
 	validates :gender, inclusion: { in: %w(Male Female), message: "%{value} is not a gender"}
+	validates :phone, numericality: true
 	validates_processing_of :photo
 	validate :image_size_validation
 

@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: schedules
+#
+#  id                    :integer          not null, primary key
+#  date                  :datetime         not null
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
+#  applicant_id          :integer
+#  category              :string(255)      not null
+#  notify_applicant_flag :string(255)      default("false"), not null
+#
+
 class SchedulesController < ApplicationController
   before_action :get_applicant, only: [:new, :create]
   before_action :set_schedule, only: [:new, :create]
@@ -33,7 +46,7 @@ class SchedulesController < ApplicationController
     
     respond_to do |format|
       if @schedule.save
-        format.html { redirect_to job_applicant_path(@applicant.job_id, @applicant), notice: 'Schedule was successfully created.' }
+        format.html { redirect_to company_job_applicant_path(current_user.company_id, @applicant.job_id, @applicant), notice: 'Schedule was successfully created.' }
         format.json { render :show, status: :created, location: @schedule }
       else
         format.html { render :new }
@@ -47,7 +60,7 @@ class SchedulesController < ApplicationController
   def update
     respond_to do |format|
       if @schedule.update(schedule_params)
-        format.html { redirect_to job_applicant_path(@applicant.job_id, @applicant), notice: 'Schedule was successfully updated.' }
+        format.html { redirect_to company_job_applicant_path(current_user.company_id, @applicant.job_id, @applicant), notice: 'Schedule was successfully updated.' }
         format.json { render :show, status: :ok, location: @schedule }
       else
         format.html { render :edit }

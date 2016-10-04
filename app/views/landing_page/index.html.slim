@@ -8,7 +8,7 @@ h1
 		br
   	= link_to 'logout', destroy_user_session_path, method: :delete
 - else
-	= form_tag(jobs_path, method: 'get', id: 'search-form') do
+	= form_tag(root_path, method: 'get', id: 'search-form') do
 		= text_field_tag :search, params[:search], placeholder: 'search job'
 		= submit_tag "search"
 
@@ -17,7 +17,7 @@ h1
 	- if @jobs.present?
 		h3 Related Jobs
 		- @jobs.each do |job|
-			= link_to job.job_title, job_path(job)
+			= link_to job.job_title, company_job_path(job.company_id, job)
 			br
 			= render job.company
 	- else

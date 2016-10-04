@@ -1,81 +1,42 @@
 class CommentsController < ApplicationController
-  before_action :set_comment, only: [:show, :edit, :update, :destroy]
-  before_action :set_applicant, only: [:new, :edit]
-  # GET /comments
-  # GET /comments.json
-  def index
-    @comments = Comment.all
-  end
 
-  # GET /comments/1
-  # GET /comments/1.json
-  def show
-  end
-
-  # GET /comments/new
-  def new
-    @applicant = Applicant.find(params[:id])
-    @comment = @applicant.comments.build
-  end
-
-  # GET /comments/1/edit
-  def edit
-    @applicant = Applicant.find(params[:id])
-    @comment = @applicant.comments.find(params[:id])
-  end
-
-  # POST /comments
-  # POST /comments.json
-  def create
-    @comment = set_applicant.comments.new(comment_params)
-    # @comment.user_id = current_user.id
+	before_action :authenticate_user!
+	
+	def create
+		@applicant = Applicant.find(params[:applicant_id])
+		@comment = Comment.build_from(@applicant, current_user.id, params[:comment][:body])		
     respond_to do |format|
-      if @comment.save
-        format.html { redirect_to job_applicant_path(@applicant.job_id,@applicant), notice: 'Comment was successfully created.' }
-        format.json { render :show, status: :created, location: @comment }
-      else
-        format.html { render :new }
-        format.json { render json: @comment.errors, status: :unprocessable_entity }
-      end
+    	if @comment.save
+    		format.html { redirect_to company_job_applicant_path(params[:company_id], params[:job_id], params[:applicant_id]), notice: "commented" }
+    	else
+    		format.html { redirect_to company_job_applicant_path(params[:company_id], params[:job_id], params[:applicant_id]) }
+    	end
     end
+	end
+
+	def comment_params
+    params.require(:comment).permit(:body, :commentable_id, :commentable_type, :comment_id)
   end
 
-  # PATCH/PUT /comments/1
-  # PATCH/PUT /comments/1.json
-  def update
-    respond_to do |format|
-      if @comment.update(comment_params)
-        format.html { redirect_to @comment, notice: 'Comment was successfully updated.' }
-        format.json { render :show, status: :ok, location: @comment }
-      else
-        format.html { render :edit }
-        format.json { render json: @comment.errors, status: :unprocessable_entity }
-      end
-    end
+  # def commentable_type
+  #   comment_params[:commentable_type]
+  # end
+
+  # def commentable_id
+  #   comment_params[:commentable_id]
+  # end
+
+  # def comment_id
+  #   comment_params[:comment_id]
+  # end
+
+  # def body
+  #   comment_params[:body]
+  # end
+
+  def make_child_comment
+    return "" if comment_id.blank?
+    parent_comment = Comment.find comment_id
+    @comment.move_to_child_of(parent_comment)
   end
-
-  # DELETE /comments/1
-  # DELETE /comments/1.json
-  def destroy
-    @comment.destroy
-    respond_to do |format|
-      format.html { redirect_to comments_url, notice: 'Comment was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
-
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_comment
-      @comment = Comment.find(params[:id])
-    end
-
-    def set_applicant
-      @applicant = Applicant.find(params[:id])
-    end
-
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def comment_params
-      params.require(:comment).permit(:body)
-    end
 end

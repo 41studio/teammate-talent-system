@@ -4,4 +4,4 @@ h1 welcome
 br
 - @applicants.each do |applicant|
 	br
-	= link_to applicant.name, job_applicant_path(applicant.job_id,applicant.id)
+	= link_to applicant.name, company_job_applicant_path(current_user.company,applicant.job_id,applicant.id)

@@ -1,3 +1,33 @@
+# == Schema Information
+#
+# Table name: jobs
+#
+#  id                      :integer          not null, primary key
+#  job_title               :string(255)      default(""), not null
+#  departement             :string(255)      default(""), not null
+#  job_code                :string(255)      default(""), not null
+#  country                 :string(255)      default(""), not null
+#  state                   :string(255)      default(""), not null
+#  city                    :string(255)      default(""), not null
+#  zip_code                :string(255)      default(""), not null
+#  min_salary              :integer          default(0), not null
+#  max_salary              :integer          default(0), not null
+#  curency                 :string(255)      default(""), not null
+#  job_description         :text(65535)      not null
+#  job_requirement         :text(65535)      not null
+#  benefits                :text(65535)      not null
+#  job_search_keyword      :string(255)      default(""), not null
+#  created_at              :datetime         not null
+#  updated_at              :datetime         not null
+#  company_id              :integer
+#  education_list_id       :integer
+#  employment_type_list_id :integer
+#  experience_list_id      :integer
+#  function_list_id        :integer
+#  industry_list_id        :integer
+#  status                  :string(255)
+#
+
 class Job < ActiveRecord::Base
 	has_many :applicants, dependent: :destroy
 	belongs_to :company
@@ -16,6 +46,7 @@ class Job < ActiveRecord::Base
 	validates :min_salary, :max_salary, numericality: { greater_than_or_equal_to: 1 }
 	validate :salary_regulation, :experience_collection_validation,:function_collection_validation,
 		:employment_type_collection_validation,:industry_collection_validation,:education_collection_validation
+	before_save :job_title
 
 	def applicants_count
 		applicants.count
@@ -105,4 +136,8 @@ class Job < ActiveRecord::Base
 	def self.search(search)
 		where("status = \"published\" and (job_title LIKE ? OR job_search_keyword LIKE ?)", "%#{search}%", "%#{search}%")
 	end
+
+	def job_title
+    self[:job_title].titleize
+  end
 end

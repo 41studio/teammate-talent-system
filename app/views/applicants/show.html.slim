@@ -56,17 +56,18 @@ p
 hr
   h3  
     | Schedule of Applicant
-    br
+  p 
     = link_to 'Set Schedule', new_applicant_schedule_path(@applicant)
 
-  table 
-    tr 
-      th Category 
-      th Date 
-      th Send notify email? 
-      th
-      th
-    = render @applicant.schedules
+- if @applicant.schedules.present?
+    table 
+      tr 
+        th Category 
+        th Date 
+        th Send notify email? 
+        th
+        th
+      = render @applicant.schedules
 hr
 
 p
@@ -87,7 +88,7 @@ p
   - @comments.each do |c|
     p
       h4
-        = c.get_user_name(c.user_id).email
+        = c.user.email
       h5
         = c.body
       = time_ago_in_words(c.created_at)
@@ -101,16 +102,15 @@ hr
   p  
     | Action
     br
-    = link_to 'Disqualify Him/Her', job_applicant_phase_path(@applicant.job_id, @applicant.id, "disqualified")
-
+    = link_to 'Disqualify Him/Her', company_job_applicant_phase_path(params[:company_id], @applicant.job_id, @applicant.id, "disqualified")
 
 br
-= link_to 'Back', job_path(@applicant.job_id) 
+= link_to 'Back', company_job_path(params[:company_id], @applicant.job_id) 
 - content_for :javascript_in_file do
   javascript:
     $('#status').on('click', function(){
       $.ajax({
-        url: Routes.job_applicant_phase_path("#{@applicant.job_id}", "#{@applicant.id}", $(this).val()),
+        url: Routes.company_job_applicant_phase_path("#{params[:company_id]}", "#{@applicant.job_id}", "#{@applicant.id}", $(this).val()),
         method: 'get',
         success: function(result){
           //alert("Applicant upgraded to " + $(this).val());

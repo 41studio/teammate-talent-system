@@ -1,25 +1,19 @@
 Rails.application.routes.draw do
   resources :companies, except: [:index] do
-    resources :jobs, only: [:new, :create]
-  end
-  resources :jobs, except: [:new, :create] do 
-    resources :applicants, only: [:new, :create, :show] do
-      get '/:phase', to: 'applicants#phase', as: 'phase'
+    resources :jobs do 
+      resources :applicants, only: [:new, :create, :show] do
+        resources :comments, only: [:create]
+        get '/:phase', to: 'applicants#phase', as: 'phase'
+      end
+      get '/applicant/:status', to: 'applicants#applicant_status', as: 'applicant_status'
     end
-    get '/applicant/:status', to: 'applicants#applicant_status', as: 'applicant_status'
+    get '/jobs/:id/:status', to: 'jobs#upgrade_status', as:'upgrade_status'
   end
-
-  # applicant comment
-  post '/applicant/:id/comments/', to: 'comments#create', as: 'applicant_comments'
-  get '/applicant/:id/comments/new', to: 'comments#new', as: 'new_applicant_comments'
-  # applicant comment
-  
-  get '/jobs/:id/:status', to: 'jobs#upgrade_status', as:'upgrade_status'
-  resources :dashboards
+  resources :dashboards, only: [:index]
+  # get '/dashboards' => "dashboards#index", as: :user_root
   devise_for :users, :controllers => { registrations: 'registrations', confirmations: 'confirmations' }
 
   post '/:job_id/:id/email_to_applicant', to: 'applicants#send_email', as: :email_to_applicant
-  get '/dashboards' => "dashboards#index", as: :user_root
 
   resources :schedules, only: [:index, :show, :destroy]
   get '/applicants/:id/schedules/new' => 'schedules#new', as: 'new_applicant_schedule'
