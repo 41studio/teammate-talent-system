@@ -50,7 +50,10 @@ gem 'slim-rails'
 gem 'nprogress-rails'
 gem 'friendly_id', '~> 5.1.0'
 gem 'dotenv-rails'
-gem "js-routes"
+gem 'js-routes'
+gem 'acts_as_commentable_with_threading'
+gem 'momentjs-rails', '>= 2.9.0'
+gem 'bootstrap3-datetimepicker-rails', '~> 4.17.42'
 
 ## API
 gem 'simple_token_authentication', '~> 1.0'

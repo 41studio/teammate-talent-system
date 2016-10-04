@@ -2,8 +2,8 @@ Rails.application.routes.draw do
   resources :companies, except: [:index] do
     resources :jobs do 
       resources :applicants, only: [:new, :create, :show] do
+        resources :comments, only: [:create]
         get '/:phase', to: 'applicants#phase', as: 'phase'
-        resources :comments
       end
       get '/applicant/:status', to: 'applicants#applicant_status', as: 'applicant_status'
     end

@@ -44,6 +44,10 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
+    acts_as_commentable_with_threading (2.0.1)
+      activerecord (>= 4.0)
+      activesupport (>= 4.0)
+      awesome_nested_set (>= 3.0)
     addressable (2.4.0)
     airbrake (5.5.0)
       airbrake-ruby (~> 1.5)
@@ -51,6 +55,8 @@ GEM
     arel (6.0.3)
     autoprefixer-rails (6.4.1.1)
       execjs
+    awesome_nested_set (3.1.1)
+      activerecord (>= 4.0.0, < 5.1)
     axiom-types (0.1.1)
       descendants_tracker (~> 0.0.4)
       ice_nine (~> 0.11.0)
@@ -70,6 +76,8 @@ GEM
       sass (>= 3.3.4)
     bootstrap-sass-extras (0.0.7)
       rails (>= 3.1.0)
+    bootstrap3-datetimepicker-rails (4.17.42)
+      momentjs-rails (>= 2.8.1)
     builder (3.2.2)
     bullet (5.4.0)
       activesupport (>= 3.0.0)
@@ -165,6 +173,8 @@ GEM
     mini_magick (4.5.1)
     mini_portile2 (2.1.0)
     minitest (5.9.0)
+    momentjs-rails (2.15.1)
+      railties (>= 3.1)
     multi_json (1.12.1)
     multi_xml (0.5.5)
     mustermann19 (0.4.4)
@@ -281,6 +291,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  acts_as_commentable_with_threading
   airbrake (~> 5.0)
   annotate!
   better_errors
@@ -288,6 +299,7 @@ DEPENDENCIES
   bootstrap-kaminari-views
   bootstrap-sass
   bootstrap-sass-extras
+  bootstrap3-datetimepicker-rails (~> 4.17.42)
   bullet
   byebug
   carrierwave
@@ -305,6 +317,7 @@ DEPENDENCIES
   letter_opener
   letter_opener_web (~> 1.2.0)
   mini_magick
+  momentjs-rails (>= 2.9.0)
   mysql2
   nprogress-rails
   puma

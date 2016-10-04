@@ -1,12 +1,5 @@
-= form_for @form, url: @url do |f|
-  - if flash.any?
-    #error_explanation
-      h2 = "#{pluralize(flash.count, "error")} prohibited this comment from being saved:"
-      ul
-        - flash.each do |key,message|
-          li = message
+= form_for @new_comment, url: @url do |f|
 
   .field
-    = f.label :body
-    = f.text_area :body, required: false
+    = f.text_area :body
   .actions = f.submit
