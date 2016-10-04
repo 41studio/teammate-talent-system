@@ -13,7 +13,7 @@
 
 class Schedule < ActiveRecord::Base
 	belongs_to :applicant
-	validates_presence_of :date, :category
+	validates_presence_of :start_date, :end_date, :category
 	validate :time_exist
 
 	after_create :send_notify_applicant_email
@@ -21,7 +21,7 @@ class Schedule < ActiveRecord::Base
 	after_destroy :send_canceled_notify_applicant_email
 
 	def time_exist
-		errors.add(:date, " is exist for this applicant")  if Schedule.where.not(date: self.date).include?self.date
+		errors.add(:start_date, " is exist for this applicant")  if Schedule.where.not(start_date: self.start_date).include?self.start_date
 	end
 
 	def applicant_total
@@ -30,7 +30,7 @@ class Schedule < ActiveRecord::Base
 
 	private
 		def date_schedule_check
-			self.date.in_time_zone.to_date == Date.tomorrow.in_time_zone.to_date && (Time.now.in_time_zone.hour >= 9 && Time.now.in_time_zone.min > 0) 
+			self.start_date.in_time_zone.to_date == Date.tomorrow.in_time_zone.to_date && (Time.now.in_time_zone.hour >= 9 && Time.now.in_time_zone.min > 0) 
 		end
 
 		def send_notify_applicant_email

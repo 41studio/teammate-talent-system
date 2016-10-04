@@ -40,7 +40,6 @@ class SchedulesController < ApplicationController
   # POST /schedules
   # POST /schedules.json
   def create
-
     @schedule = @applicant.schedules.new(schedule_params)
     @schedule.notify_applicant_flag = "true"
     
@@ -103,6 +102,6 @@ class SchedulesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def schedule_params
-      params.require(:schedule).permit(:date, :category)
+      params.require(:schedule).permit(:start_date, :end_date, :category)
     end
 end
