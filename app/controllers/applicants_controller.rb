@@ -73,11 +73,8 @@ class ApplicantsController < ApplicationController
     respond_to do |format|
       if @applicant.save
         SendMail.send_email_after_apply(@applicant, @job).deliver
-<<<<<<< HEAD
-=======
         format.html { redirect_to company_job_path(@job.company_id, @job), notice: 'Applicant was successfully created.' }
 
->>>>>>> e8a64f193e515a64860c788ac3a48d8a9f29f4a8
         #push notification
 
         app = Rpush::Gcm::App.new
@@ -104,7 +101,7 @@ class ApplicantsController < ApplicationController
         format.html { redirect_to job_path(@job), notice: 'Applicant was successfully created.' }
         format.json { render :show, status: :created, location: @applicant }
       else
-        format.html { redirect_to new_company_job_applicant_path(@job.company_id, @job), :flash => { :error => @applicant.errors.full_messages } }
+        format.html { render :new }
         format.json { render json: @applicant.errors, status: :unprocessable_entity }
       end
     end
