@@ -42,11 +42,9 @@ class CompaniesController < ApplicationController
   # POST /companies.json
   def create
     @company = Company.new(company_params)
-
     respond_to do |format|
       if @company.save
         current_user.update_attribute(:company_id, @company.id)
-
         format.html { redirect_to dashboards_path, notice: 'Company was successfully created.' }
         format.json { render :show, status: :created, location: @company }
       else
