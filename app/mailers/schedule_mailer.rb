@@ -5,7 +5,7 @@ class ScheduleMailer < ApplicationMailer
 
 		@email = applicant.email
 		@applicant = applicant.name
-		@subject = schedule.category
+		@subject = "#{schedule.category} Schedule"
 		@date = schedule.date
 		mail(to: @email, subject: @subject)
 	end
@@ -15,7 +15,17 @@ class ScheduleMailer < ApplicationMailer
 
 		@email = applicant.email
 		@applicant = applicant.name
-		@subject = schedule.category
+		@subject = "Update #{schedule.category} Schedule"
+		@date = schedule.date
+		mail(to: @email, subject: @subject)
+	end
+
+  	def canceled_notify_applicant_email(applicant, schedule)
+		mail(to: @email, subject: "Nama Aplikasi - Canceled #{@subject} Schedule")
+
+		@email = applicant.email
+		@applicant = applicant.name
+		@subject = "Canceled #{schedule.category}"
 		@date = schedule.date
 		mail(to: @email, subject: @subject)
 	end

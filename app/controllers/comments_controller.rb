@@ -28,7 +28,7 @@ class CommentsController < ApplicationController
   # POST /comments.json
   def create
     @comment = set_applicant.comments.new(comment_params)
-    @comment.user_id = current_user.id
+    # @comment.user_id = current_user.id
     respond_to do |format|
       if @comment.save
         format.html { redirect_to job_applicant_path(@applicant.job_id,@applicant), notice: 'Comment was successfully created.' }

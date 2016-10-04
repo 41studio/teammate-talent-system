@@ -9,4 +9,7 @@ tr
 		- else
 			p Waiting for due date
 	td 	
-		= link_to "Edit Schedule", edit_applicant_schedule_path(schedule.applicant_id, schedule)	
+		= link_to "Edit Schedule ", edit_applicant_schedule_path(schedule.applicant_id, schedule)
+			
+	td 	
+		= link_to " Delete Schedule", schedule, data: { confirm: 'Are you sure?' }, method: :delete
