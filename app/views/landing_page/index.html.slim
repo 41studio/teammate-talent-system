@@ -5,7 +5,6 @@ h1
 	= text_field_tag :search, params[:search], placeholder: 'search job'
 	= submit_tag "search"
 
-= link_to 'Sign in', user_session_path
 hr
 - if @jobs.present?
 	h3 Related Jobs

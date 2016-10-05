@@ -36,7 +36,7 @@
   .field
     = f.file_field :photo, accept: 'image/png,image/jpeg'
     - if f.object.photo?
-      = image_tag f.object.photo.thumb.url
+      = cl_image_tag f.object.photo.thumb.url
       = f.label :remove_photo
       = f.check_box :remove_photo
   .field
