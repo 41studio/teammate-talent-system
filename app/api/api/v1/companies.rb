@@ -25,8 +25,3 @@ module API
     end
   end
 end
-
-
-
-prejudice
-deemed
