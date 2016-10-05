@@ -3,7 +3,8 @@ module API
     class Jobs < Grape::API
       version 'v1'
       format :json
-
+      before { authenticate! }
+      
       helpers do
         params :job_id do
           requires :id, type: Integer, desc: "Job id" 
@@ -18,8 +19,7 @@ module API
           --------------------
           NOTE
         }
-        get do
-          authenticate!
+        get '/all' do
           user_jobs = {user: current_user, jobs: [current_user.company.jobs]}
         end
 

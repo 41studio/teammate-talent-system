@@ -3,6 +3,7 @@ module API
     class Applicants < Grape::API
       version 'v1'
       format :json
+      before { authenticate! }
 
       helpers do
         params :applicant_id do
@@ -43,7 +44,6 @@ module API
           requires :status        ,type: String, desc: "Applicant status"
         end
         put ':id' do
-          authenticate!
           begin
             applicant = Applicant.find(params[:id])
             if applicant.update_attribute(:status, params[:status])
