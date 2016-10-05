@@ -4,7 +4,7 @@ development:
   api_key: '157486531645444'
   api_secret: BwWIgnN1VtInJpl1jYW2W01yU_0
   enhance_image_tag: true
-  static_image_support: true
+  static_image_support: false
 staging:
   cloud_name: douvfh6mo
   api_key: '157486531645444'

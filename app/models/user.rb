@@ -30,7 +30,8 @@
 
 class User < ActiveRecord::Base
 	belongs_to :company	
-	validates :first_name, :last_name, :email, presence: true
+	has_many :api_keys
+  validates :first_name, :last_name, :email, presence: true
   acts_as_token_authenticatable
   before_save :ensure_authentication_token
 
@@ -40,12 +41,34 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, 
          :confirmable         
 
+  def fullname
+    self.first_name + " " + self.last_name
+  end  
+
   def get_schedules
-    Schedule.joins(applicant: :job).where(jobs: { company_id: self.company_id, status: "published" } ).order(date: :desc)
+    Schedule.joins(applicant: :job).where(jobs: { company_id: self.company_id, status: "published" } ).order(start_date: :desc)
   end
 
   def ensure_authentication_token
     self.authentication_token ||= generate_authentication_token
+  end
+
+  def self.authenticate_for_api(email, password)
+    if user = self.find_for_authentication(email: email)
+      if user.valid_password?(password)
+        key = user.api_keys.create
+        user.save
+        user
+      else
+        false
+      end
+    else
+      false      
+    end
+  end
+
+  def token
+    self.api_keys.nil? ? nil : self.api_keys.last.access_token
   end
 
   private

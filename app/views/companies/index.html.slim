@@ -21,7 +21,7 @@ table
         td = company.company_email
         td = company.company_phone
         td = company.industry
-        td = image_tag company.photo_company.thumb.url
+        td = cl_image_tag company.photo_company.thumb.url
         td = link_to 'Show', company
         td = link_to 'Edit', edit_company_path(company)
         td = link_to 'Destroy', company, data: { confirm: 'Are you sure?' }, method: :delete
