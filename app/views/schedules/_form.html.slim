@@ -5,11 +5,22 @@
       ul
         - @applicant.errors.full_messages.each do |message|
           li = message
-  div.row
+
+  .container
     div.col-md-4
+      .field
+        = f.label :start_date
       div.form-group
         div.input-group.date#datetimepicker1
-          = f.text_field :date, class: "form-control"
+          = f.text_field :start_date, class: "form-control"
+          = content_tag(:span, content_tag(:span, "", class: "glyphicon glyphicon-calendar"), class: "input-group-addon")
+
+    div.col-md-4
+      .field
+        = f.label :end_date
+      div.form-group
+        div.input-group.date#datetimepicker2
+          = f.text_field :end_date, class: "form-control"
           = content_tag(:span, content_tag(:span, "", class: "glyphicon glyphicon-calendar"), class: "input-group-addon")
 
   .field
@@ -17,10 +28,19 @@
   	= f.select :category, @collection, include_blank: 'Select Schedule'
 
   .actions = f.submit
+  
 - content_for :javascript_in_file do
   javascript:
     $(function () {
       $('#datetimepicker1').datetimepicker({
         format: 'DD-MM-YYYY HH:mm'
       });
+      $('#datetimepicker2').datetimepicker({
+        format: 'DD-MM-YYYY HH:mm'
+      });      $("#datetimepicker1").on("dp.change", function (e) {
+          $('#datetimepicker2').data("DateTimePicker").minDate(e.date);
+      });
+      $("#datetimepicker2").on("dp.change", function (e) {
+          $('#datetimepicker1').data("DateTimePicker").maxDate(e.date);
+      });      
     });

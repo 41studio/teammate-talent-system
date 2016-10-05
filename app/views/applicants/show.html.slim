@@ -58,12 +58,15 @@ hr
     | Schedule of Applicant
   p 
     = link_to 'Set Schedule', new_applicant_schedule_path(@applicant)
+
 - if @applicant.schedules.present?
-    table 
+    table
       tr 
         th Category 
-        th Date 
+        th Start Date 
+        th End Date 
         th Send notify email? 
+        th
         th
       = render @applicant.schedules
 hr

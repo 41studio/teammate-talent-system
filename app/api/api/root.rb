@@ -5,7 +5,7 @@ module API
 
     prefix	'api'
     format 	:json
-
+    
     rescue_from :all, :backtrace => true
     error_formatter :json, API::ErrorFormatter
 
