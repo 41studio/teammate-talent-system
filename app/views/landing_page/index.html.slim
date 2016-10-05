@@ -19,6 +19,6 @@ h1
 		- @jobs.each do |job|
 			= link_to job.job_title, company_job_path(job.company_id, job)
 			br
-		/	= render job.company
+			= render job.company
 	- else
 		h3 No Jobs
