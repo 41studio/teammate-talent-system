@@ -43,7 +43,7 @@ module API
           use :applicant_id
           requires :status        ,type: String, desc: "Applicant status"
         end
-        put ':id' do
+        put ':id/update_status/' do
           begin
             applicant = Applicant.find(params[:id])
             if applicant.update_attribute(:status, params[:status])

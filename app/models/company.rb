@@ -22,7 +22,7 @@ class Company < ActiveRecord::Base
 	validates :company_name, :company_website, :company_email, :company_phone, :industry, :photo_company, presence: true
 	validates :company_name, length: { minimum: 2 }
 	validates :company_phone, numericality: true
-  validates_processing_of :photo_company
+  	validates_processing_of :photo_company
 	validate :image_size_validation
  
 	def self.industry

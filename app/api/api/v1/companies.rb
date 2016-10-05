@@ -12,7 +12,7 @@ module API
           -------------------
           NOTE
         } 
-        get do
+        get '/detail' do
           begin
           current_user.company
 
@@ -25,3 +25,8 @@ module API
     end
   end
 end
+
+
+
+prejudice
+deemed
