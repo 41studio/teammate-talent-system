@@ -1,31 +1,35 @@
-= form_for @company do |f|
-  - if @company.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@company.errors.count, "error")} prohibited this company from being saved:"
-      ul
-        - @company.errors.full_messages.each do |message|
-          li = message
+.container
+  = form_for @company do |f|
+    - if @company.errors.any?
+      #error_explanation
+        h2 = "#{pluralize(@company.errors.count, "error")} prohibited this company from being saved:"
+        ul
+          - @company.errors.full_messages.each do |message|
+            li = message
 
-  .field
-    = f.label :company_name
-    = f.text_field :company_name
-  .field
-    = f.label :company_website
-    = f.text_field :company_website
-  .field
-    = f.label :company_email
-    = f.text_field :company_email
-  .field
-    = f.label :company_phone
-    = f.text_field :company_phone
-  .field
-    = f.label :industry
-    = f.select 'industry', @industries, include_blank:  "Select Industry"
-  .field
-    = f.file_field :photo_company, accept: 'image/png,image/jpeg'
-    - if f.object.photo_company?
-      = cl_image_tag f.object.photo_company.thumb.url
-      = f.label :remove_photo_company
-      = f.check_box :remove_photo_company
-  .field
-  .actions = f.submit
+    .form-group
+      = f.label :company_name
+      = f.text_field :company_name, class: 'form-control'
+    .form-group
+      = f.label :company_website
+      = f.text_field :company_website, class: 'form-control'
+    .form-group
+      = f.label :company_email
+      = f.text_field :company_email, class: 'form-control'
+    .form-group
+      = f.label :company_phone
+      = f.text_field :company_phone, class: 'form-control'
+    .form-groupd
+      label.label-top Industry
+      br
+      = f.select 'industry', @industries, include_blank:  "Select Industry", class: 'form-control'
+
+    .form-group
+      br
+      = f.file_field :photo_company, accept: 'image/png,image/jpeg'
+      - if f.object.photo_company?
+        = cl_image_tag f.object.photo_company.thumb.url
+        = f.label :remove_photo_company
+        = f.check_box :remove_photo_company
+    .form-group
+    .actions = f.submit class: 'btn btn-default'
