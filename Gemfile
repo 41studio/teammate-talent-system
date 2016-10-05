@@ -54,6 +54,7 @@ gem 'js-routes'
 gem 'acts_as_commentable_with_threading'
 gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17.42'
+gem 'cloudinary'
 
 ## API
 gem 'simple_token_authentication', '~> 1.0'

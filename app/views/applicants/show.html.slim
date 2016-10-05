@@ -23,7 +23,7 @@ p
   = @applicant.address
 p
   strong Photo:
-  = image_tag @applicant.photo.thumb.url
+  = cl_image_tag @applicant.photo.thumb.url
 p
   strong Resume:
   = link_to "Download Resume", @applicant.resume_url, target: '_blank'

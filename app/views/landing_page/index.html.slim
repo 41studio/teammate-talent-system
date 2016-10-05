@@ -1,24 +1,16 @@
 h1
 	| Welcome
 
-- if user_signed_in?
-	| welcome #{current_user.first_name} #{current_user.last_name}
-	br	
-		= link_to 'dashboard', dashboards_path
-		br
-  	= link_to 'logout', destroy_user_session_path, method: :delete
-- else
-	= form_tag(root_path, method: 'get', id: 'search-form') do
-		= text_field_tag :search, params[:search], placeholder: 'search job'
-		= submit_tag "search"
+= form_tag(root_path, method: 'get', id: 'search-form') do
+	= text_field_tag :search, params[:search], placeholder: 'search job'
+	= submit_tag "search"
 
-	= link_to 'Sign in', user_session_path
-	hr
-	- if @jobs.present?
-		h3 Related Jobs
-		- @jobs.each do |job|
-			= link_to job.job_title, company_job_path(job.company_id, job)
-			br
-			= render job.company
-	- else
-		h3 No Jobs
+hr
+- if @jobs.present?
+	h3 Related Jobs
+	- @jobs.each do |job|
+		= link_to job.job_title, company_job_path(job.company_id, job)
+		br
+		= render job.company
+- else
+	h3 No Jobs

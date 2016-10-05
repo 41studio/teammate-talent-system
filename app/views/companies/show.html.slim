@@ -18,7 +18,8 @@ p
   = @company.industry
 p
   strong Photo Company
-  = image_tag @company.photo_company.thumb.url
+  / = image_tag @company.photo_company.thumb.url
+  = cl_image_tag(@company.photo_company.thumb.url)
 br
 
 - if user_signed_in? and current_user.company_id == @company.id

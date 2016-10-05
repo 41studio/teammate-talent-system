@@ -78,24 +78,24 @@ class ApplicantsController < ApplicationController
 
         #push notification
 
-        app = Rpush::Gcm::App.new
-        app.name = "teamhire"
-        app.auth_key = "AIzaSyCWX1_asXP_gdqYYc-fb2_Uor2pODB_bDw"
-        app.connections = 1
-        app.save!
+        # app = Rpush::Gcm::App.new
+        # app.name = "teamhire"
+        # app.auth_key = "AIzaSyCWX1_asXP_gdqYYc-fb2_Uor2pODB_bDw"
+        # app.connections = 1
+        # app.save!
 
-        n = Rpush::Gcm::Notification.new
-        n.app = Rpush::Gcm::App.find_by_name("teamhire")
-        n.registration_ids = ["238618199031-2pjffhh7adjvgjflof8ecpbha50dnhjt.apps.googleusercontent.com"]
-        n.data = { message: "hi mom!" }
-        n.priority = 'high'        # Optional, can be either 'normal' or 'high'
-        n.content_available = true # Optional
-        # Optional notification payload. See the reference below for more keys you can use!
-        n.notification = { body: 'great match!',
-                           title: 'Portugal vs. Denmark',
-                           icon: 'myicon'
-                         }
-        n.save!
+        # n = Rpush::Gcm::Notification.new
+        # n.app = Rpush::Gcm::App.find_by_name("teamhire")
+        # n.registration_ids = ["238618199031-2pjffhh7adjvgjflof8ecpbha50dnhjt.apps.googleusercontent.com"]
+        # n.data = { message: "hi mom!" }
+        # n.priority = 'high'        # Optional, can be either 'normal' or 'high'
+        # n.content_available = true # Optional
+        # # Optional notification payload. See the reference below for more keys you can use!
+        # n.notification = { body: 'great match!',
+        #                    title: 'Portugal vs. Denmark',
+        #                    icon: 'myicon'
+        #                  }
+        # n.save!
 
         #end of push notification
 

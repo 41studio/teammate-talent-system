@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
 	
 	def create
 		@applicant = Applicant.find(params[:applicant_id])
-		@comment = Comment.build_from(@applicant, current_user.id, params[:comment][:body])		
+		@comment = Comment.build_from(@applicant, current_user.id, params[:comment][:body])
     respond_to do |format|
     	if @comment.save
     		format.html { redirect_to company_job_applicant_path(params[:company_id], params[:job_id], params[:applicant_id]), notice: "commented" }
