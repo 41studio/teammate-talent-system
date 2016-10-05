@@ -21,7 +21,7 @@ module API
         end
 
         post '/login' do
-          # begin
+          begin
             user = User.authenticate_for_api(params[:email], params[:password])
             if user
               {token: user.token, email: user.email, name: user.fullname}
@@ -29,9 +29,19 @@ module API
               error_msg = 'Bad Authentication Parameters'
               error!({ 'error_msg' => error_msg }, 401)
             end
-          # rescue ActiveRecord::RecordNotFound
-          #   error!({status: :not_found}, 404)
-          #  end 
+          rescue ActiveRecord::RecordNotFound
+            error!({status: :not_found}, 404)
+           end 
+        end
+
+        desc "Logout User", {
+          :notes => <<-NOTE
+          Destroy Token User
+          -------------------
+          NOTE
+        }
+        delete '/logout' do
+            
         end
 
       end #end resource
