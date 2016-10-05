@@ -3,7 +3,8 @@ module API
     class Companies < Grape::API
       version 'v1' 
       format :json 
- 
+      before { authenticate! }
+
       resource :companies do
         desc "User By token", {
           :notes => <<-NOTE
