@@ -11,26 +11,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160926171608) do
+ActiveRecord::Schema.define(version: 20161004092149) do
 
-  create_table "applicants", force: :cascade do |t|
-    t.string   "name",         limit: 255, default: "", null: false
-    t.string   "gender",       limit: 255, default: "", null: false
-    t.date     "date_birth",                            null: false
-    t.string   "email",        limit: 255, default: "", null: false
-    t.string   "headline",     limit: 255, default: "", null: false
-    t.string   "phone",        limit: 255, default: "", null: false
-    t.string   "address",      limit: 255, default: "", null: false
-    t.string   "photo",        limit: 255, default: "", null: false
-    t.string   "resume",       limit: 255, default: "", null: false
-    t.string   "status",       limit: 255, default: "", null: false
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
-    t.integer  "education_id", limit: 4
-    t.integer  "job_id",       limit: 4
+  create_table "api_keys", force: :cascade do |t|
+    t.string   "access_token", limit: 255
+    t.datetime "expires_at"
+    t.integer  "user_id",      limit: 4
+    t.boolean  "active"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
-  add_index "applicants", ["education_id"], name: "index_applicants_on_education_id", using: :btree
+  add_index "api_keys", ["access_token"], name: "index_api_keys_on_access_token", unique: true, using: :btree
+  add_index "api_keys", ["user_id"], name: "index_api_keys_on_user_id", using: :btree
+
+  create_table "applicants", force: :cascade do |t|
+    t.string   "name",       limit: 255, default: "",        null: false
+    t.string   "gender",     limit: 255, default: "",        null: false
+    t.date     "date_birth",                                 null: false
+    t.string   "email",      limit: 255, default: "",        null: false
+    t.string   "headline",   limit: 255, default: "",        null: false
+    t.string   "phone",      limit: 255, default: "",        null: false
+    t.string   "address",    limit: 255, default: "",        null: false
+    t.string   "photo",      limit: 255, default: "",        null: false
+    t.string   "resume",     limit: 255, default: "",        null: false
+    t.string   "status",     limit: 255, default: "Applied", null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
+    t.integer  "job_id",     limit: 4
+  end
+
   add_index "applicants", ["job_id"], name: "index_applicants_on_job_id", using: :btree
 
   create_table "applicants_educations", id: false, force: :cascade do |t|
@@ -48,6 +58,23 @@ ActiveRecord::Schema.define(version: 20160926171608) do
 
   add_index "applicants_experiences", ["applicant_id", "experience_id"], name: "index_applicants_experiences_on_applicant_id_and_experience_id", using: :btree
   add_index "applicants_experiences", ["experience_id", "applicant_id"], name: "index_applicants_experiences_on_experience_id_and_applicant_id", using: :btree
+
+  create_table "comments", force: :cascade do |t|
+    t.integer  "commentable_id",   limit: 4
+    t.string   "commentable_type", limit: 255
+    t.string   "title",            limit: 255
+    t.text     "body",             limit: 65535
+    t.string   "subject",          limit: 255
+    t.integer  "user_id",          limit: 4,     null: false
+    t.integer  "parent_id",        limit: 4
+    t.integer  "lft",              limit: 4
+    t.integer  "rgt",              limit: 4
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "comments", ["commentable_id", "commentable_type"], name: "index_comments_on_commentable_id_and_commentable_type", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "companies", force: :cascade do |t|
     t.string   "company_name",    limit: 255
@@ -131,11 +158,13 @@ ActiveRecord::Schema.define(version: 20160926171608) do
   add_index "jobs", ["industry_list_id"], name: "index_jobs_on_industry_list_id", using: :btree
 
   create_table "schedules", force: :cascade do |t|
-    t.datetime "date",                                                null: false
-    t.string   "description",  limit: 255, default: "Interview Date", null: false
+    t.datetime "start_date",                                          null: false
     t.datetime "created_at",                                          null: false
     t.datetime "updated_at",                                          null: false
-    t.integer  "applicant_id", limit: 4
+    t.integer  "applicant_id",          limit: 4
+    t.string   "category",              limit: 255,                   null: false
+    t.string   "notify_applicant_flag", limit: 255, default: "false", null: false
+    t.datetime "end_date",                                            null: false
   end
 
   add_index "schedules", ["applicant_id"], name: "index_schedules_on_applicant_id", using: :btree
@@ -160,9 +189,9 @@ ActiveRecord::Schema.define(version: 20160926171608) do
     t.datetime "locked_at"
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
-    t.string   "authentication_token",   limit: 255,              null: false
     t.string   "first_name",             limit: 255
     t.string   "last_name",              limit: 255
+    t.string   "authentication_token",   limit: 255,              null: false
     t.integer  "company_id",             limit: 4
   end
 

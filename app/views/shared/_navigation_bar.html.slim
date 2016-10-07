@@ -20,9 +20,9 @@ nav.navbar.navbar-inverse.navigation-style[role="navigation"]
           li
             = link_to "Sign up", new_user_registration_path, class: 'navbar-link'
           li
-            = link_to "Login", new_user_session_path, class: 'navbar-link'
+            = link_to "Sign in", new_user_session_path, class: 'navbar-link'
         - else
           li
             = link_to "#{current_user.first_name} #{current_user.last_name}", dashboards_path, class: 'navbar-link'
           li
-            = link_to "Logout", destroy_user_session_path, method: :delete, class: 'navbar-link'
+            = link_to "Sign out", destroy_user_session_path, method: :delete, class: 'navbar-link'
