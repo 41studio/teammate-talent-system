@@ -19,14 +19,14 @@
     .form-group
       = f.label :company_phone
       = f.text_field :company_phone, class: 'form-control'
-    .form-groupd
+    .form-group
       label.label-top Industry
       br
-      = f.select 'industry', @industries, include_blank:  "Select Industry", class: 'form-control'
+      = f.select('industry', @industries, {include_blank:  "Select Industry"}, {class: 'form-control'})
 
     .form-group
       br
-      = f.file_field :photo_company, accept: 'image/png,image/jpeg'
+      = f.file_field :photo_company, accept: 'image/png,image/jpeg', class: 'form-control'
       - if f.object.photo_company?
         = cl_image_tag f.object.photo_company.thumb.url
         = f.label :remove_photo_company
