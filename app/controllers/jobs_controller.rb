@@ -53,19 +53,20 @@ class JobsController < ApplicationController
   # GET /jobs/new
   def new
     @job = set_company.jobs.new
-    @url = url_for(:controller => 'jobs', :action => 'create')
+    @url = company_jobs_path(params[:company_id])
+    asd
   end
 
   # GET /jobs/1/edit
   def edit
-    # @company = Company.find(set_job.company_id)
     @job = set_company.jobs.find(set_job)
-    @url = url_for(:controller => 'jobs', :action => 'update')
+    @url = company_job_path(@job.company_id, @job)
   end
 
   # POST /jobs
   # POST /jobs.json
   def create
+    @url = company_jobs_path(params[:company_id])
     @job = set_company.jobs.new(job_params)
     @job.status = "draft"
     respond_to do |format|
@@ -73,7 +74,7 @@ class JobsController < ApplicationController
         format.html { redirect_to job_path(@job), notice: 'Job was successfully created.' }
         format.json { render :show, status: :created, location: @job }
       else
-        format.html { redirect_to new_company_job_path(@job.company_id), :flash => { :error => @job.errors.full_messages } }
+        format.html { render :new }
         format.json { render json: @job.errors, status: :unprocessable_entity }
       end
     end
@@ -82,12 +83,13 @@ class JobsController < ApplicationController
   # PATCH/PUT /jobs/1
   # PATCH/PUT /jobs/1.json
   def update
+    @url = company_job_path(@job.company_id, @job)
     respond_to do |format|
       if @job.update(job_params)
-        format.html { redirect_to @job, notice: 'Job was successfully updated.' }
+        format.html { redirect_to @jobs, notice: 'Job was successfully updated.' }
         format.json { render :show, status: :ok, location: @job }
       else
-        format.html { redirect_to edit_company_job_path(@job.company_id, @job), :flash => { :error => @job.errors.full_messages } }
+        format.html { render :edit }
         format.json { render json: @job.errors, status: :unprocessable_entity }
       end
     end

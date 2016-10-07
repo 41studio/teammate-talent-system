@@ -1,7 +1,7 @@
 nav.navbar.navbar-inverse.navigation-style[role="navigation"]
   .container-fluid
     .navbar-header
-      button.navbar-toggle.collapsed[type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"]
+      button.navbar-toggle.collapsed[type="button" data-toggle="collapse" data-target="#bs-navbar-collapse"]
         span.sr-only
           | Toggle navigation
         span.icon-bar
@@ -11,12 +11,13 @@ nav.navbar.navbar-inverse.navigation-style[role="navigation"]
       = link_to current_user.company.company_name, root_path, class: 'navbar-brand'
     - else
       = link_to 'Teamhire', root_path, class: 'navbar-brand'
-    #bs-example-navbar-collapse-1.collapse.navbar-collapse
+    #bs-navbar-collapse.collapse.navbar-collapse
       ul.nav.navbar-nav
-        li
-          = link_to "Dashboard", dashboards_path, class: 'navbar-link'
-        li
-          = link_to "Applicant", applicant_path, class: 'navbar-link'
+        -if user_signed_in?
+          li
+            = link_to "Dashboard", dashboards_path, class: 'navbar-link'
+          li
+            = link_to "Applicant", applicant_path, class: 'navbar-link'
       ul.nav.navbar-nav.navbar-right
         - unless user_signed_in?
           li
@@ -25,6 +26,6 @@ nav.navbar.navbar-inverse.navigation-style[role="navigation"]
             = link_to "Sign in", new_user_session_path, class: 'navbar-link'
         - else
           li
-            = link_to current_user.email, dashboards_path, class: 'navbar-link'
+            = link_to "#{current_user.first_name} #{current_user.last_name}", dashboards_path, class: 'navbar-link'
           li
             = link_to "Sign out", destroy_user_session_path, method: :delete, class: 'navbar-link'

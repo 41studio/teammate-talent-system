@@ -26,18 +26,18 @@ ActiveRecord::Schema.define(version: 20161004092149) do
   add_index "api_keys", ["user_id"], name: "index_api_keys_on_user_id", using: :btree
 
   create_table "applicants", force: :cascade do |t|
-    t.string   "name",       limit: 255, default: "", null: false
-    t.string   "gender",     limit: 255, default: "", null: false
-    t.date     "date_birth",                          null: false
-    t.string   "email",      limit: 255, default: "", null: false
-    t.string   "headline",   limit: 255, default: "", null: false
-    t.string   "phone",      limit: 255, default: "", null: false
-    t.string   "address",    limit: 255, default: "", null: false
-    t.string   "photo",      limit: 255, default: "", null: false
-    t.string   "resume",     limit: 255, default: "", null: false
-    t.string   "status",     limit: 255, default: "", null: false
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.string   "name",       limit: 255, default: "",        null: false
+    t.string   "gender",     limit: 255, default: "",        null: false
+    t.date     "date_birth",                                 null: false
+    t.string   "email",      limit: 255, default: "",        null: false
+    t.string   "headline",   limit: 255, default: "",        null: false
+    t.string   "phone",      limit: 255, default: "",        null: false
+    t.string   "address",    limit: 255, default: "",        null: false
+    t.string   "photo",      limit: 255, default: "",        null: false
+    t.string   "resume",     limit: 255, default: "",        null: false
+    t.string   "status",     limit: 255, default: "Applied", null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
     t.integer  "job_id",     limit: 4
   end
 
@@ -197,6 +197,7 @@ ActiveRecord::Schema.define(version: 20161004092149) do
 
   add_index "users", ["authentication_token"], name: "index_users_on_authentication_token", unique: true, using: :btree
   add_index "users", ["company_id"], name: "index_users_on_company_id", using: :btree
+  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
