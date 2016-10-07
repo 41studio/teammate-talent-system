@@ -9,9 +9,10 @@ module API
         params :applicant_id do
           requires :id, type: Integer, desc: "Applicant id" 
         end
-        params :job_id do
-          requires :id, type: Integer, desc: " id" 
-        end
+
+        def comments_params
+          ActionController::Parameters.new(params).require(:body)
+        end   
       end
 
       resource :applicants do
@@ -31,7 +32,6 @@ module API
             error!({status: :not_found}, 404)
           end
         end
-
 
         desc "Update Status Applicant By Id", {
           :notes => <<-NOTE
@@ -56,6 +56,34 @@ module API
             error!({ status: :error, message: :not_found }, 404)
           end
         end
+
+
+        desc "Comment Applicant", {
+          :notes => <<-NOTE
+          User Comment Applicant
+          ----------------------      belum jalan
+          NOTE
+        }
+        params do
+          use :applicant_id      
+        end        
+        post ':id/comment/new' do
+          begin
+            # byebug
+            comments = Comment.new(commentable_id: params[:id], user_id: current_user.id, body: comments_params)
+
+            if comments.save!
+              { status: :success }
+            else
+              error!({ status: :error, message: comments.errors.full_messages.first }) if comments.errors.any?
+            end
+
+          rescue ActiveRecord::RecordNotFound
+            error!({status: :not_found}, 404)
+          end 
+        end 
+
+
 
       end #end resource
     end
