@@ -1,6 +1,6 @@
 h1 Listing jobs
 
-= form_tag(jobs_path, method: 'get', id: 'search-form') do
+= form_tag(company_jobs_path, method: 'get', id: 'search-form') do
   = text_field_tag :search, params[:search], placeholder: 'search job'
   = submit_tag "search"
 br
