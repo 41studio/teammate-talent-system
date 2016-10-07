@@ -1,6 +1,7 @@
 doctype html
 html
 	head
+	  meta name="viewport" content="width=device-width, initial-scale=1.0"
 	  title Teamhire
 	  meta name="viewport" content="width=device-width, initial-scale=1.0"
 	  = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
@@ -8,7 +9,9 @@ html
 	  = csrf_meta_tags
 body
 	= render 'shared/navigation_bar'
-	p.alert
-		=alert
+	.container
+		/p.alert.alert-info
+		p.alert
+			=alert
 	== yield
 	== yield :javascript_in_file
