@@ -115,6 +115,9 @@ GEM
       railties (>= 4.1.0, < 5.1)
       responders
       warden (~> 1.2.3)
+    devise_invitable (1.7.0)
+      actionmailer (>= 4.0.0)
+      devise (>= 4.0.0)
     domain_name (0.5.20160826)
       unf (>= 0.0.5, < 1.0.0)
     dotenv (2.1.1)
@@ -331,6 +334,7 @@ DEPENDENCIES
   cocoon
   coffee-rails (~> 4.1.0)
   devise
+  devise_invitable (~> 1.7.0)
   dotenv-rails
   friendly_id (~> 5.1.0)
   grape

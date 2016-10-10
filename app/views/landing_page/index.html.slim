@@ -11,7 +11,7 @@
 
 	hr
 	- if @jobs.present?
-			p Related Jobs
+			p Available Jobs
 			- @jobs.each do |job|
 				= link_to job.job_title, company_job_path(job.company_id, job)
 				br

@@ -13,7 +13,11 @@ class DashboardsController < ApplicationController
   end
 
   def applicant
-    @jobs = current_user.company.jobs
-    @applicants = Applicant.where(job_id: @jobs)
+    if current_user.company_id.present?
+      @jobs = current_user.company.jobs
+      @applicants = Applicant.where(job_id: @jobs)
+    else
+      redirect_to new_company_path
+    end
   end
 end
