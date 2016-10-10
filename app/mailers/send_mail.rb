@@ -4,7 +4,8 @@ class SendMail < ApplicationMailer
 		@applicant = applicant
 		@subject = subject
 		@body = body
-		mail(to: @applicant.email, subject: @subject)
+		# mail(to: @applicant.email, subject: @subject)
+		mail(to: @applicant, subject: @subject)
 	end
 
 	def send_email_after_apply(applicant, job)

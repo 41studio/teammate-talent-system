@@ -1,3 +1,5 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
   resources :companies, except: [:index] do
     resources :jobs do 
@@ -29,4 +31,5 @@ Rails.application.routes.draw do
   root 'landing_page#index'
 
   mount API::Root => '/'
+  mount Sidekiq::Web => '/sidekiq'
 end

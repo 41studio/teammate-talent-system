@@ -1,7 +1,9 @@
 h1 welcome
-
-= "We have #{pluralize(@applicants.count, "applicant")}"
-br
-- @applicants.each do |applicant|
+- if current_user.company.present?
+	= "We have #{pluralize(@applicants.count, "applicant")}"
 	br
-	= link_to applicant.name, company_job_applicant_path(current_user.company,applicant.job_id,applicant.id)
+	- @applicants.each do |applicant|
+		br
+		= link_to applicant.name, company_job_applicant_path(current_user.company,applicant.job_id,applicant.id)
+- else
+	p = "You must create company first"

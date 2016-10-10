@@ -54,7 +54,6 @@ class JobsController < ApplicationController
   def new
     @job = set_company.jobs.new
     @url = company_jobs_path(params[:company_id])
-    asd
   end
 
   # GET /jobs/1/edit
