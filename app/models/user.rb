@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
   validates :first_name, :last_name, :email, presence: true
   acts_as_token_authenticatable
   before_save :ensure_authentication_token
-
+  mount_uploader :avatar, AvatarUploader
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :invitable, :database_authenticatable, :registerable,

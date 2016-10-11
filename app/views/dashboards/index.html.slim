@@ -20,9 +20,9 @@ p Drafted Jobs
   br
   = link_to "edit #{job.job_title}", edit_company_job_path(@company, job)
   p
-  	| Created 
-   	= time_ago_in_words(job.created_at)
-   	|  ago
+    | Created 
+    = time_ago_in_words(job.created_at)
+    |  ago
   br
 hr style="height:1px; background-color:black;"
 p Published Jobs

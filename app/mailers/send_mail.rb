@@ -10,6 +10,6 @@ class SendMail < ApplicationMailer
 	def send_email_after_apply(applicant, job)
 		@applicant = applicant
 		@job = job
-    	mail(to: @applicant.email, subject: 'Thanks for apply')
+    mail(to: @applicant.email, subject: 'Thanks for apply')
 	end
 end

@@ -133,10 +133,22 @@ class Job < ActiveRecord::Base
 		where(status: "closed")
 	end
 	
-	def self.search(search)
-		where("status = \"published\" and (job_title LIKE ? OR job_search_keyword LIKE ?)", "%#{search}%", "%#{search}%")
+	def self.search_keyword(keyword)
+		where("status = \"published\" and (job_title LIKE ? OR job_search_keyword LIKE ?)", "%#{keyword}%", "%#{keyword}%")
 	end
 
+	def self.search_location(location)
+		where("status = \"published\" and (city LIKE ? OR state LIKE ? OR country LIKE ?)", "%#{location}%", "%#{location}%", "%#{location}%")
+	end
+
+	def self.search_company(company)
+		where("status = \"published\" and (@jobs.company.company_name LIKE ?)", "%#{company}%")
+	end
+
+	def self.search_salary(max_salary,min_salary)
+		where("status = \"published\" and (min_salary <= ? OR max_salary = ? )", "#{min_salary}", "#{max_salary}")
+	end
+	
 	def job_title
     	self[:job_title].titleize
   end

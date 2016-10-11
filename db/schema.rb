@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161004092149) do
+ActiveRecord::Schema.define(version: 20161010023518) do
 
   create_table "api_keys", force: :cascade do |t|
     t.string   "access_token", limit: 255
@@ -26,18 +26,18 @@ ActiveRecord::Schema.define(version: 20161004092149) do
   add_index "api_keys", ["user_id"], name: "index_api_keys_on_user_id", using: :btree
 
   create_table "applicants", force: :cascade do |t|
-    t.string   "name",       limit: 255, default: "",        null: false
-    t.string   "gender",     limit: 255, default: "",        null: false
-    t.date     "date_birth",                                 null: false
-    t.string   "email",      limit: 255, default: "",        null: false
-    t.string   "headline",   limit: 255, default: "",        null: false
-    t.string   "phone",      limit: 255, default: "",        null: false
-    t.string   "address",    limit: 255, default: "",        null: false
-    t.string   "photo",      limit: 255, default: "",        null: false
-    t.string   "resume",     limit: 255, default: "",        null: false
-    t.string   "status",     limit: 255, default: "Applied", null: false
-    t.datetime "created_at",                                 null: false
-    t.datetime "updated_at",                                 null: false
+    t.string   "name",       limit: 255, default: "", null: false
+    t.string   "gender",     limit: 255, default: "", null: false
+    t.date     "date_birth",                          null: false
+    t.string   "email",      limit: 255, default: "", null: false
+    t.string   "headline",   limit: 255, default: "", null: false
+    t.string   "phone",      limit: 255, default: "", null: false
+    t.string   "address",    limit: 255, default: "", null: false
+    t.string   "photo",      limit: 255, default: "", null: false
+    t.string   "resume",     limit: 255, default: "", null: false
+    t.string   "status",     limit: 255, default: "", null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
     t.integer  "job_id",     limit: 4
   end
 
@@ -193,12 +193,23 @@ ActiveRecord::Schema.define(version: 20161004092149) do
     t.string   "last_name",              limit: 255
     t.string   "authentication_token",   limit: 255,              null: false
     t.integer  "company_id",             limit: 4
+    t.string   "avatar",                 limit: 255
+    t.string   "invitation_token",       limit: 255
+    t.datetime "invitation_created_at"
+    t.datetime "invitation_sent_at"
+    t.datetime "invitation_accepted_at"
+    t.integer  "invitation_limit",       limit: 4
+    t.integer  "invited_by_id",          limit: 4
+    t.string   "invited_by_type",        limit: 255
+    t.integer  "invitations_count",      limit: 4,   default: 0
   end
 
   add_index "users", ["authentication_token"], name: "index_users_on_authentication_token", unique: true, using: :btree
   add_index "users", ["company_id"], name: "index_users_on_company_id", using: :btree
-  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["invitation_token"], name: "index_users_on_invitation_token", unique: true, using: :btree
+  add_index "users", ["invitations_count"], name: "index_users_on_invitations_count", using: :btree
+  add_index "users", ["invited_by_id"], name: "index_users_on_invited_by_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "applicants", "jobs"

@@ -1,21 +1,43 @@
 .container
 	h1
 		| Welcome
+	hr
+	h3
+		| Search Jobs
 	.form-inline
 		.input-group
 			= form_tag(root_path, method: 'get', id: 'search-form') do
-				= text_field_tag :search, params[:search], placeholder: 'search job',class: 'form-control'
+				= text_field_tag :keyword, params[:keyword], placeholder: 'keyword e.g Phyton, Digital Marketing',class: 'form-control'
+				= text_field_tag :location, params[:location], placeholder: 'location Jakarta, Bandung, ETC', class: 'form-control'
+				br
+				= text_field_tag :min_salary, params[:min_salary], placeholder: 'Min Salary e.g 2000000', class: 'form-control'
+				= text_field_tag :max_salary, params[:max_salary], placeholder: 'Max Salary e.g 10000000', class: 'form-control'
+				br
+				= label_tag :sort
+				= select_tag :sort, options_for_select(["new","relevant"], "new") 
+				br 
+				/ = text_field_tag :company, params[:company], placeholder: 'company e.g Traveloka', class: 'form-control'
 				span.input-group-btn
-					= button_tag type: 'submit', name: nil, class: 'btn btn-default' do
+				br
+					= button_tag type: 'submit', name: nil, class: 'btn btn-primary' do
 						span.glyphicon.glyphicon-search
 
 	hr
+	- if @filtered_jobs.present?
+			p = "#{@filtered_jobs.count} Jobs Available"
+
+			- @filtered_jobs.each do |job|
+				= link_to job.job_title, company_job_path(job.company_id, job)
+				br
+				= render job.company
+
 	- if @jobs.present?
 			p Available Jobs
 			- @jobs.each do |job|
 				= link_to job.job_title, company_job_path(job.company_id, job)
 				br
-				= render job.company
-	- else
-		blockquote
-			h3 style="margin:0px;" No Jobs Related
+				= render job.company	
+
+	/ - else
+	/ 	blockquote
+	/ 		h3 style="margin:0px;" No Jobs Related
