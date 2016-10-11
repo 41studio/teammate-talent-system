@@ -1,3 +1,5 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
   resources :companies, except: [:index] do
     resources :jobs do 
@@ -9,9 +11,12 @@ Rails.application.routes.draw do
     end
     get '/jobs/:id/:status', to: 'jobs#upgrade_status', as:'upgrade_status'
   end
+  post '/companies/:id/invite_personnel', to: 'companies#invite_personnel', as: 'invite_personnel'
   resources :dashboards, only: [:index]
   # get '/dashboards' => "dashboards#index", as: :user_root
-  devise_for :users, :controllers => { registrations: 'registrations', confirmations: 'confirmations' }
+  devise_for :users, :controllers => { registrations: 'registrations',
+                                       confirmations: 'confirmations', 
+                                       invitations: 'users/invitations' }
 
   post '/:job_id/:id/email_to_applicant', to: 'applicants#send_email', as: :email_to_applicant
 
@@ -26,4 +31,5 @@ Rails.application.routes.draw do
   root 'landing_page#index'
 
   mount API::Root => '/'
+  mount Sidekiq::Web => '/sidekiq'
 end

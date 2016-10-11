@@ -1,7 +1,18 @@
-h1 Dashboard
+h1 Dashboard 
 hr style="height:1px; background-color:black;"
 p Company
 = link_to @company.company_name, @company
+p 
+  strong Invite personnel
+  .form-inline
+    .input-group
+      = form_tag invite_personnel_path(@company), method: :post do
+        = label_tag :email
+        br
+        = email_field_tag :email, nil, class: 'form-control'
+        span.input-group-btn
+          = button_tag type: 'submit', name: nil, class: 'btn btn-default' do
+            span.glyphicon.glyphicon-user
 hr style="height:1px; background-color:black;"
 p Drafted Jobs
 - @drafted_jobs.each do |job|
@@ -9,9 +20,9 @@ p Drafted Jobs
   br
   = link_to "edit #{job.job_title}", edit_company_job_path(@company, job)
   p
-  	| Created 
-   	= time_ago_in_words(job.created_at)
-   	|  ago
+    | Created 
+    = time_ago_in_words(job.created_at)
+    |  ago
   br
 hr style="height:1px; background-color:black;"
 p Published Jobs

@@ -29,17 +29,21 @@
 #
 
 class User < ActiveRecord::Base
-	belongs_to :company	
-	has_one :api_key
+  belongs_to :company 
+  has_many :api_keys
   validates :first_name, :last_name, :email, presence: true
   acts_as_token_authenticatable
   before_save :ensure_authentication_token
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
+  devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, 
-         :confirmable         
+         :confirmable, :invitable
+
+  def fullname
+    self.first_name + " " + self.last_name
+  end  
 
   def get_schedules
     Schedule.joins(applicant: :job).where(jobs: { company_id: self.company_id, status: "published" } ).order(start_date: :desc)
@@ -50,21 +54,25 @@ class User < ActiveRecord::Base
   end
 
   def self.authenticate_for_api(email, password)
-    user = self.find_for_authentication(email: email)
-    if user.valid_password?(password)
-      if user.api_key
-        user.api_key.save
+    if user = self.find_for_authentication(email: email)
+      if user.valid_password?(password)
+        key = user.api_keys.create
+        user.save
+        user
       else
-        key = user.create_api_key
+        false
       end
-      user
     else
       false      
     end
   end
 
   def token
-    self.api_key.nil? ? nil : self.api_key.access_token
+    self.api_keys.nil? ? nil : self.api_keys.last.access_token
+  end
+
+  def user_api(user)
+    {token: user.token, email: user.email, name: user.fullname}
   end
 
   private

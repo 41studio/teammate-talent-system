@@ -25,5 +25,6 @@ module Teamhire
 
     config.time_zone = 'Jakarta'
     config.active_record.default_timezone = :local
+    config.active_job.queue_adapter = :sidekiq
   end
 end

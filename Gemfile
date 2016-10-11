@@ -56,6 +56,9 @@ gem 'acts_as_commentable_with_threading'
 gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17.42'
 gem 'cloudinary'
+gem 'devise_invitable', '~> 1.7.0'
+gem 'sidekiq'
+gem 'redis-rails', '~> 4'
 
 ## API
 gem 'simple_token_authentication', '~> 1.0'

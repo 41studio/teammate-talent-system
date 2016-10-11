@@ -32,7 +32,7 @@
     = f.number_field :phone
   .field
     = f.label :address
-    = f.text_field :address
+    = f.text_area :address
   .field
     = f.file_field :photo, accept: 'image/png,image/jpeg'
     - if f.object.photo?

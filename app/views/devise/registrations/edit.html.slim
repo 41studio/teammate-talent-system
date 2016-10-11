@@ -20,11 +20,11 @@ h2
       = f.email_field :email, autofocus: true
     - if devise_mapping.confirmable? && resource.pending_reconfirmation?
       div
-        | Currently waiting confirmation for: #{resource.unconfirmed_email}
+      | Currently waiting confirmation for: #{resource.unconfirmed_email}
     .field
       = f.label :password
       i 
-        | (leave blank if you don't want to change it)
+        |  (leave blank if you don't want to change it)
       br/
       = f.password_field :password, autocomplete: "off"
       - if @minimum_password_length
@@ -39,7 +39,7 @@ h2
     .field
       = f.label :current_password
       i 
-        | (we need your current password to confirm your changes)
+        |  (we need your current password to confirm your changes)
       br/
       = f.password_field :current_password, autocomplete: "off"
     .field
