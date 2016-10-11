@@ -10,6 +10,10 @@ module API
           requires :id, type: Integer, desc: "Applicant id" 
         end
 
+        def applicant
+          Applicant.find(params[:id])
+        end
+
         def comments_params
           ActionController::Parameters.new(params).require(:body)
         end   
@@ -19,24 +23,24 @@ module API
         desc "Applicant By  Id", {
           :notes => <<-NOTE
           Get Applicant  By Id
-          -----------------------
+          --------------------- comment nya belum
           NOTE
         }
         params do
           use :applicant_id       
         end
-        get ":id" do
-          begin
-            Applicant.find(params[:id])
+        get ":id/detail" do
+          begin 
+            present applicant, with: API::V1::Entities::Applicant
           rescue ActiveRecord::RecordNotFound
-            error!({status: :not_found}, 404)
+            record_not_found_message
           end
         end
 
         desc "Update Status Applicant By Id", {
           :notes => <<-NOTE
           Update Applicant By Id
-          --------------------
+          ----------------------- send email notify status info
           NOTE
         }
         params do
@@ -45,7 +49,6 @@ module API
         end
         put ':id/update_status/' do
           begin
-            applicant = Applicant.find(params[:id])
             if applicant.update_attribute(:status, params[:status])
               { status: :success }
             else
@@ -53,15 +56,14 @@ module API
             end
      
           rescue ActiveRecord::RecordNotFound
-            error!({ status: :error, message: :not_found }, 404)
+            record_not_found_message
           end
         end
-
 
         desc "Comment Applicant", {
           :notes => <<-NOTE
           User Comment Applicant
-          ----------------------      belum jalan
+          ----------------------
           NOTE
         }
         params do
@@ -69,21 +71,19 @@ module API
         end        
         post ':id/comment/new' do
           begin
-            # byebug
-            comments = Comment.new(commentable_id: params[:id], user_id: current_user.id, body: comments_params)
-
-            if comments.save!
-              { status: :success }
-            else
-              error!({ status: :error, message: comments.errors.full_messages.first }) if comments.errors.any?
+            if applicant
+              comments = Comment.new(commentable_id: params[:id], user_id: current_user.id, body: comments_params, commentable_type: "Applicant")
+              if comments.save!
+                { status: :success }
+              else
+                error!({ status: :error, message: comments.errors.full_messages.first }) if comments.errors.any?
+              end
             end
 
           rescue ActiveRecord::RecordNotFound
-            error!({status: :not_found}, 404)
+            record_not_found_message
           end 
         end 
-
-
 
       end #end resource
     end

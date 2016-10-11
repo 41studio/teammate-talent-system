@@ -30,6 +30,7 @@ end
 
 ## library for push notification
 gem 'pushmeup'
+# gem 'rpush'
 
 ## Auth library
 gem 'devise'
@@ -59,6 +60,7 @@ gem 'cloudinary'
 ## API
 gem 'simple_token_authentication', '~> 1.0'
 gem 'grape'
+gem 'grape-entity'
 
 ## error catcher
 gem 'airbrake', '~> 5.0'

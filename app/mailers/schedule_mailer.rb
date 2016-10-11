@@ -6,7 +6,7 @@ class ScheduleMailer < ApplicationMailer
 		@email = applicant.email
 		@applicant = applicant.name
 		@subject = "#{schedule.category} Schedule"
-		@date = schedule.date
+		@date = schedule.start_date
 		mail(to: @email, subject: @subject)
 	end
 
@@ -16,7 +16,7 @@ class ScheduleMailer < ApplicationMailer
 		@email = applicant.email
 		@applicant = applicant.name
 		@subject = "Update #{schedule.category} Schedule"
-		@date = schedule.date
+		@date = schedule.start_date
 		mail(to: @email, subject: @subject)
 	end
 
@@ -26,7 +26,7 @@ class ScheduleMailer < ApplicationMailer
 		@email = applicant.email
 		@applicant = applicant.name
 		@subject = "Canceled #{schedule.category}"
-		@date = schedule.date
+		@date = schedule.start_date
 		mail(to: @email, subject: @subject)
 	end
 end

@@ -138,6 +138,6 @@ class Job < ActiveRecord::Base
 	end
 
 	def job_title
-    self[:job_title].titleize
+    	self[:job_title].titleize
   end
 end

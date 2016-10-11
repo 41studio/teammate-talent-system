@@ -73,7 +73,7 @@ class JobsController < ApplicationController
         format.html { redirect_to job_path(@job), notice: 'Job was successfully created.' }
         format.json { render :show, status: :created, location: @job }
       else
-        format.html { redirect_to new_company_job_path(@job.company_id), :flash => { :error => @job.errors.full_messages } }
+        format.html { render :new }
         format.json { render json: @job.errors, status: :unprocessable_entity }
       end
     end
@@ -87,7 +87,7 @@ class JobsController < ApplicationController
         format.html { redirect_to @job, notice: 'Job was successfully updated.' }
         format.json { render :show, status: :ok, location: @job }
       else
-        format.html { redirect_to edit_company_job_path(@job.company_id, @job), :flash => { :error => @job.errors.full_messages } }
+        format.html { render :edit }
         format.json { render json: @job.errors, status: :unprocessable_entity }
       end
     end
