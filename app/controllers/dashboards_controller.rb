@@ -13,7 +13,11 @@ class DashboardsController < ApplicationController
   end
 
   def applicant
+    if current_user.company.present?
     @jobs = current_user.company.jobs
     @applicants = Applicant.where(job_id: @jobs)
+    else
+      flash[:notice] = "No Applicant here"
+    end
   end
 end

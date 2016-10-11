@@ -23,7 +23,7 @@ p
   = @applicant.address
 p
   strong Photo:
-  = cl_image_tag @applicant.photo.thumb.url
+  = image_tag @applicant.photo.thumb.url
 p
   strong Resume:
   = link_to "Download Resume", @applicant.resume_url, target: '_blank'
@@ -89,7 +89,7 @@ p
   - @comments.each do |c|
     p
       h4
-        = c.user.email
+        = "#{c.user.first_name} #{c.user.last_name}"
       h5
         = c.body
       = time_ago_in_words(c.created_at)

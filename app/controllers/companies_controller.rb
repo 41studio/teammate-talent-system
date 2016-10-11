@@ -78,6 +78,19 @@ class CompaniesController < ApplicationController
     end
   end
 
+  def invite_personnel
+    personnel_email = params[:email]    
+    respond_to do |format|
+      if User.invite!({email: personnel_email, company_id: current_user.company_id}, current_user)
+        format.html { redirect_to dashboards_path, notice: 'User invited!' }
+        # format.json { render :show, status: :ok, location: @company }
+      else
+        format.html { redirect_to dashboards_path }
+        # format.json { render json: @company.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def redirect_url

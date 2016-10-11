@@ -6,12 +6,12 @@
 			= form_tag(root_path, method: 'get', id: 'search-form') do
 				= text_field_tag :search, params[:search], placeholder: 'search job',class: 'form-control'
 				span.input-group-btn
-					= button_tag class: 'btn btn-default' do
+					= button_tag type: 'submit', name: nil, class: 'btn btn-default' do
 						span.glyphicon.glyphicon-search
 
 	hr
 	- if @jobs.present?
-			p Related Jobs
+			p Available Jobs
 			- @jobs.each do |job|
 				= link_to job.job_title, company_job_path(job.company_id, job)
 				br
