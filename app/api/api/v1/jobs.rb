@@ -196,15 +196,16 @@ module API
         end
         get ":id/applicants" do
           begin
-            jobs = {}
+            applicants = {}
             
             applicant_statuses.each do |status|
-              jobs_with_status = job.applicants.where(status: status).as_json
-              jobs["total_jobs_with_status_#{status.underscore}"] = jobs_with_status.count
-              jobs["jobs_with_status_#{status.underscore}"] = jobs_with_status
+              applicants_with_status = job.applicants.where(status: status)
+              data = API::V1::Entities::Applicant.represent(applicants_with_status, only: [:id, :name, :headline])
+              applicants["total_applicants_with_status_#{status.underscore}"] = applicants_with_status.count
+              applicants["applicants_with_status_#{status.underscore}"] = data.as_json
             end
           
-            jobs
+            applicants
 
           rescue ActiveRecord::RecordNotFound
             record_not_found_message
