@@ -218,7 +218,7 @@ module API
           NOTE
         }
         get '/all_jobs' do
-          jobs = {jobs: [API::V1::Entities::Job.represent(jobs, only: [:id, :job_title, :status, :created_at])]}
+          {jobs: [API::V1::Entities::Job.represent(jobs, only: [:id, :job_title, :status, :created_at])]}
         end
 
       end #end resource
