@@ -37,7 +37,7 @@ class ApplicantsController < ApplicationController
   def show
     applicant = Applicant.find(params[:id])
     @recruitment_level = Applicant::STATUSES
-    @disabled_level = applicant.disable_level(params[:id])
+    @disabled_level = applicant.disable_level
     @new_comment = Comment.build_from(applicant, current_user.id, "")
     @url = company_job_applicant_comments_path(params[:company_id], params[:job_id], params[:id])
     @comments = applicant.comment_threads
