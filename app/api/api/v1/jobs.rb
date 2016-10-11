@@ -144,6 +144,25 @@ module API
           end
         end 
 
+        desc "Delete Job", {
+          :notes => <<-NOTE
+          Destroy Job (destroy)
+          ---------------------
+          NOTE
+        }
+        params do
+          use :job_id
+        end
+        delete ':id/delete' do
+          begin
+            if job.destroy!
+              { status: :delete_success }
+            end
+          rescue ActiveRecord::RecordNotFound
+            record_not_found_message
+          end
+        end
+
         desc "Update Status Job By Id", {
           :notes => <<-NOTE
           Update Status Job (update)
