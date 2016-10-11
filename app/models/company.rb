@@ -42,7 +42,7 @@ class Company < ActiveRecord::Base
 				applicants["applicant#{applicant.id}".to_s] = applicant.name
 				applicant_schedules[:applicants] = applicants
 				applicant.schedules.each do |schedule|
-					schedules["schedule#{schedule.id}".to_s] = "#{schedule.date.to_date} at #{schedule.date.strftime("%I:%M%p")}" 
+					schedules["schedule#{schedule.id}".to_s] = "#{schedule.start_date.to_date} at #{schedule.start_date.strftime("%I:%M%p")}" 
 				end
 			end
 			applicant_schedules[:schedules] = schedules
