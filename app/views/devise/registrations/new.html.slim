@@ -24,6 +24,9 @@
       = f.label :password_confirmation
       br/
       = f.password_field :password_confirmation, autocomplete: "off", class: 'form-control selectpicker'
+    .form-group
+      = f.label :avatar
+      = f.file_field :avatar, accept: 'image/png,image/jpeg', class: 'form-control'    
     .actions
       = f.submit "Sign up", class: 'btn btn-default'
   br
