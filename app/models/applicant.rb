@@ -38,6 +38,7 @@ class Applicant < ActiveRecord::Base
 	validates :name, length: {in: 2..70}
 	validates :gender, inclusion: { in: %w(Male Female), message: "%{value} is not a gender"}
 	validates :phone, numericality: true
+	validate :applicant_statuses
 	validates_processing_of :photo
 	validate :image_size_validation
 
@@ -48,22 +49,22 @@ class Applicant < ActiveRecord::Base
 	# 	@stages = [["Applied","applied"],["Phone Screen","phonescreen"],["Interview","interview"],["Offer","offer"],["Hired","hired"]]
 	# end
 	
-	def disable_level(id)
-		applicant = Applicant.find(id)
-		arr = []
-		@hashh.each do |key, value|
-			if @hashh[applicant.status.to_sym] >= value
-				arr << key.to_s
-			end
-		end
-		return arr
-	end
+	STATUSES = {"applied": 1,"phone_screen": 2,"interview": 3,"offer": 4,"hired": 5}
 
-	def applicant_recruitment_level
-		@hashh = {"applied": 1,"phone_screen": 2,"interview": 3,"offer": 4,"hired": 5}
+	def disable_level
+		STATUSES.select{|key, value| STATUSES[self.status.to_sym] >= value}.keys
 	end
 
 	private
+		def applicant_statuses
+			unless STATUSES.has_key? self.status.to_sym
+				errors[:status] << "not available" 
+				return false
+			else
+				return true
+			end
+		end
+
 	  def image_size_validation
 	    errors[:photo] << "should be less than 500KB" if photo.size > 0.5.megabytes
 	  end
