@@ -36,8 +36,8 @@ class ApplicantsController < ApplicationController
   # GET /applicants/1.json
   def show
     applicant = Applicant.find(params[:id])
-    @recruitment_level = applicant.applicant_recruitment_level
-    @disabled_level = applicant.disable_level(params[:id])
+    @recruitment_level = Applicant::STATUSES
+    @disabled_level = applicant.disable_level
     @new_comment = Comment.build_from(applicant, current_user.id, "")
     @url = company_job_applicant_comments_path(params[:company_id], params[:job_id], params[:id])
     @comments = applicant.comment_threads
@@ -60,7 +60,7 @@ class ApplicantsController < ApplicationController
   def send_email
     @applicant = Applicant.find(params[:id])
     @job = Job.find(params[:job_id])
-    SendMail.sample_email(@applicant, params[:subject], params[:body]).deliver
+    SendMail.delay.sample_email(@applicant, params[:subject], params[:body])
     redirect_to company_job_applicant_path(@job.company_id, @job, @applicant)
   end
 
@@ -73,7 +73,7 @@ class ApplicantsController < ApplicationController
     @applicant.status = "applied"
     respond_to do |format|
       if @applicant.save
-        SendMail.send_email_after_apply(@applicant, @job).deliver
+        SendMail.delay.send_email_after_apply(@applicant, @job)
         format.html { redirect_to company_job_path(@job.company_id, @job), notice: 'Applicant was successfully created.' }
 
         #push notification
@@ -150,7 +150,7 @@ class ApplicantsController < ApplicationController
       end
     else
       respond_to do |format|
-        format.html { redirect_to job_applicant_path(@job, @applicant), notice: "invalid!" }
+        format.html { redirect_to company_job_applicant_path(@job.company_id, @job, @applicant), notice: "invalid!" }
         format.js {}
       end
     end 

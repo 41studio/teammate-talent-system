@@ -72,7 +72,7 @@ p Published Jobs
 hr style="height:1px; background-color:black;"
 p Closed Jobs
 - @closed_jobs.each do |job|
-  = link_to job.job_title, job
+  = link_to job.job_title, company_job_path(@company, job)
   p
     | Closed 
     = time_ago_in_words(job.updated_at)

@@ -15,6 +15,6 @@ h1 Listing schedules
         	tr
             td = " #{schedule.applicant.job.job_title}"  
           	td = " #{schedule.applicant.name}"  
-            td = " #{schedule.date.to_formatted_s(:long_ordinal)}"
+            td = " #{schedule.start_date.to_formatted_s(:long_ordinal)}"
             td = " #{schedule.category}"
 

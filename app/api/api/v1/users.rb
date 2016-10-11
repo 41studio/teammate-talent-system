@@ -42,7 +42,9 @@ module API
         }
         delete '/logout' do
           authenticate!
-          ApiKey.find_by(access_token: headers['Token']).destroy!
+          if ApiKey.find_by(access_token: headers['Token']).destroy!
+            { status: :log_out_success }
+          end
         end
 
         desc "User Registration", {

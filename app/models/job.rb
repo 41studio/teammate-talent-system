@@ -31,11 +31,11 @@
 class Job < ActiveRecord::Base
 	has_many :applicants, dependent: :destroy
 	belongs_to :company
-	has_one :education_list
-	has_one :employment_type_list
-	has_one :experience_list
-	has_one :function_list
-	has_one :industry_list
+	belongs_to :education_list
+	belongs_to :employment_type_list
+	belongs_to :experience_list
+	belongs_to :function_list
+	belongs_to :industry_list
 	validates :job_title, :departement, :job_code, :country, :state, :city, :zip_code,
 		:min_salary, :max_salary, :curency, :job_description, :job_requirement, :benefits,
 		:experience_list_id, :function_list_id, :employment_type_list_id, :industry_list_id, 
@@ -150,6 +150,6 @@ class Job < ActiveRecord::Base
 	end
 	
 	def job_title
-    self[:job_title].titleize
+    	self[:job_title].titleize
   end
 end

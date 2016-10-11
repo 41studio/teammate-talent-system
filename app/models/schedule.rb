@@ -35,17 +35,17 @@ class Schedule < ActiveRecord::Base
 
 		def send_notify_applicant_email
 			if date_schedule_check
-		 		ScheduleMailer.notify_applicant_email(self.applicant, self).deliver
+		 		ScheduleMailer.delay.notify_applicant_email(self.applicant, self)
 			end
 		end
 
 		def send_update_notify_applicant_email
 			if date_schedule_check || (self.notify_applicant_flag == "true")
-				ScheduleMailer.update_notify_applicant_email(self.applicant, self).deliver
+				ScheduleMailer.delay.update_notify_applicant_email(self.applicant, self)
 			end
 		end
 
 		def send_canceled_notify_applicant_email
-			ScheduleMailer.canceled_notify_applicant_email(self.applicant, self).deliver
+			ScheduleMailer.delay.canceled_notify_applicant_email(self.applicant, self)
 		end
 end

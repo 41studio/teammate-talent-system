@@ -1,0 +1,139 @@
+module API
+  module V1
+  	module Entities
+			extend Grape::API::Helpers
+  		
+  		class User < Grape::Entity
+  			expose :fullname
+  		end
+	  	
+	  	class Applicant < Grape::Entity
+	  		expose :id
+	  		expose :name
+	  		expose :gender
+	  		expose :email
+	  		expose :headline
+	  		expose :phone
+	  		expose :address
+	  		expose :photo
+	  		expose :resume
+	  		expose :status
+	  		expose :educations, using: "API::V1::Entities::Education", as: :educations 
+	  		expose :experiences, using: "API::V1::Entities::Experience", as: :experiences 
+				expose :comment_threads, using: "API::V1::Entities::Comment", as: :comments
+		    with_options(format_with: :iso_timestamp) do
+	  			expose :created_at, as: :apply_at
+		    end 
+		    # comments
+	  	end
+
+	  	class Comment < Grape::Entity
+	  		expose :fullname
+	  		expose :body
+	  	end
+
+	  	class Education < Grape::Entity
+	  		expose :id
+	  		expose :name_school
+	  		expose :field_study
+	  		expose :degree
+	  	end
+
+	  	class Experience < Grape::Entity
+	  		expose :id
+	  		expose :name_company
+	  		expose :industry
+	  		expose :title
+	  		expose :summary
+	  	end
+
+	  	class Job < Grape::Entity
+	  		expose :id
+	  		expose :job_title
+	  		expose :departement
+	  		expose :job_code
+	  		expose :country
+	  		expose :state
+	  		expose :city
+	  		expose :zip_code
+	  		expose :min_salary
+	  		expose :max_salary
+	  		expose :curency
+	  		expose :job_description
+	  		expose :job_requirement
+	  		expose :benefits
+	  		expose :job_search_keyword
+	  		expose :status
+	  		expose :education_list, using: "API::V1::Entities::EducationList", as: :education_list
+	  		expose :employment_type_list, using: "API::V1::Entities::EmploymentTypeList", as: :employment_type_list
+	  		expose :experience_list, using: "API::V1::Entities::ExperienceList", as: :experience_list
+	  		expose :function_list, using: "API::V1::Entities::FunctionList", as: :function_list
+	  		expose :industry_list, using: "API::V1::Entities::IndustryList", as: :industry_list
+				expose :created_at, format_with: :timestamp
+	  	end
+
+	  	class EducationList < Grape::Entity
+	  		expose :id
+	  		expose :education
+	  	end
+
+	  	class	EmploymentTypeList < Grape::Entity
+	  		expose :id
+	  		expose :employment_type
+	  	end
+
+	  	class ExperienceList < Grape::Entity
+	  		expose :id
+	  		expose :experience
+	  	end
+
+	  	class FunctionList < Grape::Entity
+	  		expose :id
+	  		expose :function
+	  	end
+
+	  	class IndustryList < Grape::Entity
+	  		expose :id
+	  		expose :industry
+	  	end
+
+	  	class Company < Grape::Entity
+	  		expose :company_name	
+	  		expose :company_website
+	  		expose :company_email
+	  		expose :company_phone
+	  		expose :industry
+	  		expose :photo_company
+	  	end
+
+	  end
+	end
+end
+
+
+	  		# expose :comments, using: "API::V1::Entities::Comment", as: :comments 
+	  	# 	expose :comment_threads do
+	  	# 		expose :body
+				# end
+				# expose :comments				
+				# expose :comment do |applicant, options|
+				# 	applicant.comments
+				# end
+			 #  expose( :comments ) do |body,opts| 
+			 #    body.is_a?( Basis ) ? body.health : nil
+			 #  end				
+	  	# 	expose :educations do
+				# 	expose :body
+				# end
+				# 
+				# 
+				# 
+				# 
+
+# expose: comment_threads, using: "API::V1::Entities::Comment, as: :comments
+
+
+# atau kamu buat lagi aja entitiy baru
+
+
+# pokoknya, yang bisa dipake di expose itu semua object public method yang ada dimodel
