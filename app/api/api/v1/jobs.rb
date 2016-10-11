@@ -211,6 +211,16 @@ module API
            end
         end
 
+        desc "Job List", {
+          :notes => <<-NOTE
+          Get All Jobs by user's company
+          ------------------------------
+          NOTE
+        }
+        get '/all_jobs' do
+          jobs = {jobs: [API::V1::Entities::Job.represent(jobs, only: [:id, :job_title, :status, :created_at])]}
+        end
+
       end #end resource
     end
   end
