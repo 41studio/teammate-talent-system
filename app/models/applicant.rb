@@ -52,22 +52,17 @@ class Applicant < ActiveRecord::Base
 	STATUSES = {"applied": 1,"phone_screen": 2,"interview": 3,"offer": 4,"hired": 5}
 
 	def disable_level
-		arr = []
-		STATUSES.each do |key, value|
-			if STATUSES[self.status.to_sym] >= value
-				arr << key.to_s
-			end
-		end
-		return arr
+		STATUSES.select{|key, value| STATUSES[self.status.to_sym] >= value}.keys
 	end
 
 	private
 		def applicant_statuses
-			# errors[:status] << "not available" unless STATUSES.has_key? self.status.to_sym
-			# 	return false
-			# else
-			# 	return true
-			# end
+			unless STATUSES.has_key? self.status.to_sym
+				errors[:status] << "not available" 
+				return false
+			else
+				return true
+			end
 		end
 
 	  def image_size_validation
