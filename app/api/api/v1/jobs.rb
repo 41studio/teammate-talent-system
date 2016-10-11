@@ -221,6 +221,15 @@ module API
           {jobs: [API::V1::Entities::Job.represent(jobs, only: [:id, :job_title, :status, :created_at])]}
         end
 
+        desc "Job List with user profile", {
+          :notes => <<-NOTE
+          Get All Jobs by user's company
+          ------------------------------
+          NOTE
+        }
+        get '/all_jobs_with_user' do
+          {user: current_user.user_api(current_user), jobs: [current_user.company.jobs]}
+        end
       end #end resource
     end
   end
