@@ -8,8 +8,12 @@ module API
       helpers do
         def company_params
           company_param = ActionController::Parameters.new(params).require(:companies).permit(:company_name, :company_website, :company_email, :company_phone, :industry, photo_company: [:filename, :type, :name, :tempfile, :head])
-          company_param["photo_company"] = ActionDispatch::Http::UploadedFile.new(params.companies.photo_company)
+          params.companies.photo_company.present? ? file_params_process : 
           company_param
+        end
+
+        def file_params_process
+          company_param["photo_company"] = ActionDispatch::Http::UploadedFile.new(params.companies.photo_company)
         end
 
         def company
@@ -23,7 +27,15 @@ module API
         def field_on_company_form
           industry_list = IndustryList.all
           present :industry_list, industry_list, with: API::V1::Entities::IndustryList
-        end        
+        end     
+
+        params :companies do
+          requires :company_name, type: String
+          requires :company_website, type: String
+          requires :company_email, type: String
+          requires :company_phone, type: String
+          requires :industry, type: String
+        end
       end      
 
       resource :companies do
@@ -59,11 +71,7 @@ module API
         }
         params do
           requires :companies, type: Hash do
-            requires :company_name, type: String
-            requires :company_website, type: String
-            requires :company_email, type: String
-            requires :company_phone, type: String
-            requires :industry, type: String
+            use :companies
             requires :photo_company, type: File, allow_blank: false
           end
         end
@@ -102,17 +110,22 @@ module API
           -------------------
           NOTE
         }
+        params do
+          requires :companies, type: Hash do
+            use :companies
+            optional :photo_company, type: File
+          end
+        end
         put '/update' do
-          begin
+          if company
             if company.update(company_params)
               { status: :success }
             else
               error_message
             end
-
-          rescue ActiveRecord::RecordNotFound
+          else
             record_not_found_message
-          end 
+          end
         end 
       end #end resource
     end

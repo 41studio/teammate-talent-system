@@ -67,6 +67,16 @@ module API
           end 
         end       
         
+        desc "User Profil", {
+          :notes => <<-NOTE
+          User Profil (show)
+          ------------------
+          NOTE
+        }
+        get '/profile' do
+          authenticate!
+          present current_user, with: API::V1::Entities::User
+        end
       end #end resource
     end
   end

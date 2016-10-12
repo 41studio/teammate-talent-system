@@ -36,7 +36,7 @@ class Applicant < ActiveRecord::Base
 
 	validates :name, :gender, :date_birth, :email, :phone, :address, :photo, :resume,  presence: true
 	validates :name, length: {in: 2..70}
-	validates :gender, inclusion: { in: %w(Male Female), message: "%{value} is not a gender"}
+	# validates :gender, inclusion: { in: %w(Male Female), message: "%{value} is not a gender"}
 	validates :phone, numericality: true
 	validate :applicant_statuses
 	validates_processing_of :photo

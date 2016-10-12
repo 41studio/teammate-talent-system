@@ -37,6 +37,7 @@
     = f.label :address
     = f.text_area :address, class: 'form-control'
   .form-group
+    = f.label :photo
     = f.file_field :photo, accept: 'image/png,image/jpeg'
     - if f.object.photo?
       = image_tag f.object.photo.thumb.url
