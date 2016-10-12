@@ -20,10 +20,6 @@ module API
           )
         end
 
-        def applicant_statuses
-          ["applied", "phonescreen", "interview", "offer", "hired"]
-        end
-
         def jobs
           current_user.company.jobs
         end

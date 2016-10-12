@@ -15,7 +15,6 @@ module API
 			format_with :date do |date|
 				date.strftime('%m/%d/%Y')
 			end  			
-
 	  		expose :id
 	  		expose :name
 	  		expose :gender

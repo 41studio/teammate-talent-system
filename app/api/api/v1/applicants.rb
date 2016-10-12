@@ -37,6 +37,31 @@ module API
           end
         end
 
+        desc "Edit Status", {
+          :notes => <<-NOTE
+          Edit Status applicant, for applicant edit status form (edit)
+          -------------------------------------------------------------
+          NOTE
+        }
+        params do
+          use :applicant_id
+        end
+        get ':id/edit_status' do
+          # present :applicant_statuses, Applicant::STATUSES
+          # Applicant::STATUSES.as_json
+
+          # applicant_status = API::V1::Entities::Applicant.represent(applicant, only: [:status])
+
+          # present :applicant, applicant_status
+          # present :applicant_statuses, Applicant::STATUSES.as_json
+
+          # present :applicant_statuses, Applicant::STATUSES
+          # present :applicant, applicant, with: API::V1::Entities::Applicant, only: [:status]
+                      
+            present Applicant::STATUSES
+            present :applicant, applicant, with: API::V1::Entities::Applicant, only: [:status]
+        end
+
         desc "Update Status Applicant By Id", {
           :notes => <<-NOTE
           Update Applicant By Id
