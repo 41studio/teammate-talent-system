@@ -7,8 +7,9 @@ module API
 
       helpers do
         def company_params
-          ActionController::Parameters.new(params).require(:companies).permit(:company_name, :company_website, 
-            :company_email, :company_phone, :industry, :photo_company)
+          company_param = ActionController::Parameters.new(params).require(:companies).permit(:company_name, :company_website, :company_email, :company_phone, :industry, photo_company: [:filename, :type, :name, :tempfile, :head])
+          company_param["photo_company"] = ActionDispatch::Http::UploadedFile.new(params.companies.photo_company)
+          company_param
         end
 
         def company
@@ -34,7 +35,8 @@ module API
         } 
         get '/detail' do
           begin
-            present company, with: API::V1::Entities::Company
+            byebug
+            company.present? ? with: API::V1::Entities::Company
           rescue ActiveRecord::RecordNotFound
             record_not_found_message
            end
@@ -57,45 +59,27 @@ module API
           NOTE
         }
         params do
-          # requires :photo_company, :type => Rack::Multipart::UploadedFile, desc: "Company Photo"
-          # requires :avatar, type: File
-          # group :company, type: Array, desc: "An array of company" do
-          #   requires :company_name, type: String
-          #   requires :company_website, type: String
-          #   requires :company_email, type: String
-          #   requires :company_phone, type: String
-          #   requires :industry, type: String
-          #   requires :photo_company, type: File
-          # end
-          requires :companies, type: Array
+          requires :companies, type: Hash do
+            requires :company_name, type: String
+            requires :company_website, type: String
+            requires :company_email, type: String
+            requires :company_phone, type: String
+            requires :industry, type: String
+            requires :photo_company, type: File, allow_blank: false
+          end
         end
         post '/create' do
-          # begin
-            # companies = Company.create(company_params)
-            if 1>2
-              { status: :you_are_belongs_to_one_company }
+          if company
+            { status: :you_are_belongs_to_one_company }
+          else
+            companies = Company.create(company_params)
+            if companies.save!
+              current_user.update_attribute(:company_id, companies.id)
+              { status: :success }
             else
-              # Company.create!({
-              #   company_name: params[:company_name],
-              #   company_website: params[:company_website],
-              #   company_email: params[:company_email],
-              #   company_phone: params[:company_phone],
-              #   industry: params[:industry],
-              #   photo_company: params[:photo_company]
-              # })
-              a = Company.create(company_params)
-              # a.save!
+              error_message
             end
-            # if companies.save!
-            #   current_user.update_attribute(:company_id, companies.id)
-            #   { status: :success }
-            # else
-            #   error_message
-            # end
-
-          # rescue ActiveRecord::RecordNotFound
-          #   record_not_found_message
-          # end 
+          end
         end   
 
         desc "Company detail for edit", {
