@@ -32,6 +32,7 @@ class User < ActiveRecord::Base
 	belongs_to :company	
 	has_many :api_keys
   validates :first_name, :last_name, :email, presence: true
+  validate :avatar_size_validation
   acts_as_token_authenticatable
   before_save :ensure_authentication_token
   mount_uploader :avatar, AvatarUploader
@@ -67,6 +68,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def avatar_size_validation
+    errors[:avatar] << "should be less than 700KB" if avatar.size > 0.7.megabytes
+  end
+  
   def token
     self.api_keys.nil? ? nil : self.api_keys.last.access_token
   end

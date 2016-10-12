@@ -48,6 +48,8 @@ class Job < ActiveRecord::Base
 		:employment_type_collection_validation,:industry_collection_validation,:education_collection_validation
 	before_save :job_title
 
+	ransack_alias :keyword, :job_title_or_job_search_keyword
+
 	def applicants_count
 		applicants.count
 	end
@@ -133,23 +135,7 @@ class Job < ActiveRecord::Base
 		where(status: "closed")
 	end
 	
-	def self.search_keyword(keyword)
-		where("status = \"published\" and (job_title LIKE ? OR job_search_keyword LIKE ?)", "%#{keyword}%", "%#{keyword}%")
-	end
-
-	def self.search_location(location)
-		where("status = \"published\" and (city LIKE ? OR state LIKE ? OR country LIKE ?)", "%#{location}%", "%#{location}%", "%#{location}%")
-	end
-
-	def self.search_company(company)
-		where("status = \"published\" and (@jobs.company.company_name LIKE ?)", "%#{company}%")
-	end
-
-	def self.search_salary(max_salary,min_salary)
-		where("status = \"published\" and (min_salary <= ? OR max_salary = ? )", "#{min_salary}", "#{max_salary}")
-	end
-	
 	def job_title
     	self[:job_title].titleize
-  end
+    end
 end
