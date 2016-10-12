@@ -23,7 +23,18 @@ module API
         def field_on_company_form
           industry_list = IndustryList.all
           present :industry_list, industry_list, with: API::V1::Entities::IndustryList
-        end        
+        end     
+
+        params :companies do
+          requires :companies, type: Hash do
+            requires :company_name, type: String
+            requires :company_website, type: String
+            requires :company_email, type: String
+            requires :company_phone, type: String
+            requires :industry, type: String
+            requires :photo_company, type: File, allow_blank: false
+          end
+        end
       end      
 
       resource :companies do
@@ -58,14 +69,7 @@ module API
           NOTE
         }
         params do
-          requires :companies, type: Hash do
-            requires :company_name, type: String
-            requires :company_website, type: String
-            requires :company_email, type: String
-            requires :company_phone, type: String
-            requires :industry, type: String
-            requires :photo_company, type: File, allow_blank: false
-          end
+          use :companies 
         end
         post '/create' do
           if company
@@ -102,17 +106,19 @@ module API
           -------------------
           NOTE
         }
+        params do
+          use :companies
+        end
         put '/update' do
-          begin
+          if company
             if company.update(company_params)
               { status: :success }
             else
               error_message
             end
-
-          rescue ActiveRecord::RecordNotFound
+          else
             record_not_found_message
-          end 
+          end
         end 
       end #end resource
     end
