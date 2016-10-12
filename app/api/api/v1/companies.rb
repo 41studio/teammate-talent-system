@@ -8,8 +8,12 @@ module API
       helpers do
         def company_params
           company_param = ActionController::Parameters.new(params).require(:companies).permit(:company_name, :company_website, :company_email, :company_phone, :industry, photo_company: [:filename, :type, :name, :tempfile, :head])
-          company_param["photo_company"] = ActionDispatch::Http::UploadedFile.new(params.companies.photo_company)
+          params.companies.photo_company.present? ? file_params_process : 
           company_param
+        end
+
+        def file_params_process
+          company_param["photo_company"] = ActionDispatch::Http::UploadedFile.new(params.companies.photo_company)
         end
 
         def company
@@ -26,14 +30,11 @@ module API
         end     
 
         params :companies do
-          requires :companies, type: Hash do
-            requires :company_name, type: String
-            requires :company_website, type: String
-            requires :company_email, type: String
-            requires :company_phone, type: String
-            requires :industry, type: String
-            requires :photo_company, type: File, allow_blank: false
-          end
+          requires :company_name, type: String
+          requires :company_website, type: String
+          requires :company_email, type: String
+          requires :company_phone, type: String
+          requires :industry, type: String
         end
       end      
 
@@ -69,7 +70,10 @@ module API
           NOTE
         }
         params do
-          use :companies 
+          requires :companies, type: Hash do
+            use :companies
+            requires :photo_company, type: File, allow_blank: false
+          end
         end
         post '/create' do
           if company
@@ -107,7 +111,10 @@ module API
           NOTE
         }
         params do
-          use :companies
+          requires :companies, type: Hash do
+            use :companies
+            optional :photo_company, type: File
+          end
         end
         put '/update' do
           if company
