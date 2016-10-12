@@ -1,38 +1,38 @@
+.container
+  p#notice = notice
 
-p#notice = notice
-
-p
-  strong Company name:
-  = @company.company_name
-p
-  strong Company website:
-  = @company.company_website
-p
-  strong Company email:
-  = @company.company_email
-p
-  strong Company phone:
-  = @company.company_phone
-p
-  strong Industry:
-  = @company.industry
-p
-  strong Photo Company
-  / = image_tag @company.photo_company.thumb.url
-  = image_tag(@company.photo_company.thumb.url)
-br
-
-- if user_signed_in? and current_user.company_id == @company.id
+  p
+    strong Company name:
+    = @company.company_name
+  p
+    strong Company website:
+    = @company.company_website
+  p
+    strong Company email:
+    = @company.company_email
+  p
+    strong Company phone:
+    = @company.company_phone
+  p
+    strong Industry:
+    = @company.industry
+  p
+    strong Photo Company
+    / = image_tag @company.photo_company.thumb.url
+    = image_tag(@company.photo_company.thumb.url)
   br
-  = link_to "Create New Job", new_company_job_path(@company)
-  br
-  = link_to 'Edit', edit_company_path(@company)
-  '|
-  = link_to 'Back', dashboards_path
-  
-- else
-  = link_to 'Back', root_path
 
-h3
-  | Related Jobs
-= render @company.jobs
+  - if user_signed_in? and current_user.company_id == @company.id
+    br
+    = link_to "Create New Job", new_company_job_path(@company)
+    br
+    = link_to 'Edit', edit_company_path(@company)
+    '|
+    = link_to 'Back', dashboards_path
+    
+  - else
+    = link_to 'Back', root_path
+
+  h3
+    | Related Jobs
+  = render @company.jobs

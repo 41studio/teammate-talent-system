@@ -1,14 +1,18 @@
- .nested-fields
-   p
-   = f.label :name_company
-   = f.text_field :name_company
-   br
-   = f.label :industry
-   = f.text_field :industry
-   br
-   = f.label :title
-   = f.text_field :title
-   br
-   = f.label :summary
-   = f.text_field :summary 
-   = link_to_remove_association "Remove form Experience", f
+.nested-fields
+  .form-group
+    = f.label :name_company
+    = f.text_field :name_company, class: 'form-control'
+  .form-group
+    = f.label :industry
+    = f.text_field :industry, class: 'form-control'
+  .form-group
+    = f.label :title
+    = f.text_field :title, class: 'form-control'
+  .form-group
+    = f.label :summary
+    = f.text_field :summary, class: 'form-control'
+  .btn
+    = link_to_remove_association f, class: 'btn btn-danger' do
+        span
+          .glyphicon.glyphicon-remove
+          |  Experience Form

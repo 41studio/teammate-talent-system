@@ -6,22 +6,21 @@
         - @applicant.errors.full_messages.each do |message|
           li = message
 
-  .container
+  .row
     div.col-md-4
       .field
         = f.label :start_date
-      div.form-group
-        div.input-group.date#datetimepicker1
-          = f.text_field :start_date, class: "form-control"
-          = content_tag(:span, content_tag(:span, "", class: "glyphicon glyphicon-calendar"), class: "input-group-addon")
-
+        div.form-group
+          div.input-group.date#datetimepicker1
+            = f.text_field :start_date, class: "form-control"
+            = content_tag(:span, content_tag(:span, "", class: "glyphicon glyphicon-calendar"), class: "input-group-addon")
     div.col-md-4
       .field
         = f.label :end_date
-      div.form-group
-        div.input-group.date#datetimepicker2
-          = f.text_field :end_date, class: "form-control"
-          = content_tag(:span, content_tag(:span, "", class: "glyphicon glyphicon-calendar"), class: "input-group-addon")
+        div.form-group
+          div.input-group.date#datetimepicker2
+            = f.text_field :end_date, class: "form-control"
+            = content_tag(:span, content_tag(:span, "", class: "glyphicon glyphicon-calendar"), class: "input-group-addon")
 
   .field
   	= f.label :category

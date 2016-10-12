@@ -1,81 +1,83 @@
-h1 Dashboard 
-hr style="height:1px; background-color:black;"
-p Company
-= link_to @company.company_name, @company
-p 
-  strong Invite personnel
-  .form-inline
-    .input-group
-      = form_tag invite_personnel_path(@company), method: :post do
-        = label_tag :email
-        br
-        = email_field_tag :email, nil, class: 'form-control'
-        span.input-group-btn
-          = button_tag type: 'submit', name: nil, class: 'btn btn-default' do
-            span.glyphicon.glyphicon-user
-hr style="height:1px; background-color:black;"
-p Drafted Jobs
-- @drafted_jobs.each do |job|
-  = link_to job.job_title, company_job_path(@company, job)
-  br
-  = link_to "edit #{job.job_title}", edit_company_job_path(@company, job)
-  p
-    | Created 
-    = time_ago_in_words(job.created_at)
-    |  ago
-  br
-hr style="height:1px; background-color:black;"
-p Published Jobs
-- @published_jobs.each do |job|
-  = link_to job.job_title, company_job_path(@company, job)
-  p
-    | Applicants :
-    = job.applicants_count
-  p
-    | Publised 
-    = time_ago_in_words(job.updated_at)
-    |  ago
-  table border="1"
-    tr align="center"
-      td Applied
-      td Phone Call
-      td Interview
-      td Offer
-      td Hired
-    tr align="center"
-      td
-        - if job.applied_count > 0
-          = link_to job.applied_count, company_job_applicant_status_path(@company, job, "applied")
-        - else
-          | -
-      td
-        - if job.phone_screen_count > 0
-          = link_to job.phone_screen_count, company_job_applicant_status_path(@company, job, "phone_screen")
-        - else
-          | -
-      td
-        - if job.interview_count > 0
-          = link_to job.interview_count, company_job_applicant_status_path(@company, job, "interview")
-        - else
-          | -
-      td
-        - if job.offer_count > 0
-          = link_to job.offer_count, company_job_applicant_status_path(@company, job, "offer")
-        - else
-          | -
-      td
-        - if job.hired_count > 0
-          = link_to job.hired_count, company_job_applicant_status_path(@company, job, "hired")
-        - else
-          | -
-  br
-hr style="height:1px; background-color:black;"
-p Closed Jobs
-- @closed_jobs.each do |job|
-  = link_to job.job_title, company_job_path(@company, job)
-  p
-    | Closed 
-    = time_ago_in_words(job.updated_at)
-    |  ago
-  br
-hr style="height:1px; background-color:black;"
+.container
+  h1 Dashboard 
+  hr style="height:1px; background-color:black;"
+  p Company
+  = link_to @company.company_name, @company
+  p 
+    strong Invite personnel
+    .form-inline
+      .input-group
+        = form_tag invite_personnel_path(@company), method: :post, id: 'search-form' do
+          = label_tag :email
+          br
+          span
+            = email_field_tag :email, nil, class: 'form-control'
+            span.input-group-btn
+              = button_tag type: 'submit', name: nil, class: 'btn btn-default' do
+                span.glyphicon.glyphicon-user
+  hr style="height:1px; background-color:black;"
+  p Drafted Jobs
+  - @drafted_jobs.each do |job|
+    = link_to job.job_title, company_job_path(@company, job)
+    br
+    = link_to "edit #{job.job_title}", edit_company_job_path(@company, job)
+    p
+      | Created 
+      = time_ago_in_words(job.created_at)
+      |  ago
+    br
+  hr style="height:1px; background-color:black;"
+  p Published Jobs
+  - @published_jobs.each do |job|
+    = link_to job.job_title, company_job_path(@company, job)
+    p
+      | Applicants :
+      = job.applicants_count
+    p
+      | Publised 
+      = time_ago_in_words(job.updated_at)
+      |  ago
+    table border="1"
+      tr align="center"
+        td Applied
+        td Phone Call
+        td Interview
+        td Offer
+        td Hired
+      tr align="center"
+        td
+          - if job.applied_count > 0
+            = link_to job.applied_count, company_job_applicant_status_path(@company, job, "applied")
+          - else
+            | -
+        td
+          - if job.phone_screen_count > 0
+            = link_to job.phone_screen_count, company_job_applicant_status_path(@company, job, "phone_screen")
+          - else
+            | -
+        td
+          - if job.interview_count > 0
+            = link_to job.interview_count, company_job_applicant_status_path(@company, job, "interview")
+          - else
+            | -
+        td
+          - if job.offer_count > 0
+            = link_to job.offer_count, company_job_applicant_status_path(@company, job, "offer")
+          - else
+            | -
+        td
+          - if job.hired_count > 0
+            = link_to job.hired_count, company_job_applicant_status_path(@company, job, "hired")
+          - else
+            | -
+    br
+  hr style="height:1px; background-color:black;"
+  p Closed Jobs
+  - @closed_jobs.each do |job|
+    = link_to job.job_title, company_job_path(@company, job)
+    p
+      | Closed 
+      = time_ago_in_words(job.updated_at)
+      |  ago
+    br
+  hr style="height:1px; background-color:black;"

@@ -1,83 +1,84 @@
-p#notice = notice
-- if user_signed_in?
-  - if @job.status == "draft"
-    = link_to "Publish job", company_upgrade_status_path(params[:company_id], @job.id, "published")
-  - else
-    = link_to "Close job"
-hr 
-p
-  strong Job status 
-  = @job.status
-p
-  strong Job title:
-  = @job.job_title
-p
-  strong Departement:
-  = @job.departement
-p
-  strong Job code:
-  = @job.job_code
-p
-  strong Country:
-  = @job.country
-p
-  strong State:
-  = @job.state
-p
-  strong City:
-  = @job.city
-p
-  strong Zip code:
-  = @job.zip_code
-p
-  strong Min salary:
-  = @job.min_salary
-p
-  strong Max salary:
-  = @job.max_salary
-p
-  strong Curency:
-  = @job.curency
-p
-  strong Job description:
-  = @job.job_description
-p
-  strong Job requirement:
-  = @job.job_requirement
-p
-  strong Benefits:
-  = @job.benefits
-  
-- if user_signed_in?
+.container
+  p#notice = notice
+  - if user_signed_in?
+    - if @job.status == "draft"
+      = link_to "Publish job", company_upgrade_status_path(params[:company_id], @job.id, "published")
+    - else
+      = link_to "Close job"
+  hr 
   p
-    strong Aplicant experience:
-    = @job.get_experience_name.experience
+    strong Job status 
+    = @job.status
   p
-    strong Aplicant function:
-    = @job.get_function_name.function
+    strong Job title:
+    = @job.job_title
   p
-    strong Aplicant employment type:
-    = @job.get_employment_type_name.employment_type
+    strong Departement:
+    = @job.departement
   p
-    strong Aplicant industry:
-    = @job.get_industry_name.industry
+    strong Job code:
+    = @job.job_code
   p
-    strong Aplicant education:
-    = @job.get_education_name.education
+    strong Country:
+    = @job.country
   p
-    strong Job search keyword:
-    = @job.job_search_keyword
+    strong State:
+    = @job.state
+  p
+    strong City:
+    = @job.city
+  p
+    strong Zip code:
+    = @job.zip_code
+  p
+    strong Min salary:
+    = @job.min_salary
+  p
+    strong Max salary:
+    = @job.max_salary
+  p
+    strong Curency:
+    = @job.curency
+  p
+    strong Job description:
+    = @job.job_description
+  p
+    strong Job requirement:
+    = @job.job_requirement
+  p
+    strong Benefits:
+    = @job.benefits
+    
+  - if user_signed_in?
+    p
+      strong Aplicant experience:
+      = @job.get_experience_name.experience
+    p
+      strong Aplicant function:
+      = @job.get_function_name.function
+    p
+      strong Aplicant employment type:
+      = @job.get_employment_type_name.employment_type
+    p
+      strong Aplicant industry:
+      = @job.get_industry_name.industry
+    p
+      strong Aplicant education:
+      = @job.get_education_name.education
+    p
+      strong Job search keyword:
+      = @job.job_search_keyword
 
-- if user_signed_in?
-  = link_to 'Back', root_path
-  '|
-  = link_to 'Delete', company_job_path(params[:company_id], @job), data: { confirm: 'Are you sure?' }, method: :delete
-  - if @job.status == "published"
-    h3
-      | list of applicants
-    =render @job.applicants
-  
-- else
-  = link_to 'apply this job', new_company_job_applicant_path(@job.company_id, @job)
-  '|
-  = link_to 'Back', root_path
+  - if user_signed_in?
+    = link_to 'Back', root_path
+    '|
+    = link_to 'Delete', company_job_path(params[:company_id], @job), data: { confirm: 'Are you sure?' }, method: :delete
+    - if @job.status == "published"
+      h3
+        | list of applicants
+      =render @job.applicants
+    
+  - else
+    = link_to 'apply this job', new_company_job_applicant_path(@job.company_id, @job)
+    '|
+    = link_to 'Back', root_path

@@ -1,125 +1,126 @@
-p#notice = notice
+.container
+  p#notice = notice
 
-p
-  strong Name:
-  = @applicant.name
-p
-  strong Gender:
-  = @applicant.gender
-p
-  strong Date birth:
-  = @applicant.date_birth
-p
-  strong Email:
-  = @applicant.email
-p
-  strong Headline:
-  = @applicant.headline
-p
-  strong Phone:
-  = @applicant.phone
-p
-  strong Address:
-  = @applicant.address
-p
-  strong Photo:
-  = image_tag @applicant.photo.thumb.url
-p
-  strong Resume:
-  = link_to "Download Resume", @applicant.resume_url, target: '_blank'
-p
-  strong Status:
-  = @applicant.status.gsub('_',' ').capitalize
-p
-  strong Name School:
-  = @applicant.educations.map {|c| c.name_school}.join(',')
-p
-  strong Field Study:
-  = @applicant.educations.map {|c| c.field_study}.join(',')
-p
-  strong Degree:
-  = @applicant.educations.map {|c| c.degree}.join(',')
-p
-  strong Name Company:
-  = @applicant.experiences.map {|c| c.name_company}.join(',')
-p
-  strong Industry:
-  = @applicant.experiences.map {|c| c.industry}.join(',')
-p 
-  strong Title:
-  = @applicant.experiences.map {|c| c.title}.join(',')
-p
-  strong Summary:
-  = @applicant.experiences.map {|c| c.summary}.join(',')
-  / = link_to "Send email", controller: "applicants", action: "send_email", id: @applicant.id, job_id: @applicant.job_id
-
-hr
-  h3  
-    | Schedule of Applicant
-  p 
-    = link_to 'Set Schedule', new_applicant_schedule_path(@applicant)
-
-- if @applicant.schedules.present?
-    table
-      tr 
-        th Category 
-        th Start Date 
-        th End Date 
-        th Send notify email? 
-        th
-        th
-      = render @applicant.schedules
-hr
-
-p
-  strong email to applicant :
-  = form_tag email_to_applicant_path(@applicant.job_id,@applicant), method: :post
-    div.field
-      = label_tag :subject
-      = text_field_tag :subject
-    div.field
-      = label_tag :body
-      = text_area_tag :body
-    = button_tag "send"
-p
-  strong add comments : 
-  = render 'comments/form'
-p
-  strong comments :
-  - @comments.each do |c|
-    p
-      h4
-        = "#{c.user.first_name} #{c.user.last_name}"
-      h5
-        = c.body
-      = time_ago_in_words(c.created_at)
-      |  ago
-hr
-- unless @applicant.status == "disqualified"
   p
-    | Action
-    br
-    = select_tag :status, options_from_collection_for_select(@recruitment_level, :first, :first, {selected: @applicant.status, disabled: @disabled_level }), id: 'status'
-  p  
-    | Action
-    br
-    = link_to 'Disqualify Him/Her', company_job_applicant_phase_path(params[:company_id], @applicant.job_id, @applicant.id, "disqualified")
+    strong Name:
+    = @applicant.name
+  p
+    strong Gender:
+    = @applicant.gender
+  p
+    strong Date birth:
+    = @applicant.date_birth
+  p
+    strong Email:
+    = @applicant.email
+  p
+    strong Headline:
+    = @applicant.headline
+  p
+    strong Phone:
+    = @applicant.phone
+  p
+    strong Address:
+    = @applicant.address
+  p
+    strong Photo:
+    = image_tag @applicant.photo.thumb.url
+  p
+    strong Resume:
+    = link_to "Download Resume", @applicant.resume_url, target: '_blank'
+  p
+    strong Status:
+    = @applicant.status.gsub('_',' ').capitalize
+  p
+    strong Name School:
+    = @applicant.educations.map {|c| c.name_school}.join(',')
+  p
+    strong Field Study:
+    = @applicant.educations.map {|c| c.field_study}.join(',')
+  p
+    strong Degree:
+    = @applicant.educations.map {|c| c.degree}.join(',')
+  p
+    strong Name Company:
+    = @applicant.experiences.map {|c| c.name_company}.join(',')
+  p
+    strong Industry:
+    = @applicant.experiences.map {|c| c.industry}.join(',')
+  p 
+    strong Title:
+    = @applicant.experiences.map {|c| c.title}.join(',')
+  p
+    strong Summary:
+    = @applicant.experiences.map {|c| c.summary}.join(',')
+    / = link_to "Send email", controller: "applicants", action: "send_email", id: @applicant.id, job_id: @applicant.job_id
 
-br
-= link_to 'Back', company_job_path(params[:company_id], @applicant.job_id) 
-- content_for :javascript_in_file do
-  javascript:
-    $('#status').on('click', function(){
-      $.ajax({
-        url: Routes.company_job_applicant_phase_path("#{params[:company_id]}", "#{@applicant.job_id}", "#{@applicant.id}", $(this).val()),
-        method: 'get',
-        success: function(result){
-          //alert("Applicant upgraded to " + $(this).val());
-          alert("Applicant status changed");
-          location.reload();
-        }
-      });  
-    });
+  hr
+    h3  
+      | Schedule of Applicant
+    p 
+      = link_to 'Set Schedule', new_applicant_schedule_path(@applicant)
+
+  - if @applicant.schedules.present?
+      table
+        tr 
+          th Category 
+          th Start Date 
+          th End Date 
+          th Send notify email? 
+          th
+          th
+        = render @applicant.schedules
+  hr
+
+  p
+    strong email to applicant :
+    = form_tag email_to_applicant_path(@applicant.job_id,@applicant), method: :post
+      div.field
+        = label_tag :subject
+        = text_field_tag :subject
+      div.field
+        = label_tag :body
+        = text_area_tag :body
+      = button_tag "send"
+  p
+    strong add comments : 
+    = render 'comments/form'
+  p
+    strong comments :
+    - @comments.each do |c|
+      p
+        h4
+          = "#{c.user.first_name} #{c.user.last_name}"
+        h5
+          = c.body
+        = time_ago_in_words(c.created_at)
+        |  ago
+  hr
+  - unless @applicant.status == "disqualified"
+    p
+      | Action
+      br
+      = select_tag :status, options_from_collection_for_select(@recruitment_level, :first, :first, {selected: @applicant.status, disabled: @disabled_level }), id: 'status'
+    p  
+      | Action
+      br
+      = link_to 'Disqualify Him/Her', company_job_applicant_phase_path(params[:company_id], @applicant.job_id, @applicant.id, "disqualified")
+
+  br
+  = link_to 'Back', company_job_path(params[:company_id], @applicant.job_id) 
+  - content_for :javascript_in_file do
+    javascript:
+      $('#status').on('click', function(){
+        $.ajax({
+          url: Routes.company_job_applicant_phase_path("#{params[:company_id]}", "#{@applicant.job_id}", "#{@applicant.id}", $(this).val()),
+          method: 'get',
+          success: function(result){
+            //alert("Applicant upgraded to " + $(this).val());
+            alert("Applicant status changed");
+            location.reload();
+          }
+        });  
+      });
 
 
 

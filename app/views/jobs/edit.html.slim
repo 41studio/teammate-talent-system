@@ -1,8 +1,9 @@
-h1 Editing job
+.container
+	h1 Editing job
 
-== render 'form'
+	== render 'form'
 
-= link_to 'Show', company_job_path(@job.company_id, @job)
-'|
-= link_to 'Back', dashboards_path
+	= link_to 'Show', company_job_path(@job.company_id, @job)
+	'|
+	= link_to 'Back', dashboards_path
 
