@@ -1,5 +1,6 @@
-h1 New schedule
+.container
+	h1 New schedule
 
-== render 'form'
+	== render 'form'
 
-= link_to 'Back', company_job_applicant_path(current_user.company_id, @applicant.job_id, @applicant)
+	= link_to 'Back', company_job_applicant_path(current_user.company_id, @applicant.job_id, @applicant)

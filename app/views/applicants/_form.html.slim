@@ -6,40 +6,43 @@
         - @applicant.errors.full_messages.each do |message|
           li = message
 
-  .field
+  .form-group
     = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :gender 
-    = f.radio_button :gender, 'Male' 
-    = f.label :Male
-    = f.radio_button :gender, 'Female'
-    = f.label :Female
+    = f.text_field :name, class: 'form-control'
+  .form-group
+    = f.label :gender
+    br
+    .radio-inline
+      = f.radio_button :gender, 'Male' 
+      = f.label :Male
+    .radio-inline
+      = f.radio_button :gender, 'Female'
+      = f.label :Female
   div.row
     div.col-md-4
       div.form-group
         div.input-group.date#datetimepicker1
           = f.text_field :date_birth, class: "form-control"
           = content_tag(:span, content_tag(:span, "", class: "glyphicon glyphicon-calendar"), class: "input-group-addon")
-  .field
+  .form-group
     = f.label :email
-    = f.email_field :email
-  .field
+    = f.email_field :email, class: 'form-control'
+  .form-group
     = f.label :headline
-    = f.text_field :headline
-  .field
+    = f.text_field :headline, class: 'form-control'
+  .form-group
     = f.label :phone
-    = f.number_field :phone
-  .field
+    = f.number_field :phone, class: 'form-control'
+  .form-group
     = f.label :address
-    = f.text_area :address
-  .field
+    = f.text_area :address, class: 'form-control'
+  .form-group
     = f.file_field :photo, accept: 'image/png,image/jpeg'
     - if f.object.photo?
       = image_tag f.object.photo.thumb.url
       = f.label :remove_photo
       = f.check_box :remove_photo
-  .field
+  .form-group
     = f.label :resume
     = f.file_field :resume , accept: 'application/pdf'
     - if f.object.resume?
@@ -50,16 +53,23 @@
     - for education in @applicant.educations  
       = f.fields_for :educations, Education.new do |education|
         = render 'education_fields', f: education  
-  .link
-    = link_to_add_association 'Add form education', f, :educations
+    .btn
+      = link_to_add_association f, :educations, class: 'btn btn-primary' do
+        span
+          .glyphicon.glyphicon-plus
+          |  Education Form
     
     - for education in @applicant.experiences
       = f.fields_for :experiences, Experience.new do |experience|
-       = render 'experience_fields', f: experience
-  .link
-    = link_to_add_association 'Add form experience', f, :experiences
+        = render 'experience_fields', f: experience
+    .btn
+      = link_to_add_association f, :experiences, class: 'btn btn-primary' do
+        span
+          .glyphicon.glyphicon-plus
+          |  Experience Form
         
-  .actions = f.submit
+  .form-group
+    = f.submit "Submit", class: 'btn btn-primary'
 - content_for :javascript_in_file do
   javascript:
     $(function () {

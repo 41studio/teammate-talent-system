@@ -31,5 +31,4 @@ class Users::InvitationsController < Devise::InvitationsController
 	  def update_sanitized_params
 	    devise_parameter_sanitizer.permit(:accept_invitation, keys: [:first_name, :last_name, :company_id, :password, :password_confirmation, :invitation_token])
 	  end
-	  # caJ3794ViBGsmgJK6xsa
 end

@@ -136,6 +136,7 @@ class JobsController < ApplicationController
       @employment_type_collection = EmploymentTypeList.all.collect {|i| [i.employment_type, i.id]}
       @industry_collection = IndustryList.all.collect {|i| [i.industry, i.id]}
       @education_collection = EducationList.all.collect {|i| [i.education, i.id]}
+      # @country_collection = CountryStateSelect.countries.collect {|k,v| [v, k.to_s]}
     end
 
 

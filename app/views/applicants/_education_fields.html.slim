@@ -1,11 +1,15 @@
- .nested-fields
-   p
+.nested-fields
+  .form-group
     = f.label :name_school
-    = f.text_field :name_school
-    br
+    = f.text_field :name_school, class: 'form-control'
+  .form-group
     = f.label :field_study
-    = f.text_field :field_study
-    br
+    = f.text_field :field_study, class: 'form-control'
+  .form-group
     = f.label :degree
-    = f.text_field :degree
-    = link_to_remove_association "Remove form Education", f
+    = f.text_field :degree, class: 'form-control'
+  .btn
+    = link_to_remove_association f, class: 'btn btn-danger' do
+        span
+          .glyphicon.glyphicon-remove
+          |  Education Form
