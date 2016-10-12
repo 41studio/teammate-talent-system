@@ -77,7 +77,7 @@ module API
 	  		expose :education
 	  	end
 
-	  	class	EmploymentTypeList < Grape::Entity
+	  	class EmploymentTypeList < Grape::Entity
 	  		expose :id
 	  		expose :employment_type
 	  	end
@@ -109,31 +109,3 @@ module API
 	  end
 	end
 end
-
-
-	  		# expose :comments, using: "API::V1::Entities::Comment", as: :comments 
-	  	# 	expose :comment_threads do
-	  	# 		expose :body
-				# end
-				# expose :comments				
-				# expose :comment do |applicant, options|
-				# 	applicant.comments
-				# end
-			 #  expose( :comments ) do |body,opts| 
-			 #    body.is_a?( Basis ) ? body.health : nil
-			 #  end				
-	  	# 	expose :educations do
-				# 	expose :body
-				# end
-				# 
-				# 
-				# 
-				# 
-
-# expose: comment_threads, using: "API::V1::Entities::Comment, as: :comments
-
-
-# atau kamu buat lagi aja entitiy baru
-
-
-# pokoknya, yang bisa dipake di expose itu semua object public method yang ada dimodel
