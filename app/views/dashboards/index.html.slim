@@ -7,7 +7,7 @@
     strong Invite personnel
     .form-inline
       .input-group
-        = form_tag invite_personnel_path(@company), method: :post, id: 'search-form' do
+        = form_tag company_invite_personnel_path(@company), method: :post, id: 'search-form' do
           = label_tag :email
           br
           span
