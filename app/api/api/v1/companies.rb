@@ -35,8 +35,7 @@ module API
         } 
         get '/detail' do
           begin
-            byebug
-            company.present? ? with: API::V1::Entities::Company
+            company.present? ? API::V1::Entities::Company.represent(company) : "Create company profil"
           rescue ActiveRecord::RecordNotFound
             record_not_found_message
            end
