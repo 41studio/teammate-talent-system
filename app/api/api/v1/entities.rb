@@ -1,16 +1,25 @@
 module API
   module V1
   	module Entities
-			extend Grape::API::Helpers
+		extend Grape::API::Helpers
   		
   		class User < Grape::Entity
-  			expose :fullname
+  			expose :first_name
+  			expose :last_name
+  			expose :email
+  			expose :confirmed_at, format_with: :timestamp, as: :joined_at
+  			expose :avatar
   		end
 	  	
 	  	class Applicant < Grape::Entity
+			format_with :date do |date|
+				date.strftime('%m/%d/%Y')
+			end  			
+
 	  		expose :id
 	  		expose :name
 	  		expose :gender
+	  		expose :date_birth, format_with: :date
 	  		expose :email
 	  		expose :headline
 	  		expose :phone
@@ -20,11 +29,8 @@ module API
 	  		expose :status
 	  		expose :educations, using: "API::V1::Entities::Education", as: :educations 
 	  		expose :experiences, using: "API::V1::Entities::Experience", as: :experiences 
-				expose :comment_threads, using: "API::V1::Entities::Comment", as: :comments
-		    with_options(format_with: :iso_timestamp) do
-	  			expose :created_at, as: :apply_at
-		    end 
-		    # comments
+			expose :comment_threads, using: "API::V1::Entities::Comment", as: :comments
+  			expose :created_at, format_with: :timestamp, as: :apply_at
 	  	end
 
 	  	class Comment < Grape::Entity
@@ -69,7 +75,7 @@ module API
 	  		expose :experience_list, using: "API::V1::Entities::ExperienceList", as: :experience_list
 	  		expose :function_list, using: "API::V1::Entities::FunctionList", as: :function_list
 	  		expose :industry_list, using: "API::V1::Entities::IndustryList", as: :industry_list
-				expose :created_at, format_with: :timestamp
+			expose :created_at, format_with: :timestamp
 	  	end
 
 	  	class EducationList < Grape::Entity
