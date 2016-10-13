@@ -4,6 +4,7 @@ class LandingPageController < ApplicationController
 		if user_signed_in?
 			redirect_to dashboards_path
 		end
+		params[:q][:status_matches] = "published"
 		@search = Job.search(params[:q])
 		@filtered_jobs = @search.result
 		# @search.build_condition
