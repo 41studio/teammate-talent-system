@@ -93,7 +93,7 @@ module API
         post ':id/comment/new' do
           begin
             if applicant
-              comments = Comment.new(commentable_id: params[:id], user_id: current_user.id, body: comments_params, commentable_type: "Applicant")
+              comments = Comment.build_from(applicant, current_user.id, comments_params)
               if comments.save!
                 { status: :success }
               else

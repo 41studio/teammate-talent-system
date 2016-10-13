@@ -216,6 +216,8 @@ module API
               Applicant::STATUSES.each do |status, val|
                 statuses[status.to_s.underscore] = job.applicants.where(status: status).size
               end
+              # present statuses, root: 'applicant_statuses'
+              # present :applicants, job.applicants.where(status: "applied"), with: API::V1::Entities::Applicant
               statuses
           rescue ActiveRecord::RecordNotFound
             record_not_found_message
@@ -232,11 +234,10 @@ module API
           use :job_id       
           requires :status        ,type: String, desc: "Applicants status"
         end
-        get ":id/:status/applicants" do
+        get ":id/applicants" do
           begin
               applicants_with_status = job.applicants.where(status: params[:status])
               present :applicants, applicants_with_status, with: API::V1::Entities::Applicant
-              
           rescue ActiveRecord::RecordNotFound
             record_not_found_message
            end
