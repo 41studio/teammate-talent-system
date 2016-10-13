@@ -54,22 +54,23 @@
     = @applicant.experiences.map {|c| c.summary}.join(',')
     / = link_to "Send email", controller: "applicants", action: "send_email", id: @applicant.id, job_id: @applicant.job_id
 
-  hr
-    h3  
-      | Schedule of Applicant
-    p 
-      = link_to 'Set Schedule', new_applicant_schedule_path(@applicant)
+    - if @applicant.status != "disqualified"
+      hr
+      h3 Schedule of Applicant
+        
+      p 
+        = link_to 'Set Schedule', new_applicant_schedule_path(@applicant)
 
-  - if @applicant.schedules.present?
-      table
-        tr 
-          th Category 
-          th Start Date 
-          th End Date 
-          th Send notify email? 
-          th
-          th
-        = render @applicant.schedules
+      - if @applicant.schedules.present?
+          table
+            tr 
+              th Category 
+              th Start Date 
+              th End Date 
+              th Send notify email? 
+              th
+              th
+            = render @applicant.schedules
   hr
 
   p

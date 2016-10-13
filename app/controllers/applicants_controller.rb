@@ -22,6 +22,7 @@
 class ApplicantsController < ApplicationController
 
   skip_before_filter :authenticate_user!, only: [:create, :new]
+  before_action :authenticate_user!, only: [:show]
   before_action :set_applicant, only: [:show, :edit, :update, :destroy]
   before_action :set_job
   before_action :set_company, only: [:new]
@@ -141,7 +142,7 @@ class ApplicantsController < ApplicationController
     @job = Job.find(params[:job_id])
     @applicant = Applicant.find(params[:applicant_id])
     @applicant.status = params[:phase]
-    if @applicant.status == "applied" or @applicant.status == "phone_screen" or @applicant.status == "interview" or @applicant.status == "offer" or @applicant.status == "hired" or @applicant.status == "disqualified"
+    if @applicant.status == "disqualified"
       if @applicant.save!
         respond_to do |format|
           format.html { redirect_to company_job_applicant_path(@job.company_id, @job, @applicant) }

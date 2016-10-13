@@ -15,7 +15,6 @@ module API
 			format_with :date do |date|
 				date.strftime('%m/%d/%Y')
 			end  			
-
 	  		expose :id
 	  		expose :name
 	  		expose :gender
@@ -24,13 +23,13 @@ module API
 	  		expose :headline
 	  		expose :phone
 	  		expose :address
-	  		expose :photo
 	  		expose :resume
 	  		expose :status
+  			expose :created_at, format_with: :timestamp, as: :apply_at
 	  		expose :educations, using: "API::V1::Entities::Education", as: :educations 
 	  		expose :experiences, using: "API::V1::Entities::Experience", as: :experiences 
 			expose :comment_threads, using: "API::V1::Entities::Comment", as: :comments
-  			expose :created_at, format_with: :timestamp, as: :apply_at
+	  		expose :photo
 	  	end
 
 	  	class Comment < Grape::Entity
@@ -70,12 +69,13 @@ module API
 	  		expose :benefits
 	  		expose :job_search_keyword
 	  		expose :status
-	  		expose :education_list, using: "API::V1::Entities::EducationList", as: :education_list
-	  		expose :employment_type_list, using: "API::V1::Entities::EmploymentTypeList", as: :employment_type_list
-	  		expose :experience_list, using: "API::V1::Entities::ExperienceList", as: :experience_list
-	  		expose :function_list, using: "API::V1::Entities::FunctionList", as: :function_list
-	  		expose :industry_list, using: "API::V1::Entities::IndustryList", as: :industry_list
+	  		expose :education_list, using: "API::V1::Entities::EducationList", as: :edu
+	  		expose :employment_type_list, using: "API::V1::Entities::EmploymentTypeList"
+	  		expose :experience_list, using: "API::V1::Entities::ExperienceList"
+	  		expose :function_list, using: "API::V1::Entities::FunctionList"
+	  		expose :industry_list, using: "API::V1::Entities::IndustryList"
 			expose :created_at, format_with: :timestamp
+			expose :updated_at, format_with: :timestamp
 	  	end
 
 	  	class EducationList < Grape::Entity

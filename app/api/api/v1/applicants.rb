@@ -6,6 +6,13 @@ module API
       before { authenticate! }
 
       helpers do
+        def applicant_params
+          applicant_param = ActionController::Parameters.new(params).require(:applicant).permit(:name, :gender, :date_birth, :email, :headline, :phone, :address, photo: [:filename, :type, :name, :tempfile, :head], resume: [:filename, :type, :name, :tempfile, :head], educations_attributes: [:name_school, :field_study, :degree], experiences_attributes: [:name_company, :industry, :title, :summary])
+          applicant_param["photo"] = ActionDispatch::Http::UploadedFile.new(params.applicants.photo) if params.applicants.photo.present? 
+          applicant_param["resume"] = ActionDispatch::Http::UploadedFile.new(params.applicants.resume) if params.applicants.resume.present?
+          applicant_param
+        end
+
         params :applicant_id do
           requires :id, type: Integer, desc: "Applicant id" 
         end
@@ -20,6 +27,22 @@ module API
       end
 
       resource :applicants do
+        desc "Create Applicant", {
+          :notes => <<-NOTE
+          Create Applicant, save process (save)
+          -------------------------------
+          NOTE
+        }
+        post '/create' do
+          applicants = applicant.new(applicant_params)
+          if applicants.save!
+            { status: :success }
+          else
+            error_message
+          end
+        end    
+
+
         desc "Applicant By  Id", {
           :notes => <<-NOTE
           Get Applicant  By Id
@@ -37,6 +60,20 @@ module API
           end
         end
 
+        desc "Edit Status", {
+          :notes => <<-NOTE
+          Edit Status applicant, for applicant edit status form (edit)
+          -------------------------------------------------------------
+          NOTE
+        }
+        params do
+          use :applicant_id
+        end
+        get ':id/edit_status' do
+          present Applicant::STATUSES, root: 'applicant_statuses'
+          present :applicant, applicant, with: API::V1::Entities::Applicant, only: [:status]
+        end
+
         desc "Update Status Applicant By Id", {
           :notes => <<-NOTE
           Update Applicant By Id
@@ -45,7 +82,8 @@ module API
         }
         params do
           use :applicant_id
-          requires :status        ,type: String, desc: "Applicant status"
+          # byebug
+          requires :status        ,type: String, values: { value: Applicant::STATUSES.map{|key, val| key.to_s}, message: 'not valid' }, desc: "Applicant status"
         end
         put ':id/update_status/' do
           begin
@@ -72,7 +110,7 @@ module API
         post ':id/comment/new' do
           begin
             if applicant
-              comments = Comment.new(commentable_id: params[:id], user_id: current_user.id, body: comments_params, commentable_type: "Applicant")
+              comments = Comment.build_from(applicant, current_user.id, comments_params)
               if comments.save!
                 { status: :success }
               else

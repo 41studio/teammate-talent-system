@@ -20,10 +20,6 @@ module API
           )
         end
 
-        def applicant_statuses
-          ["applied", "phonescreen", "interview", "offer", "hired"]
-        end
-
         def jobs
           current_user.company.jobs
         end
@@ -31,7 +27,7 @@ module API
         def job
           jobs.find(params[:id]) 
         end
-
+        
         def field_on_job_form
           education_list = EducationList.all
           employment_type_list = EmploymentTypeList.all
@@ -78,7 +74,12 @@ module API
         end
         get ":id/detail" do
           begin
-            present job, with: API::V1::Entities::Job
+            # API::V1::Entities::Job.represent(job, except: [:updated_at, { education_list: [:id] }])
+          # , employment_type_list: [:id], experience_list: [:id], function_list: [:id], industry_list: [:id] 
+          # 
+          # 
+            data = API::V1::Entities::Job.represent(job, except: [:updated_at , { education_list: [:id] }])
+            data.as_json
           rescue ActiveRecord::RecordNotFound
             record_not_found_message
           end
@@ -185,33 +186,6 @@ module API
           end
         end
 
-        desc "Job and applicant list", {
-          :notes => <<-NOTE
-          Get Job By Id with applicants group by status
-          --------------------------------------------
-          NOTE
-        }
-        params do
-          use :job_id       
-        end
-        get ":id/applicants" do
-          begin
-            applicants = {}
-            
-            applicant_statuses.each do |status|
-              applicants_with_status = job.applicants.where(status: status)
-              data = API::V1::Entities::Applicant.represent(applicants_with_status)
-              applicants["total_applicants_with_status_#{status.underscore}"] = applicants_with_status.count
-              applicants["applicants_with_status_#{status.underscore}"] = data.as_json
-            end
-          
-            applicants
-
-          rescue ActiveRecord::RecordNotFound
-            record_not_found_message
-           end
-        end
-
         desc "Job List", {
           :notes => <<-NOTE
           Get All Jobs by user's company
@@ -231,6 +205,48 @@ module API
         get '/all_jobs_with_user' do
           {user: current_user.user_api(current_user), jobs: [current_user.company.jobs]}
         end
+
+        desc "number of applicant", {
+          :notes => <<-NOTE
+          number of applicant per status
+          ------------------------------
+          NOTE
+        }
+        params do
+          use :job_id       
+        end
+        get ":id/applicant_total_by_status" do
+          begin
+              statuses = {}
+              Applicant::STATUSES.each do |status, val|
+                statuses[status.to_s.underscore] = job.applicants.where(status: status).size.to_s
+              end
+              # present statuses, root: 'applicant_statuses'
+              # present :applicants, job.applicants.where(status: "applied"), with: API::V1::Entities::Applicant
+              statuses
+          rescue ActiveRecord::RecordNotFound
+            record_not_found_message
+           end
+        end
+
+        desc "Job and applicant list", {
+          :notes => <<-NOTE
+          Get Job By Id with applicants group by status
+          --------------------------------------------
+          NOTE
+        }
+        params do
+          use :job_id       
+          requires :status        ,type: String, desc: "Applicants status", allow_blank: false
+        end
+        get ":id/applicants" do
+          begin
+              applicants_with_status = job.applicants.where(status: params[:status])
+              present :applicants, applicants_with_status, with: API::V1::Entities::Applicant
+          rescue ActiveRecord::RecordNotFound
+            record_not_found_message
+           end
+        end        
       end #end resource
     end
   end

@@ -8,12 +8,8 @@ module API
       helpers do
         def company_params
           company_param = ActionController::Parameters.new(params).require(:companies).permit(:company_name, :company_website, :company_email, :company_phone, :industry, photo_company: [:filename, :type, :name, :tempfile, :head])
-          params.companies.photo_company.present? ? file_params_process : 
+          company_param["photo_company"] = ActionDispatch::Http::UploadedFile.new(params.companies.photo_company) if params.companies.photo_company.present? 
           company_param
-        end
-
-        def file_params_process
-          company_param["photo_company"] = ActionDispatch::Http::UploadedFile.new(params.companies.photo_company)
         end
 
         def company

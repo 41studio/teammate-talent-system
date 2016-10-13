@@ -22,7 +22,6 @@ module API
 			error!({status: :not_found}, 404)
 		end
 
-
       # rescue_from ActiveRecord::RecordNotFound do |e|
       #   error_response(message: e.message, status: 404)
       # end

@@ -67,9 +67,9 @@ module API
           end 
         end       
         
-        desc "User Profil", {
+        desc "User Profile", {
           :notes => <<-NOTE
-          User Profil (show)
+          User Profile (show)
           ------------------
           NOTE
         }
