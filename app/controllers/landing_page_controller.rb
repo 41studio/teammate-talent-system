@@ -5,6 +5,6 @@ class LandingPageController < ApplicationController
 			redirect_to dashboards_path
 		end
 		@search = Job.search(params[:q])
-		@filtered_jobs = @search.result
+		@jobs = @search.result
 	end
 end
