@@ -237,7 +237,7 @@ module API
         }
         params do
           use :job_id       
-          requires :status        ,type: String, desc: "Applicants status"
+          requires :status        ,type: String, desc: "Applicants status", allow_blank: false
         end
         get ":id/applicants" do
           begin
