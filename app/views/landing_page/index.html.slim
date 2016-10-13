@@ -20,7 +20,7 @@
 				= f.label :max_salary_gteq, "Max Salary"
 				= f.text_field :max_salary_eq, placeholder: 'e.g 5000000'
 				br
-				= f.label :max_salary_gteq,"Min Salary"
+				= f.label :min_salary_gteq,"Min Salary"
 				= f.text_field :min_salary_eq, placeholder: 'e.g 1000000'
 				.field
 				br
@@ -45,7 +45,7 @@
 				br
 				= render job.company
 	
-			= paginate @jobs 
+			= paginate @jobs
 
 	- else
 		blockquote
