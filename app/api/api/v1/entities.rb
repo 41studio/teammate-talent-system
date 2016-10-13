@@ -69,7 +69,7 @@ module API
 	  		expose :benefits
 	  		expose :job_search_keyword
 	  		expose :status
-	  		expose :education_list, using: "API::V1::Entities::EducationList"
+	  		expose :education_list, using: "API::V1::Entities::EducationList", as: :edu
 	  		expose :employment_type_list, using: "API::V1::Entities::EmploymentTypeList"
 	  		expose :experience_list, using: "API::V1::Entities::ExperienceList"
 	  		expose :function_list, using: "API::V1::Entities::FunctionList"

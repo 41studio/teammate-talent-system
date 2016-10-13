@@ -27,6 +27,22 @@ module API
       end
 
       resource :applicants do
+        desc "Create Applicant", {
+          :notes => <<-NOTE
+          Create Applicant, save process (save)
+          -------------------------------
+          NOTE
+        }
+        post '/create' do
+          applicants = applicant.new(applicant_params)
+          if applicants.save!
+            { status: :success }
+          else
+            error_message
+          end
+        end    
+
+
         desc "Applicant By  Id", {
           :notes => <<-NOTE
           Get Applicant  By Id
@@ -66,7 +82,8 @@ module API
         }
         params do
           use :applicant_id
-          requires :status        ,type: String, desc: "Applicant status"
+          # byebug
+          requires :status        ,type: String, values: { value: Applicant::STATUSES.map{|key, val| key.to_s}, message: 'not valid' }, desc: "Applicant status"
         end
         put ':id/update_status/' do
           begin
