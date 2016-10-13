@@ -69,12 +69,13 @@ module API
 	  		expose :benefits
 	  		expose :job_search_keyword
 	  		expose :status
-	  		expose :education_list, using: "API::V1::Entities::EducationList", as: :education_list
-	  		expose :employment_type_list, using: "API::V1::Entities::EmploymentTypeList", as: :employment_type_list
-	  		expose :experience_list, using: "API::V1::Entities::ExperienceList", as: :experience_list
-	  		expose :function_list, using: "API::V1::Entities::FunctionList", as: :function_list
-	  		expose :industry_list, using: "API::V1::Entities::IndustryList", as: :industry_list
+	  		expose :education_list, using: "API::V1::Entities::EducationList"
+	  		expose :employment_type_list, using: "API::V1::Entities::EmploymentTypeList"
+	  		expose :experience_list, using: "API::V1::Entities::ExperienceList"
+	  		expose :function_list, using: "API::V1::Entities::FunctionList"
+	  		expose :industry_list, using: "API::V1::Entities::IndustryList"
 			expose :created_at, format_with: :timestamp
+			expose :updated_at, format_with: :timestamp
 	  	end
 
 	  	class EducationList < Grape::Entity

@@ -74,7 +74,12 @@ module API
         end
         get ":id/detail" do
           begin
-            present job, with: API::V1::Entities::Job
+            # API::V1::Entities::Job.represent(job, except: [:updated_at, { education_list: [:id] }])
+          # , employment_type_list: [:id], experience_list: [:id], function_list: [:id], industry_list: [:id] 
+          # 
+          # 
+            data = API::V1::Entities::Job.represent(job, except: [:updated_at , { education_list: [:id] }])
+            data.as_json
           rescue ActiveRecord::RecordNotFound
             record_not_found_message
           end
@@ -201,10 +206,10 @@ module API
           {user: current_user.user_api(current_user), jobs: [current_user.company.jobs]}
         end
 
-        desc "applicant list", {
+        desc "number of applicant", {
           :notes => <<-NOTE
-          sum of applicant by status
-          --------------------------
+          number of applicant per status
+          ------------------------------
           NOTE
         }
         params do
@@ -214,7 +219,7 @@ module API
           begin
               statuses = {}
               Applicant::STATUSES.each do |status, val|
-                statuses[status.to_s.underscore] = job.applicants.where(status: status).size
+                statuses[status.to_s.underscore] = job.applicants.where(status: status).size.to_s
               end
               # present statuses, root: 'applicant_statuses'
               # present :applicants, job.applicants.where(status: "applied"), with: API::V1::Entities::Applicant
