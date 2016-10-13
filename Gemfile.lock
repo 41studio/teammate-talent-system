@@ -90,6 +90,7 @@ GEM
       json (>= 1.7)
       mime-types (>= 1.16)
       mimemagic (>= 0.3.0)
+    chartkick (2.1.1)
     chronic (0.10.2)
     cloudinary (1.2.3)
       aws_cf_signer
@@ -146,6 +147,8 @@ GEM
     grape-entity (0.5.1)
       activesupport
       multi_json (>= 1.3.2)
+    groupdate (3.0.2)
+      activesupport (>= 3)
     hashie (3.4.6)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
@@ -163,6 +166,8 @@ GEM
     jquery-turbolinks (2.1.0)
       railties (>= 3.1.0)
       turbolinks
+    jquery-ui-rails (5.0.5)
+      railties (>= 3.2.16)
     js-routes (1.3.0)
       railties (>= 3.2)
       sprockets-rails
@@ -358,6 +363,7 @@ DEPENDENCIES
   bullet
   byebug
   carrierwave
+  chartkick
   cloudinary
   cocoon
   coffee-rails (~> 4.1.0)
@@ -367,9 +373,11 @@ DEPENDENCIES
   friendly_id (~> 5.1.0)
   grape
   grape-entity
+  groupdate
   jbuilder (~> 2.0)
   jquery-rails
   jquery-turbolinks
+  jquery-ui-rails
   js-routes
   kaminari
   letter_opener

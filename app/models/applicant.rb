@@ -19,6 +19,7 @@
 #
 
 class Applicant < ActiveRecord::Base
+	alias_attribute :applicant_status, :status
 	acts_as_commentable
 	belongs_to :job
 	has_and_belongs_to_many :educations
@@ -36,7 +37,7 @@ class Applicant < ActiveRecord::Base
 
 	validates :name, :gender, :date_birth, :email, :phone, :address, :photo, :resume,  presence: true
 	validates :name, length: {in: 2..70}
-	validates :gender, inclusion: { in: %w(Male Female), message: "%{value} is not a gender"}
+	# validates :gender, inclusion: { in: %w(Male Female), message: "%{value} is not a gender"}
 	validates :phone, numericality: true
 	validate :applicant_statuses
 	validates_processing_of :photo

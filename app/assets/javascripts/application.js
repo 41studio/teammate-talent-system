@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery.turbolinks
 //= require jquery_ujs
+//= require jquery-ui/autocomplete
 //= require turbolinks
 //= require nprogress
 //= require nprogress-turbolinks
@@ -21,3 +22,5 @@
 //= require moment
 //= require bootstrap-datetimepicker
 //= require js-routes
+//= require Chart.bundle
+//= require chartkick

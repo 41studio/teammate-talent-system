@@ -12,6 +12,7 @@
  *
  *= require bootstrap_modified
  *= require npprogress-custom
+ *= require jquery-ui/autocomplete
  *= require_self
  */
  body{
@@ -20,4 +21,7 @@
  .navigation-style{
  	border-radius: 0px;
  	border-color: none;
+ }
+ .padth{
+ 	padding-left: 5px;
  }
