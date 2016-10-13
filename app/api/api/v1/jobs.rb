@@ -210,7 +210,7 @@ module API
         params do
           use :job_id       
         end
-        get ":id/applicant_statuses" do
+        get ":id/applicant_total_by_status" do
           begin
               statuses = {}
               Applicant::STATUSES.each do |status, val|

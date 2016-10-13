@@ -54,7 +54,7 @@ module API
           use :applicant_id
         end
         get ':id/edit_status' do
-          present Applicant::STATUSES
+          present Applicant::STATUSES, root: 'applicant_statuses'
           present :applicant, applicant, with: API::V1::Entities::Applicant, only: [:status]
         end
 
