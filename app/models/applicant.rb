@@ -52,12 +52,14 @@ class Applicant < ActiveRecord::Base
 	STATUSES = {"applied": 1,"phone_screen": 2,"interview": 3,"offer": 4,"hired": 5}
 
 	def disable_level
-		STATUSES.select{|key, value| STATUSES[self.status.to_sym] >= value}.keys
+		if self.status != "disqualified"
+			STATUSES.select{|key, value| STATUSES[self.status.to_sym] >= value}.keys
+		end
 	end
 
 	private
 		def applicant_statuses
-			unless STATUSES.has_key? self.status.to_sym
+			if STATUSES.has_key? self.status.to_sym && self.status.to_sym != "disqualified"
 				errors[:status] << "not available" 
 				return false
 			else
