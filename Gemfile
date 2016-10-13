@@ -60,7 +60,6 @@ gem 'devise_invitable', '~> 1.7.0'
 gem 'sidekiq'
 gem 'redis-rails', '~> 4'
 gem 'chartkick'
-gem 'groupdate'
 gem 'jquery-ui-rails'
 # gem 'country_state_select'
 
