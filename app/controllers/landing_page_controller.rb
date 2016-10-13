@@ -6,7 +6,5 @@ class LandingPageController < ApplicationController
 		end
 		@search = Job.search(params[:q])
 		@filtered_jobs = @search.result
-		# @search.build_condition
-  		#@search.build_sort if @search.sorts.empty?
 	end
 end

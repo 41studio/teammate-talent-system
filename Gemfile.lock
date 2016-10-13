@@ -90,6 +90,7 @@ GEM
       json (>= 1.7)
       mime-types (>= 1.16)
       mimemagic (>= 0.3.0)
+    chartkick (2.1.1)
     chronic (0.10.2)
     cloudinary (1.2.3)
       aws_cf_signer
@@ -358,6 +359,7 @@ DEPENDENCIES
   bullet
   byebug
   carrierwave
+  chartkick
   cloudinary
   cocoon
   coffee-rails (~> 4.1.0)
