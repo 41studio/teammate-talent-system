@@ -6,8 +6,6 @@ class LandingPageController < ApplicationController
 		end
 		params[:q][:status_matches] = "published"
 		@search = Job.search(params[:q])
-		@filtered_jobs = @search.result
-		# @search.build_condition
-  		#@search.build_sort if @search.sorts.empty?
+		@jobs = @search.result
 	end
 end
