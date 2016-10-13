@@ -6,6 +6,13 @@ module API
       before { authenticate! }
 
       helpers do
+        def applicant_params
+          applicant_param = ActionController::Parameters.new(params).require(:applicant).permit(:name, :gender, :date_birth, :email, :headline, :phone, :address, photo: [:filename, :type, :name, :tempfile, :head], resume: [:filename, :type, :name, :tempfile, :head], educations_attributes: [:name_school, :field_study, :degree], experiences_attributes: [:name_company, :industry, :title, :summary])
+          applicant_param["photo"] = ActionDispatch::Http::UploadedFile.new(params.applicants.photo) if params.applicants.photo.present? 
+          applicant_param["resume"] = ActionDispatch::Http::UploadedFile.new(params.applicants.resume) if params.applicants.resume.present?
+          applicant_param
+        end
+
         params :applicant_id do
           requires :id, type: Integer, desc: "Applicant id" 
         end
@@ -47,19 +54,8 @@ module API
           use :applicant_id
         end
         get ':id/edit_status' do
-          # present :applicant_statuses, Applicant::STATUSES
-          # Applicant::STATUSES.as_json
-
-          # applicant_status = API::V1::Entities::Applicant.represent(applicant, only: [:status])
-
-          # present :applicant, applicant_status
-          # present :applicant_statuses, Applicant::STATUSES.as_json
-
-          # present :applicant_statuses, Applicant::STATUSES
-          # present :applicant, applicant, with: API::V1::Entities::Applicant, only: [:status]
-                      
-            present Applicant::STATUSES
-            present :applicant, applicant, with: API::V1::Entities::Applicant, only: [:status]
+          present Applicant::STATUSES
+          present :applicant, applicant, with: API::V1::Entities::Applicant, only: [:status]
         end
 
         desc "Update Status Applicant By Id", {

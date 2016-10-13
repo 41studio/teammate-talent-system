@@ -22,10 +22,6 @@ module API
 			error!({status: :not_found}, 404)
 		end
 
-    def applicant_statuses
-      ["applied", "phone_screen", "interview", "offer", "hired"]
-    end
-
       # rescue_from ActiveRecord::RecordNotFound do |e|
       #   error_response(message: e.message, status: 404)
       # end

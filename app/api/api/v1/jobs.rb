@@ -27,7 +27,7 @@ module API
         def job
           jobs.find(params[:id]) 
         end
-
+        
         def field_on_job_form
           education_list = EducationList.all
           employment_type_list = EmploymentTypeList.all
@@ -194,11 +194,10 @@ module API
           begin
             applicants = {}
             
-            applicant_statuses.each do |status|
+            Applicant::STATUSES.each do |status, val|
               applicants_with_status = job.applicants.where(status: status)
-              data = API::V1::Entities::Applicant.represent(applicants_with_status)
-              applicants["total_applicants_with_status_#{status.underscore}"] = applicants_with_status.count
-              applicants["applicants_with_status_#{status.underscore}"] = data.as_json
+              applicants["total_applicants_with_status_#{status.to_s.underscore}"] = applicants_with_status.count
+              applicants["applicants_with_status_#{status.to_s.underscore}"] = applicants_with_status
             end
           
             applicants
