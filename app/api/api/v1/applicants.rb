@@ -3,7 +3,7 @@ module API
     class Applicants < Grape::API
       version 'v1'
       format :json
-      before { authenticate! }
+      # before { authenticate! }
 
       helpers do
         def applicant_params
@@ -46,7 +46,7 @@ module API
         desc "Applicant By  Id", {
           :notes => <<-NOTE
           Get Applicant  By Id
-          --------------------- comment nya belum
+          ---------------------
           NOTE
         }
         params do
@@ -82,7 +82,6 @@ module API
         }
         params do
           use :applicant_id
-          # byebug
           requires :status        ,type: String, values: { value: Applicant::STATUSES.map{|key, val| key.to_s}, message: 'not valid' }, desc: "Applicant status"
         end
         put ':id/update_status/' do

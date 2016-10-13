@@ -67,6 +67,7 @@ class ApplicantsController < ApplicationController
   # POST /applicants
   # POST /applicants.json
   def create
+    asd
     @job = Job.find(params[:job_id])
     @applicant = @job.applicants.new(applicant_params)
     @form = @applicant

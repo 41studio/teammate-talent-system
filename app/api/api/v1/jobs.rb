@@ -56,8 +56,7 @@ module API
         }
         get '/all' do
           begin
-            data = API::V1::Entities::Job.represent(jobs, only: [:id, :job_title, :status, :created_at])
-            data.as_json
+            present jobs, with: API::V1::Entities::Job, only: [:id, :job_title, :status, :created_at]
           rescue ActiveRecord::RecordNotFound
             record_not_found_message
           end          
@@ -74,12 +73,7 @@ module API
         end
         get ":id/detail" do
           begin
-            # API::V1::Entities::Job.represent(job, except: [:updated_at, { education_list: [:id] }])
-          # , employment_type_list: [:id], experience_list: [:id], function_list: [:id], industry_list: [:id] 
-          # 
-          # 
-            data = API::V1::Entities::Job.represent(job, except: [:updated_at , { education_list: [:id] }])
-            data.as_json
+            present job, with: API::V1::Entities::Job, except: [:updated_at , { education_list: [:id], employment_type_list: [:id], experience_list: [:id], function_list: [:id], industry_list: [:id] }]
           rescue ActiveRecord::RecordNotFound
             record_not_found_message
           end
