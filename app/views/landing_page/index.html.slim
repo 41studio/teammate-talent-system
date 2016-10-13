@@ -7,12 +7,14 @@
 	.form-inline
 		.input-group
 			= search_form_for(@search, url: root_path, method: :get) do |f|
+			 .form-group	
 			 	.field
-				= f.text_field :keyword_cont, placeholder: 'name or keyword'
-				= f.text_field :city_cont, placeholder: 'location city'
+				= f.text_field :keyword_cont, placeholder: 'name or keyword', class: 'form-control'
+				= f.text_field :city_cont, placeholder: 'location city', class: 'form-control'
 				br
-				= f.text_field :company_cont, placeholder: 'e.g Traveloka'
-				= f.text_field :industry_cont, placeholder: 'e.g Airlines, Marketing, Banking'
+				= f.text_field :company_cont, placeholder: 'e.g Traveloka', class: 'form-control'
+				= f.text_field :industry_cont, placeholder: 'e.g Airlines, Marketing, Banking', class: 'form-control' ,id: 'js-autocomplete', remote: true
+				br	
 				.field
 				br
 				= f.label :max_salary_gteq, "Max Salary"
@@ -34,6 +36,7 @@
 	  tr
 	  	th.padth = sort_link(@search, :job_title, "Job title")
 		th.padth = sort_link(@search, :created_at, "Date Published")
+
 	hr
 	- if @jobs.present?
 			p = "#{@jobs.count} Jobs Available"
@@ -41,7 +44,26 @@
 				= link_to job.job_title, company_job_path(job.company_id, job)
 				br
 				= render job.company
+	
+			= paginate @jobs 
 
 	- else
 		blockquote
 			h3 style="margin:0px;" No Jobs Related
+
+javascript:
+	$( "#js-autocomplete" ).autocomplete({
+      source: function( request, response ) {
+        $.ajax( {
+          url: Routes.autocomplete_industry_path({q: request.term}),
+          dataType: "JSON",
+          success: function( data ) {
+            response( data );
+          }
+        } );
+      },
+      minLength: 3,
+      select: function( event, ui ) {
+        log( "Selected: " + ui.item.value + " aka " + ui.item.id );
+      }
+    });

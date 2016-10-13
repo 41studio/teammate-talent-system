@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   get 'aplicants/:applicant_id/schedules/:id/edit' => 'schedules#edit', as: 'edit_applicant_schedule'
   patch 'aplicants/:applicant_id/schedules/:id' => 'schedules#update', as: 'applicant_schedule'
   # put 'aplicants/:applicant_id/schedules/:id' => 'schedules#update', as: 'applicant_schedule'
+  get '/autocomplete/json', to: 'companies#autocomplete_industry', as: 'autocomplete_industry' , defaults: { format: 'json' }
 
   get '/applicants' => "dashboards#applicant", as: 'applicant'
   root 'landing_page#index'

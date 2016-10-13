@@ -1,5 +1,4 @@
 source 'https://rubygems.org'
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
 # Use mysql as the database for Active Record
@@ -61,6 +60,7 @@ gem 'devise_invitable', '~> 1.7.0'
 gem 'sidekiq'
 gem 'redis-rails', '~> 4'
 gem "chartkick"
+gem 'jquery-ui-rails'
 # gem 'country_state_select'
 
 ## API
