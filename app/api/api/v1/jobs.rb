@@ -181,32 +181,6 @@ module API
           end
         end
 
-        desc "Job and applicant list", {
-          :notes => <<-NOTE
-          Get Job By Id with applicants group by status
-          --------------------------------------------
-          NOTE
-        }
-        params do
-          use :job_id       
-        end
-        get ":id/applicants" do
-          begin
-            applicants = {}
-            
-            Applicant::STATUSES.each do |status, val|
-              applicants_with_status = job.applicants.where(status: status)
-              applicants["total_applicants_with_status_#{status.to_s.underscore}"] = applicants_with_status.count
-              applicants["applicants_with_status_#{status.to_s.underscore}"] = applicants_with_status
-            end
-          
-            applicants
-
-          rescue ActiveRecord::RecordNotFound
-            record_not_found_message
-           end
-        end
-
         desc "Job List", {
           :notes => <<-NOTE
           Get All Jobs by user's company
@@ -226,6 +200,47 @@ module API
         get '/all_jobs_with_user' do
           {user: current_user.user_api(current_user), jobs: [current_user.company.jobs]}
         end
+
+        desc "applicant list", {
+          :notes => <<-NOTE
+          sum of applicant by status
+          --------------------------
+          NOTE
+        }
+        params do
+          use :job_id       
+        end
+        get ":id/applicant_statuses" do
+          begin
+              statuses = {}
+              Applicant::STATUSES.each do |status, val|
+                statuses[status.to_s.underscore] = job.applicants.where(status: status).size
+              end
+              statuses
+          rescue ActiveRecord::RecordNotFound
+            record_not_found_message
+           end
+        end
+
+        desc "Job and applicant list", {
+          :notes => <<-NOTE
+          Get Job By Id with applicants group by status
+          --------------------------------------------
+          NOTE
+        }
+        params do
+          use :job_id       
+          requires :status        ,type: String, desc: "Applicants status"
+        end
+        get ":id/:status/applicants" do
+          begin
+              applicants_with_status = job.applicants.where(status: params[:status])
+              present :applicants, applicants_with_status, with: API::V1::Entities::Applicant
+              
+          rescue ActiveRecord::RecordNotFound
+            record_not_found_message
+           end
+        end        
       end #end resource
     end
   end

@@ -23,13 +23,13 @@ module API
 	  		expose :headline
 	  		expose :phone
 	  		expose :address
-	  		expose :photo
 	  		expose :resume
 	  		expose :status
+  			expose :created_at, format_with: :timestamp, as: :apply_at
 	  		expose :educations, using: "API::V1::Entities::Education", as: :educations 
 	  		expose :experiences, using: "API::V1::Entities::Experience", as: :experiences 
 			expose :comment_threads, using: "API::V1::Entities::Comment", as: :comments
-  			expose :created_at, format_with: :timestamp, as: :apply_at
+	  		expose :photo
 	  	end
 
 	  	class Comment < Grape::Entity
