@@ -85,7 +85,7 @@ class JobsController < ApplicationController
     @url = company_job_path(@job.company_id, @job)
     respond_to do |format|
       if @job.update(job_params)
-        format.html { redirect_to @jobs, notice: 'Job was successfully updated.' }
+        format.html { redirect_to company_job_path(@job.company_id, @job), notice: 'Job was successfully updated.' }
         format.json { render :show, status: :ok, location: @job }
       else
         format.html { render :edit }

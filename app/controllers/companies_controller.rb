@@ -91,6 +91,15 @@ class CompaniesController < ApplicationController
     end
   end
 
+  def autocomplete_industry
+    keyword = params[:q]
+    @industry = IndustryList.where("industry LIKE ?", "%#{keyword}%").pluck(:industry)
+
+    respond_to do |format|
+      format.json { render json: @industry.to_json }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def redirect_url

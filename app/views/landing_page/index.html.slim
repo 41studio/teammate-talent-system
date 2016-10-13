@@ -68,3 +68,20 @@
 	- else
 		blockquote
 			h3 style="margin:0px;" No Jobs Related
+
+javascript:
+	$( "#js-autocomplete" ).autocomplete({
+      source: function( request, response ) {
+        $.ajax( {
+          url: Routes.autocomplete_industry_path({q: request.term}),
+          dataType: "JSON",
+          success: function( data ) {
+            response( data );
+          }
+        } );
+      },
+      minLength: 3,
+      select: function( event, ui ) {
+        log( "Selected: " + ui.item.value + " aka " + ui.item.id );
+      }
+    });
