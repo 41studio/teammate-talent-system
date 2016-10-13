@@ -1,2 +1,9 @@
-h1 Report#index
-p Find me in app/views/report/index.html.slim
+.container
+	h1 Report
+	= line_chart @applied_applicant_by_day, xtitle: 'Date', ytitle: 'Applicant'
+	br
+	.row
+		- @jobs.each do |job|
+			.col-md-4
+				= job.job_title
+				= pie_chart job.applicant_stage_per_job(job)

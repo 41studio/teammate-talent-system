@@ -21,3 +21,5 @@
 //= require moment
 //= require bootstrap-datetimepicker
 //= require js-routes
+//= require Chart.bundle
+//= require chartkick

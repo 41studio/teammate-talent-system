@@ -29,6 +29,7 @@
 #
 
 class Job < ActiveRecord::Base
+	alias_attribute :job_status, :status
 	has_many :applicants, dependent: :destroy
 	belongs_to :company
 	belongs_to :education_list
@@ -137,5 +138,9 @@ class Job < ActiveRecord::Base
 	
 	def job_title
     	self[:job_title].titleize
-    end
+  end
+
+	def applicant_stage_per_job(attr)
+		Job.find(attr).applicants.group(:status).count
+	end
 end

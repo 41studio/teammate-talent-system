@@ -60,7 +60,8 @@ gem 'cloudinary'
 gem 'devise_invitable', '~> 1.7.0'
 gem 'sidekiq'
 gem 'redis-rails', '~> 4'
-gem "chartkick"
+gem 'chartkick'
+gem 'groupdate'
 # gem 'country_state_select'
 
 ## API
