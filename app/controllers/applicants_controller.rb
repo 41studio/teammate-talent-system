@@ -143,9 +143,9 @@ class ApplicantsController < ApplicationController
     @job = Job.find(params[:job_id])
     @applicant = Applicant.find(params[:applicant_id])
     @applicant.status = params[:phase]
-    # byebug
     if Applicant::STATUSES.has_key? @applicant.status.to_sym 
       if @applicant.save!
+        ApplicantStatusChanged.delay.send_mail_after_change_status(@applicant, @job)
         respond_to do |format|
           format.html { redirect_to company_job_applicant_path(@job.company_id, @job, @applicant) }
           format.js {}
