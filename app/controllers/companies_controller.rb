@@ -16,6 +16,7 @@
 class CompaniesController < ApplicationController
   before_action :set_company, only: [:show, :edit, :update, :destroy]
   before_filter :redirect_url, only: [:new, :index]
+  before_filter :user_allowed, only: [:edit, :update, :destroy]
   skip_before_filter :authenticate_user!, only: [:index, :show, :autocomplete_industry]
   before_action :set_collection, only: [:new, :create, :edit, :update]
 
@@ -116,6 +117,12 @@ class CompaniesController < ApplicationController
 
     def set_collection
       @industries = Company.industry.collect {|p| [ p[1], p[1] ] }
+    end
+
+    def user_allowed
+      if current_user.company_id != @company.id
+        redirect_to dashboards_path
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
