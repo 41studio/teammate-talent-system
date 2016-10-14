@@ -3,11 +3,23 @@ module API
     class Applicants < Grape::API
       version 'v1'
       format :json
-      # before { authenticate! }
 
       helpers do
         def applicant_params
-          applicant_param = ActionController::Parameters.new(params).require(:applicant).permit(:name, :gender, :date_birth, :email, :headline, :phone, :address, photo: [:filename, :type, :name, :tempfile, :head], resume: [:filename, :type, :name, :tempfile, :head], educations_attributes: [:name_school, :field_study, :degree], experiences_attributes: [:name_company, :industry, :title, :summary])
+          applicant_param = ActionController::Parameters.new(params).require(:applicants).permit(:job_id, :name, :gender, :date_birth, :email, :headline, :phone, :address, photo: [:filename, :type, :name, :tempfile, :head], resume: [:filename, :type, :name, :tempfile, :head], educations_attributes: [:name_school, :field_study, :degree], experiences_attributes: [:name_company, :industry, :title, :summary])
+
+          if params.applicants.educations_attributes.present?
+            params.applicants.educations_attributes.each do |key, val|
+              applicant_param["educations_attributes"]["#{key}"] = params.applicants.educations_attributes[key]
+            end
+          end
+          
+          if params.applicants.experiences_attributes.present?
+            params.applicants.experiences_attributes.each do |key, val|
+              applicant_param["experiences_attributes"]["#{key}"] = params.applicants.experiences_attributes[key]
+            end
+          end
+
           applicant_param["photo"] = ActionDispatch::Http::UploadedFile.new(params.applicants.photo) if params.applicants.photo.present? 
           applicant_param["resume"] = ActionDispatch::Http::UploadedFile.new(params.applicants.resume) if params.applicants.resume.present?
           applicant_param
@@ -24,24 +36,66 @@ module API
         def comments_params
           ActionController::Parameters.new(params).require(:body)
         end   
+
+        def applicant_valid
+          error!("You don't have permission.", 401) unless applicant.job.company.users.include?current_user
+        end
       end
 
+
       resource :applicants do
+        before do
+          unless request.path.include?("applicants/create")
+            authenticate!
+            applicant_valid
+          end
+        end
+
         desc "Create Applicant", {
           :notes => <<-NOTE
           Create Applicant, save process (save)
-          -------------------------------
+          -------------------------------------
           NOTE
         }
+        params do
+          requires :applicants, type: Hash do
+            requires :job_id, type: String, allow_blank: false
+            requires :name, type: String, allow_blank: false
+            requires :gender, type: String, allow_blank: false
+            requires :date_birth, type: String, allow_blank: false
+            requires :email, type: String, allow_blank: false
+            requires :headline, type: String, allow_blank: false
+            requires :phone, type: String, allow_blank: false
+            requires :address, type: String, allow_blank: false
+            optional :educations_attributes, type: Hash do
+              optional :"#{0}", type: Hash do
+                optional :name_school, type: String
+                optional :field_study, type: String
+                optional :degree, type: String
+              end
+            end
+            optional :experiences_attributes, type: Hash do
+              optional :"#{0}" , type: Hash do
+                optional :name_company, type: String
+                optional :industry, type: String
+                optional :title, type: String
+                optional :summary, type: String
+              end
+            end
+            requires :photo, type: File, desc: "Applicant photo", allow_blank: false
+            requires :resume, type: File, desc: "Applicant resume", allow_blank: false
+          end
+        end
         post '/create' do
-          applicants = applicant.new(applicant_params)
-          if applicants.save!
+          job = Job.find(params.applicants.job_id)
+          applicant = job.applicants.new(applicant_params)
+          applicant.status = "applied"
+          if applicant.save!
             { status: :success }
           else
             error_message
           end
-        end    
-
+        end 
 
         desc "Applicant By  Id", {
           :notes => <<-NOTE
@@ -71,7 +125,9 @@ module API
         end
         get ':id/edit_status' do
           present Applicant::STATUSES, root: 'applicant_statuses'
-          present :applicant, applicant, with: API::V1::Entities::Applicant, only: [:status]
+          unless applicant.status == DISQUALIFIED
+            present :applicant, applicant, with: API::V1::Entities::Applicant, only: [:status]
+          end
         end
 
         desc "Update Status Applicant By Id", {
@@ -88,6 +144,28 @@ module API
           begin
             if applicant.update_attribute(:status, params[:status])
               { status: :success }
+            else
+              error!({ status: :error, message: applicant.errors.full_messages.first }) if applicant.errors.any?
+            end
+     
+          rescue ActiveRecord::RecordNotFound
+            record_not_found_message
+          end
+        end
+
+        desc "Desqualified Applicant", {
+          :notes => <<-NOTE
+          Update status to disqualified
+          -----------------------------
+          NOTE
+        }
+        params do
+          use :applicant_id
+        end
+        put ':id/desqualified/' do
+          begin
+            if applicant.update_attribute(:status, Applicant::DISQUALIFIED)
+              { status: :applicant_disqualified }
             else
               error!({ status: :error, message: applicant.errors.full_messages.first }) if applicant.errors.any?
             end

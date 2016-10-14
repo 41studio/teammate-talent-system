@@ -8,7 +8,7 @@ module API
       helpers do
         def company_params
           company_param = ActionController::Parameters.new(params).require(:companies).permit(:company_name, :company_website, :company_email, :company_phone, :industry, photo_company: [:filename, :type, :name, :tempfile, :head])
-          company_param["photo_company"] = ActionDispatch::Http::UploadedFile.new(params.companies.photo_company) if params.companies.photo_company.present? 
+          # company_param["photo_company"] = ActionDispatch::Http::UploadedFile.new(params.companies.photo_company) if params.companies.photo_company.present? 
           company_param
         end
 
@@ -22,15 +22,15 @@ module API
 
         def field_on_company_form
           industry_list = IndustryList.all
-          present :industry_list, industry_list, with: API::V1::Entities::IndustryList
+          present :industry_list, industry_list, with: API::V1::Entities::IndustryList, only: [:industry]
         end     
 
         params :companies do
-          requires :company_name, type: String
-          requires :company_website, type: String
-          requires :company_email, type: String
-          requires :company_phone, type: String
-          requires :industry, type: String
+          requires :company_name, type: String, allow_blank: false
+          requires :company_website, type: String, allow_blank: false
+          requires :company_email, type: String, allow_blank: false
+          requires :company_phone, type: String, allow_blank: false
+          requires :industry, type: String, allow_blank: false
         end
       end      
 
@@ -109,7 +109,7 @@ module API
         params do
           requires :companies, type: Hash do
             use :companies
-            optional :photo_company, type: File
+            requires :photo_company, type: File, allow_blank: true
           end
         end
         put '/update' do

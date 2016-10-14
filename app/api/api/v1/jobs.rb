@@ -48,6 +48,7 @@ module API
       end
 
       resource :jobs do
+        
         desc "Job List", {
           :notes => <<-NOTE
           Get All Jobs by user's company (index)
@@ -115,8 +116,8 @@ module API
         end
         get ':id/edit' do
           begin
-            field_on_job_form
             present :job, job, with: API::V1::Entities::Job
+            field_on_job_form
           rescue ActiveRecord::RecordNotFound
             record_not_found_message
           end
@@ -158,6 +159,20 @@ module API
           end
         end
 
+        desc "Edit Status", {
+          :notes => <<-NOTE
+          Edit Status job, for job edit status form (edit)
+          ------------------------------------------------
+          NOTE
+        }
+        params do
+          use :job_id
+        end
+        get ':id/edit_status' do
+          present Job::STATUSES, root: 'job_statuses'
+          present :job, job, with: API::V1::Entities::Job, only: [:status]
+        end
+
         desc "Update Status Job By Id", {
           :notes => <<-NOTE
           Update Status Job (update)
@@ -166,7 +181,7 @@ module API
         }
         params do
           use :job_id
-          requires :status        ,type: String, desc: "Job status"
+          requires :status ,type: String, values: { value: Job::STATUSES.map{|s| s.to_s}, message: 'not valid' }, desc: "Job status"
         end
         put ':id/update_status/' do
           begin
