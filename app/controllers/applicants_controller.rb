@@ -22,7 +22,7 @@
 class ApplicantsController < ApplicationController
 
   skip_before_filter :authenticate_user!, only: [:create, :new]
-  before_action :authenticate_user!, only: [:show]
+  before_filter :user_allowed, only: [:show, :edit, :update, :destroy]
   before_action :set_applicant, only: [:show, :edit, :update, :destroy]
   before_action :set_job
   before_action :set_company, only: [:new]
@@ -186,6 +186,12 @@ class ApplicantsController < ApplicationController
 
     def set_company
       @company = Company.find(params[:company_id])
+    end
+
+    def user_allowed
+      if current_user.company_id != set_company.id
+        redirect_to dashboards_path
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

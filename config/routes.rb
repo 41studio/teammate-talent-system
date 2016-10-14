@@ -1,7 +1,6 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-
   resources :companies, except: [:index] do
     resources :jobs do 
       resources :applicants, only: [:new, :create, :show] do
@@ -12,7 +11,6 @@ Rails.application.routes.draw do
     end
     get '/jobs/:id/:status', to: 'jobs#upgrade_status', as:'upgrade_status'
     post '/invite_personnel', to: 'companies#invite_personnel', as: 'invite_personnel'
-    get 'report/show'
     get 'report/', to: 'report#index'
   end
   # post '/companies/:id/invite_personnel', to: 'companies#invite_personnel', as: 'invite_personnel'

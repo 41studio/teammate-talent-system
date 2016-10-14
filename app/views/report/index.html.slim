@@ -6,4 +6,9 @@
 		- @jobs.each do |job|
 			.col-md-4
 				= job.job_title
-				= pie_chart job.applicant_stage_per_job(job)
+				- if job.applicant_stage_per_job(job).present?
+					= pie_chart job.applicant_stage_per_job(job)
+				-else
+					center
+						p Empty Chart
+
