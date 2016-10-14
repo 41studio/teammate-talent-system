@@ -16,7 +16,7 @@
 class CompaniesController < ApplicationController
   before_action :set_company, only: [:show, :edit, :update, :destroy]
   before_filter :redirect_url, only: [:new, :index]
-  skip_before_filter :authenticate_user!, only: [:index, :show]
+  skip_before_filter :authenticate_user!, only: [:index, :show, :autocomplete_industry]
   before_action :set_collection, only: [:new, :create, :edit, :update]
 
   # GET /companies
