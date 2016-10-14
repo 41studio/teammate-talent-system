@@ -51,6 +51,7 @@ class Applicant < ActiveRecord::Base
 	# end
 	
 	STATUSES = {"applied": 1,"phone_screen": 2,"interview": 3,"offer": 4,"hired": 5}
+	DISQUALIFIED = "disqualified"
 
 	def disable_level
 		if self.status != "disqualified"

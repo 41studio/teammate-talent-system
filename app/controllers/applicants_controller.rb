@@ -22,7 +22,7 @@
 class ApplicantsController < ApplicationController
 
   skip_before_filter :authenticate_user!, only: [:create, :new]
-  before_action :authenticate_user!, only: [:show]
+  before_filter :user_allowed, only: [:show, :edit, :update, :destroy]
   before_action :set_applicant, only: [:show, :edit, :update, :destroy]
   before_action :set_job
   before_action :set_company, only: [:new]
@@ -68,6 +68,7 @@ class ApplicantsController < ApplicationController
   # POST /applicants
   # POST /applicants.json
   def create
+    # asd
     @job = Job.find(params[:job_id])
     @applicant = @job.applicants.new(applicant_params)
     @form = @applicant
@@ -142,12 +143,29 @@ class ApplicantsController < ApplicationController
     @job = Job.find(params[:job_id])
     @applicant = Applicant.find(params[:applicant_id])
     @applicant.status = params[:phase]
-    if @applicant.status == "disqualified"
+    # byebug
+    if Applicant::STATUSES.has_key? @applicant.status.to_sym 
       if @applicant.save!
         respond_to do |format|
           format.html { redirect_to company_job_applicant_path(@job.company_id, @job, @applicant) }
           format.js {}
         end
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to company_job_applicant_path(@job.company_id, @job, @applicant), notice: "invalid!" }
+        format.js {}
+      end
+    end 
+  end
+
+  def disqualified
+    @job = Job.find(params[:job_id])
+    @applicant = Applicant.find(params[:applicant_id])
+    if @applicant.update_attribute(:status, Applicant::DISQUALIFIED)
+      respond_to do |format|
+        format.html { redirect_to company_job_applicant_path(@job.company_id, @job, @applicant) }
+        format.js {}
       end
     else
       respond_to do |format|
@@ -169,6 +187,12 @@ class ApplicantsController < ApplicationController
 
     def set_company
       @company = Company.find(params[:company_id])
+    end
+
+    def user_allowed
+      if current_user.company_id != set_company.id
+        redirect_to dashboards_path
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -48,33 +48,36 @@ class Job < ActiveRecord::Base
 	validate :salary_regulation, :experience_collection_validation,:function_collection_validation,
 		:employment_type_collection_validation,:industry_collection_validation,:education_collection_validation
 	before_save :job_title
+	before_update :job_title
 
 	ransack_alias :keyword, :job_title_or_job_search_keyword
 	ransack_alias :company, :company_company_name
 	ransack_alias :industry, :company_industry
+
+	STATUSES = ["draft", "published", "closed"]
 
 	def applicants_count
 		applicants.count
 	end
 	
 	def applied_count
-		applicants.where(status: "applied").count
+		applicants.where(status: "applied").size
 	end
 
 	def phone_screen_count
-		applicants.where(status: "phone_screen").count
+		applicants.where(status: "phone_screen").size
 	end
 	
 	def interview_count
-		applicants.where(status: "interview").count
+		applicants.where(status: "interview").size
 	end
 	
 	def offer_count
-		applicants.where(status: "offer").count
+		applicants.where(status: "offer").size
 	end
 	
 	def hired_count
-		applicants.where(status: "hired").count
+		applicants.where(status: "hired").size
 	end
 
 	def	get_experience_name

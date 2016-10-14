@@ -30,6 +30,8 @@
 
 class JobsController < ApplicationController
   skip_before_filter :authenticate_user!, only: [:index, :show]
+  before_filter :user_allowed, only: [:edit, :update, :destroy]
+  before_filter :job_allowed, only: [:show]
   before_action :set_job, only: [:show, :edit, :update, :destroy]
   before_action :set_company, only: [:new]
   before_action :set_collection, only: [:new, :edit, :create, :update]
@@ -139,6 +141,17 @@ class JobsController < ApplicationController
       # @country_collection = CountryStateSelect.countries.collect {|k,v| [v, k.to_s]}
     end
 
+    def user_allowed
+      if current_user.company_id != set_company.id
+        redirect_to dashboards_path
+      end
+    end
+    
+    def job_allowed
+      if set_job.company_id != params[:company_id].to_i
+         redirect_to root_path, notice: 'No Job available with this company' 
+      end
+    end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def job_params
