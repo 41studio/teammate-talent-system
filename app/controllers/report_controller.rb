@@ -3,7 +3,4 @@ class ReportController < ApplicationController
   	@applied_applicant_by_day = Applicant.group('date(created_at)').count
   	@jobs = current_user.company.jobs.where(job_status: "published")
   end
-
-  def show
-  end
 end
