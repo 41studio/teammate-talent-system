@@ -112,7 +112,11 @@ class CompaniesController < ApplicationController
     end
 
     def set_company
-      @company = Company.find(params[:id])
+      if user_signed_in?
+        @company = Company.find(current_user.company_id)
+      else
+        @company = Company.find(params[:id])
+      end
     end
 
     def set_collection
