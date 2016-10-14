@@ -186,7 +186,7 @@ class ApplicantsController < ApplicationController
     end
 
     def set_company
-      @company = Company.find(params[:company_id])
+      @company = Company.find(current_user.company_id)
     end
 
     def user_allowed

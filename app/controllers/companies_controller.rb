@@ -112,7 +112,7 @@ class CompaniesController < ApplicationController
     end
 
     def set_company
-      @company = Company.find(params[:id])
+      @company = Company.find(current_user.company_id)
     end
 
     def set_collection
