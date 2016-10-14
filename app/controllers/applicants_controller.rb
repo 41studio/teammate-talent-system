@@ -68,7 +68,7 @@ class ApplicantsController < ApplicationController
   # POST /applicants
   # POST /applicants.json
   def create
-    asd
+    # asd
     @job = Job.find(params[:job_id])
     @applicant = @job.applicants.new(applicant_params)
     @form = @applicant
@@ -143,12 +143,28 @@ class ApplicantsController < ApplicationController
     @job = Job.find(params[:job_id])
     @applicant = Applicant.find(params[:applicant_id])
     @applicant.status = params[:phase]
-    if @applicant.status == "disqualified"
+    if Applicant::STATUSES.include? @applicant.status 
       if @applicant.save!
         respond_to do |format|
           format.html { redirect_to company_job_applicant_path(@job.company_id, @job, @applicant) }
           format.js {}
         end
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to company_job_applicant_path(@job.company_id, @job, @applicant), notice: "invalid!" }
+        format.js {}
+      end
+    end 
+  end
+
+  def disqualified
+    @job = Job.find(params[:job_id])
+    @applicant = Applicant.find(params[:applicant_id])
+    if @applicant.update_attribute(:status, Applicant::DISQUALIFIED)
+      respond_to do |format|
+        format.html { redirect_to company_job_applicant_path(@job.company_id, @job, @applicant) }
+        format.js {}
       end
     else
       respond_to do |format|

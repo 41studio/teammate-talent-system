@@ -115,7 +115,7 @@ class CompaniesController < ApplicationController
     end
 
     def set_collection
-      @industries = Company.industry.collect {|p| [ p[1], p[1] ] }
+      @industries = IndustryList.all.collect {|i| [i.industry, i.id]}
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
