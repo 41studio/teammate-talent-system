@@ -141,7 +141,7 @@ class JobsController < ApplicationController
     end
 
     def user_allowed
-      if current_user.company_id != @job.company_id
+      if current_user.company_id != set_company.id
         redirect_to dashboards_path
       end
     end
