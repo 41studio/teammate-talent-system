@@ -7,10 +7,10 @@ nav.navbar.navbar-inverse.navigation-style[role="navigation"]
         span.icon-bar
         span.icon-bar
         span.icon-bar
-    - if user_signed_in? && current_user.company != nil
-      = link_to current_user.company.company_name, root_path, class: 'navbar-brand'
-    - else
-      = link_to 'Teamhire', root_path, class: 'navbar-brand'
+      - if user_signed_in? && current_user.company != nil
+        = link_to current_user.company.company_name, root_path, class: 'navbar-brand'
+      - else
+        = link_to 'Teamhire', root_path, class: 'navbar-brand'
     #bs-navbar-collapse.collapse.navbar-collapse
       ul.nav.navbar-nav
         -if user_signed_in?
@@ -18,8 +18,9 @@ nav.navbar.navbar-inverse.navigation-style[role="navigation"]
             = link_to "Dashboard", dashboards_path, class: 'navbar-link'
           li
             = link_to "Applicant", applicant_path, class: 'navbar-link'
-          li
-            = link_to "Report", company_report_path(current_user.company_id), class: 'navbar-link'
+          - if current_user.company_id.present?
+            li
+              = link_to "Report", company_report_path(current_user.company_id), class: 'navbar-link'
       ul.nav.navbar-nav.navbar-right
         - if user_signed_in?
           li
