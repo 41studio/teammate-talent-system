@@ -125,9 +125,7 @@ module API
         end
         get ':id/edit_status' do
           present Applicant::STATUSES, root: 'applicant_statuses'
-          unless applicant.status == DISQUALIFIED
-            present :applicant, applicant, with: API::V1::Entities::Applicant, only: [:status]
-          end
+          present :applicant, applicant, with: API::V1::Entities::Applicant, only: [:status]
         end
 
         desc "Update Status Applicant By Id", {
@@ -142,12 +140,16 @@ module API
         end
         put ':id/update_status/' do
           begin
-            if applicant.update_attribute(:status, params[:status])
-              { status: :success }
+            unless applicant.status == Applicant::DISQUALIFIED
+              if applicant.update_attribute(:status, params[:status])
+                { status: :success }
+              else
+                error!({ status: :error, message: applicant.errors.full_messages.first }) if applicant.errors.any?
+              end
             else
-              error!({ status: :error, message: applicant.errors.full_messages.first }) if applicant.errors.any?
+              { status: :this_applicant_cannot_do_any_changes }
             end
-     
+       
           rescue ActiveRecord::RecordNotFound
             record_not_found_message
           end
@@ -162,7 +164,7 @@ module API
         params do
           use :applicant_id
         end
-        put ':id/desqualified/' do
+        put ':id/disqualified/' do
           begin
             if applicant.update_attribute(:status, Applicant::DISQUALIFIED)
               { status: :applicant_disqualified }
@@ -199,6 +201,17 @@ module API
             record_not_found_message
           end 
         end 
+
+        post '/set_schedule' do
+          job = Job.find(params.applicants.job_id)
+          applicant = job.applicants.new(applicant_params)
+          applicant.status = "applied"
+          if applicant.save!
+            { status: :success }
+          else
+            error_message
+          end
+        end         
 
       end #end resource
     end
