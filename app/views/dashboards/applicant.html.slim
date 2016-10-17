@@ -1,10 +1,113 @@
 .container
-	h1 welcome
-	- if current_user.company.present?
-		= "We have #{pluralize(@applicants.count, "applicant")}"
-		br
-		- @applicants.each do |applicant|
+	.row
+		.col-md-3
+			h3 Filter
+			hr
+			.panel.panel-default
+				.panel-body
+					p By Gender
+					hr
+					.input-group
+						label
+							= radio_button_tag 'filter_by_gender', 'Male', id: 'male'
+							= label_tag 'male', 'Male'
+					.input-group
+						label
+							= radio_button_tag 'filter_by_gender', 'Female', id: 'female'
+							= label_tag 'female', 'Female'
+			.panel.panel-default
+				.panel-body
+					p By Stage
+					hr
+					.input-group
+						label
+							= check_box_tag 'filter_by_stage', 'Applied'
+							= label_tag 'applied', 'Applied'
+					.input-group
+						label
+							= check_box_tag 'filter_by_stage', 'Phone Screen'
+							= label_tag 'phone_screen', 'Phone Screen'
+					.input-group
+						label
+							= check_box_tag 'filter_by_stage', 'Interview'
+							= label_tag 'interview', 'Interview'
+					.input-group
+						label
+							= check_box_tag 'filter_by_stage', 'Offer'
+							= label_tag 'offer', 'Offer'
+					.input-group
+						label
+							= check_box_tag 'filter_by_stage', 'Hired'
+							= label_tag 'hired', 'Hired'
+			.panel.panel-default
+				.panel-body
+					p By Consideration
+					hr
+					.input-group
+						label
+							= check_box_tag 'filter_by_consideration', 'Qualified'
+							= label_tag 'qualified', 'Qualified'
+					.input-group
+						label
+							= check_box_tag 'filter_by_consideration', 'Disqualified'
+							= label_tag 'disqualified', 'Disqualified'
+			.panel.panel-default
+				.panel-body
+					p By Gender
+					hr
+					.input-group
+						label
+							= radio_button_tag 'filter_by_date', 'Last Week', id: 'by_last_week'
+							= label_tag 'last_week', 'Last Week'
+					.input-group
+						label
+							= radio_button_tag 'filter_by_date', 'Last Month', id: 'by_last_month'
+							= label_tag 'last_week', 'Last Month'
+					.input-group
+						label
+							= radio_button_tag 'filter_by_date', 'Last Year', id: 'by_last_tree_month'
+							= label_tag 'last_week', 'Last Three Month'
+					.input-group
+						label
+							= radio_button_tag 'filter_by_date', 'Last Year', id: 'by_last_year'
+							= label_tag 'last_week', 'Last Year'
+					
+		.col-md-9
+			h3 Applicant List
+			hr
+			= search_form_for(@search, url: applicant_path, method: :get) do |f|
+				.form-inline
+					.form-group
+						= f.text_field :name_cont, placeholder: 'search by name', class: 'form-control'
+						= f.submit "search", class: 'btn btn-primary'
+			
 			br
-			= link_to applicant.name, company_job_applicant_path(current_user.company,applicant.job_id,applicant.id)
-	- else
-		p = "You must create company first"
+			- if @applicants.present?
+				= "We have #{pluralize(@applicants.count, "applicant")}"
+			- else
+				p There is no applicant matching your criteria.
+
+			hr
+			- if current_user.company.present?
+				- @applicants.each do |applicant|
+					.col-md-6
+						.panel.panel-default
+								.panel-body
+									.col-md-3
+										= image_tag applicant.photo.thumb.url, width: '70px', height: '70px'
+									.col-md-9
+										.input-group
+											label Full Name : 
+											= link_to applicant.name, company_job_applicant_path(current_user.company,applicant.job_id,applicant.id)
+										.input-group
+											label Gender :  
+											= applicant.gender
+										.input-group
+											label Headline :
+											= applicant.headline
+										.input-group
+											label Email : 
+											= applicant.email
+
+			- else
+				p = "You must create company first"
