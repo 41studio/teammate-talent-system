@@ -143,7 +143,7 @@ class Job < ActiveRecord::Base
 	
 	def job_title
     	self[:job_title].titleize
-  end
+  	end
 
 	def applicant_stage_per_job(attr)
 		Job.find(attr).applicants.group(:status).count
