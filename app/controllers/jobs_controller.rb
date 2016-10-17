@@ -30,7 +30,7 @@
 
 class JobsController < ApplicationController
   skip_before_filter :authenticate_user!, only: [:index, :show]
-  before_filter :user_allowed, only: [:edit, :update, :destroy]
+  before_filter :user_allowed, only: [:edit, :update, :destroy, :create, :new]
   before_filter :job_allowed, only: [:show]
   before_action :set_job, only: [:show, :edit, :update, :destroy]
   before_action :set_company, only: [:new]
@@ -129,7 +129,7 @@ class JobsController < ApplicationController
     end
 
     def set_company
-      @company = Company.find(current_user.company_id)
+      @company = Company.find(params[:company_id])
     end
 
     def set_collection
