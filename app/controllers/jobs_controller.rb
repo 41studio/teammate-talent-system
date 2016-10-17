@@ -148,7 +148,7 @@ class JobsController < ApplicationController
     end
     
     def job_allowed
-      if set_job.company_id != current_user.company_id.to_i
+      if set_job.company_id != params[:company_id].to_i
          redirect_to root_path, notice: 'No Job available with this company' 
       end
     end
