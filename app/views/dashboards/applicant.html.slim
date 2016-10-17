@@ -76,10 +76,9 @@
 			h3 Applicant List
 			hr
 			= search_form_for(@search, url: applicant_path, method: :get) do |f|
-				.form-inline
-					.form-group
-						= f.text_field :name_cont, placeholder: 'search by name', class: 'form-control'
-						= f.submit "search", class: 'btn btn-primary'
+				= f.text_field :name_cont, placeholder: 'search by name', class: 'form-control'
+				br
+				= f.submit "search", class: 'btn btn-primary'
 			
 			br
 			- if @applicants.present?
