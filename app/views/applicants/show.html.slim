@@ -97,7 +97,7 @@
         = time_ago_in_words(c.created_at)
         |  ago
   hr
-  - unless @applicant.status == "disqualified"
+  - unless @applicant.status == @disqualified
     p
       | Action
       br

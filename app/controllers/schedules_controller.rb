@@ -85,7 +85,12 @@ class SchedulesController < ApplicationController
     end
 
     def get_applicant
-      @applicant = Applicant.find(params[:id])
+      applicant = Applicant.find(params[:id])
+      if applicant.job.company.users.include?current_user
+        @applicant = applicant
+      else
+        redirect_to dashboards_path
+      end
     end
 
     def set_schedule
@@ -97,7 +102,7 @@ class SchedulesController < ApplicationController
     end
 
     def collection
-      @collection = [["Interview", "Interview"], ["Offer", "Offer"], ["Hired", "Hired"]].collect {|i| [i[1], i[1]]}
+      @category = Applicant::STATUSES.keys
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

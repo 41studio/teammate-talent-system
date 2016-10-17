@@ -61,7 +61,7 @@ class Applicant < ActiveRecord::Base
 
 	private
 		def applicant_statuses
-			if STATUSES.has_key? self.status.to_sym && self.status.to_sym != "disqualified"
+			if STATUSES.has_key? self.status.to_sym && self.status != DISQUALIFIED
 				errors[:status] << "not available" 
 				return false
 			else

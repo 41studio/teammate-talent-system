@@ -13,8 +13,9 @@
 
 class Schedule < ActiveRecord::Base
 	belongs_to :applicant
-	validates_presence_of :start_date, :end_date, :category
+	validates :start_date, :end_date, :category,  presence: true
 	validate :time_exist
+	validate :time_valid
 
 	after_create :send_notify_applicant_email
 	after_update :send_update_notify_applicant_email
@@ -22,6 +23,10 @@ class Schedule < ActiveRecord::Base
 
 	def time_exist
 		errors.add(:start_date, " is exist for this applicant")  if Schedule.where.not(start_date: self.start_date).include?self.start_date
+	end
+
+	def time_valid
+		errors.add(:end_date, " cannot less than start date") if self.start_date < self.start_date
 	end
 
 	def applicant_total

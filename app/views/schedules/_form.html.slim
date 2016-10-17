@@ -24,7 +24,8 @@
 
   .field
   	= f.label :category
-  	= f.select :category, @collection, include_blank: 'Select Schedule'
+    = f.select :category, @category, {include_blank: "Select Category"}, {class: 'form-control'}
+
 
   .actions = f.submit
   
@@ -32,10 +33,10 @@
   javascript:
     $(function () {
       $('#datetimepicker1').datetimepicker({
-        format: 'DD-MM-YYYY HH:mm'
+        format: 'YYYY-MM-DD HH:mm'
       });
       $('#datetimepicker2').datetimepicker({
-        format: 'DD-MM-YYYY HH:mm'
+        format: 'YYYY-MM-DD HH:mm'
       });      $("#datetimepicker1").on("dp.change", function (e) {
           $('#datetimepicker2').data("DateTimePicker").minDate(e.date);
       });
