@@ -32,45 +32,52 @@
     strong Status:
     = @applicant.status.gsub('_',' ').capitalize
   p
-    strong Name School:
-    = @applicant.educations.map {|c| c.name_school}.join(',')
-  p
-    strong Field Study:
-    = @applicant.educations.map {|c| c.field_study}.join(',')
-  p
-    strong Degree:
-    = @applicant.educations.map {|c| c.degree}.join(',')
-  p
-    strong Name Company:
-    = @applicant.experiences.map {|c| c.name_company}.join(',')
-  p
-    strong Industry:
-    = @applicant.experiences.map {|c| c.industry}.join(',')
-  p 
-    strong Title:
-    = @applicant.experiences.map {|c| c.title}.join(',')
-  p
-    strong Summary:
-    = @applicant.experiences.map {|c| c.summary}.join(',')
-    / = link_to "Send email", controller: "applicants", action: "send_email", id: @applicant.id, job_id: @applicant.job_id
+    strong Education
 
-    - if @applicant.status != "disqualified"
-      hr
-      h3 Schedule of Applicant
+  table
+    tr
+      th Name School
+      th.padth Field Study
+      th.padth Degree 
+    - @applicant.educations.each do |c|
+      tr
+        td = c.name_school
+        td.padth = c.field_study
+        td.padth = c.degree
+  br
+  p
+    strong Experience
+    
+  table
+    tr
+      th Name Company
+      th.padth Industry
+      th.padth Title
+      th.padth Summary
+    - @applicant.experiences.each do |c|
+      tr
+        td = c.name_company
+        td.padth = c.industry
+        td.padth = c.title
+        td.padth = c.summary
+
+  - if @applicant.status != "disqualified"
+    hr
+    h3 Schedule of Applicant
         
-      p 
-        = link_to 'Set Schedule', new_applicant_schedule_path(@applicant)
+    p 
+      = link_to 'Set Schedule', new_applicant_schedule_path(@applicant)
 
-      - if @applicant.schedules.present?
-          table
-            tr 
-              th Category 
-              th Start Date 
-              th End Date 
-              th Send notify email? 
-              th
-              th
-            = render @applicant.schedules
+    - if @applicant.schedules.present?
+        table
+          tr 
+            th Category 
+            th Start Date 
+            th End Date 
+            th Send notify email? 
+            th
+            th
+          = render @applicant.schedules
   hr
 
   p
