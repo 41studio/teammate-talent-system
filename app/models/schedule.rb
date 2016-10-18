@@ -23,7 +23,7 @@ class Schedule < ActiveRecord::Base
 	after_destroy :send_canceled_notify_applicant_email
 
 	private
-		scope :by_company_id, -> (company_id) { self.joins(applicant: :job).where(jobs: {company_id: company_id}) }
+		scope :by_company_id, -> (company_id, applicant_id) { self.joins(applicant: :job).where(jobs: {company_id: company_id}, applicants: {id: applicant_id}) }
 
 		def time_collection
 			time_now = Time.now.in_time_zone

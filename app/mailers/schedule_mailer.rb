@@ -8,8 +8,8 @@ class ScheduleMailer < ApplicationMailer
 		@email = applicant.email
 		@applicant_name = applicant.name
 		@subject = "#{schedule.category} Schedule"
-		@date = schedule.start_date
-		mail(to: @email, subject: @subject)
+		@date = @schedule.start_date
+		# mail(to: @email, subject: @subject)
 	end
 
   def update_notify_applicant_email(applicant, schedule)
@@ -18,7 +18,7 @@ class ScheduleMailer < ApplicationMailer
 		@email = applicant.email
 		@applicant_name = applicant.name
 		@subject = "#{schedule.category} Schedule"
-		@date = schedule.start_date
+		@date = @schedule.start_date
 		mail(to: @email, subject: @subject)
 	end
 
@@ -28,13 +28,12 @@ class ScheduleMailer < ApplicationMailer
 		@email = applicant.email
 		@applicant_name = applicant.name
 		@subject = "#{schedule.category}"
-		@date = schedule.start_date
+		@date = @schedule.start_date
 		mail(to: @email, subject: @subject)
 	end
 
 	private
 		def update_applicant!
-			
 			@schedule.update_column(:notify_applicant_flag, true)
 		end
 end

@@ -96,7 +96,7 @@ class SchedulesController < ApplicationController
     end
 
     def set_schedule
-      @schedule = Schedule.by_company_id(current_user.company_id).find(params[:id])
+      @schedule = Schedule.by_company_id(current_user.company_id, @applicant.id).find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
