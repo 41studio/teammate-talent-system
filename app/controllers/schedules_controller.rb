@@ -34,7 +34,7 @@ class SchedulesController < ApplicationController
 
   # GET /schedules/1/edit
   def edit
-    @schedule = Schedule.find(params[:id]).applicant
+    edit_schedule_path
   end
 
   # POST /schedules
@@ -96,13 +96,7 @@ class SchedulesController < ApplicationController
     end
 
     def set_schedule
-      schedule = Schedule.find(params[:id])
-      if schedule.applicant.job.company.users.include?current_user
-        @schedule = schedule
-      else
-        schedule
-      end
-      # @schedule = Schedule.by_company_id(current_user.company_id).find(params[:id])x
+      @schedule = Schedule.by_company_id(current_user.company_id).find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -4,9 +4,9 @@ class DashboardsController < ApplicationController
   def index
     @company = current_user.company
     if @company.present?
-      @drafted_jobs = current_user.company.jobs.drafted_jobs
-      @published_jobs = current_user.company.jobs.published_jobs
-      @closed_jobs = current_user.company.jobs.closed_jobs
+      @drafted_jobs = @company.jobs.drafted_jobs
+      @published_jobs = @company.jobs.published_jobs
+      @closed_jobs = @company.jobs.closed_jobs
     else
       redirect_to new_company_path
     end
@@ -14,8 +14,9 @@ class DashboardsController < ApplicationController
 
   def applicant
     if current_user.company.present?
-    @jobs = current_user.company.jobs
-    @applicants = Applicant.where(job_id: @jobs)
+     @jobs = current_user.company.jobs
+     @search = Applicant.search(params[:q])
+     @applicants = @search.result.where(job_id: @jobs) 
     else
       flash[:notice] = "No Applicant here"
     end

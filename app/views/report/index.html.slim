@@ -9,15 +9,15 @@
 					hr
 					.input-group
 						label
-							= radio_button_tag 'filter_by_date', 'Last Week', id: 'by_last_week'
+							= radio_button_tag :filter_by, 'last_week'
 							= label_tag 'last_week', 'Last Week'
 					.input-group
 						label
-							= radio_button_tag 'filter_by_date', 'Last Month', id: 'by_last_month'
+							= radio_button_tag :filter_by, 'last_month'
 							= label_tag 'last_week', 'Last Month'
 					.input-group
 						label
-							= radio_button_tag 'filter_by_date', 'Last Year', id: 'by_last_year'
+							= radio_button_tag :filter_by, 'last_year'	
 							= label_tag 'last_week', 'Last Year'
 			.panel.panel-default
 				.panel-body
@@ -80,7 +80,8 @@
 		.col-md-9
 			h3 Report
 			hr
-			= line_chart @applied_applicant_by_day, xtitle: 'Date', ytitle: 'Applicant'
+			#line_chart
+				= render 'report/line_chart'
 			br
 			.row
 				- @jobs.each do |job|
@@ -91,3 +92,29 @@
 						-else
 							center
 								p Empty Chart
+- content_for :javascript_in_file do
+  javascript:
+    $('#filter_by_last_week').on('click', function(){
+    	console.log("week ini bisa");
+    	$.ajax({
+        url: Routes.company_report_path("#{current_user.company_id}"),
+        method: 'get',
+        data: { group_by: "week" }
+      });  
+    });
+    $('#filter_by_last_month').on('click', function(){
+    	console.log("month ini bisa");
+    	$.ajax({
+        url: Routes.company_report_path("#{current_user.company_id}"),
+        method: 'get',
+        data: { group_by: "month" }
+      });
+    });
+    $('#filter_by_last_year').on('click', function(){
+    	console.log("year ini bisa");
+    	$.ajax({
+        url: Routes.company_report_path("#{current_user.company_id}"),
+        method: 'get',
+        data: { group_by: "year" }
+      });
+    });

@@ -3,7 +3,5 @@
 
 	== render 'form'
 
-	= link_to 'Show', @schedule
-	'|
-	= link_to 'Back', schedules_path
+	= link_to 'Back', company_job_applicant_path(current_user.company_id, @applicant.job_id, @applicant)
 

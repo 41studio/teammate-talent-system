@@ -71,7 +71,7 @@
       p 
         = @job.benefits
 
-      - if user_signed_in?
+      - if user_signed_in? && current_user.company_id == @job.company_id
         = link_to 'Back', root_path
         '|
         = link_to 'Delete', company_job_path(params[:company_id], @job), data: { confirm: 'Are you sure?' }, method: :delete

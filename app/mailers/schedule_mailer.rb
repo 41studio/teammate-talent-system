@@ -1,6 +1,6 @@
 class ScheduleMailer < ApplicationMailer
 	
-	after_action :update_applicant!, only[:notify_applicant_email]
+	after_action :update_applicant!, only: [:notify_applicant_email]
 
   def notify_applicant_email(applicant, schedule)
 		mail(to: @email, subject: "Nama Aplikasi - #{@subject}")
@@ -34,7 +34,7 @@ class ScheduleMailer < ApplicationMailer
 
 	private
 		def update_applicant!
-			byebug
+			
 			@schedule.update_column(:notify_applicant_flag, true)
 		end
 end
