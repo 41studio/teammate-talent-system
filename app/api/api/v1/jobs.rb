@@ -57,7 +57,7 @@ module API
         }
         get '/all' do
           begin
-            present jobs, with: API::V1::Entities::Job, only: [:id, :job_title, :status, :created_at]
+            present :jobs, jobs, with: API::V1::Entities::Job, only: [:id, :job_title, :status, :created_at]
           rescue ActiveRecord::RecordNotFound
             record_not_found_message
           end          
@@ -193,16 +193,6 @@ module API
           rescue ActiveRecord::RecordNotFound
             record_not_found_message
           end
-        end
-
-        desc "Job List", {
-          :notes => <<-NOTE
-          Get All Jobs by user's company
-          ------------------------------
-          NOTE
-        }
-        get '/all_jobs' do
-          {jobs: [API::V1::Entities::Job.represent(jobs, only: [:id, :job_title, :status, :created_at])]}
         end
 
         desc "Job List with user profile", {

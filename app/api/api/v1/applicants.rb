@@ -25,6 +25,10 @@ module API
           applicant_param
         end
 
+        def schedule_params
+          ActionController::Parameters.new(params).require(:schedule).permit(:start_date, :end_date, :category)
+        end
+
         params :applicant_id do
           requires :id, type: Integer, desc: "Applicant id" 
         end
@@ -33,7 +37,7 @@ module API
           Applicant.find(params[:id])
         end
 
-        def comments_params
+        def comment_params
           ActionController::Parameters.new(params).require(:body)
         end   
 
@@ -189,7 +193,7 @@ module API
         post ':id/comment/new' do
           begin
             if applicant
-              comments = Comment.build_from(applicant, current_user.id, comments_params)
+              comments = Comment.build_from(applicant, current_user.id, comment_params)
               if comments.save!
                 { status: :success }
               else
@@ -202,7 +206,13 @@ module API
           end 
         end 
 
-        post '/set_schedule' do
+
+        params do
+          requires :start_date, type: DateTime, allow_blank: false
+          requires :end_date, type: DateTime, allow_blank: false
+          requires :category, type: DateTime, allow_blank: false
+        end
+        post '/schedule/create' do
           job = Job.find(params.applicants.job_id)
           applicant = job.applicants.new(applicant_params)
           applicant.status = "applied"

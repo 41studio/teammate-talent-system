@@ -12,11 +12,9 @@
 #
 
 class SchedulesController < ApplicationController
-  before_action :get_applicant, only: [:new, :create]
-  before_action :set_schedule, only: [:new, :create]
-  before_action :get_schedule, only: [:show, :destroy, :edit, :update]
-  before_action :set_applicant, only: [:edit, :update]
-  before_action :collection
+  before_action :set_applicant, :set_location
+  before_action :new_schedule_path, only: [:new, :create]
+  before_action :edit_schedule_path, :set_schedule, only: [:destroy, :edit, :update]
 
   # GET /schedules
   # GET /schedules.json
@@ -31,22 +29,23 @@ class SchedulesController < ApplicationController
 
   # GET /schedules/new
   def new
+    @schedule = set_applicant.schedules.new
   end
 
   # GET /schedules/1/edit
   def edit
+    edit_schedule_path
   end
 
   # POST /schedules
   # POST /schedules.json
   def create
     @schedule = @applicant.schedules.new(schedule_params)
-    @schedule.notify_applicant_flag = "true"
-    
+    @schedule.category = @applicant.status    
     respond_to do |format|
       if @schedule.save
-        format.html { redirect_to company_job_applicant_path(current_user.company_id, @applicant.job_id, @applicant), notice: 'Schedule was successfully created.' }
-        format.json { render :show, status: :created, location: @schedule }
+        format.html { redirect_to @location, notice: 'Schedule was successfully created.' }
+        format.json { render :show, status: :created, location: @location }
       else
         format.html { render :new }
         format.json { render json: @schedule.errors, status: :unprocessable_entity }
@@ -59,8 +58,8 @@ class SchedulesController < ApplicationController
   def update
     respond_to do |format|
       if @schedule.update(schedule_params)
-        format.html { redirect_to company_job_applicant_path(current_user.company_id, @applicant.job_id, @applicant), notice: 'Schedule was successfully updated.' }
-        format.json { render :show, status: :ok, location: @schedule }
+        format.html { redirect_to @location, notice: 'Schedule was successfully updated.' }
+        format.json { render :show, status: :ok, location: @location }
       else
         format.html { render :edit }
         format.json { render json: @schedule.errors, status: :unprocessable_entity }
@@ -73,35 +72,35 @@ class SchedulesController < ApplicationController
   def destroy
     @schedule.destroy
     respond_to do |format|
-      format.html { redirect_to schedules_url, notice: 'Schedule was successfully destroyed.' }
+      format.html { redirect_to @location, notice: 'Schedule was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_applicant
-      @applicant = @schedule.applicant
+    def set_location
+      @location = company_job_applicant_path(current_user.company_id, @applicant.job_id, @applicant)
     end
 
-    def get_applicant
-      @applicant = Applicant.find(params[:id])
+    def set_applicant
+      @applicant = Applicant.by_company_id(current_user.company_id).find(params[:applicant_id])
+    end
+
+    def new_schedule_path
+      @url = company_job_applicant_schedules_path(current_user.company_id, @applicant.job_id, @applicant)
+    end
+
+    def edit_schedule_path
+      @url = company_job_applicant_schedules_path(current_user.company_id, @applicant.job_id, @applicant, @schedule)
     end
 
     def set_schedule
-      @schedule = @applicant.schedules.build
-    end
-
-    def get_schedule
-      @schedule = Schedule.find(params[:id])
-    end
-
-    def collection
-      @collection = [["Interview", "Interview"], ["Offer", "Offer"], ["Hired", "Hired"]].collect {|i| [i[1], i[1]]}
+      @schedule = Schedule.by_company_id(current_user.company_id, @applicant.id).find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def schedule_params
-      params.require(:schedule).permit(:start_date, :end_date, :category)
+      params.require(:schedule).permit(:start_date, :end_date)
     end
 end

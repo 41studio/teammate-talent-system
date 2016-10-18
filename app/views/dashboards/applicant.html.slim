@@ -53,7 +53,7 @@
 							= label_tag 'disqualified', 'Disqualified'
 			.panel.panel-default
 				.panel-body
-					p By Gender
+					p By Date
 					hr
 					.input-group
 						label
@@ -82,7 +82,7 @@
 			
 			br
 			- if @applicants.present?
-				= "We have #{pluralize(@applicants.count, "applicant")}"
+				= "We have #{@applicants.count} from #{pluralize(@applicant_count.count, "applicant")}"
 			- else
 				p There is no applicant matching your criteria.
 

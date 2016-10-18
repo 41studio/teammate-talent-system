@@ -1,9 +1,9 @@
-= form_for [@applicant, @schedule] do |f|
-  - if @applicant.errors.any?
+= form_for @schedule, url: @url do |f|
+  - if @schedule.errors.any?
     #error_explanation
-      h2 = "#{pluralize(@applicant.errors.count, "error")} prohibited this schedule from being saved:"
+      h2 = "#{pluralize(@schedule.errors.count, "error")} prohibited this schedule from being saved:"
       ul
-        - @applicant.errors.full_messages.each do |message|
+        - @schedule.errors.full_messages.each do |message|
           li = message
 
   .row
@@ -22,24 +22,15 @@
             = f.text_field :end_date, class: "form-control"
             = content_tag(:span, content_tag(:span, "", class: "glyphicon glyphicon-calendar"), class: "input-group-addon")
 
-  .field
-  	= f.label :category
-  	= f.select :category, @collection, include_blank: 'Select Schedule'
-
   .actions = f.submit
   
 - content_for :javascript_in_file do
   javascript:
     $(function () {
       $('#datetimepicker1').datetimepicker({
-        format: 'DD-MM-YYYY HH:mm'
+        format: 'YYYY-MM-DD HH:mm'
       });
       $('#datetimepicker2').datetimepicker({
-        format: 'DD-MM-YYYY HH:mm'
-      });      $("#datetimepicker1").on("dp.change", function (e) {
-          $('#datetimepicker2').data("DateTimePicker").minDate(e.date);
-      });
-      $("#datetimepicker2").on("dp.change", function (e) {
-          $('#datetimepicker1').data("DateTimePicker").maxDate(e.date);
+        format: 'YYYY-MM-DD HH:mm'
       });      
     });
