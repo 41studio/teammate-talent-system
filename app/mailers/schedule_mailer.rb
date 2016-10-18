@@ -9,7 +9,7 @@ class ScheduleMailer < ApplicationMailer
 		@applicant_name = applicant.name
 		@subject = "#{schedule.category} Schedule"
 		@date = @schedule.start_date
-		# mail(to: @email, subject: @subject)
+		mail(to: @email, subject: @subject)
 	end
 
   def update_notify_applicant_email(applicant, schedule)
