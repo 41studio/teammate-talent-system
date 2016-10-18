@@ -212,7 +212,7 @@ module API
           requires :end_date, type: DateTime, allow_blank: false
           requires :category, type: DateTime, allow_blank: false
         end
-        post '/set_schedule' do
+        post '/schedule/create' do
           job = Job.find(params.applicants.job_id)
           applicant = job.applicants.new(applicant_params)
           applicant.status = "applied"

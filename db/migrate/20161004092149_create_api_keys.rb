@@ -9,7 +9,7 @@ class CreateApiKeys < ActiveRecord::Migration
       t.timestamps null: false
     end
 
-	add_index :api_keys, ["user_id"], name: "index_api_keys_on_user_id", unique: false
+    add_index :api_keys, ["user_id"], name: "index_api_keys_on_user_id", unique: false
     add_index :api_keys, ["access_token"], name: "index_api_keys_on_access_token", unique: true
 
   end
