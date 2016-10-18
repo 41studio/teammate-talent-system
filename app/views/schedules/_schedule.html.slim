@@ -6,12 +6,12 @@ tr
 	td
 		= schedule.end_date
 	td
-		- if schedule.notify_applicant_flag == "true"
+		- if schedule.notify_applicant_flag == true
 			p Notified
 		- else
 			p Waiting for due date
 	td 	
-		= link_to "Edit ", edit_applicant_schedule_path(schedule.applicant_id, schedule)
+		= link_to "Edit ", edit_company_job_applicant_schedule_path(params[:company_id], schedule.applicant.job_id, schedule.applicant_id, schedule)
 			
 	td 	
-		= link_to " Delete ", schedule, data: { confirm: 'Are you sure?' }, method: :delete
+		= link_to " Delete ", company_job_applicant_schedule_path(params[:company_id], schedule.applicant.job_id, schedule.applicant_id, schedule), data: { confirm: 'Are you sure?' }, method: :delete

@@ -45,10 +45,6 @@ class Applicant < ActiveRecord::Base
 
 	validates_processing_of :resume
 	validate :resume_size_validation
-
-	# def self.applicant_stage
-	# 	@stages = [["Applied","applied"],["Phone Screen","phonescreen"],["Interview","interview"],["Offer","offer"],["Hired","hired"]]
-	# end
 	
 	STATUSES = {"applied": 1,"phone_screen": 2,"interview": 3,"offer": 4,"hired": 5}
 	DISQUALIFIED = "disqualified"
@@ -60,6 +56,8 @@ class Applicant < ActiveRecord::Base
 	end
 
 	private
+		scope :by_company_id, -> (company_id) { self.joins(:job).where(jobs: {company_id: company_id}) }
+
 		def applicant_statuses
 			if STATUSES.has_key? self.status.to_sym && self.status != DISQUALIFIED
 				errors[:status] << "not available" 

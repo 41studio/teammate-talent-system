@@ -59,7 +59,7 @@
       h3 Schedule of Applicant
         
       p 
-        = link_to 'Set Schedule', new_applicant_schedule_path(@applicant)
+        = link_to 'Set Schedule',  new_company_job_applicant_schedule_path(params[:company_id], @applicant.job_id, @applicant)
 
       - if @applicant.schedules.present?
           table
