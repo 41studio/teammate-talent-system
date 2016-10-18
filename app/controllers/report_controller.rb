@@ -16,7 +16,7 @@ class ReportController < ApplicationController
     end
     @applied_applicant_by_day = Applicant.joins(:job).where(jobs: {company_id: current_user.company_id}).group(@group).count
     @jobs = current_user.company.jobs.where(job_status: "published")
-    if params[:group_by]
+    if params[:group_by_time]
       respond_to do |format|
         format.js { render 'report/sort_by_time' }
       end
