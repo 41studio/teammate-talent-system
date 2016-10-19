@@ -23,6 +23,8 @@ class ApplicantsController < ApplicationController
 
   skip_before_filter :authenticate_user!, only: [:create, :new]
   before_filter :user_allowed, only: [:show, :edit, :update, :destroy, :applicant_status]
+  before_filter :applicant_status_allowed, only: [:applicant_status, :show]
+  before_filter :applicant_allowed, only: [:show]
   before_action :set_applicant, only: [:show, :edit, :update, :destroy]
   before_action :set_job
   before_action :set_company, only: [:new]
@@ -142,7 +144,7 @@ class ApplicantsController < ApplicationController
     @job_id = params[:job_id]
     @search = Applicant.search(params[:q])
     @applicants = @search.result.where(applicants: { status: status, job_id: params[:job_id] })
-    @applicant_count = Applicant.total_applicant_status(current_user.company_id, status)
+    @applicant_count = Applicant.total_applicant_status(current_user.company_id, @job_id , status)
   end
 
   def phase
@@ -197,6 +199,20 @@ class ApplicantsController < ApplicationController
 
     def user_allowed
       if current_user.company_id != set_company.id
+        redirect_to dashboards_path
+      end
+    end
+
+    def applicant_status_allowed
+      company_id = params[:company_id].to_i
+      if set_job.company_id != company_id
+        redirect_to dashboards_path
+      end   
+    end
+
+    def applicant_allowed
+      job_id = params[:job_id].to_i
+      if set_applicant.job_id != job_id
         redirect_to dashboards_path
       end
     end
