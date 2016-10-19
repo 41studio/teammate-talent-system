@@ -22,7 +22,7 @@
 class ApplicantsController < ApplicationController
 
   skip_before_filter :authenticate_user!, only: [:create, :new]
-  before_filter :user_allowed, only: [:show, :edit, :update, :destroy]
+  before_filter :user_allowed, only: [:show, :edit, :update, :destroy, :applicant_status]
   before_action :set_applicant, only: [:show, :edit, :update, :destroy]
   before_action :set_job
   before_action :set_company, only: [:new]
@@ -137,7 +137,9 @@ class ApplicantsController < ApplicationController
 
   def applicant_status
     status = params[:status]
-    @applicants = Applicant.where(applicants: { status: status, job_id: params[:job_id] })
+    @search = Applicant.search(params[:q])
+    @applicants = @search.result.where(applicants: { status: status, job_id: params[:job_id] })
+    @applicant_count = Applicant.total_applicant_status(current_user.company_id, status)
   end
 
   def phase
