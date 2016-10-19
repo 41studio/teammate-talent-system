@@ -9,11 +9,11 @@
 					hr
 					.input-group
 						label
-							= radio_button_tag 'filter_by_gender', 'Male', id: 'male'
+							= radio_button_tag :filter_by_gender,'Male'
 							= label_tag 'male', 'Male'
 					.input-group
 						label
-							= radio_button_tag 'filter_by_gender', 'Female', id: 'female'
+							= radio_button_tag :filter_by_gender,'Female'
 							= label_tag 'female', 'Female'
 			.panel.panel-default
 				.panel-body
@@ -57,56 +57,55 @@
 					hr
 					.input-group
 						label
-							= radio_button_tag 'filter_by_date', 'Last Week', id: 'by_last_week'
+							= radio_button_tag 'filter_by_date', 'Last Week'
 							= label_tag 'last_week', 'Last Week'
 					.input-group
 						label
-							= radio_button_tag 'filter_by_date', 'Last Month', id: 'by_last_month'
+							= radio_button_tag 'filter_by_date', 'Last Month'
 							= label_tag 'last_week', 'Last Month'
 					.input-group
 						label
-							= radio_button_tag 'filter_by_date', 'Last Year', id: 'by_last_tree_month'
+							= radio_button_tag 'filter_by_date', 'Last Year'
 							= label_tag 'last_week', 'Last Three Month'
 					.input-group
 						label
-							= radio_button_tag 'filter_by_date', 'Last Year', id: 'by_last_year'
+							= radio_button_tag 'filter_by_date', 'Last Year'
 							= label_tag 'last_week', 'Last Year'
 					
 		.col-md-9
 			h3 Applicant List
 			hr
-			= search_form_for(@search, url: applicant_path, method: :get) do |f|
-				= f.text_field :name_cont, placeholder: 'search by name', class: 'form-control'
-				br
-				= f.submit "search", class: 'btn btn-primary'
-			
-			br
-			- if @applicants.present?
-				= "We have #{@applicants.count} from #{pluralize(@applicant_count.count, "applicant")}"
-			- else
-				p There is no applicant matching your criteria.
-
-			hr
 			- if current_user.company.present?
+				= search_form_for(@search, url: applicant_path, method: :get) do |f|
+					= f.text_field :name_cont, placeholder: 'search by name', class: 'form-control'
+					br
+					= f.submit "search", class: 'btn btn-primary'
+				
+				br
+				- if @applicants.present?
+					= "We have #{@applicants.count} from #{pluralize(@applicant_count.count, "applicant")}"
+				- else
+					p There is no applicant matching your criteria.
+
+				hr
 				- @applicants.each do |applicant|
 					.col-md-6
 						.panel.panel-default
-								.panel-body
-									.col-md-3
-										= image_tag applicant.photo.thumb.url, width: '70px', height: '70px'
-									.col-md-9
-										.input-group
-											label Full Name : 
-											= link_to applicant.name, company_job_applicant_path(current_user.company,applicant.job_id,applicant.id)
-										.input-group
-											label Gender :  
-											= applicant.gender
-										.input-group
-											label Headline :
-											= applicant.headline
-										.input-group
-											label Email : 
-											= applicant.email
-
+							.panel-body
+								.col-md-3
+									= image_tag applicant.photo.thumb.url, width: '70px', height: '70px'
+								.col-md-9
+									.input-group
+										label Full Name : 
+										= link_to applicant.name, company_job_applicant_path(current_user.company,applicant.job_id,applicant.id)
+									.input-group
+										label Gender :  
+										= applicant.gender
+									.input-group
+										label Headline :
+										= applicant.headline
+									.input-group
+										label Job :
+										= applicant.job.job_title
 			- else
 				p = "You must create company first"

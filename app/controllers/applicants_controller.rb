@@ -22,7 +22,9 @@
 class ApplicantsController < ApplicationController
 
   skip_before_filter :authenticate_user!, only: [:create, :new]
-  before_filter :user_allowed, only: [:show, :edit, :update, :destroy]
+  before_filter :user_allowed, only: [:show, :edit, :update, :destroy, :applicant_status]
+  before_filter :applicant_status_allowed, only: [:applicant_status, :show]
+  before_filter :applicant_allowed, only: [:show]
   before_action :set_applicant, only: [:show, :edit, :update, :destroy]
   before_action :set_job
   before_action :set_company, only: [:new]
@@ -137,7 +139,12 @@ class ApplicantsController < ApplicationController
 
   def applicant_status
     status = params[:status]
-    @applicants = Applicant.where(applicants: { status: status, job_id: params[:job_id] })
+    @status = status
+    @company_id = params[:company_id]
+    @job_id = params[:job_id]
+    @search = Applicant.search(params[:q])
+    @applicants = @search.result.where(applicants: { status: status, job_id: params[:job_id] })
+    @applicant_count = Applicant.total_applicant_status(current_user.company_id, @job_id , status)
   end
 
   def phase
@@ -187,15 +194,25 @@ class ApplicantsController < ApplicationController
     end
 
     def set_company
-      if user_signed_in?
-        @company = Company.find(current_user.company_id)
-      else
         @company = Company.find(params[:company_id])
-      end
     end
 
     def user_allowed
       if current_user.company_id != set_company.id
+        redirect_to dashboards_path
+      end
+    end
+
+    def applicant_status_allowed
+      company_id = params[:company_id].to_i
+      if set_job.company_id != company_id
+        redirect_to dashboards_path
+      end   
+    end
+
+    def applicant_allowed
+      job_id = params[:job_id].to_i
+      if set_applicant.job_id != job_id
         redirect_to dashboards_path
       end
     end

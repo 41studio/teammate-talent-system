@@ -25,7 +25,7 @@
       = f.select('industry', @industries, {include_blank:  "Select Industry"}, {class: 'form-control'})
 
     .form-group
-      br
+      = f.label :photo_company
       = f.file_field :photo_company, accept: 'image/png,image/jpeg', class: 'form-control'
       - if f.object.photo_company?
         = image_tag f.object.photo_company.thumb.url
