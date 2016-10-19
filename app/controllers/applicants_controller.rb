@@ -187,11 +187,7 @@ class ApplicantsController < ApplicationController
     end
 
     def set_company
-      if user_signed_in?
-        @company = Company.find(current_user.company_id)
-      else
         @company = Company.find(params[:company_id])
-      end
     end
 
     def user_allowed

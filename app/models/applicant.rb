@@ -55,6 +55,10 @@ class Applicant < ActiveRecord::Base
 		end
 	end
 
+	def self.total_applicant(company_id)
+		joins(:job).where(jobs: {company_id: company_id})
+	end
+
 	private
 		scope :by_company_id, -> (company_id) { self.joins(:job).where(jobs: {company_id: company_id}) }
 

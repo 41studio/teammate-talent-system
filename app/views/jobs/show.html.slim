@@ -72,7 +72,7 @@
         = @job.benefits
 
       - if user_signed_in? && current_user.company_id == @job.company_id
-        = link_to 'Back', root_path
+        = link_to 'Back', dashboards_path
         '|
         = link_to 'Delete', company_job_path(params[:company_id], @job), data: { confirm: 'Are you sure?' }, method: :delete
         - if @job.status == "published"
@@ -80,5 +80,9 @@
             | list of applicants
           =render @job.applicants
         
+      - elsif user_signed_in? && current_user.company_id != @job.company_id
+        = link_to 'back', dashboards_path
+
       - else
         = link_to 'apply this job', new_company_job_applicant_path(@job.company_id, @job), class: 'btn btn-primary'
+
