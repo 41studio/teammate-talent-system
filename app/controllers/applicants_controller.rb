@@ -137,6 +137,9 @@ class ApplicantsController < ApplicationController
 
   def applicant_status
     status = params[:status]
+    @status = status
+    @company_id = params[:company_id]
+    @job_id = params[:job_id]
     @search = Applicant.search(params[:q])
     @applicants = @search.result.where(applicants: { status: status, job_id: params[:job_id] })
     @applicant_count = Applicant.total_applicant_status(current_user.company_id, status)
