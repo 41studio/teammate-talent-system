@@ -39,12 +39,21 @@
   .form-group
     = f.label :job_description
     = f.text_area :job_description, class: 'form-control'
+    span#karakter_description[style="color:red"]
+      |  500 
+    |  Characters left
   .form-group
     = f.label :job_requirement
     = f.text_area :job_requirement, class: 'form-control'
+    span#karakter_requirement[style="color:red"]
+      |  500 
+    |  Characters left    
   .form-group
     = f.label :benefits
     = f.text_area :benefits, class: 'form-control'
+    span#karakter_benefits[style="color:red"]
+      |  500 
+    |  Characters left  
   .form-group
     = f.label :experience_list_id, "Applicant Experience"
     = f.select :experience_list_id, @experience_collection, {include_blank:  "Select Applicant Level"}, {class: 'form-control'}
@@ -65,3 +74,28 @@
     = f.text_field :job_search_keyword, class: 'form-control'
   .form-group
     = f.submit "Submit", class: 'btn btn-primary'
+
+  javascript:
+    $(document).ready(function(){
+        $('#job_job_description').keyup(function(){
+            var len = this.value.length;
+            if (len >= 500){
+              this.value = this.value.substring(0,500);
+            }
+            $('#karakter_description').text(500 - len)
+        });
+        $('#job_job_requirement').keyup(function(){
+            var len = this.value.length;
+            if (len >= 500){
+              this.value = this.value.substring(0,500);
+            }
+            $('#karakter_requirement').text(500 - len)
+        });
+        $('#job_benefits').keyup(function(){
+            var len = this.value.length;
+            if (len >= 500){
+              this.value = this.value.substring(0,500);
+            }
+            $('#karakter_benefits').text(500 - len)
+        });
+    });
