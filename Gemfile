@@ -29,13 +29,16 @@ end
 
 ## library for push notification
 gem 'pushmeup'
-# gem 'rpush'
+gem 'rpush'
 
 ## Auth library
 gem 'devise'
 
 ## schduler library
 gem 'whenever', require: false
+
+## event calendar
+gem 'fullcalendar-rails'
 
 ## make easy for nested form
 gem "cocoon"
@@ -67,6 +70,8 @@ gem 'jquery-ui-rails'
 gem 'simple_token_authentication', '~> 1.0'
 gem 'grape'
 gem 'grape-entity'
+gem 'grape-swagger'
+gem 'grape-swagger-rails'
 
 ## error catcher
 gem 'airbrake', '~> 5.0'

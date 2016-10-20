@@ -4,6 +4,8 @@ module API
 		extend Grape::API::Helpers
   		
   		class User < Grape::Entity
+  			expose :id
+  			expose :fullname
   			expose :first_name
   			expose :last_name
   			expose :email

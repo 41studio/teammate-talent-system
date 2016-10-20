@@ -49,6 +49,8 @@ class Applicant < ActiveRecord::Base
 	STATUSES = {"applied": 1,"phone_screen": 2,"interview": 3,"offer": 4,"hired": 5}
 	DISQUALIFIED = "disqualified"
 
+	paginates_per 10
+
 	def disable_level
 		if self.status != "disqualified"
 			STATUSES.select{|key, value| STATUSES[self.status.to_sym] >= value}.keys

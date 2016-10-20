@@ -1,10 +1,11 @@
 module API
   module V1
     class Jobs < Grape::API
-      version 'v1'
-      format :json
+      version 'v1' 
+      format :json 
       before { authenticate! }
-      
+      helpers Helpers
+
       helpers do
         params :job_id do
           requires :id, type: Integer, desc: "Job id" 
@@ -55,9 +56,12 @@ module API
           --------------------------------------
           NOTE
         }
+        params do
+          use :pagination
+        end
         get '/all' do
           begin
-            present :jobs, jobs, with: API::V1::Entities::Job, only: [:id, :job_title, :status, :created_at]
+            present :jobs, jobs.page(params[:page]), with: API::V1::Entities::Job, only: [:id, :job_title, :status, :created_at]
           rescue ActiveRecord::RecordNotFound
             record_not_found_message
           end          
@@ -195,19 +199,9 @@ module API
           end
         end
 
-        desc "Job List with user profile", {
+        desc "Total of applicant", {
           :notes => <<-NOTE
-          Get All Jobs by user's company
-          ------------------------------
-          NOTE
-        }
-        get '/all_jobs_with_user' do
-          {user: current_user.user_api(current_user), jobs: [current_user.company.jobs]}
-        end
-
-        desc "number of applicant", {
-          :notes => <<-NOTE
-          number of applicant per status
+          Total of applicant per status
           ------------------------------
           NOTE
         }
@@ -236,12 +230,13 @@ module API
         }
         params do
           use :job_id       
+          use :pagination
           requires :status        ,type: String, desc: "Applicants status", allow_blank: false
         end
         get ":id/applicants" do
           begin
-              applicants_with_status = job.applicants.where(status: params[:status])
-              present :applicants, applicants_with_status, with: API::V1::Entities::Applicant
+            applicants_with_status = job.applicants.where(status: params[:status])
+            present :applicants, applicants_with_status.page(params[:page]), with: API::V1::Entities::Applicant
           rescue ActiveRecord::RecordNotFound
             record_not_found_message
            end

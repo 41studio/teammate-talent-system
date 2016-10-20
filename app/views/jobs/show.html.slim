@@ -1,6 +1,6 @@
 .container
   p#notice = notice
-  - if user_signed_in?
+  - if user_signed_in? && current_user.company_id == @job.company_id
     - if @job.status == "draft"
       = link_to "Publish job", company_upgrade_status_path(params[:company_id], @job.id, "published")
       hr 
@@ -8,7 +8,7 @@
         strong Job status 
         = @job.status
     - else
-      = link_to "Close job"
+      = ' '
   .row
     .col-md-8.col-md-offset-2
       ol.breadcrumb

@@ -4,6 +4,7 @@ module API
       version 'v1' 
       format :json 
       before { authenticate! }
+      helpers Helpers
 
       helpers do
         def company_params
@@ -123,6 +124,25 @@ module API
             record_not_found_message
           end
         end 
+
+        desc "Users in company", {
+          :notes => <<-NOTE
+          User List in company (show)
+          -------------------------------------
+          NOTE
+        } 
+        params do
+          use :pagination
+        end
+        get '/users' do
+          begin
+            present :users, company.users, with: API::V1::Entities::User, only: [:id, :fullname]
+          rescue ActiveRecord::RecordNotFound
+            record_not_found_message
+           end
+        end
+
+
       end #end resource
     end
   end
