@@ -3,75 +3,7 @@
 		.col-md-3
 			h3 Filter
 			hr
-			.panel.panel-default
-				.panel-body
-					p By Gender
-					hr
-					.input-group
-						label
-							= radio_button_tag :filter_by_gender,'Male'
-							= label_tag 'male', 'Male'
-					.input-group
-						label
-							= radio_button_tag :filter_by_gender,'Female'
-							= label_tag 'female', 'Female'
-			.panel.panel-default
-				.panel-body
-					p By Stage
-					hr
-					.input-group
-						label
-							= check_box_tag 'filter_by_stage', 'Applied'
-							= label_tag 'applied', 'Applied'
-					.input-group
-						label
-							= check_box_tag 'filter_by_stage', 'Phone Screen'
-							= label_tag 'phone_screen', 'Phone Screen'
-					.input-group
-						label
-							= check_box_tag 'filter_by_stage', 'Interview'
-							= label_tag 'interview', 'Interview'
-					.input-group
-						label
-							= check_box_tag 'filter_by_stage', 'Offer'
-							= label_tag 'offer', 'Offer'
-					.input-group
-						label
-							= check_box_tag 'filter_by_stage', 'Hired'
-							= label_tag 'hired', 'Hired'
-			.panel.panel-default
-				.panel-body
-					p By Consideration
-					hr
-					.input-group
-						label
-							= check_box_tag 'filter_by_consideration', 'Qualified'
-							= label_tag 'qualified', 'Qualified'
-					.input-group
-						label
-							= check_box_tag 'filter_by_consideration', 'Disqualified'
-							= label_tag 'disqualified', 'Disqualified'
-			.panel.panel-default
-				.panel-body
-					p By Date
-					hr
-					.input-group
-						label
-							= radio_button_tag 'filter_by_date', 'Last Week'
-							= label_tag 'last_week', 'Last Week'
-					.input-group
-						label
-							= radio_button_tag 'filter_by_date', 'Last Month'
-							= label_tag 'last_week', 'Last Month'
-					.input-group
-						label
-							= radio_button_tag 'filter_by_date', 'Last Year'
-							= label_tag 'last_week', 'Last Three Month'
-					.input-group
-						label
-							= radio_button_tag 'filter_by_date', 'Last Year'
-							= label_tag 'last_week', 'Last Year'
-					
+			= render 'report/form_filter'					
 		.col-md-9
 			h3 Applicant List
 			hr
@@ -107,7 +39,26 @@
 									.input-group
 										label Job :
 										= applicant.job.job_title
-				center
-					= paginate @applicants
+				.col-md-12
+					center
+						= paginate @applicants
 			- else
 				p = "You must create company first"
+- content_for :javascript_in_file do
+  javascript:
+    $('.filter_by_time').on('click', function(){
+    	console.log($('.form_filter').serialize());
+    	/*$.ajax({
+        url: Routes.company_report_path("#{current_user.company_id}") + ".js",
+        method: 'get',
+        data: $('.form_filter').serialize()
+      });*/
+    });
+    $('.filter_by_stage, .filter_by_job, .filter_by_gender, .filter_by_consideration').on('change', function(){
+    	console.log($('.form_filter').serialize());
+    	/*$.ajax({
+        url: Routes.company_report_path("#{current_user.company_id}") + ".js",
+        method: 'get',
+        data: $('.form_filter').serialize()
+    	});*/
+    });
