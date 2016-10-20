@@ -54,6 +54,8 @@ class Job < ActiveRecord::Base
 	ransack_alias :company, :company_company_name
 	ransack_alias :industry, :company_industry
 
+	paginates_per 10
+
 	STATUSES = ["draft", "published", "closed"]
 
 	def applicants_count

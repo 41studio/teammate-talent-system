@@ -13,10 +13,13 @@
 
 class Schedule < ActiveRecord::Base
 	belongs_to :applicant
-	validates :start_date, :end_date, presence: true
+	belongs_to :assignee, class_name: "User", foreign_key: :assignee_id
+	validates :start_date, :end_date, :assignee_id, presence: true
 	validate :time_exist
 	validate :time_valid
+	validate :avaliable_assignee
 	validate :start_date_valid
+	validate :schedule_date_is_valid_datetime
 
 	after_create :send_notify_applicant_email
 	after_update :send_update_notify_applicant_email
@@ -34,8 +37,21 @@ class Schedule < ActiveRecord::Base
 			}
 		end
 
+		def schedule_date_is_valid_datetime
+			DateTime.parse(start_date) && DateTime.parse(end_date) rescue errors.add(:start_date, ' and End date must be a valid datetime')
+		end
+
+		def assignee_valid
+			errors.add(:assignee_id, " is not valid")  if User.joins(company: { jobs: :applicants }).where(applicants: { id: self.applicant_id }).find_by_id(self.assignee_id).present?
+		end
+
+		def avaliable_assignee
+			errors.add(:assignee_id, " is exist for this time")  if Schedule.where(start_date: applicant_schedule_date, assignee_id: self.assignee_id).any? && self.start_date_changed?
+			# aszx
+		end
+
 		def time_exist
-			# errors.add(:start_date, " is exist for this applicant")  if Schedule.where.not(start_date: self.start_date).include? applicant_schedule_date
+			errors.add(:start_date, " is exist for this applicant")  if Schedule.where(start_date: self.start_date).any? && self.start_date_changed?
 		end
 
 		def time_valid
@@ -63,7 +79,7 @@ class Schedule < ActiveRecord::Base
 
 		def date_schedule_check
 			_time_collection = time_collection
-			applicant_schedule_date.to_date == Date.tomorrow.in_time_zone.to_date && (_time_collection[:time_now].hour >= 9 && _time_collection[:time_now].min > 0)
+			applicant_schedule_date.to_date == Date.tomorrow.in_time_zone.to_date && (_time_collection[:time_now].hour >= 9 && _time_collection[:time_now].min > 0) || date_schedule_for_now
 		end
 
 		def send_notify_applicant_email
@@ -73,7 +89,7 @@ class Schedule < ActiveRecord::Base
 		end
 
 		def send_update_notify_applicant_email
-			if date_schedule_check || (self.notify_applicant_flag == "true") 
+			if (date_schedule_check || (self.notify_applicant_flag == "true")) && self.start_date_changed?
 				ScheduleMailer.delay.update_notify_applicant_email(self.applicant, self)
 			end
 		end

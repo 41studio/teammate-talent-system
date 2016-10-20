@@ -31,20 +31,29 @@
 class User < ActiveRecord::Base
 	belongs_to :company	
 	has_many :api_keys
+
   validates :first_name, :last_name, :email, presence: true
   validate :avatar_size_validation
-  acts_as_token_authenticatable
+
   before_save :ensure_authentication_token
+  
   mount_uploader :avatar, AvatarUploader
+  
+  acts_as_token_authenticatable
+  paginates_per 10
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, 
          :confirmable, :invitable
-
   def fullname
     self.first_name + " " + self.last_name
   end  
+
+  def assignee_collection 
+    self.company.users
+  end
 
   def get_schedules
     Schedule.joins(applicant: :job).where(jobs: { company_id: self.company_id, status: "published" } ).order(start_date: :desc)
