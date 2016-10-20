@@ -21,7 +21,7 @@ module API
 
       resource :users do
         before do
-          unless ["create", "login", "new"].any? { |word| request.path.include?(word) }
+          unless ["sign_up", "login", "new"].any? { |word| request.path.include?(word) }
             authenticate!
           end
         end
@@ -67,11 +67,22 @@ module API
           -----------------
           NOTE
         }
-        post '/new' do
+        params do
+          requires :user, type: Hash do
+            requires :first_name                        ,type: String, desc: "User first name"
+            optional :last_name                         ,type: String, desc: "User last name"
+            requires :email                             ,type: String, desc: "User email"
+            requires :password                          ,type: String, desc: "User password 
+            (leave blank if you don't want to change it) ", allow_blank: true
+            requires :password_confirmation             ,type: String, desc: "User password confirmation", allow_blank: true
+            optional :avatar                            ,type: File, desc: "User avatar"
+          end
+        end        
+        post '/sign_up' do
           begin
             users = User.create(user_params)
             if users.save!
-              { status: :success }
+              { status: "A message with a confirmation link has been sent to your email address. Please follow the link to activate your account." }
             else
               error_message
             end
