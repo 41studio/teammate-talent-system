@@ -142,7 +142,7 @@ class ApplicantsController < ApplicationController
 
   def phase
     @job = Job.find(params[:job_id])
-    @applicant = Applicant.find(params[:applicant_id])
+    @applicant = Applicant.find(params[:id])
     @applicant.status = params[:phase]
     if Applicant::STATUSES.has_key? @applicant.status.to_sym 
       if @applicant.save!
@@ -162,7 +162,7 @@ class ApplicantsController < ApplicationController
 
   def disqualified
     @job = Job.find(params[:job_id])
-    @applicant = Applicant.find(params[:applicant_id])
+    @applicant = Applicant.find(params[:id])
     if @applicant.update_attribute(:status, Applicant::DISQUALIFIED)
       respond_to do |format|
         format.html { redirect_to company_job_applicant_path(@job.company_id, @job, @applicant) }

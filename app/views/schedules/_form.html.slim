@@ -22,7 +22,14 @@
             = f.text_field :end_date, class: "form-control"
             = content_tag(:span, content_tag(:span, "", class: "glyphicon glyphicon-calendar"), class: "input-group-addon")
 
-  .actions = f.submit
+    div.col-md-4
+      .field
+        = f.label :Assignee
+        div.form-group
+          div.btn-group
+            = collection_radio_buttons(:schedule, :assignee_id, @assignee_collection, :id, :fullname)
+
+    .actions = f.submit
   
 - content_for :javascript_in_file do
   javascript:

@@ -1,35 +1,41 @@
 class ScheduleMailer < ApplicationMailer
 	
-	after_action :update_applicant!, only: [:notify_applicant_email]
+	after_action :update_applicant!
 
   def notify_applicant_email(applicant, schedule)
-		mail(to: @email, subject: "Nama Aplikasi - #{@subject}")
 		@schedule = schedule
-		@email = applicant.email
-		@applicant_name = applicant.name
-		@subject = "#{schedule.category} Schedule"
+		@applicant = applicant
+
+		@email = @applicant.email
+		@name = @applicant.name
+		@category = @schedule.category
 		@date = @schedule.start_date
-		mail(to: @email, subject: @subject)
+
+    mail(to: @email, subject: "Reminder #{@category.capitalize} Schedule")
 	end
 
   def update_notify_applicant_email(applicant, schedule)
-		mail(to: @email, subject: "Nama Aplikasi - Update #{@subject} Schedule")
 		@schedule = schedule
-		@email = applicant.email
-		@applicant_name = applicant.name
-		@subject = "#{schedule.category} Schedule"
+		@applicant = applicant
+
+		@email = @applicant.email
+		@name = @applicant.name
+		@category = @schedule.category
 		@date = @schedule.start_date
-		mail(to: @email, subject: @subject)
+
+    mail(to: @email, subject: "Update #{@category.capitalize} Schedule")
 	end
 
   def canceled_notify_applicant_email(applicant, schedule)
-		mail(to: @email, subject: "Nama Aplikasi - Canceled #{@subject} Schedule")
 		@schedule = schedule
-		@email = applicant.email
-		@applicant_name = applicant.name
-		@subject = "#{schedule.category}"
+		@applicant = applicant
+
+		@email = @applicant.email
+		@name = @applicant.name
+		@category = @schedule.category
 		@date = @schedule.start_date
-		mail(to: @email, subject: @subject)
+
+    mail(to: @email, subject: "Canceled #{@category.capitalize} Schedule")
 	end
 
 	private

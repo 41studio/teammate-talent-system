@@ -12,9 +12,9 @@
 #
 
 class SchedulesController < ApplicationController
-  before_action :set_applicant, :set_location
+  before_action :set_applicant, :set_location, :set_assignee_collection
   before_action :new_schedule_path, only: [:new, :create]
-  before_action :edit_schedule_path, :set_schedule, only: [:destroy, :edit, :update]
+  before_action :set_schedule, :edit_schedule_path, only: [:destroy, :edit, :update]
 
   # GET /schedules
   # GET /schedules.json
@@ -34,14 +34,13 @@ class SchedulesController < ApplicationController
 
   # GET /schedules/1/edit
   def edit
-    edit_schedule_path
   end
 
   # POST /schedules
   # POST /schedules.json
   def create
     @schedule = @applicant.schedules.new(schedule_params)
-    @schedule.category = @applicant.status    
+    @schedule.category = @applicant.status   
     respond_to do |format|
       if @schedule.save
         format.html { redirect_to @location, notice: 'Schedule was successfully created.' }
@@ -79,6 +78,11 @@ class SchedulesController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    
+    def set_assignee_collection
+      @assignee_collection = current_user.assignee_collection
+    end
+
     def set_location
       @location = company_job_applicant_path(current_user.company_id, @applicant.job_id, @applicant)
     end
@@ -92,7 +96,7 @@ class SchedulesController < ApplicationController
     end
 
     def edit_schedule_path
-      @url = company_job_applicant_schedules_path(current_user.company_id, @applicant.job_id, @applicant, @schedule)
+      @url = company_job_applicant_schedule_path(current_user.company_id, @applicant.job_id, @applicant, @schedule)
     end
 
     def set_schedule
@@ -101,6 +105,6 @@ class SchedulesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def schedule_params
-      params.require(:schedule).permit(:start_date, :end_date)
+      params.require(:schedule).permit(:start_date, :end_date, :assignee_id)
     end
 end
