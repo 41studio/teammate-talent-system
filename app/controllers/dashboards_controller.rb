@@ -16,7 +16,8 @@ class DashboardsController < ApplicationController
     if current_user.company.present?
      @jobs = current_user.company.jobs
      @search = Applicant.search(params[:q])
-     @applicants = @search.result.where(job_id: @jobs) 
+     @applicants = @search.result.where(job_id: @jobs).page(params[:page]).per(10)
+     @applicant_count = Applicant.total_applicant(current_user.company_id, @jobs)
     else
       flash[:notice] = "No Applicant here"
     end

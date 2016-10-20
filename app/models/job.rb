@@ -52,7 +52,7 @@ class Job < ActiveRecord::Base
 
 	ransack_alias :keyword, :job_title_or_job_search_keyword
 	ransack_alias :company, :company_company_name
-	ransack_alias :industry, :company_industry
+	ransack_alias :industry, :industry_list_industry
 
 	paginates_per 10
 

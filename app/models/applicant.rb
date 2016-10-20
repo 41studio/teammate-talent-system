@@ -57,6 +57,14 @@ class Applicant < ActiveRecord::Base
 		end
 	end
 
+	def self.total_applicant(company_id, job_id)
+		joins(:job).where(jobs: {id: job_id, company_id: company_id})
+	end
+
+	def self.total_applicant_status(company_id, job_id, status)
+		joins(:job).where(jobs: {id: job_id, company_id: company_id}, applicants: {status: status})
+	end
+
 	private
 		scope :by_company_id, -> (company_id) { self.joins(:job).where(jobs: {company_id: company_id}) }
 
