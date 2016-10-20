@@ -21,7 +21,7 @@ module API
 
       resource :users do
         before do
-          unless request.path.include?(["create", "login", "new"])
+          unless ["create", "login", "new"].any? { |word| request.path.include?(word) }
             authenticate!
           end
         end
@@ -41,7 +41,7 @@ module API
             if user = User.authenticate_for_api(params[:email], params[:password])
               user.user_api(user)
             else
-              error_msg = 'Bad Authentication Parameters'
+              error_msg = 'Invalid Email or password.'
               error!({ 'error_msg' => error_msg }, 401)
             end
           rescue ActiveRecord::RecordNotFound
