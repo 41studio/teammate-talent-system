@@ -1,6 +1,8 @@
 module API
   module V1
 	module Helpers
+    extend Grape::API::Helpers
+    
     def authenticate!
       error!('Unauthorized. Invalid or expired token.', 401) unless current_user
     end
@@ -8,7 +10,7 @@ module API
     def current_user
       token = ApiKey.find_by(access_token: headers['Token'])
       if token && !token.expired?
-        @current_user = User.find(token.user_id)
+        User.find(token.user_id)
       else
         false
       end
@@ -21,6 +23,10 @@ module API
 		def record_not_found_message
 			error!({status: :not_found}, 404)
 		end
+
+    params :pagination do
+      optional :pages         ,type: Integer, desc: "Pagination"
+    end
 
       # rescue_from ActiveRecord::RecordNotFound do |e|
       #   error_response(message: e.message, status: 404)

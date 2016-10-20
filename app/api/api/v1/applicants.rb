@@ -38,7 +38,7 @@ module API
         end
 
         def comment_params
-          ActionController::Parameters.new(params).require(:body)
+          ActionController::Parameters.new(params).require(:comment).permit(:body)
         end   
 
         def applicant_valid
@@ -188,7 +188,10 @@ module API
           NOTE
         }
         params do
-          use :applicant_id      
+          use :applicant_id
+          requires :comment, type: Hash do
+            requires :body, type: String, allow_blank: false
+          end
         end        
         post ':id/comment/new' do
           begin
@@ -206,22 +209,46 @@ module API
           end 
         end 
 
-
+        desc "New Schedule Applicant", {
+          :notes => <<-NOTE
+          Schedule Applicant Form (new)
+          -----------------------------
+          NOTE
+        }
         params do
+          use :applicant_id
+        end
+        get ':id/schedule/new' do
+          present :users, current_user.company.users, with: API::V1::Entities::User, only: [:id, :fullname]
+        end 
+
+        desc "Create Schedule Applicant", {
+          :notes => <<-NOTE
+          Schedule Applicant create process (create)
+          -------------------------------------------
+          NOTE
+        }
+        params do
+          use :applicant_id
           requires :start_date, type: DateTime, allow_blank: false
           requires :end_date, type: DateTime, allow_blank: false
           requires :category, type: DateTime, allow_blank: false
         end
-        post '/schedule/create' do
-          job = Job.find(params.applicants.job_id)
-          applicant = job.applicants.new(applicant_params)
-          applicant.status = "applied"
-          if applicant.save!
+        post ':id/schedule/create' do
+          schedule = applicant.schedules.new(schedule_params)
+          schedule.category = applicant.status
+          if schedule.save!
             { status: :success }
           else
             error_message
           end
-        end         
+        end     
+
+
+        # edit
+        # update
+        # delete
+
 
       end #end resource
     end
