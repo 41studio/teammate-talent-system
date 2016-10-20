@@ -4,13 +4,14 @@ Rails.application.routes.draw do
   resources :companies, except: [:index] do
     resources :jobs do 
       resources :applicants, only: [:new, :create, :show] do
-        resources :schedules
-        resources :comments, only: [:create]
         member do
-          get :phase, param: :phase
-          get '/disqualified', to: 'applicants#disqualified', as: 'disqualified'
+          get :phase, path: 'phase/:phase'
+          get :disqualified
         end
+        resources :comments, only: [:create]
+        resources :schedules
       end
+
       get '/applicant/:status', to: 'applicants#applicant_status', as: 'applicant_status'
     end
     get '/jobs/:id/:status', to: 'jobs#upgrade_status', as:'upgrade_status'
