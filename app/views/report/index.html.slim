@@ -3,66 +3,7 @@
 		.col-md-3
 			h3 Filter
 			hr
-			= form_tag nil, class: 'form_filter'
-				.panel.panel-default
-					.panel-body
-						p By Date
-						hr
-						.input-group
-							label
-								= radio_button_tag 'filter_by', 'week', false, class: 'filter_by_time'
-								= label_tag 'last_week', 'Week'
-						.input-group
-							label
-								= radio_button_tag 'filter_by', 'month', false, class: 'filter_by_time'
-								= label_tag 'last_week', 'Month'
-						.input-group
-							label
-								= radio_button_tag 'filter_by', 'year', false, class: 'filter_by_time'
-								= label_tag 'last_week', 'Year'
-				.panel.panel-default
-					.panel-body
-						p By Stage
-						hr
-						- Applicant::STATUSES.each do |k, v|
-							.input-group
-								label
-									= check_box_tag "filter_by_stage[#{v}]", k.to_s, false, class: 'filter_by_stage'
-									= label_tag k.to_s, k.to_s.gsub(/_/, ' ').titleize
-				.panel.panel-default
-					.panel-body
-						p By Job Title
-						hr
-						- @jobs.each do |job|
-							.input-group
-								label
-									= check_box_tag "filter_by_job[#{job.id}]", job.job_title, false, class: 'filter_by_job'
-									= job.job_title
-				.panel.panel-default
-					.panel-body
-						p By Consideration
-						hr
-						.input-group
-							label
-								= check_box_tag 'filter_by_consideration[1]', 'qualified', false, class: 'filter_by_consideration'
-								= label_tag 'qualified', 'Qualified'
-						.input-group
-							label
-								= check_box_tag 'filter_by_consideration[2]', 'disqualified', false, class: 'filter_by_consideration'
-								= label_tag 'disqualified', 'Disqualified'
-				.panel.panel-default
-					.panel-body
-						p By Gender
-						hr
-						.input-group
-							label
-								= check_box_tag 'filter_by_gender[1]', 'Male', false, class: 'filter_by_gender'
-								= label_tag 'male', 'Male'
-						.input-group
-							label
-								= check_box_tag 'filter_by_gender[2]', 'Female', false, class: 'filter_by_gender'
-								= label_tag 'female', 'Female'
-
+			= render 'report/form_filter'
 		.col-md-9
 			h3 Report
 			hr
@@ -82,40 +23,16 @@
     $('.filter_by_time').on('click', function(){
     	console.log($('.form_filter').serialize());
     	$.ajax({
-        url: Routes.company_report_path("#{current_user.company_id}"),
+        url: Routes.company_report_path("#{current_user.company_id}") + ".js",
         method: 'get',
         data: $('.form_filter').serialize()
       });
     });
-    $('.filter_by_stage').on('change', function(){
+    $('.filter_by_stage, .filter_by_job, .filter_by_gender, .filter_by_consideration').on('change', function(){
     	console.log($('.form_filter').serialize());
     	$.ajax({
-        url: Routes.company_report_path("#{current_user.company_id}"),
+        url: Routes.company_report_path("#{current_user.company_id}") + ".js",
         method: 'get',
         data: $('.form_filter').serialize()
     	});
     });
-    $('.filter_by_job').on('change', function(){
-    	console.log($('.form_filter').serialize());
-    	$.ajax({
-        url: Routes.company_report_path("#{current_user.company_id}"),
-        method: 'get',
-        data: $('.form_filter').serialize()
-    	});
-    });
-    $('.filter_by_gender').on('change', function(){
-    	console.log($('.form_filter').serialize());
-    	$.ajax({
-        url: Routes.company_report_path("#{current_user.company_id}"),
-        method: 'get',
-        data: $('.form_filter').serialize()
-    	});
-    });
-    /*$('.filter_by_consideration').on('change', function(){
-    	console.log($('.form_filter').serialize());
-    	$.ajax({
-        url: Routes.company_report_path("#{current_user.company_id}"),
-        method: 'get',
-        data: $('.form_filter').serialize()
-    	});
-    });*/
