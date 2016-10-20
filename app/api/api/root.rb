@@ -1,8 +1,6 @@
 module API
   class Root < Grape::API
 
-    # include V1::Helpers
-
     prefix	'api'
     format 	:json
     
