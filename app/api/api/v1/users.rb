@@ -21,7 +21,7 @@ module API
 
       resource :users do
         before do
-          unless request.path.include?("users/create")
+          unless request.path.include?(["create", "login", "new"])
             authenticate!
           end
         end
