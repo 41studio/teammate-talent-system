@@ -107,5 +107,7 @@
 									.input-group
 										label Job :
 										= applicant.job.job_title
+				center
+					= paginate @applicants
 			- else
 				p = "You must create company first"
