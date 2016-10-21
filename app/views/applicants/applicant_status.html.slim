@@ -23,7 +23,7 @@
     $('.filter_by_time').on('click', function(){
     	console.log($('.form_filter').serialize());
     	$.ajax({
-        url: Routes.applicant_path() + ".js",
+        url: Routes.applicant_status_path({status: @status}) + ".js",
         method: 'get',
         data: $('.form_filter').serialize()
       });
@@ -31,7 +31,7 @@
     $('.filter_by_gender').on('change', function(){
     	console.log($('.form_filter').serialize());
     	$.ajax({
-        url: Routes.applicant_path() + ".js",
+        url: Routes.applicant_status_path({status: @status}) + ".js",
         method: 'get',
         data: $('.form_filter').serialize()
     	});
