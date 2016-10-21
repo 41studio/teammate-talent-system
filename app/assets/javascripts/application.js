@@ -25,4 +25,3 @@
 //= require js-routes
 //= require Chart.bundle
 //= require chartkick
-//= require fullcalendar

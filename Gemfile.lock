@@ -133,10 +133,6 @@ GEM
     execjs (2.7.0)
     friendly_id (5.1.0)
       activerecord (>= 4.0.0)
-    fullcalendar-rails (3.0.0.0)
-      jquery-rails (>= 4.0.5, < 5.0.0)
-      jquery-ui-rails (>= 5.0.2)
-      momentjs-rails (>= 2.9.0)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
     grape (0.17.0)
@@ -314,6 +310,8 @@ GEM
       connection_pool (~> 2.2, >= 2.2.0)
       rack-protection (~> 1.5)
       redis (~> 3.2, >= 3.2.1)
+    simple_calendar (2.2.0)
+      rails (>= 3.0)
     simple_token_authentication (1.14.0)
       actionmailer (>= 3.2.6, < 6)
       actionpack (>= 3.2.6, < 6)
@@ -387,7 +385,6 @@ DEPENDENCIES
   devise_invitable (~> 1.7.0)
   dotenv-rails
   friendly_id (~> 5.1.0)
-  fullcalendar-rails
   grape
   grape-entity
   grape-swagger
@@ -415,6 +412,7 @@ DEPENDENCIES
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   sidekiq
+  simple_calendar
   simple_token_authentication (~> 1.0)
   slim-rails
   spring
