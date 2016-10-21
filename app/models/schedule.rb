@@ -19,7 +19,7 @@ class Schedule < ActiveRecord::Base
 	validate :time_valid
 	validate :avaliable_assignee
 	validate :start_date_valid
-	validate :schedule_date_is_valid_datetime
+	# validate :schedule_date_is_valid_datetime
 
 	after_create :send_notify_applicant_email
 	after_update :send_update_notify_applicant_email
@@ -29,6 +29,10 @@ class Schedule < ActiveRecord::Base
 
 	def notify_applicant_flag_display_text
 		self.notify_applicant_flag ? 'Notified' : 'Waiting for due date'
+	end
+
+	def start_time
+	  start_date.to_datetime
 	end
 
 	private

@@ -13,7 +13,8 @@
  *= require bootstrap_modified
  *= require npprogress-custom
  *= require jquery-ui/autocomplete
- *= require fullcalendar
+ *= require applicants
+ *= require simple_calendar
  *= require_self
  */
  body{

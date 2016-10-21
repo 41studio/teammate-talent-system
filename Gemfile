@@ -38,32 +38,57 @@ gem 'devise'
 gem 'whenever', require: false
 
 ## event calendar
-gem 'fullcalendar-rails'
+gem 'simple_calendar'
 
 ## make easy for nested form
 gem "cocoon"
 
+## object-based searching
 gem 'ransack'
-gem 'mini_magick'
+
+## file uploads
 gem 'carrierwave'
+gem 'mini_magick'
+
+## paging
 gem 'kaminari'
+
+## bootstrap
 gem 'bootstrap-sass'
 gem 'bootstrap-kaminari-views'
 gem 'bootstrap-sass-extras'
+
+## datepicker bootstrap
+gem 'bootstrap3-datetimepicker-rails', '~> 4.17.42'
+
+## rails slim
 gem 'slim-rails'
+
+## comment
+gem 'acts_as_commentable_with_threading'
+
+## routes on js
+gem 'js-routes'
+
+## cloud file upload
+gem 'cloudinary'
+
+## invite user
+gem 'devise_invitable', '~> 1.7.0'
+
+## background job
+gem 'redis-rails', '~> 4'
+gem 'sidekiq'
+
+## jquery UI rails
+gem 'jquery-ui-rails'
+
+## gem for chart
+gem 'chartkick'
 gem 'nprogress-rails'
 gem 'friendly_id', '~> 5.1.0'
 gem 'dotenv-rails'
-gem 'js-routes'
-gem 'acts_as_commentable_with_threading'
 gem 'momentjs-rails', '>= 2.9.0'
-gem 'bootstrap3-datetimepicker-rails', '~> 4.17.42'
-gem 'cloudinary'
-gem 'devise_invitable', '~> 1.7.0'
-gem 'sidekiq'
-gem 'redis-rails', '~> 4'
-gem 'chartkick'
-gem 'jquery-ui-rails'
 # gem 'country_state_select'
 
 ## API
