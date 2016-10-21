@@ -1,20 +1,41 @@
-  h1 Listing schedules
+h1 Listing schedules
 
-  table
-    thead
+table
+  thead
+    tr
+      th Job
+      th Applicant
+      th Start Date
+      th End Date
+      th Category
+      th Assignee
+  tbody  
+    -@schedules.each do |schedule|
       tr
-        th Job
-        th Applicant
-        th Start Date
-        th End Date
-        th Category
-        th Assignee
-    tbody  
-      -@schedules.each do |schedule|
-        tr
-          td = " #{schedule.applicant.job.job_title}"  
-          td = " #{schedule.applicant.name}"  
-          td = " #{schedule.start_date.to_formatted_s(:long_ordinal)}"
-          td = " #{schedule.end_date.to_formatted_s(:long_ordinal)}"
-          td = " #{schedule.category}"
-          td = " #{schedule.assignee.fullname}"
+        td = " #{schedule.applicant.job.job_title}"  
+        td = " #{schedule.applicant.name}"  
+        td = " #{schedule.start_date.to_formatted_s(:long_ordinal)}"
+        td = " #{schedule.end_date.to_formatted_s(:long_ordinal)}"
+        td = " #{schedule.category}"
+        td = " #{schedule.assignee.fullname}"
+hr
+.container
+  .row
+    .col-md-3
+      h3 Filter
+      hr
+      .panel.panel-default
+        .panel-body
+          p Lorem ipsum
+    .col-md-9
+      h3 Agenda
+      hr
+      - if current_user.company.present?
+        div#calendar
+
+      - else
+        p = "You must create company first"
+
+- content_for :javascript_in_file do
+  javascript:
+    $('#calendar').fullCalendar();

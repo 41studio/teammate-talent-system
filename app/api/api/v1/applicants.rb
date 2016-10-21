@@ -42,6 +42,9 @@ module API
           ActionController::Parameters.new(params).require(:comment).permit(:body)
         end   
 
+        def error_message
+          error!({ status: :error, message: applicant.errors.full_messages.first }) if applicant.errors.any?
+        end       
       end
 
 
@@ -157,7 +160,7 @@ module API
           end
         end
 
-        desc "Desqualified Applicant", {
+        desc "Disqualified Applicant", {
           :notes => <<-NOTE
           Update status to disqualified
           -----------------------------

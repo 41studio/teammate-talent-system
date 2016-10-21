@@ -27,6 +27,10 @@ class Schedule < ActiveRecord::Base
 
 	paginates_per 10
 
+	def notify_applicant_flag_display_text
+		self.notify_applicant_flag ? 'Notified' : 'Waiting for due date'
+	end
+
 	private
 		scope :by_company_id, -> (company_id, applicant_id) { self.joins(applicant: :job).where(jobs: {company_id: company_id}, applicants: {id: applicant_id}) }
 

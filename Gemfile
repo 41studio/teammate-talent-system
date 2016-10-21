@@ -69,7 +69,7 @@ gem 'jquery-ui-rails'
 ## API
 gem 'simple_token_authentication', '~> 1.0'
 gem 'grape'
-gem 'grape-entity'
+gem 'grape-entity', github: 'intridea/grape-entity'
 gem 'grape-swagger'
 gem 'grape-swagger-rails'
 

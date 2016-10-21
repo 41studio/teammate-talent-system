@@ -12,7 +12,7 @@
 #
 
 class SchedulesController < ApplicationController
-  before_action :set_applicant, :set_location, :set_assignee_collection
+  before_action :set_applicant, :set_location, :set_assignee_collection, except: [:index]
   before_action :new_schedule_path, only: [:new, :create]
   before_action :set_schedule, :edit_schedule_path, only: [:destroy, :edit, :update]
 
@@ -80,7 +80,7 @@ class SchedulesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     
     def set_assignee_collection
-      @assignee_collection = current_user.assignee_collection
+      @assignee_collection = User.by_company_id(current_user.company_id)
     end
 
     def set_location

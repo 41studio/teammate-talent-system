@@ -5,7 +5,7 @@ module API
     class Root < Grape::API
 			version 'v1', using: :header, vendor: 'teamhire'
       
-      error_formatter :json, API::V1::ErrorFormatter
+      error_formatter :json, API::V1::ErrorFormatter      
 
       mount API::V1::Jobs
       mount API::V1::Companies
