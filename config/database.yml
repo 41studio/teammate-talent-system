@@ -16,7 +16,7 @@ default: &default
   username: root
   password: kiki
 
-
+  
 development:
   <<: *default
   database: teammate-talent-system_development
