@@ -65,6 +65,22 @@ class Applicant < ActiveRecord::Base
 		joins(:job).where(jobs: {id: job_id, company_id: company_id}, applicants: {status: status})
 	end
 
+	def self.filter_report_applicant(company_id, job_title, applicant_status, applicant_gender)
+		where("jobs.company_id IN (?) and jobs.job_title IN (?) and applicants.status IN (?) and applicants.gender IN (?)", company_id, job_title, applicant_status, applicant_gender )
+	end
+
+	def self.filter_applicant(job_id, time, gender, status)
+		where("job_id IN (?) and created_at >= ? and gender IN (?) and status IN (?)", job_id, time, gender, status)
+	end
+
+	def self.join_job
+		joins(:job)
+	end
+
+	def self.get_first_created_applicant
+		order("created_at ASC LIMIT 1")
+	end
+
 	private
 		scope :by_company_id, -> (company_id) { self.joins(:job).where(jobs: {company_id: company_id}) }
 

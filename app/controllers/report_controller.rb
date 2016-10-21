@@ -1,7 +1,6 @@
 class ReportController < ApplicationController
   def index
-    @jobs = current_user.company.jobs.where(job_status: "published")
-
+    @jobs = current_user.company.jobs.published_jobs
     if params[:filter_by]
       case params[:filter_by]
       when "week"
@@ -30,6 +29,8 @@ class ReportController < ApplicationController
     else
       if params[:filter_by_stage]
         filter_by_stage = params[:filter_by_stage].values
+      elsif params[:filter_by_consideration].present? && params[:filter_by_consideration].values == ["disqualified"]
+        filter_by_stage = ["disqualified"]
       else
         filter_by_stage = ["applied","phone_screen","interview","offer","hired"]
       end
@@ -38,7 +39,7 @@ class ReportController < ApplicationController
     if params[:filter_by_job]
       filter_by_job = params[:filter_by_job].values
     else
-      filter_by_job = @jobs.select(:job_title)
+      filter_by_job = @jobs.job_title
     end
     
     if params[:filter_by_gender]
@@ -46,8 +47,8 @@ class ReportController < ApplicationController
     else
       filter_by_gender = ["Male","Female"]
     end
-
-    @data = Applicant.joins(:job).where(jobs: {company_id: current_user.company_id, job_title: filter_by_job}, status: filter_by_stage, gender: filter_by_gender ).group(time).count
+    
+    @data = Applicant.join_job.filter_report_applicant(current_user.company_id, filter_by_job, filter_by_stage, filter_by_gender).group(time).count
     respond_to do |format|
       format.html
       format.js { render 'report/filter_report' }
