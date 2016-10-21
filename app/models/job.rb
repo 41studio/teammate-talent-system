@@ -143,9 +143,13 @@ class Job < ActiveRecord::Base
 		where(status: "closed")
 	end
 	
-	def job_title
-    	self[:job_title].titleize
-  	end
+	# def self.job_title
+	# 	self[:job_title].titleize
+	# end
+	
+	def self.job_title
+		select(:job_title)
+	end
 
 	def applicant_stage_per_job(attr)
 		Job.find(attr).applicants.group(:status).count
