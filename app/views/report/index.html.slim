@@ -23,7 +23,7 @@
     $('.filter_by_time').on('click', function(){
     	console.log($('.form_filter').serialize());
     	$.ajax({
-        url: Routes.company_report_path("#{current_user.company_id}") + ".js",
+        url: Routes.company_report_index_path("#{current_user.company_id}") + ".js",
         method: 'get',
         data: $('.form_filter').serialize()
       });
@@ -31,7 +31,7 @@
     $('.filter_by_stage, .filter_by_job, .filter_by_gender, .filter_by_consideration').on('change', function(){
     	console.log($('.form_filter').serialize());
     	$.ajax({
-        url: Routes.company_report_path("#{current_user.company_id}") + ".js",
+        url: Routes.company_report_index_path("#{current_user.company_id}") + ".js",
         method: 'get',
         data: $('.form_filter').serialize()
     	});
