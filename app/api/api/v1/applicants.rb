@@ -47,7 +47,6 @@ module API
         end       
       end
 
-
       resource :applicants do
         before do
           unless request.path.include?("applicants/create")
