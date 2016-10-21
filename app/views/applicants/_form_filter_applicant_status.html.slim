@@ -1,0 +1,33 @@
+= form_tag nil, class: 'form_filter'	
+	.panel.panel-default
+		.panel-body
+			p By Gender
+			hr
+			.input-group
+				label
+					= check_box_tag 'filter_by_gender[1]', 'Male', false, class: 'filter_by_gender'
+					= label_tag 'male', 'Male'
+			.input-group
+				label
+					= check_box_tag 'filter_by_gender[2]', 'Female', false, class: 'filter_by_gender'
+					= label_tag 'female', 'Female'
+	.panel.panel-default
+		.panel-body
+			p By Date
+			hr
+			.input-group
+				label
+					= radio_button_tag 'filter_by', 'week', false, class: 'filter_by_time'
+					= label_tag 'last_week', 'Week'
+			.input-group
+				label
+					= radio_button_tag 'filter_by', 'month', false, class: 'filter_by_time'
+					= label_tag 'last_week', 'Month'
+			.input-group
+				label
+					= radio_button_tag 'filter_by', 'year', false, class: 'filter_by_time'
+					= label_tag 'last_week', 'Year'
+			.input-group
+				label
+					= radio_button_tag 'filter_by', 'three_month', false, class: 'filter_by_three_month'
+					= label_tag 'last_three_month', 'Three Month'

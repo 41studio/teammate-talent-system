@@ -210,13 +210,13 @@ module API
         end
         get ":id/applicant_total_by_status" do
           begin
-              statuses = {}
-              Applicant::STATUSES.each do |status, val|
-                statuses[status.to_s.underscore] = job.applicants.where(status: status).size.to_s
-              end
-              # present statuses, root: 'applicant_statuses'
-              # present :applicants, job.applicants.where(status: "applied"), with: API::V1::Entities::Applicant
-              statuses
+            statuses = {}
+            Applicant::STATUSES.each do |status, val|
+              statuses[status.to_s.underscore] = job.applicants.where(status: status).size.to_s
+            end
+            # present statuses, root: 'applicant_statuses'
+            # present :applicants, job.applicants.where(status: "applied"), with: API::V1::Entities::Applicant
+            statuses
           rescue ActiveRecord::RecordNotFound
             record_not_found_message
            end

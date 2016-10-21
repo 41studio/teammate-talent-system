@@ -31,6 +31,7 @@
 class User < ActiveRecord::Base
 	belongs_to :company	
 	has_many :api_keys
+  has_many :schedules
 
   validates :first_name, :last_name, :email, presence: true
   validate :avatar_size_validation
@@ -50,11 +51,7 @@ class User < ActiveRecord::Base
   def fullname
     self.first_name + " " + self.last_name
   end  
-
-  def assignee_collection 
-    self.company.users
-  end
-
+  
   def get_schedules
     Schedule.joins(applicant: :job).where(jobs: { company_id: self.company_id, status: "published" } ).order(start_date: :desc)
   end
@@ -90,6 +87,8 @@ class User < ActiveRecord::Base
   end
 
   private
+    scope :by_company_id, -> (company_id) { self.joins(:company).where(companies: {id: company_id}) }
+
     def generate_authentication_token
       loop do
         token = Devise.friendly_token

@@ -28,6 +28,11 @@ module API
       optional :pages         ,type: Integer, desc: "Pagination"
     end
 
+    def applicant_valid
+      error!("You don't have permission.", 401) unless applicant.job.company.users.include?current_user
+    end
+
+
       # rescue_from ActiveRecord::RecordNotFound do |e|
       #   error_response(message: e.message, status: 404)
       # end

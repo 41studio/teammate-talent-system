@@ -1,8 +1,6 @@
 module API
   module V1
   	module Entities
-		extend Grape::API::Helpers
-  		
   		class User < Grape::Entity
   			expose :id
   			expose :fullname
@@ -112,6 +110,16 @@ module API
 	  		expose :company_phone
 	  		expose :industry
 	  		expose :photo_company
+	  	end
+
+	  	class Schedule < Grape::Entity
+	  		expose :id
+	  		expose :start_date, format_with: :timestamp
+	  		expose :end_date, format_with: :timestamp
+	  		expose :category
+	  		expose :notify_applicant_flag, as: :sent_email_to_applicant
+	  		expose :applicant, using: "API::V1::Entities::Applicant"
+	  		expose :assignee, using: "API::V1::Entities::User"
 	  	end
 
 	  end

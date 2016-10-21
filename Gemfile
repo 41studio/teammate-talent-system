@@ -94,7 +94,7 @@ gem 'momentjs-rails', '>= 2.9.0'
 ## API
 gem 'simple_token_authentication', '~> 1.0'
 gem 'grape'
-gem 'grape-entity'
+gem 'grape-entity', github: 'intridea/grape-entity'
 gem 'grape-swagger'
 gem 'grape-swagger-rails'
 

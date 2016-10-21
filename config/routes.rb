@@ -2,6 +2,7 @@ require 'sidekiq/web'
 
 Rails.application.routes.draw do
   resources :companies, except: [:index] do
+    resources :schedules, only: [:index]
     resources :jobs do 
       resources :applicants, only: [:new, :create, :show] do
         member do
@@ -9,9 +10,8 @@ Rails.application.routes.draw do
           get :disqualified
         end
         resources :comments, only: [:create]
-        resources :schedules
+        resources :schedules, except: [:index]
       end
-
       get '/applicant/:status', to: 'applicants#applicant_status', as: 'applicant_status'
     end
     get '/jobs/:id/:status', to: 'jobs#upgrade_status', as:'upgrade_status'
