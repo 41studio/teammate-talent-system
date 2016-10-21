@@ -28,21 +28,35 @@ class DashboardsController < ApplicationController
         @time = Applicant.order("created_at ASC LIMIT 1").map(&:created_at)
       end
       
-      if params[:filter_by_stage]
-        filter_by_stage = params[:filter_by_stage].values
+      if params[:filter_by_consideration] && params[:filter_by_consideration].values == "disqualified"
+            filter_by_stage = params[:filter_by_consideration].values
       else
-        filter_by_stage = ["applied","phone_screen","interview","offer","hired"]
+        if params[:filter_by_stage]
+          filter_by_stage = params[:filter_by_stage].values
+        else
+          filter_by_stage = ["applied","phone_screen","interview","offer","hired"]
+        end
       end
-    
+        
       if params[:filter_by_gender]
         filter_by_gender = params[:filter_by_gender].values
       else
         filter_by_gender = ["Male","Female"]
       end
 
+      if params[:filter_by_job]
+        filter_by_job = params[:filter_by_job].values
+      else
+        filter_by_job = @jobs.select(:job_title)
+      end
+      
       @search = Applicant.search(params[:q])
-      @applicants = @search.result.where("job_id IN (?) and created_at >= ? and gender IN (?) and status IN (?)", @jobs.ids, @time, filter_by_gender, filter_by_stage).page(params[:page]).per(10)
-      @applicant_filter_result_count = @search.result.where("job_id IN (?) and created_at >= ? and gender IN (?) and status IN (?)", @jobs.ids, @time, filter_by_gender, filter_by_stage).count
+      @applicants = @search.result.joins(:job).where("applicants.job_id IN (?) and applicants.created_at >= ? and applicants.gender IN (?) and 
+        applicants.status IN (?) and jobs.job_title IN (?)", @jobs.ids, @time, filter_by_gender, filter_by_stage, filter_by_job).page(params[:page]).per(10)
+      
+      @applicant_filter_result_count = @search.result.joins(:job).where("applicants.job_id IN (?) and applicants.created_at >= ? and applicants.gender IN (?) 
+        and applicants.status IN (?) and jobs.job_title IN (?)", @jobs.ids, @time, filter_by_gender, filter_by_stage, filter_by_job).count
+    
       @applicant_total = Applicant.total_applicant(current_user.company_id, @jobs).count
       respond_to do |format|
         format.html

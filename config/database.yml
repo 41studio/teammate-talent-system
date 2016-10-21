@@ -14,10 +14,10 @@ default: &default
   encoding: utf8
   pool: 5
   username: root
-  password:
-  socket: /opt/lampp/var/mysql/mysql.sock 
+  password: 
+  socket: /opt/lampp/var/mysql/mysql.sock
 
-
+  
 development:
   <<: *default
   database: teammate-talent-system_development

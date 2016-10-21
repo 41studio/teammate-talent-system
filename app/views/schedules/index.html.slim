@@ -18,11 +18,3 @@
           td = " #{schedule.end_date.to_formatted_s(:long_ordinal)}"
           td = " #{schedule.category}"
           td = " #{schedule.assignee.fullname}"
-
-
-  div#calendar
-
-  - content_for :javascript_in_file do
-    javascript:
-      $('#calendar').fullCalendar();
-

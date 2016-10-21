@@ -138,13 +138,54 @@ class ApplicantsController < ApplicationController
   end
 
   def applicant_status
-    status = params[:status]
-    @status = status
-    @company_id = params[:company_id]
-    @job_id = params[:job_id]
-    @search = Applicant.search(params[:q])
-    @applicants = @search.result.where(applicants: { status: status, job_id: params[:job_id] })
-    @applicant_count = Applicant.total_applicant_status(current_user.company_id, @job_id , status)
+    @jobs = current_user.company.jobs
+     if params[:filter_by]
+        case params[:filter_by]
+        when "week"
+          @time = 1.week.ago
+        when "month"
+          @time = 1.month.ago
+        when "year"
+          @time = 1.year.ago
+        when "three_month"
+          @time = 3.month.ago
+        end
+      else
+        @time = Applicant.order("created_at ASC LIMIT 1").map(&:created_at)
+      end
+        
+      if params[:filter_by_gender]
+        filter_by_gender = params[:filter_by_gender].values
+      else
+        filter_by_gender = ["Male","Female"]
+      end
+      @job_title = Job.find(params[:job_id])
+      status = params[:status]
+      @status = status
+      @company_id = params[:company_id]
+      @job_id = params[:job_id]
+     
+      @search = Applicant.search(params[:q])
+      @applicants = @search.result.where("job_id IN (?) and created_at >= ? 
+        and gender IN (?) and status IN (?)", @job_id, @time, filter_by_gender, status).page(params[:page]).per(10)
+      
+      @applicant_filter_result_count = @search.result.where("job_id IN (?) and created_at >= ?
+       and gender IN (?) and status IN (?)", @job_id, @time, filter_by_gender, status).count
+    
+      # @applicant_total = Applicant.total_applicant(current_user.company_id, @jobs).count
+      @applicant_total = Applicant.total_applicant_status(current_user.company_id, @job_id , status).count
+      respond_to do |format|
+        format.html
+        format.js { render 'applicants/filter_applicant' }
+    end
+    # @job_title = Job.find(params[:job_id])
+    # status = params[:status]
+    # @status = status
+    # @company_id = params[:company_id]
+    # @job_id = params[:job_id]
+    # @search = Applicant.search(params[:q])
+    # @applicants = @search.result.where(applicants: { status: status, job_id: params[:job_id] })
+    # @applicant_count = Applicant.total_applicant_status(current_user.company_id, @job_id , status)
   end
 
   def phase

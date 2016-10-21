@@ -1,0 +1,20 @@
+.container
+	.row
+		.col-md-3
+			h3 Filter
+			hr
+			.panel.panel-default
+				.panel-body
+					p Lorem ipsum
+		.col-md-9
+			h3 Agenda
+			hr
+			- if current_user.company.present?
+				div#calendar
+
+			- else
+				p = "You must create company first"
+
+- content_for :javascript_in_file do
+  javascript:
+    $('#calendar').fullCalendar();
