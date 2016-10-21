@@ -56,6 +56,7 @@ class SchedulesController < ApplicationController
   # PATCH/PUT /schedules/1.json
   def update
     respond_to do |format|
+      # @schedule.category = applicant.status
       if @schedule.update(schedule_params)
         format.html { redirect_to @location, notice: 'Schedule was successfully updated.' }
         format.json { render :show, status: :ok, location: @location }

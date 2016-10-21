@@ -44,7 +44,7 @@ class Schedule < ActiveRecord::Base
 		end
 
 		def schedule_date_is_valid_datetime
-			DateTime.parse(start_date) && DateTime.parse(end_date) rescue errors.add(:start_date, ' and End date must be a valid datetime')
+			# DateTime.parse(start_date) && DateTime.parse(end_date) rescue errors.add(:start_date, ' and End date must be a valid datetime')
 		end
 
 		def assignee_valid
