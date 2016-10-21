@@ -5,17 +5,17 @@ class ReportController < ApplicationController
     if params[:filter_by]
       case params[:filter_by]
       when "week"
-        @group = 'week(applicants.created_at)'
+        time = 'week(applicants.created_at)'
         @x_title = "Week"
       when "month"
-        @group = 'month(applicants.created_at)'
+        time = 'month(applicants.created_at)'
         @x_title = "Month"
       when "year"
-        @group = 'year(applicants.created_at)'
+        time = 'year(applicants.created_at)'
         @x_title = "Year"
       end
     else
-      @group = 'date(applicants.created_at)'
+      time = 'date(applicants.created_at)'
       @x_title = "Date"
     end
     
@@ -23,6 +23,16 @@ class ReportController < ApplicationController
       filter_by_stage = params[:filter_by_stage].values
     else
       filter_by_stage = ["applied","phone_screen","interview","offer","hired"]
+    end
+
+    if params[:filter_by_consideration] && params[:filter_by_consideration].values == "disqualified"
+      filter_by_stage = params[:filter_by_consideration].values
+    else
+      if params[:filter_by_stage]
+        filter_by_stage = params[:filter_by_stage].values
+      else
+        filter_by_stage = ["applied","phone_screen","interview","offer","hired"]
+      end
     end
     
     if params[:filter_by_job]
@@ -37,10 +47,10 @@ class ReportController < ApplicationController
       filter_by_gender = ["Male","Female"]
     end
 
-    @data = Applicant.joins(:job).where(jobs: {company_id: current_user.company_id, job_title: filter_by_job}, status: filter_by_stage, gender: filter_by_gender ).group(@group).count
+    @data = Applicant.joins(:job).where(jobs: {company_id: current_user.company_id, job_title: filter_by_job}, status: filter_by_stage, gender: filter_by_gender ).group(time).count
     respond_to do |format|
       format.html
-      format.js { render 'report/sort_by_time' }
+      format.js { render 'report/filter_report' }
     end
   end
 

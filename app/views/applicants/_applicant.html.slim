@@ -1,2 +1,26 @@
-= link_to applicant.name, company_job_applicant_path(params[:company_id], @job, applicant.id)
 br
+- if @applicants.present?
+	= "We have #{@applicant_filter_result_count} from #{pluralize(@applicant_total, "applicant")}"
+- else
+	p There is no applicant matching your criteria.
+
+hr
+- @applicants.each do |applicant|
+	.col-md-6
+		.panel.panel-default
+			.panel-body
+				.col-md-3
+					= image_tag applicant.photo.thumb.url, width: '70px', height: '70px'
+				.col-md-9
+					.input-group
+						label Full Name : 
+						= link_to applicant.name, company_job_applicant_path(current_user.company,applicant.job_id,applicant.id)
+					.input-group
+						label Gender :  
+						= applicant.gender
+					.input-group
+						label Headline :
+						= applicant.headline
+					.input-group
+						label Job :
+						= applicant.job.job_title

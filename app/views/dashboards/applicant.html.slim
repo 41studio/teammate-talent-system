@@ -12,33 +12,8 @@
 					= f.text_field :name_cont, placeholder: 'search by name', class: 'form-control'
 					br
 					= f.submit "search", class: 'btn btn-primary'
-				
-				br
-				- if @applicants.present?
-					= "We have #{@applicants.count} from #{pluralize(@applicant_count.count, "applicant")}"
-				- else
-					p There is no applicant matching your criteria.
-
-				hr
-				- @applicants.each do |applicant|
-					.col-md-6
-						.panel.panel-default
-							.panel-body
-								.col-md-3
-									= image_tag applicant.photo.thumb.url, width: '70px', height: '70px'
-								.col-md-9
-									.input-group
-										label Full Name : 
-										= link_to applicant.name, company_job_applicant_path(current_user.company,applicant.job_id,applicant.id)
-									.input-group
-										label Gender :  
-										= applicant.gender
-									.input-group
-										label Headline :
-										= applicant.headline
-									.input-group
-										label Job :
-										= applicant.job.job_title
+				#list-of-applicant
+					= render 'applicants/applicant'
 				.col-md-12
 					center
 						= paginate @applicants
@@ -48,17 +23,17 @@
   javascript:
     $('.filter_by_time').on('click', function(){
     	console.log($('.form_filter').serialize());
-    	/*$.ajax({
-        url: Routes.company_report_path("#{current_user.company_id}") + ".js",
+    	$.ajax({
+        url: Routes.applicant_path() + ".js",
         method: 'get',
         data: $('.form_filter').serialize()
-      });*/
+      });
     });
     $('.filter_by_stage, .filter_by_job, .filter_by_gender, .filter_by_consideration').on('change', function(){
     	console.log($('.form_filter').serialize());
-    	/*$.ajax({
-        url: Routes.company_report_path("#{current_user.company_id}") + ".js",
+    	$.ajax({
+        url: Routes.applicant_path() + ".js",
         method: 'get',
         data: $('.form_filter').serialize()
-    	});*/
+    	});
     });

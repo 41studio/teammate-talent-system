@@ -16,9 +16,11 @@ Rails.application.routes.draw do
     end
     get '/jobs/:id/:status', to: 'jobs#upgrade_status', as:'upgrade_status'
     post '/invite_personnel', to: 'companies#invite_personnel', as: 'invite_personnel'
-    get 'report/', to: 'report#index'
+    resources :report, only: [:index]
+    resources :agenda, only: [:index]
   end
   # post '/companies/:id/invite_personnel', to: 'companies#invite_personnel', as: 'invite_personnel'
+  get '/applicants' => "dashboards#applicant", as: 'applicant'
   resources :dashboards, only: [:index]
   # get '/dashboards' => "dashboards#index", as: :user_root
   devise_for :users, :controllers => { registrations: 'registrations',
@@ -29,7 +31,6 @@ Rails.application.routes.draw do
   
   get '/autocomplete/json', to: 'companies#autocomplete_industry', as: 'autocomplete_industry' , defaults: { format: 'json' }
 
-  get '/applicants' => "dashboards#applicant", as: 'applicant'
   root 'landing_page#index'
 
   mount API::Root => '/'
