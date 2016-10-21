@@ -3,8 +3,13 @@ module API
     class Applicants < Grape::API
       version 'v1'
       format :json
+      helpers Helpers
 
       helpers do
+        params :applicant_id do
+          requires :id, type: Integer, desc: "Applicant id" 
+        end
+
         def applicant_params
           applicant_param = ActionController::Parameters.new(params).require(:applicants).permit(:job_id, :name, :gender, :date_birth, :email, :headline, :phone, :address, photo: [:filename, :type, :name, :tempfile, :head], resume: [:filename, :type, :name, :tempfile, :head], educations_attributes: [:name_school, :field_study, :degree], experiences_attributes: [:name_company, :industry, :title, :summary])
 
@@ -25,25 +30,18 @@ module API
           applicant_param
         end
 
-        def schedule_params
-          ActionController::Parameters.new(params).require(:schedule).permit(:start_date, :end_date, :category)
-        end
-
-        params :applicant_id do
-          requires :id, type: Integer, desc: "Applicant id" 
-        end
-
         def applicant
           Applicant.find(params[:id])
+        end
+        
+        def schedule_params
+          ActionController::Parameters.new(params).require(:schedule).permit(:start_date, :end_date, :category)
         end
 
         def comment_params
           ActionController::Parameters.new(params).require(:comment).permit(:body)
         end   
 
-        def applicant_valid
-          error!("You don't have permission.", 401) unless applicant.job.company.users.include?current_user
-        end
       end
 
 
@@ -135,7 +133,7 @@ module API
         desc "Update Status Applicant By Id", {
           :notes => <<-NOTE
           Update Applicant By Id
-          ----------------------- send email notify status info
+          ----------------------- 
           NOTE
         }
         params do
@@ -208,48 +206,6 @@ module API
             record_not_found_message
           end 
         end 
-
-        desc "New Schedule Applicant", {
-          :notes => <<-NOTE
-          Schedule Applicant Form (new)
-          -----------------------------
-          NOTE
-        }
-        params do
-          use :applicant_id
-        end
-        get ':id/schedule/new' do
-          present :users, current_user.company.users, with: API::V1::Entities::User, only: [:id, :fullname]
-        end 
-
-        desc "Create Schedule Applicant", {
-          :notes => <<-NOTE
-          Schedule Applicant create process (create)
-          -------------------------------------------
-          NOTE
-        }
-        params do
-          use :applicant_id
-          requires :start_date, type: DateTime, allow_blank: false
-          requires :end_date, type: DateTime, allow_blank: false
-          requires :category, type: DateTime, allow_blank: false
-        end
-        post ':id/schedule/create' do
-          schedule = applicant.schedules.new(schedule_params)
-          schedule.category = applicant.status
-          if schedule.save!
-            { status: :success }
-          else
-            error_message
-          end
-        end     
-
-
-        # edit
-        # update
-        # delete
-
-
       end #end resource
     end
   end

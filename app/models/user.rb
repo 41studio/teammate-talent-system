@@ -31,6 +31,7 @@
 class User < ActiveRecord::Base
 	belongs_to :company	
 	has_many :api_keys
+  has_many :schedules
 
   validates :first_name, :last_name, :email, presence: true
   validate :avatar_size_validation

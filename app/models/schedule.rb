@@ -25,6 +25,8 @@ class Schedule < ActiveRecord::Base
 	after_update :send_update_notify_applicant_email
 	after_destroy :send_canceled_notify_applicant_email
 
+	paginates_per 10
+
 	private
 		scope :by_company_id, -> (company_id, applicant_id) { self.joins(applicant: :job).where(jobs: {company_id: company_id}, applicants: {id: applicant_id}) }
 

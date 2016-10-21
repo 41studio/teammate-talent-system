@@ -114,6 +114,16 @@ module API
 	  		expose :photo_company
 	  	end
 
+	  	class Schedule < Grape::Entity
+	  		expose :id
+	  		expose :applicant, using: "API::V1::Entities::Applicant"
+	  		expose :assignee, using: "API::V1::Entities::User"
+	  		expose :start_date, format_with: :timestamp
+	  		expose :end_date, format_with: :timestamp
+	  		expose :category
+	  		expose :notify_applicant_flag, as: :sent_email_to_applicant
+	  	end
+
 	  end
 	end
 end
