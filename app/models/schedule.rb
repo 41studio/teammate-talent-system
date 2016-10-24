@@ -19,36 +19,74 @@ class Schedule < ActiveRecord::Base
 	validate :time_valid
 	validate :avaliable_assignee
 	validate :start_date_valid
+	validate :category_valid
 	# validate :schedule_date_is_valid_datetime
 
 	after_create :send_notify_applicant_email
 	after_update :send_update_notify_applicant_email
-	after_destroy :send_canceled_notify_applicant_email
+	before_update :set_email
 
 	paginates_per 10
+
+	CATEGORY = ['phone_screen','interview','offer']
 
 	def notify_applicant_flag_display_text
 		self.notify_applicant_flag ? 'Notified' : 'Waiting for due date'
 	end
 
 	def start_time
-	  start_date.to_datetime
+		self.start_date.to_datetime
+	end
+
+	def start_date_display
+		self.start_date.to_formatted_s(:long) 
+	end
+
+	def end_date_display
+		self.end_date.to_formatted_s(:long) 
+	end
+
+	def out_of_date
+		_time_collection = time_collection
+		applicant_schedule_date < _time_collection[:date_now]
+	end
+
+	# def date_format
+	# 	self.strftime('%d %b %Y @ %I:%M%p')
+	# end
+
+	def send_canceled_notify_applicant_email
+		# ScheduleMailer.delay.canceled_notify_applicant_email(self.applicant, self)
+		ScheduleMailer.canceled_notify_applicant_email(self.applicant, self).deliver
 	end
 
 	private
-		scope :by_company_id, -> (company_id, applicant_id) { self.joins(applicant: :job).where(jobs: {company_id: company_id}, applicants: {id: applicant_id}) }
-
 		def time_collection
 			time_now = Time.now.in_time_zone
 			{
 				min_time: time_now + 2.hours,
 				time_now: time_now,
-				date_now: time_now.to_date.to_date
+				date_now: time_now.to_date
 			}
 		end
 
+		def old_schedules
+			_time_collection = time_collection
+			self.where("start_date < ?", _time_collection[:time_now])
+		end
+
+		def latest_schedules
+			_time_collection = time_collection
+			self.where.not("start_date < ?", _time_collection[:time_now]).order('start_date ASC')
+		end
+
+		scope :old_schedules, -> { self.where("start_date < ?", Time.now.in_time_zone) }
+		scope :latest_schedules, -> { self.where.not("start_date < ?", Time.now.in_time_zone).order('start_date ASC') }
+		scope :by_company_id, -> (company_id, applicant_id) { self.joins(applicant: :job).where(jobs: {company_id: company_id}, applicants: {id: applicant_id}) }
+
+
 		def schedule_date_is_valid_datetime
-			DateTime.parse(start_date) && DateTime.parse(end_date) rescue errors.add(:start_date, ' and End date must be a valid datetime')
+			# DateTime.parse(start_date) && DateTime.parse(end_date) rescue errors.add(:start_date, ' and End date must be a valid datetime')
 		end
 
 		def assignee_valid
@@ -57,7 +95,6 @@ class Schedule < ActiveRecord::Base
 
 		def avaliable_assignee
 			errors.add(:assignee_id, " is exist for this time")  if Schedule.where(start_date: applicant_schedule_date, assignee_id: self.assignee_id).any? && self.start_date_changed?
-			# aszx
 		end
 
 		def time_exist
@@ -74,6 +111,10 @@ class Schedule < ActiveRecord::Base
 			errors.add(:end_date, " cannot less than start date") if self.end_date < self.start_date
 		end
 
+		def category_valid
+			errors.add(:category, " is not valid ") unless CATEGORY.include? self.category
+		end
+
 		def applicant_total
 			applicants.count	
 		end
@@ -87,24 +128,23 @@ class Schedule < ActiveRecord::Base
 			applicant_schedule_date.to_date == _time_collection[:date_now]
 		end
 
-		def date_schedule_check
-			_time_collection = time_collection
-			applicant_schedule_date.to_date == Date.tomorrow.in_time_zone.to_date && (_time_collection[:time_now].hour >= 9 && _time_collection[:time_now].min > 0) || date_schedule_for_now
-		end
-
 		def send_notify_applicant_email
-			if date_schedule_check 
-		 		ScheduleMailer.delay.notify_applicant_email(self.applicant, self)
-			end
+	 		# ScheduleMailer.delay.notify_applicant_email(self.applicant, self)
+	 		ScheduleMailer.notify_applicant_email(self.applicant, self).deliver
 		end
 
 		def send_update_notify_applicant_email
-			if (date_schedule_check || (self.notify_applicant_flag == "true")) && self.start_date_changed?
-				ScheduleMailer.delay.update_notify_applicant_email(self.applicant, self)
+			if self.category_changed? || self.start_date_changed?
+				# ScheduleMailer.delay.update_notify_applicant_email(self.applicant, self, @old_category)
+				ScheduleMailer.update_notify_applicant_email(self.applicant, self, @old_category).deliver
 			end
 		end
 
-		def send_canceled_notify_applicant_email
-			ScheduleMailer.delay.canceled_notify_applicant_email(self.applicant, self)
+		def set_email
+			if self.category_changed?
+				@old_category = self.category_was 
+			else
+				@old_category
+			end
 		end
 end

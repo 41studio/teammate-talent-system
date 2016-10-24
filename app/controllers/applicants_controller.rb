@@ -45,6 +45,8 @@ class ApplicantsController < ApplicationController
     @new_comment = Comment.build_from(applicant, current_user.id, "")
     @url = company_job_applicant_comments_path(params[:company_id], params[:job_id], params[:id])
     @comments = applicant.comment_threads
+    @old_schedules = applicant.schedules.old_schedules
+    @latest_schedules = applicant.schedules.latest_schedules
   end
 
   # GET /applicants/new
@@ -195,7 +197,7 @@ class ApplicantsController < ApplicationController
     status = params[:phase]
     if Applicant::STATUSES.has_key? status.to_sym 
       if @applicant.update_attribute(:status, status)
-        ApplicantStatusChanged.delay.send_mail_after_change_status(@applicant, @job)
+        SendMail.delay.send_mail_after_change_status(@applicant, @job)
         respond_to do |format|
           format.html { redirect_to company_job_applicant_path(@job.company_id, @job, @applicant) }
           format.js {}

@@ -16,33 +16,37 @@ module API
 
         params :schedule do
           use :applicant_id
-          requires :start_date, type: DateTime, allow_blank: false
-          requires :end_date, type: DateTime, allow_blank: false
-          requires :assignee_id, type: Integer
+          requires :schedule, type: Hash do
+            requires :category, type: String, values: { value: Schedule::CATEGORY, message: 'not valid' }, allow_blank: false,  desc: "Schedule category"
+            requires :start_date, type: DateTime, allow_blank: false
+            requires :end_date, type: DateTime, allow_blank: false
+            requires :assignee_id, type: Integer, allow_blank: false
+          end
         end
 
         def schedule_params
-          ActionController::Parameters.new(params).require(:schedule).permit(:start_date, :end_date, :assignee_id)
+          ActionController::Parameters.new(params).require(:schedule).permit(:category, :start_date, :end_date, :assignee_id)
         end
 
         def field_on_schedule_form
-          present :assignee, User.by_company_id(current_user.company_id), with: API::V1::Entities::User, only: [:id, :fullname]
+          present :assignee, User.by_company_id(current_user.company_id), with: API::V1::Entities::UserEntity, only: [:id, :fullname]
+          present :category_collection, Schedule.new, with: API::V1::Entities::ScheduleEntity, only: [:category_valid]
         end
 
         def schedules
           applicant.schedules
         end
 
-        def schedule
-          schedules.find(params[:id])
+        def set_schedule
+          @schedule = schedules.find(params[:id])
         end
 
         def applicant
-          Applicant.find(params[:applicant_id])
+          @applicant = Applicant.find(params[:applicant_id])
         end
 
         def error_message
-          error!({ status: :error, message: schedule.errors.full_messages.first }) if schedule.errors.any?
+          error!({ status: :error, message: @schedule.errors.full_messages.first }) if @schedule.errors.any?
         end       
       end
 
@@ -50,6 +54,9 @@ module API
         before do
           authenticate!
           applicant_valid
+          unless ["all", "new", "create", ].any? { |word| request.path.include?(word) }
+            set_schedule
+          end
         end
 
         segment '/:applicant_id' do
@@ -64,9 +71,9 @@ module API
             params do
               use :pagination
             end
-            get do
+            get '/all' do
               begin
-                API::V1::Entities::Schedule.represent(schedules.page(params[:page]), only: [:id, :start_date, :end_date, :category, :sent_email_to_applicant, { applicant: [:name], assignee: [:fullname] }])
+                present :schedules, API::V1::Entities::ScheduleEntity.represent(schedules.order('start_date DESC').page(params[:page]), only: [:id, :start_date, :end_date, :category, :sent_email_to_applicant, { applicant: [:name], assignee: [:fullname] }])
               rescue ActiveRecord::RecordNotFound
                 record_not_found_message
               end          
@@ -95,9 +102,8 @@ module API
               use :schedule
             end
             post '/create' do
-              schedule = applicant.schedules.new(schedule_params)
-              schedule.category = applicant.status
-              if schedule.save!
+              @schedule = applicant.schedules.new(schedule_params)
+              if @schedule.save!
                 { status: :success }
               else
                 error_message
@@ -115,7 +121,7 @@ module API
               use :schedule_id
             end
             get ':id/edit' do
-              present :schedule, schedule, with: API::V1::Entities::Schedule, only: [:start_date, :end_date, :category , { applicant: [:name], assignee: [:fullname] }]
+              present :schedule, @schedule, with: API::V1::Entities::ScheduleEntity, only: [:start_date, :end_date, :category , { applicant: [:name], assignee: [:fullname] }]
               field_on_schedule_form
             end     
 
@@ -126,12 +132,13 @@ module API
               NOTE
             }
             params do
+              use :applicant_id
               use :schedule_id
               use :schedule
             end
             put ':id/update' do
               begin
-                if schedule.update(schedule_params)
+                if @schedule.update(schedule_params)
                   { status: :update_success }
                 else
                   error_message
@@ -153,7 +160,10 @@ module API
             end
             delete ':id/delete' do
               begin
-                if schedule.destroy!
+                unless @schedule.out_of_date
+                  @schedule.send_canceled_notify_applicant_email
+                end                
+                if @schedule.destroy!
                   { status: :delete_success }
                 end
               rescue ActiveRecord::RecordNotFound

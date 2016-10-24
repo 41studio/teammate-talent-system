@@ -13,6 +13,7 @@
 
 class SchedulesController < ApplicationController
   before_action :set_applicant, :set_location, :set_assignee_collection, except: [:index]
+  before_action :set_category_collection
   before_action :new_schedule_path, only: [:new, :create]
   before_action :set_schedule, :edit_schedule_path, only: [:destroy, :edit, :update]
 
@@ -40,7 +41,6 @@ class SchedulesController < ApplicationController
   # POST /schedules.json
   def create
     @schedule = @applicant.schedules.new(schedule_params)
-    @schedule.category = @applicant.status   
     respond_to do |format|
       if @schedule.save
         format.html { redirect_to @location, notice: 'Schedule was successfully created.' }
@@ -69,6 +69,9 @@ class SchedulesController < ApplicationController
   # DELETE /schedules/1
   # DELETE /schedules/1.json
   def destroy
+    unless @schedule.out_of_date
+      @schedule.send_canceled_notify_applicant_email
+    end
     @schedule.destroy
     respond_to do |format|
       format.html { redirect_to @location, notice: 'Schedule was successfully destroyed.' }
@@ -78,6 +81,10 @@ class SchedulesController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    
+    def set_category_collection
+      @category_collection = Schedule::CATEGORY
+    end
     
     def set_assignee_collection
       @assignee_collection = User.by_company_id(current_user.company_id)
@@ -105,6 +112,6 @@ class SchedulesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def schedule_params
-      params.require(:schedule).permit(:start_date, :end_date, :assignee_id)
+      params.require(:schedule).permit(:start_date, :end_date, :category, :assignee_id)
     end
 end

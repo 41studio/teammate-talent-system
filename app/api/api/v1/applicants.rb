@@ -47,7 +47,6 @@ module API
         end       
       end
 
-
       resource :applicants do
         before do
           unless request.path.include?("applicants/create")
@@ -113,7 +112,7 @@ module API
         end
         get ":id/detail" do
           begin 
-            present applicant, with: API::V1::Entities::Applicant
+            present applicant, with: API::V1::Entities::ApplicantEntity
           rescue ActiveRecord::RecordNotFound
             record_not_found_message
           end
@@ -130,7 +129,7 @@ module API
         end
         get ':id/edit_status' do
           present Applicant::STATUSES, root: 'applicant_statuses'
-          present :applicant, applicant, with: API::V1::Entities::Applicant, only: [:status]
+          present :applicant, applicant, with: API::V1::Entities::ApplicantEntity, only: [:status]
         end
 
         desc "Update Status Applicant By Id", {
