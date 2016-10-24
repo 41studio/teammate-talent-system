@@ -98,7 +98,7 @@ module API
           NOTE
         }
         get '/profile' do
-          present current_user, with: API::V1::Entities::User, except: [:id, :fullname]
+          present current_user, with: API::V1::Entities::UserEntity, except: [:id, :fullname]
         end
 
         desc "Forget Password", {

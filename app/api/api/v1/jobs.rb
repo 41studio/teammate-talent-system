@@ -36,11 +36,11 @@ module API
           function_list = FunctionList.all
           industry_list = IndustryList.all
 
-          present :education_list, education_list, with: API::V1::Entities::EducationList
-          present :employment_type, employment_type_list, with: API::V1::Entities::EmploymentTypeList
-          present :experience_list, experience_list, with: API::V1::Entities::ExperienceList
-          present :function_list, function_list, with: API::V1::Entities::FunctionList
-          present :industry_list, industry_list, with: API::V1::Entities::IndustryList
+          present :education_list, education_list, with: API::V1::Entities::EducationListEntity
+          present :employment_type, employment_type_list, with: API::V1::Entities::EmploymentTypeListEntity
+          present :experience_list, experience_list, with: API::V1::Entities::ExperienceListEntity
+          present :function_list, function_list, with: API::V1::Entities::FunctionListEntity
+          present :industry_list, industry_list, with: API::V1::Entities::IndustryListEntity
         end
 
         def error_message
@@ -61,7 +61,7 @@ module API
         end
         get '/all' do
           begin
-            present :jobs, jobs.page(params[:page]), with: API::V1::Entities::Job, only: [:id, :job_title, :status, :created_at]
+            present :jobs, jobs.page(params[:page]), with: API::V1::Entities::JobEntity, only: [:id, :job_title, :status, :created_at]
           rescue ActiveRecord::RecordNotFound
             record_not_found_message
           end          
@@ -78,7 +78,7 @@ module API
         end
         get ":id/detail" do
           begin
-            present job, with: API::V1::Entities::Job, except: [:updated_at , { education_list: [:id], employment_type_list: [:id], experience_list: [:id], function_list: [:id], industry_list: [:id] }]
+            present job, with: API::V1::Entities::JobEntity, except: [:updated_at , { education_list: [:id], employment_type_list: [:id], experience_list: [:id], function_list: [:id], industry_list: [:id] }]
           rescue ActiveRecord::RecordNotFound
             record_not_found_message
           end
@@ -120,7 +120,7 @@ module API
         end
         get ':id/edit' do
           begin
-            present :job, job, with: API::V1::Entities::Job
+            present :job, job, with: API::V1::Entities::JobEntity
             field_on_job_form
           rescue ActiveRecord::RecordNotFound
             record_not_found_message
@@ -174,7 +174,7 @@ module API
         end
         get ':id/edit_status' do
           present Job::STATUSES, root: 'job_statuses'
-          present :job, job, with: API::V1::Entities::Job, only: [:status]
+          present :job, job, with: API::V1::Entities::JobEntity, only: [:status]
         end
 
         desc "Update Status Job By Id", {
@@ -215,7 +215,7 @@ module API
               statuses[status.to_s.underscore] = job.applicants.where(status: status).size.to_s
             end
             # present statuses, root: 'applicant_statuses'
-            # present :applicants, job.applicants.where(status: "applied"), with: API::V1::Entities::Applicant
+            # present :applicants, job.applicants.where(status: "applied"), with: API::V1::Entities::ApplicantEntity
             statuses
           rescue ActiveRecord::RecordNotFound
             record_not_found_message
@@ -236,7 +236,7 @@ module API
         get ":id/applicants" do
           begin
             applicants_with_status = job.applicants.where(status: params[:status])
-            present :applicants, applicants_with_status.page(params[:page]), with: API::V1::Entities::Applicant
+            present :applicants, applicants_with_status.page(params[:page]), with: API::V1::Entities::ApplicantEntity
           rescue ActiveRecord::RecordNotFound
             record_not_found_message
            end
