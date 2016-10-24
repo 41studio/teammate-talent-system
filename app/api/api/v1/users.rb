@@ -12,11 +12,11 @@ module API
             user_param["avatar"] = ActionDispatch::Http::UploadedFile.new(params.user.avatar)
           end
           user_param
-        end
+        end 
 
-        def error_message
-          error!({ status: :error, message: current_user.errors.full_messages.first }) if current_user.errors.any?
-        end       
+        def set_user
+          @user = current_user
+        end      
       end
 
       resource :users do
@@ -84,11 +84,10 @@ module API
             if users.save!
               { status: "A message with a confirmation link has been sent to your email address. Please follow the link to activate your account." }
             else
-              error_message
+              error!({ status: :error, message: users.errors.full_messages.first }) if users.errors.any?
             end
-
           rescue ActiveRecord::RecordNotFound
-            error!({status: :not_found}, 404)
+            record_not_found_message
           end 
         end       
         
@@ -99,7 +98,7 @@ module API
           NOTE
         }
         get '/profile' do
-          present current_user, with: API::V1::Entities::User, except: [:id, :fullname]
+          present current_user, with: API::V1::Entities::UserEntity, except: [:id, :fullname]
         end
 
         desc "Forget Password", {
@@ -141,13 +140,11 @@ module API
           end
         end
         put '/update' do      
-          # byebug
-          # user = current_user
-          if current_user.update_with_password(user_params)
+          set_user
+          if @user.update_with_password(user_params)
             { status: "Update Success" }
           else
-            # error_message
-            error!({ status: :error, message: current_user.errors.full_messages.first }) if current_user.errors.any?
+            error!({ status: :error, message: @user.errors.full_messages.first }) if @user.errors.any?
           end
         end
       end #end resource

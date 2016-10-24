@@ -23,7 +23,7 @@ module API
 
         def field_on_company_form
           industry_list = IndustryList.all
-          present :industry_list, industry_list, with: API::V1::Entities::IndustryList, only: [:industry]
+          present :industry_list, industry_list, with: API::V1::Entities::IndustryListEntity, only: [:industry]
         end     
 
         params :companies do
@@ -44,7 +44,7 @@ module API
         } 
         get '/detail' do
           begin
-            company.present? ? API::V1::Entities::Company.represent(company) : "Create company profil"
+            company.present? ? API::V1::Entities::CompanyEntity.represent(company) : "Create company profil"
           rescue ActiveRecord::RecordNotFound
             record_not_found_message
            end
@@ -95,7 +95,7 @@ module API
         get '/edit' do
           begin
             field_on_company_form
-            present :company, company, with: API::V1::Entities::Company
+            present :company, company, with: API::V1::Entities::CompanyEntity
           rescue ActiveRecord::RecordNotFound
             record_not_found_message
            end
@@ -136,7 +136,7 @@ module API
         end
         get '/users' do
           begin
-            present :users, company.users, with: API::V1::Entities::User, only: [:id, :fullname]
+            present :users, company.users, with: API::V1::Entities::UserEntity, only: [:id, :fullname]
           rescue ActiveRecord::RecordNotFound
             record_not_found_message
            end

@@ -8,7 +8,7 @@ task :notify_applicants => :environment do
 
 	schedules.each do |schedule|
 		applicant = schedule.applicant
-		ScheduleMailer.delay.notify_applicant_email(applicant, schedule).deliver
+		ScheduleMailer.delay.reminder_notify_applicant_email(applicant, schedule).deliver
 	end
 	puts "Done! "
 end

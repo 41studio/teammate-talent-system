@@ -1,7 +1,7 @@
 module API
   module V1
   	module Entities
-  		class User < Grape::Entity
+  		class UserEntity < Grape::Entity
   			expose :id
   			expose :fullname
   			expose :first_name
@@ -11,7 +11,7 @@ module API
   			expose :avatar
   		end
 	  	
-	  	class Applicant < Grape::Entity
+	  	class ApplicantEntity < Grape::Entity
 			format_with :date do |date|
 				date.strftime('%m/%d/%Y')
 			end  			
@@ -26,25 +26,25 @@ module API
 	  		expose :resume
 	  		expose :status
   			expose :created_at, format_with: :timestamp, as: :apply_at
-	  		expose :educations, using: "API::V1::Entities::Education", as: :educations 
-	  		expose :experiences, using: "API::V1::Entities::Experience", as: :experiences 
-			expose :comment_threads, using: "API::V1::Entities::Comment", as: :comments
+	  		expose :educations, using: "API::V1::Entities::EducationEntity", as: :educations 
+	  		expose :experiences, using: "API::V1::Entities::ExperienceEntity", as: :experiences 
+			expose :comment_threads, using: "API::V1::Entities::CommentEntity", as: :comments
 	  		expose :photo
 	  	end
 
-	  	class Comment < Grape::Entity
+	  	class CommentEntity < Grape::Entity
 	  		expose :fullname
 	  		expose :body
 	  	end
 
-	  	class Education < Grape::Entity
+	  	class EducationEntity < Grape::Entity
 	  		expose :id
 	  		expose :name_school
 	  		expose :field_study
 	  		expose :degree
 	  	end
 
-	  	class Experience < Grape::Entity
+	  	class ExperienceEntity < Grape::Entity
 	  		expose :id
 	  		expose :name_company
 	  		expose :industry
@@ -52,7 +52,7 @@ module API
 	  		expose :summary
 	  	end
 
-	  	class Job < Grape::Entity
+	  	class JobEntity < Grape::Entity
 	  		expose :id
 	  		expose :job_title
 	  		expose :departement
@@ -69,41 +69,41 @@ module API
 	  		expose :benefits
 	  		expose :job_search_keyword
 	  		expose :status
-	  		expose :education_list, using: "API::V1::Entities::EducationList"
-	  		expose :employment_type_list, using: "API::V1::Entities::EmploymentTypeList"
-	  		expose :experience_list, using: "API::V1::Entities::ExperienceList"
-	  		expose :function_list, using: "API::V1::Entities::FunctionList"
-	  		expose :industry_list, using: "API::V1::Entities::IndustryList"
+	  		expose :education_list, using: "API::V1::Entities::EducationListEntity"
+	  		expose :employment_type_list, using: "API::V1::Entities::EmploymentTypeListEntity"
+	  		expose :experience_list, using: "API::V1::Entities::ExperienceListEntity"
+	  		expose :function_list, using: "API::V1::Entities::FunctionListEntity"
+	  		expose :industry_list, using: "API::V1::Entities::IndustryListEntity"
 			expose :created_at, format_with: :timestamp
 			expose :updated_at, format_with: :timestamp
 	  	end
 
-	  	class EducationList < Grape::Entity
+	  	class EducationListEntity < Grape::Entity
 	  		expose :id
 	  		expose :education
 	  	end
 
-	  	class EmploymentTypeList < Grape::Entity
+	  	class EmploymentTypeListEntity < Grape::Entity
 	  		expose :id
 	  		expose :employment_type
 	  	end
 
-	  	class ExperienceList < Grape::Entity
+	  	class ExperienceListEntity < Grape::Entity
 	  		expose :id
 	  		expose :experience
 	  	end
 
-	  	class FunctionList < Grape::Entity
+	  	class FunctionListEntity < Grape::Entity
 	  		expose :id
 	  		expose :function
 	  	end
 
-	  	class IndustryList < Grape::Entity
+	  	class IndustryListEntity < Grape::Entity
 	  		expose :id
 	  		expose :industry
 	  	end
 
-	  	class Company < Grape::Entity
+	  	class CompanyEntity < Grape::Entity
 	  		expose :company_name	
 	  		expose :company_website
 	  		expose :company_email
@@ -112,7 +112,7 @@ module API
 	  		expose :photo_company
 	  	end
 
-	  	class Schedule < Grape::Entity
+	  	class ScheduleEntityEntity < Grape::Entity
 	  		expose :id
 	  		expose :start_date, format_with: :timestamp
 	  		expose :end_date, format_with: :timestamp
@@ -120,6 +120,12 @@ module API
 	  		expose :notify_applicant_flag, as: :sent_email_to_applicant
 	  		expose :applicant, using: "API::V1::Entities::Applicant"
 	  		expose :assignee, using: "API::V1::Entities::User"
+	  		expose :category_valid
+
+	  		private
+	  			def category_valid
+	  				Schedule::CATEGORY
+	  			end
 	  	end
 
 	  end

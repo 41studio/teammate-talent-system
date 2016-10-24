@@ -7,14 +7,21 @@
           li = message
 
   .row
-    div.col-md-4
+    div.col-md-3
+      .field
+        = f.label :category
+        div.form-group
+          div.input-group
+            = f.select :category, @category_collection, include_blank: 'Select Schedule'
+    
+    div.col-md-3
       .field
         = f.label :start_date
         div.form-group
           div.input-group.date#datetimepicker1
             = f.text_field :start_date, class: "form-control"
             = content_tag(:span, content_tag(:span, "", class: "glyphicon glyphicon-calendar"), class: "input-group-addon")
-    div.col-md-4
+    div.col-md-3
       .field
         = f.label :end_date
         div.form-group
@@ -22,13 +29,13 @@
             = f.text_field :end_date, class: "form-control"
             = content_tag(:span, content_tag(:span, "", class: "glyphicon glyphicon-calendar"), class: "input-group-addon")
 
-    div.col-md-4
+    div.col-md-3
       .field
         = f.label :Assignee
         div.form-group
-          div.btn-group
+          div.input-group
             = collection_radio_buttons(:schedule, :assignee_id, @assignee_collection, :id, :fullname)
-
+  .row
     .actions = f.submit
   
 - content_for :javascript_in_file do
