@@ -1,13 +1,13 @@
-.container
-	.row
-		.col-md-3
-			h3 Filter
-			hr
-			= render 'report/form_filter'					
-		.col-md-9
-			h3 Applicant List
-			hr
-			- if current_user.company.present?
+- if current_user.company.present?
+	.container
+		.row
+			.col-md-3
+				h3 Filter
+				hr
+				= render 'report/form_filter'					
+			.col-md-9
+				h3 Applicant List
+				hr
 				= search_form_for(@search, url: applicant_path, method: :get) do |f|
 					= f.text_field :name_cont, placeholder: 'search by name', class: 'form-control'
 					br
@@ -17,8 +17,10 @@
 				.col-md-12
 					center
 						= paginate @applicants
-			- else
-				p = "You must create company first"
+- else
+	p = "You must create company first"
+
+	
 - content_for :javascript_in_file do
   javascript:
     $('.filter_by_time').on('click', function(){
