@@ -159,6 +159,7 @@ class ApplicantsController < ApplicationController
       else
         filter_by_gender = ["Male","Female"]
       end
+      
       @job_title = Job.find(params[:job_id])
       status = params[:status]
       @status = status
@@ -170,13 +171,13 @@ class ApplicantsController < ApplicationController
         and gender IN (?) and status IN (?)", @job_id, @time, filter_by_gender, status).page(params[:page]).per(10)
       
       @applicant_filter_result_count = @search.result.where("job_id IN (?) and created_at >= ?
-       and gender IN (?) and status IN (?)", @job_id, @time, filter_by_gender, status).count
+       and gender IN (?) and status IN (?)", @job_id, @time, filter_by_gender, params[:status]).count
     
       # @applicant_total = Applicant.total_applicant(current_user.company_id, @jobs).count
       @applicant_total = Applicant.total_applicant_status(current_user.company_id, @job_id , status).count
       respond_to do |format|
         format.html
-        format.js { render 'applicants/filter_applicant' }
+        format.js { render 'applicants/filter_applicant_status' }
     end
     # @job_title = Job.find(params[:job_id])
     # status = params[:status]
