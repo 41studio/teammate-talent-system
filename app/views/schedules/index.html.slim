@@ -24,18 +24,32 @@
     .col-md-3
       h3 Filter
       hr
-      .panel.panel-default
-        .panel-body
-          p Lorem ipsum
+      = form_tag nil, class: 'form_filter'
+        .panel.panel-default
+          .panel-body
+            .form-group
+              = label_tag 'by_active_job', 'By Active Job'
+              = select_tag 'by_active_job', options_from_collection_for_select(@jobs, "id", "job_title"), include_blank: "-- All active job --", class: 'form-control', id: 'by_active_job'
+            .form-group#applicant-select
+              = render 'schedules/applicant_select'
+            .form-group
+              = label_tag 'by_activity', 'By Activity'
+              = select_tag 'by_activity', options_from_collection_for_select(@jobs, "id", "job_title"), include_blank: "-- All activity --", class: 'form-control', id: 'by_activity'
     .col-md-9
       h3 Agenda
       hr
       - if current_user.company.present?
         #calendar
-          = month_calendar events: @schedules do |date, schedules|
-            = date.day
-            br
-            - schedules.each do |schedule|
-              = "#{schedule.category.titleize} with #{schedule.applicant.name}"
+          = render 'schedules/calendar'
       - else
         p = "You must create company first"
+- content_for :javascript_in_file do
+  javascript:
+    $("#by_active_job, #by_applicant, #by_activity").on('click', function(){
+      console.log($('.form_filter').serialize());
+      $.ajax({
+        url: Routes.company_schedules_path("#{current_user.company_id}") + ".js",
+        method: 'get',
+        data: $('.form_filter').serialize()
+      });
+    });
