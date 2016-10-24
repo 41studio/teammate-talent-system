@@ -56,8 +56,8 @@ class Schedule < ActiveRecord::Base
 	# end
 
 	def send_canceled_notify_applicant_email
-		# ScheduleMailer.delay.canceled_notify_applicant_email(self.applicant, self)
-		ScheduleMailer.canceled_notify_applicant_email(self.applicant, self).deliver
+		ScheduleMailer.delay.canceled_notify_applicant_email(self.applicant, self)
+		# ScheduleMailer.canceled_notify_applicant_email(self.applicant, self).deliver
 	end
 
 	private
@@ -129,14 +129,14 @@ class Schedule < ActiveRecord::Base
 		end
 
 		def send_notify_applicant_email
-	 		# ScheduleMailer.delay.notify_applicant_email(self.applicant, self)
-	 		ScheduleMailer.notify_applicant_email(self.applicant, self).deliver
+	 		ScheduleMailer.delay.notify_applicant_email(self.applicant, self)
+	 		# ScheduleMailer.notify_applicant_email(self.applicant, self).deliver
 		end
 
 		def send_update_notify_applicant_email
 			if self.category_changed? || self.start_date_changed?
-				# ScheduleMailer.delay.update_notify_applicant_email(self.applicant, self, @old_category)
-				ScheduleMailer.update_notify_applicant_email(self.applicant, self, @old_category).deliver
+				ScheduleMailer.delay.update_notify_applicant_email(self.applicant, self, @old_category)
+				# ScheduleMailer.update_notify_applicant_email(self.applicant, self, @old_category).deliver
 			end
 		end
 
