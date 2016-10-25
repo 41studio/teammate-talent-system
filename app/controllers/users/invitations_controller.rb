@@ -10,6 +10,7 @@ class Users::InvitationsController < Devise::InvitationsController
   end
   
   def edit
+    asd
 		super
   end
 
