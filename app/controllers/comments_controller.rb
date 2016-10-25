@@ -7,7 +7,7 @@ class CommentsController < ApplicationController
 		@comment = Comment.build_from(@applicant, current_user.id, params[:comment][:body])
     respond_to do |format|
     	if @comment.save
-    		format.html { redirect_to company_job_applicant_path(params[:company_id], params[:job_id], params[:applicant_id]), notice: "commented" }
+    		format.js { render 'comments/index' }
     	else
     		format.html { redirect_to company_job_applicant_path(params[:company_id], params[:job_id], params[:applicant_id]) }
     	end
