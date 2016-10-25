@@ -39,7 +39,7 @@ module API
         end
 
         def comment_params
-          ActionController::Parameters.new(params).require(:comment).permit(:body)
+          ActionController::Parameters.new(params).permit(:body)
         end   
 
         def error_message
@@ -189,9 +189,7 @@ module API
         }
         params do
           use :applicant_id
-          requires :comment, type: Hash do
-            requires :body, type: String, allow_blank: false
-          end
+          requires :body, type: String, allow_blank: false
         end        
         post ':id/comment/new' do
           begin
