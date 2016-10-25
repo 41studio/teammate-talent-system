@@ -3,6 +3,7 @@ module API
     class Users < Grape::API
       version 'v1'
       format :json
+      helpers Helpers
 
       helpers do
         params :user_params do
@@ -24,12 +25,17 @@ module API
         def set_user
           @user = current_user
         end    
+
+        def error_message
+          error!({ status: :error, message: @user.errors.full_messages.first }) if @user.errors.any?
+        end       
       end
 
       resource :users do
         before do
           unless ["sign_up", "login", "new"].any? { |word| request.path.include?(word) }
             authenticate!
+            set_user
           end
         end
 
@@ -57,14 +63,12 @@ module API
           end 
         end
 
-        desc "Logout User", {
-          headers: {
-            "token" => {
-              desc: "Valdates your identity",
-              required: true
-            }
+        desc "Logout User" do
+          headers token: {
+            description: 'Valdates your identity',
+            required: true
           } 
-        }        
+        end
         delete '/logout' do
           if ApiKey.find_by(access_token: headers['Token']).destroy!
             { status: "Log out success" }
@@ -86,11 +90,11 @@ module API
         end        
         post '/sign_up' do
           begin
-            users = User.create(user_params)
-            if users.save!
+            @user = User.create(user_params)
+            if @user.save!
               { status: "A message with a confirmation link has been sent to your email address. Please follow the link to activate your account." }
             else
-              error!({ status: :error, message: users.errors.full_messages.first }) if users.errors.any?
+              error_message
             end
           rescue ActiveRecord::RecordNotFound
             record_not_found_message
@@ -98,15 +102,10 @@ module API
         end       
         
         desc "User Profile", {
-          headers: {
-            "token" => {
-              desc: "Valdates your identity",
-              required: true
-            }
-          }         
+          # headers: { token: get_token }         
         }
         get '/profile' do
-          present current_user, with: API::V1::Entities::UserEntity, except: [:id, :fullname]
+          present @user, with: API::V1::Entities::UserEntity, except: [:id, :fullname]
         end
 
         desc "Forget Password", {
@@ -126,6 +125,13 @@ module API
           else
             { status: "No such email" }
           end
+        end
+
+        desc "Edit User" do
+          # headers: { token: get_token }      
+        end
+        get '/edit' do
+          present current_user, with: API::V1::Entities::UserEntity, except: [:id, :fullname, :token, :joined_at]
         end
 
         desc "Update User", {
@@ -151,7 +157,7 @@ module API
           if @user.update_with_password(user_params)
             { status: "Update Success" }
           else
-            error!({ status: :error, message: @user.errors.full_messages.first }) if @user.errors.any?
+            error_message
           end
         end
       end #end resource
