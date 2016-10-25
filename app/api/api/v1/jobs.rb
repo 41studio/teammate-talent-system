@@ -102,6 +102,7 @@ module API
         }
         post '/create' do
           job = jobs.new(job_params)
+          # byebug
           if job.save!
             { status: :success }
           else
@@ -236,7 +237,7 @@ module API
         get ":id/applicants" do
           begin
             applicants_with_status = job.applicants.where(status: params[:status])
-            present :applicants, applicants_with_status.page(params[:page]), with: API::V1::Entities::ApplicantEntity
+            present :applicants, applicants_with_status.page(params[:page]), with: API::V1::Entities::ApplicantEntity, except: [ { educations: [:id], experiences: [:id], comments:  [ user: [:id, :first_name, :last_name, :email, :joined_at] ] }]
           rescue ActiveRecord::RecordNotFound
             record_not_found_message
            end

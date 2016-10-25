@@ -13,11 +13,12 @@ module API
       mount API::V1::Users
       mount API::V1::Schedules
 
-      add_swagger_documentation base_path: "/api",
-                                api_version: 'v1',
-                                hide_documentation_path: true,
-                                markdown: false
-
+      add_swagger_documentation \
+        mount_path: '/swagger_doc',
+        add_version: true,
+        doc_version: '0.0.1',
+        hide_documentation_path: true,
+        markdown: false
 		  before do
 		      header['Access-Control-Allow-Origin'] = '*'
 		      header['Access-Control-Request-Method'] = '*'

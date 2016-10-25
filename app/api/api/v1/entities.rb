@@ -7,6 +7,7 @@ module API
   			expose :first_name
   			expose :last_name
   			expose :email
+  			expose :token
   			expose :confirmed_at, format_with: :timestamp, as: :joined_at
   			expose :avatar
   		end
@@ -22,18 +23,18 @@ module API
 	  		expose :email
 	  		expose :headline
 	  		expose :phone
-	  		expose :address
-	  		expose :resume
 	  		expose :status
+	  		expose :address
   			expose :created_at, format_with: :timestamp, as: :apply_at
+	  		expose :resume
+	  		expose :photo
 	  		expose :educations, using: "API::V1::Entities::EducationEntity", as: :educations 
 	  		expose :experiences, using: "API::V1::Entities::ExperienceEntity", as: :experiences 
 			expose :comment_threads, using: "API::V1::Entities::CommentEntity", as: :comments
-	  		expose :photo
 	  	end
 
 	  	class CommentEntity < Grape::Entity
-	  		expose :fullname
+	  		expose :user, using: "API::V1::Entities::UserEntity"
 	  		expose :body
 	  	end
 
@@ -112,14 +113,14 @@ module API
 	  		expose :photo_company
 	  	end
 
-	  	class ScheduleEntityEntity < Grape::Entity
+	  	class ScheduleEntity < Grape::Entity
 	  		expose :id
 	  		expose :start_date, format_with: :timestamp
 	  		expose :end_date, format_with: :timestamp
 	  		expose :category
 	  		expose :notify_applicant_flag, as: :sent_email_to_applicant
-	  		expose :applicant, using: "API::V1::Entities::Applicant"
-	  		expose :assignee, using: "API::V1::Entities::User"
+	  		expose :applicant, using: "API::V1::Entities::ApplicantEntity"
+	  		expose :assignee, using: "API::V1::Entities::UserEntity"
 	  		expose :category_valid
 
 	  		private

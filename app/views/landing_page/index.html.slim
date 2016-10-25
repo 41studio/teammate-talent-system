@@ -8,17 +8,17 @@
 	= search_form_for(@search, url: root_path, method: :get) do |f|
 		.row
 			.col-md-6
-				= f.text_field :keyword_cont, placeholder: 'name or keyword', class: 'form-control'
+				= f.text_field :keyword_cont, placeholder: 'name or keyword job', class: 'form-control'
 				br
 			.col-md-6
 				= f.text_field :city_cont, placeholder: 'location city', class: 'form-control'
 				br
 		.row
 			.col-md-6
-				= f.text_field :company_cont, placeholder: 'e.g Traveloka', class: 'form-control'
+				= f.text_field :company_cont, placeholder: 'e.g Traveloka (company name)', class: 'form-control'
 				br
 			.col-md-6
-				= f.text_field :industry_cont, placeholder: 'e.g Airlines, Marketing, Banking', class: 'form-control', id: 'js-autocomplete'
+				= f.text_field :industry_cont, placeholder: 'e.g Airlines, Marketing, Banking (industry)', class: 'form-control', id: 'js-autocomplete'
 				br
 		br
 		.row
