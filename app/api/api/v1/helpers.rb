@@ -32,14 +32,12 @@ module API
       error!("You don't have permission.", 401) unless applicant.job.company.users.include?current_user
     end
 
-
-          # headers: {
-          #   "token" => {
-          #     desc: "Valdates your identity",
-          #     required: true
-          #   }
-          # }
-
+    def token_param
+      # token: {
+      #   desc: "Validates your identity",
+      #   required: true
+      # }
+    end
 
       # rescue_from ActiveRecord::RecordNotFound do |e|
       #   error_response(message: e.message, status: 404)

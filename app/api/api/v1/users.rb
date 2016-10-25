@@ -5,6 +5,13 @@ module API
       format :json
 
       helpers do
+        params :user_params do
+            requires :first_name                        ,type: String, desc: "User first name"
+            optional :last_name                         ,type: String, desc: "User last name"
+            requires :email                             ,type: String, desc: "User email"
+            optional :avatar                            ,type: File, desc: "User avatar"
+        end
+
         def user_params
           # byebug
           user_param = ActionController::Parameters.new(params).require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :current_password, :avatar)
@@ -16,7 +23,7 @@ module API
 
         def set_user
           @user = current_user
-        end      
+        end    
       end
 
       resource :users do
@@ -39,7 +46,8 @@ module API
         post '/login' do
           begin
             if user = User.authenticate_for_api(params[:email], params[:password])
-              user.user_api(user)
+              # user.user_api(user)
+              present user, with: API::V1::Entities::UserEntity, only: [:fullname, :email, :token]
             else
               error_msg = 'Invalid Email or password.'
               error!({ 'error_msg' => error_msg }, 401)
@@ -55,11 +63,11 @@ module API
               desc: "Valdates your identity",
               required: true
             }
-          }
+          } 
         }        
         delete '/logout' do
           if ApiKey.find_by(access_token: headers['Token']).destroy!
-            { status: "Log outsuccess" }
+            { status: "Log out success" }
           end
         end
 
@@ -71,12 +79,9 @@ module API
         }
         params do
           requires :user, type: Hash do
-            requires :first_name                        ,type: String, desc: "User first name"
-            optional :last_name                         ,type: String, desc: "User last name"
-            requires :email                             ,type: String, desc: "User email"
-            requires :password                          ,type: String, desc: "User password", allow_blank: true
-            requires :password_confirmation             ,type: String, desc: "User password confirmation", allow_blank: true
-            optional :avatar                            ,type: File, desc: "User avatar"
+            use :user_params
+            requires :password                          ,type: String, desc: "User password", allow_blank: false
+            requires :password_confirmation             ,type: String, desc: "User password confirmation", allow_blank: false
           end
         end        
         post '/sign_up' do
@@ -124,22 +129,21 @@ module API
         end
 
         desc "Update User", {
-          :notes => <<-NOTE
-          Update user profile process (put)
-          ---------------------------------
-          NOTE
+          headers: {
+            "token" => {
+              desc: "Valdates your identity",
+              required: true
+            }
+          } 
         }
         params do
           requires :user, type: Hash do
-            requires :first_name                        ,type: String, desc: "User first name"
-            requires :last_name                         ,type: String, desc: "User last name"
-            requires :email                             ,type: String, desc: "User email"
+            use :user_params
             optional :password                          ,type: String, desc: "User password 
             (leave blank if you don't want to change it) ", allow_blank: true
             optional :password_confirmation             ,type: String, desc: "User password confirmation", allow_blank: true
             requires :current_password                  ,type: String, desc: "User current password 
             (we need your current password to confirm your changes) "
-            optional :avatar                            ,type: File, desc: "User avatar"
           end
         end
         put '/update' do      
