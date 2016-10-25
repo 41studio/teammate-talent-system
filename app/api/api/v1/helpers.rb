@@ -33,6 +33,14 @@ module API
     end
 
 
+          # headers: {
+          #   "token" => {
+          #     desc: "Valdates your identity",
+          #     required: true
+          #   }
+          # }
+
+
       # rescue_from ActiveRecord::RecordNotFound do |e|
       #   error_response(message: e.message, status: 404)
       # end
@@ -43,3 +51,11 @@ module API
 		end
 	end
 end
+
+
+        #   :notes => <<-NOTE
+        #   Destroy Token User
+        #   -------------------
+        #   NOTE
+        # }
+        # desc "Return super-secret information", {

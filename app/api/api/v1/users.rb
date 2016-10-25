@@ -50,11 +50,13 @@ module API
         end
 
         desc "Logout User", {
-          :notes => <<-NOTE
-          Destroy Token User
-          -------------------
-          NOTE
-        }
+          headers: {
+            "token" => {
+              desc: "Valdates your identity",
+              required: true
+            }
+          }
+        }        
         delete '/logout' do
           if ApiKey.find_by(access_token: headers['Token']).destroy!
             { status: "Log outsuccess" }
@@ -72,8 +74,7 @@ module API
             requires :first_name                        ,type: String, desc: "User first name"
             optional :last_name                         ,type: String, desc: "User last name"
             requires :email                             ,type: String, desc: "User email"
-            requires :password                          ,type: String, desc: "User password 
-            (leave blank if you don't want to change it) ", allow_blank: true
+            requires :password                          ,type: String, desc: "User password", allow_blank: true
             requires :password_confirmation             ,type: String, desc: "User password confirmation", allow_blank: true
             optional :avatar                            ,type: File, desc: "User avatar"
           end
@@ -92,10 +93,12 @@ module API
         end       
         
         desc "User Profile", {
-          :notes => <<-NOTE
-          User Profile (show)
-          ------------------
-          NOTE
+          headers: {
+            "token" => {
+              desc: "Valdates your identity",
+              required: true
+            }
+          }         
         }
         get '/profile' do
           present current_user, with: API::V1::Entities::UserEntity, except: [:id, :fullname]

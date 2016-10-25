@@ -102,6 +102,7 @@ module API
         }
         post '/create' do
           job = jobs.new(job_params)
+          # byebug
           if job.save!
             { status: :success }
           else

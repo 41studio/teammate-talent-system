@@ -112,7 +112,7 @@ module API
         end
         get ":id/detail" do
           begin 
-            present applicant, with: API::V1::Entities::ApplicantEntity
+            present :applicant, applicant, with: API::V1::Entities::ApplicantEntity, except: [ { educations: [:id], experiences: [:id], comments:  [ user: [:id, :first_name, :last_name, :email, :joined_at] ] }]
           rescue ActiveRecord::RecordNotFound
             record_not_found_message
           end
@@ -196,7 +196,8 @@ module API
         post ':id/comment/new' do
           begin
             if applicant
-              comments = Comment.build_from(applicant, current_user.id, comment_params)
+              # byebug
+              comments = Comment.build_from(applicant, current_user.id, comment_params[:body])
               if comments.save!
                 { status: :success }
               else

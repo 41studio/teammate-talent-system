@@ -22,18 +22,18 @@ module API
 	  		expose :email
 	  		expose :headline
 	  		expose :phone
-	  		expose :address
-	  		expose :resume
 	  		expose :status
+	  		expose :address
   			expose :created_at, format_with: :timestamp, as: :apply_at
+	  		expose :resume
+	  		expose :photo
 	  		expose :educations, using: "API::V1::Entities::EducationEntity", as: :educations 
 	  		expose :experiences, using: "API::V1::Entities::ExperienceEntity", as: :experiences 
 			expose :comment_threads, using: "API::V1::Entities::CommentEntity", as: :comments
-	  		expose :photo
 	  	end
 
 	  	class CommentEntity < Grape::Entity
-	  		expose :fullname
+	  		expose :user, using: "API::V1::Entities::UserEntity"
 	  		expose :body
 	  	end
 
