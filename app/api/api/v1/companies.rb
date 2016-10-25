@@ -136,7 +136,8 @@ module API
         end
         get '/users' do
           begin
-            present :users, company.users, with: API::V1::Entities::UserEntity, only: [:id, :fullname]
+            users = User.by_company_id(current_user.company_id)
+            present :users, users.page(params[:page]), with: API::V1::Entities::UserEntity, only: [:id, :fullname]
           rescue ActiveRecord::RecordNotFound
             record_not_found_message
            end

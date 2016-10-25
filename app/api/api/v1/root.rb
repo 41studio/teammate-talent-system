@@ -18,11 +18,7 @@ module API
         add_version: true,
         doc_version: '0.0.1',
         hide_documentation_path: true,
-        markdown: false,
-        models: [
-          API::V1::Entities::UserEntity,
-          API::V1::Entities::ApplicantEntity
-        ]
+        markdown: false
 		  before do
 		      header['Access-Control-Allow-Origin'] = '*'
 		      header['Access-Control-Request-Method'] = '*'

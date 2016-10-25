@@ -12,7 +12,6 @@ class Comment < ActiveRecord::Base
 
   # NOTE: Comments belong to a user
   belongs_to :user, foreign_key: :user_id
-  delegate :fullname, to: :user
 
   # Helper class method that allows you to build a comment
   # by passing a commentable object, a user_id, and comment text

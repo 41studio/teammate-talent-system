@@ -82,11 +82,7 @@ class User < ActiveRecord::Base
   def token
     self.api_keys.nil? ? nil : self.api_keys.last.access_token
   end
-
-  def user_api(user)
-    {token: user.token, email: user.email, name: user.fullname}
-  end
-
+  
   private
     scope :by_company_id, -> (company_id) { self.joins(:company).where(companies: {id: company_id}) }
 
