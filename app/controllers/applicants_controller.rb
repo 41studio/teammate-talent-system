@@ -38,15 +38,15 @@ class ApplicantsController < ApplicationController
   # GET /applicants/1
   # GET /applicants/1.json
   def show
-    applicant = Applicant.find(params[:id])
+    @applicant = Applicant.find(params[:id])
     @recruitment_level = Applicant::STATUSES
     @disqualified = Applicant::DISQUALIFIED
-    @disabled_level = applicant.disable_level
-    @new_comment = Comment.build_from(applicant, current_user.id, "")
+    @disabled_level = @applicant.disable_level
+    @new_comment = Comment.build_from(@applicant, current_user.id, "")
     @url = company_job_applicant_comments_path(params[:company_id], params[:job_id], params[:id])
-    @comments = applicant.comment_threads
-    @old_schedules = applicant.schedules.old_schedules
-    @latest_schedules = applicant.schedules.latest_schedules
+    # @comments = applicant.comment_threads
+    @old_schedules = @applicant.schedules.old_schedules
+    @latest_schedules = @applicant.schedules.latest_schedules
   end
 
   # GET /applicants/new
