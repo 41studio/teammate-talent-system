@@ -101,16 +101,8 @@
   = link_to "Comment", "javascript:void(0)", id: 'show_comment_form'
   #comment_on_applicant
     = render 'comments/form'
-    p
-      strong comments :
-      - @comments.each do |c|
-        p
-          h4
-            = "#{c.user.first_name} #{c.user.last_name}"
-          h5
-            = c.body
-          = time_ago_in_words(c.created_at)
-          |  ago
+    #comments
+      = render @applicant.comment_threads
   hr
   - unless @applicant.status == @disqualified
     p

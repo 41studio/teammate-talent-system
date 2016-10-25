@@ -1,5 +1,5 @@
-= form_for @new_comment, url: @url do |f|
+= form_for @new_comment, url: @url, remote: true do |f|
 
   .field
-    = f.text_area :body
+    = f.text_area :body, id: "comment_field"
   .actions = f.submit
