@@ -31,12 +31,12 @@ module API
     def applicant_valid
       error!("You don't have permission.", 401) unless applicant.job.company.users.include?current_user
     end
-
-    def token_param
-      # token: {
-      #   desc: "Validates your identity",
-      #   required: true
-      # }
+    
+    def get_token
+      {
+        desc: "Valdates your identity",
+        required: true
+      }
     end
 
       # rescue_from ActiveRecord::RecordNotFound do |e|

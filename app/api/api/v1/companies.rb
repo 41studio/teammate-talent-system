@@ -3,7 +3,6 @@ module API
     class Companies < Grape::API
       version 'v1' 
       format :json 
-      before { authenticate! }
       helpers Helpers
 
       helpers do
@@ -13,12 +12,16 @@ module API
           company_param
         end
 
-        def company
-          current_user.company
+        def invitation_params
+          ActionController::Parameters.new(params).permit(:email)
+        end
+
+        def set_company
+          @company = current_user.company
         end
 
         def error_message
-          error!({ status: :error, message: company.errors.full_messages.first }) if company.errors.any?
+          error!({ status: :error, message: @company.errors.full_messages.first }) if @company.errors.any?
         end
 
         def field_on_company_form
@@ -36,6 +39,11 @@ module API
       end      
 
       resource :companies do
+        before do
+          authenticate!
+          set_company
+        end
+
         desc "Company detail", {
           :notes => <<-NOTE
           Company detail by User company (show)
@@ -44,7 +52,7 @@ module API
         } 
         get '/detail' do
           begin
-            company.present? ? API::V1::Entities::CompanyEntity.represent(company) : "Create company profil"
+            @company.present? ? API::V1::Entities::CompanyEntity.represent(@company) : "Create company profil"
           rescue ActiveRecord::RecordNotFound
             record_not_found_message
            end
@@ -73,12 +81,12 @@ module API
           end
         end
         post '/create' do
-          if company
-            { status: :you_are_belongs_to_one_company }
+          if @company
+            { status: "You are belongs to one company" }
           else
-            companies = Company.create(company_params)
-            if companies.save!
-              current_user.update_attribute(:company_id, companies.id)
+            @company = Company.create(company_params)
+            if @company.save!
+              current_user.update_attribute(:company_id, @company.id)
               { status: :success }
             else
               error_message
@@ -95,7 +103,7 @@ module API
         get '/edit' do
           begin
             field_on_company_form
-            present :company, company, with: API::V1::Entities::CompanyEntity
+            present :company, @company, with: API::V1::Entities::CompanyEntity
           rescue ActiveRecord::RecordNotFound
             record_not_found_message
            end
@@ -114,8 +122,8 @@ module API
           end
         end
         put '/update' do
-          if company
-            if company.update(company_params)
+          if @company
+            if @company.update(company_params)
               { status: :success }
             else
               error_message
@@ -143,6 +151,26 @@ module API
            end
         end
 
+        desc "Invite Personel", {
+          :notes => <<-NOTE
+          User List in company (show)
+          -------------------------------------
+          NOTE
+        } 
+        params do
+          requires :email, type: String, allow_blank: false, desc: "Personnel email"
+        end
+        post '/invite_personnel' do
+          if User.find_by(email: invitation_params[:email]).present?
+            { status: "This user has belongs to one company" }
+          else
+            if User.invite!({email: invitation_params[:email], company_id: @company.id}, current_user)
+              { status: "User Invited. Invitation email has sent." }
+            else
+              error_message
+            end
+          end
+        end        
 
       end #end resource
     end
