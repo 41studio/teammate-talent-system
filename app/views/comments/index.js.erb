@@ -3,5 +3,6 @@ $('#comment_field').val("");
 $('html, body').animate({
 	scrollTop: $("#comment-<%= @comment.id %>").offset().top
 }, 500);
-$("#comment-<%= @comment.id %>").css("background-color", "#cce6ff");
-// $("#comment-<%= @comment.id %>").css("background-color", "#cce6ff").animate({backgroundColor: "#000"},"slow");
+// $("#comment-<%= @comment.id %>").css("background-color", "#cce6ff");
+$('#comment-<%= @comment.id %>').css({'background-color':'#cce6ff'}).
+animate({'background-color':'#fff'}, 3000);
