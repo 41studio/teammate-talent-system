@@ -1,0 +1,2 @@
+= label_tag 'by_applicant', 'By Applicant'
+= select_tag 'by_applicant', options_from_collection_for_select(@applicants, "id", "name"), include_blank: "-- All applicant --", class: 'form-control', id: 'by_applicant'

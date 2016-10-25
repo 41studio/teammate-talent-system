@@ -142,6 +142,10 @@ class Job < ActiveRecord::Base
 	def self.closed_jobs
 		where(status: "closed")
 	end
+
+	def self.published_or_closed_jobs
+		where("jobs.status IN (?)", ["published","closed"])
+	end
 	
 	# def self.job_title
 	# 	self[:job_title].titleize
