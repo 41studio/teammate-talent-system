@@ -13,7 +13,7 @@ module API
         end
 
         def invitation_params
-          ActionController::Parameters.new(params).require(:invitation).permit(:email)
+          ActionController::Parameters.new(params).permit(:email)
         end
 
         def set_company
@@ -82,7 +82,7 @@ module API
         end
         post '/create' do
           if @company
-            { status: :you_are_belongs_to_one_company }
+            { status: "You are belongs to one company" }
           else
             @company = Company.create(company_params)
             if @company.save!
@@ -158,17 +158,14 @@ module API
           NOTE
         } 
         params do
-          requires :invitation, type: Hash do
-            requires :email, type: String, allow_blank: false, desc: "Personnel email"
-          end
+          requires :email, type: String, allow_blank: false, desc: "Personnel email"
         end
         post '/invite_personnel' do
           if User.find_by(email: invitation_params[:email]).present?
-            { status: :you_are_belongs_to_one_company }
+            { status: "This user has belongs to one company" }
           else
-            byebug
             if User.invite!({email: invitation_params[:email], company_id: @company.id}, current_user)
-              { status: "User Invited" }
+              { status: "User Invited. Invitation email has sent." }
             else
               error_message
             end
