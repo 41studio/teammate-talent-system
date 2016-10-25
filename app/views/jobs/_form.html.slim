@@ -56,7 +56,7 @@
     |  Characters left  
   .form-group
     = f.label :experience_list_id, "Applicant Experience"
-    = f.select :experience_list_id, @experience_collection, include_blank:  "Select Applicant Level", {class: 'form-control'}
+    = f.select :experience_list_id, @experience_collection, {include_blank:  "Select Applicant Level"}, {class: 'form-control'}
   .form-group
     = f.label :function_list_id, "Applicant Function"
     = f.select :function_list_id, @function_collection, {include_blank: "Select Applicant Level"}, {class: 'form-control'}
