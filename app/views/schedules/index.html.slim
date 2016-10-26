@@ -33,13 +33,13 @@
               = render 'schedules/applicant_select'
             .form-group
               = label_tag 'by_activity', 'By Activity'
-              = select_tag 'by_activity',  options_for_select(@category_collection.map{ |val| val.titleize }), include_blank: "-- All activity --", class: 'form-control', id: 'by_activity'
+              = select_tag 'by_activity',  options_for_select(@category_collection), include_blank: "-- All activity --", class: 'form-control', id: 'by_activity'
     .col-md-9
       h3 Agenda
       hr
       - if current_user.company.present?
         #calendar
-          = render 'schedules/calendar'
+          = render partial: 'schedules/calendar', locals: {event: @schedules}
       - else
         p = "You must create company first"
 - content_for :javascript_in_file do
@@ -48,6 +48,7 @@
       console.log($('.form_filter').serialize());
       $.ajax({
         url: Routes.company_schedules_path("#{current_user.company_id}"),
+        dataType: 'script',
         method: 'get',
         data: $('.form_filter').serialize()
       });

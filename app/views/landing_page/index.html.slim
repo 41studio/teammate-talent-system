@@ -29,10 +29,6 @@
 				.form-group
 					= f.label :max_salary_gteq,"Min Salary"
 					= f.text_field :min_salary_eq, placeholder: 'e.g 1000000', class: 'form-control'
-
-		.field
-		= f.sort_fields do |s|
-		  = s.sort_select	
 		.row
 			.col-md-offset-3.col-md-6
 				= f.submit "search", class: 'btn btn-block btn-primary'

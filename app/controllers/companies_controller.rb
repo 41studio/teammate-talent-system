@@ -80,7 +80,8 @@ class CompaniesController < ApplicationController
   end
 
   def invite_personnel
-    personnel_email = params[:email]    
+    personnel_email = params[:email]
+    if valid_email?(personnel_email)    
     respond_to do |format|
       if User.invite!({email: personnel_email, company_id: current_user.company_id}, current_user)
         format.html { redirect_to dashboards_path, notice: 'User invited!' }
@@ -88,7 +89,10 @@ class CompaniesController < ApplicationController
       else
         format.html { redirect_to dashboards_path }
         # format.json { render json: @company.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      redirect_to dashboards_path, notice: 'email is not valid'
     end
   end
 
@@ -126,6 +130,27 @@ class CompaniesController < ApplicationController
     def user_allowed
       if current_user.company_id != @company.id
         redirect_to dashboards_path
+      end
+    end
+
+    def valid_email?(email)
+      
+      email_regex = %r{
+        ^ # Start of string
+        [0-9a-z] # First character
+        [0-9a-z.+]+ # Middle characters
+        [0-9a-z] # Last character
+        @ # Separating @ character
+        [0-9a-z] # Domain name begin
+        [0-9a-z.-]+ # Domain name middle
+        [0-9a-z] # Domain name end
+        $ # End of string
+      }xi # Case insensitive
+      
+      if (email =~ email_regex) == 0
+        return true
+      else
+        return false
       end
     end
 

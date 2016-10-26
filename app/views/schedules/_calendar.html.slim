@@ -1,4 +1,4 @@
-= month_calendar events: @schedules do |date, schedules|
+= month_calendar events: event, previous_link: events_ajax_previous_link, next_link: events_ajax_next_link do |date, schedules|
   = date.day
   br
   - schedules.each do |schedule|

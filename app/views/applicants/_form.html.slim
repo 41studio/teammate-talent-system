@@ -7,10 +7,10 @@
           li = message
 
   .form-group
-    = f.label :name
+    = f.label :name, class: 'control-label'
     = f.text_field :name, class: 'form-control'
   .form-group
-    = f.label :gender
+    = f.label :gender, class: 'control-label'
     br
     .radio-inline
       = f.radio_button :gender, 'Male' 
@@ -21,30 +21,31 @@
   div.row
     div.col-md-4
       div.form-group
+        = f.label :date_birth, class: 'control-label'
         div.input-group.date#datetimepicker1
           = f.text_field :date_birth, class: "form-control"
           = content_tag(:span, content_tag(:span, "", class: "glyphicon glyphicon-calendar"), class: "input-group-addon")
   .form-group
-    = f.label :email
+    = f.label :email, class: 'control-label'
     = f.email_field :email, class: 'form-control'
   .form-group
-    = f.label :headline
+    = f.label :headline, class: 'control-label'
     = f.text_field :headline, class: 'form-control'
   .form-group
-    = f.label :phone
+    = f.label :phone, class: 'control-label'
     = f.number_field :phone, class: 'form-control'
   .form-group
-    = f.label :address
+    = f.label :address, class: 'control-label'
     = f.text_area :address, class: 'form-control'
   .form-group
-    = f.label :photo
+    = f.label :photo, class: 'control-label'
     = f.file_field :photo, accept: 'image/png,image/jpeg'
     - if f.object.photo?
       = image_tag f.object.photo.thumb.url
       = f.label :remove_photo
       = f.check_box :remove_photo
   .form-group
-    = f.label :resume
+    = f.label :resume, class: 'control-label'
     = f.file_field :resume , accept: 'application/pdf'
     - if f.object.resume?
       = link_to "Preview Resume", f.object.resume.url, target: '_blank'

@@ -16,6 +16,7 @@ class SchedulesController < ApplicationController
   before_action :set_category_collection
   before_action :new_schedule_path, only: [:new, :create]
   before_action :set_schedule, :edit_schedule_path, only: [:destroy, :edit, :update]
+  # protect_from_forgery except: :index
 
   # GET /schedules
   # GET /schedules.json
@@ -34,6 +35,7 @@ class SchedulesController < ApplicationController
       applicants = @applicants.get_applicant_ids
     end
 
+    @assignee = User
     if params[:by_activity].present?
       categories = params[:by_activity]
     else
@@ -42,8 +44,8 @@ class SchedulesController < ApplicationController
 
     @schedules = current_user.get_schedules.where("jobs.id IN (?) AND applicants.id IN (?) AND category IN (?)", active_job, applicants, categories)
     respond_to do |format|
-      format.html {}
-      format.js { render 'schedules/index' }
+      format.js
+      format.html
     end
   end
 

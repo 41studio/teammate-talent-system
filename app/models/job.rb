@@ -60,7 +60,7 @@ class Job < ActiveRecord::Base
 
 	scope :by_company_id, -> (company_id) { self.joins(:company, applicants: :schedules).where(companies: {id: company_id}).group(:id) }
 	scope :get_job_ids, -> { self.ids }
-
+	
 	def applicants_count
 		applicants.count
 	end
