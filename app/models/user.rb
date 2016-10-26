@@ -33,7 +33,10 @@ class User < ActiveRecord::Base
 	has_many :api_keys
   has_many :schedules
 
+  EMAIL_REGEX = /\A[\w]([^@\s,;]+)@(([\w-]+\.)+(com|edu|org|net|gov|mil|biz|info|co.id))\z/i
+
   validates :first_name, :last_name, :email, presence: true
+  validates :email, presence: true, uniqueness: true, format: {with: EMAIL_REGEX}
   validate :avatar_size_validation
 
   before_save :ensure_authentication_token
