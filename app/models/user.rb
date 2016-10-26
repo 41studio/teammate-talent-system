@@ -49,7 +49,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, 
          :confirmable
   def fullname
-    self.first_name + " " + self.last_name
+    "#{self.first_name} #{self.last_name}"
   end  
   
   def get_schedules
