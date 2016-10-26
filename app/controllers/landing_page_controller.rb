@@ -7,6 +7,5 @@ class LandingPageController < ApplicationController
 		params[:q][:status_matches] = "published" if params[:q].present?
 		@search = Job.search(params[:q])
 		@jobs = @search.result.published_jobs.page(params[:page]).per(9)
-		asd
 	end
 end
