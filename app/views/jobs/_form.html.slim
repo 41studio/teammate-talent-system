@@ -82,6 +82,9 @@
             if (len >= 500){
               this.value = this.value.substring(0,500);
             }
+            if (len >= 100){
+              $('#karakter_description').css("color", "green");
+            }
             $('#karakter_description').text(500 - len)
         });
         $('#job_job_requirement').keyup(function(){
@@ -89,12 +92,18 @@
             if (len >= 500){
               this.value = this.value.substring(0,500);
             }
+            if (len >= 100){
+              $('#karakter_requirement').css("color", "green");
+            }
             $('#karakter_requirement').text(500 - len)
         });
         $('#job_benefits').keyup(function(){
             var len = this.value.length;
             if (len >= 500){
               this.value = this.value.substring(0,500);
+            }
+            if (len >= 100){
+              $('#karakter_benefits').css("color", "green");
             }
             $('#karakter_benefits').text(500 - len)
         });
