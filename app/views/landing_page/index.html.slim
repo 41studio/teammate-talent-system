@@ -5,7 +5,7 @@
 	hr
 	h3
 		| Search Jobs
-	= search_form_for(@search, url: root_path, method: :get) do |f|
+	= search_form_for(@search, url: root_path, method: :get, remote: true) do |f|
 		.row
 			.col-md-6
 				= f.text_field :keyword_cont, placeholder: 'name or keyword job', class: 'form-control'
@@ -40,28 +40,8 @@
 			th.padth = sort_link(@search, :created_at, "Date Published")
 	hr
 	- if @jobs.present?
-			p = "#{@jobs.total_count} Jobs Available"
-			.row
-				- @jobs.each do |job|
-					.col-md-4
-						.panel.panel-default[style="border-radius:0px;"]
-							.panel-body
-								.panel-body
-									= link_to company_job_path(job.company_id, job) do
-										= image_tag job.company.photo_company.thumb.url 
-										|   
-										= job.job_title
-								hr
-								.panel-body
-									= link_to job.company.company_name, company_path(job.company_id)
-									br
-									= "#{job.city}, #{job.state}, #{job.country}"
-									hr
-									.row
-										.col-md-12
-											= link_to "View Detail", company_job_path(job.company_id, job), { class: 'btn btn-block btn-primary', style: 'border-radius:0px;' }
-			center
-				= paginate @jobs
+		#jobs
+			= render partial: 'landing_page/job'
 	- else
 		blockquote
 			h3 style="margin:0px;" No Jobs Related
