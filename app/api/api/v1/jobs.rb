@@ -3,7 +3,6 @@ module API
     class Jobs < Grape::API
       version 'v1' 
       format :json 
-      before { authenticate! }
       helpers Helpers
 
       helpers do
@@ -43,13 +42,22 @@ module API
           present :industry_list, industry_list, with: API::V1::Entities::IndustryListEntity
         end
 
+        def job_list(jobs, page, job_title = "asc", published_date = "asc")
+          present :jobs, jobs.page(page).order(job_title: job_title.to_sym, created_at: published_date.to_sym), with: API::V1::Entities::JobEntity, only: [:id, :job_title, :country, :state, :city, {company: [:photo_company]}]
+        end
+
         def error_message
           error!({ status: :error, message: job.errors.full_messages.first }) if job.errors.any?
         end        
       end
 
       resource :jobs do
-        
+        before do
+          unless request.path.include?("jobs/search")
+            authenticate!
+          end
+        end
+
         desc "Job List", {
           :notes => <<-NOTE
           Get All Jobs by user's company (index)
@@ -78,7 +86,7 @@ module API
         end
         get ":id/detail" do
           begin
-            present job, with: API::V1::Entities::JobEntity, except: [:updated_at , { education_list: [:id], employment_type_list: [:id], experience_list: [:id], function_list: [:id], industry_list: [:id] }]
+            present job, with: API::V1::Entities::JobEntity, except: [:company, :updated_at , { education_list: [:id], employment_type_list: [:id], experience_list: [:id], function_list: [:id], industry_list: [:id] }]
           rescue ActiveRecord::RecordNotFound
             record_not_found_message
           end
@@ -241,7 +249,34 @@ module API
           rescue ActiveRecord::RecordNotFound
             record_not_found_message
            end
-        end        
+        end
+
+        desc "Search Job", {
+          :notes => <<-NOTE
+          Get Job By search keyword
+          --------------------------
+          NOTE
+        }
+        params do
+          use :pagination
+          optional :q, type: Hash do
+            optional :keyword_cont, type: String, desc: "Name or job keyword"
+            optional :city_cont, type: String, desc: "Company city"
+            optional :company_cont, type: String, desc: "Company name"
+            optional :industry_cont, type: String, desc: "Industry name"
+            optional :max_salary_lteq, type: Integer, desc: "Max salary"
+            optional :min_salary_gteq, type: Integer, desc: "Min salary"
+          end
+          optional :sort_by, type: Hash do
+            optional :job_title, type: String, values: { value: ['asc','desc'], message: 'not valid' }, desc: "Sort by job title ASC / DESC"
+            optional :published_date, type: String, values: { value: ['asc','desc'], message: 'not valid' },  desc: "Sort by published date ASC / DESC"
+          end
+        end
+        post "/search" do
+          @jobs = Job.search(params[:q]).result.published_jobs
+          byebug
+          @jobs.present? ? job_list(@jobs, params[:page], params[:sort_by][:job_title], params[:sort_by][:published_date]) : { status: "No Jobs Related"}
+        end
       end #end resource
     end
   end

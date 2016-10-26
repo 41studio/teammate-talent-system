@@ -24,11 +24,11 @@
 		.row
 			.col-md-offset-3.col-md-6
 				.form-group
-					= f.label :max_salary_gteq, "Max Salary"
-					= f.text_field :max_salary_eq, placeholder: 'e.g 5000000', class: 'form-control'
+					= f.label :max_salary_lteq, "Max Salary"
+					= f.text_field :max_salary_lteq, placeholder: 'e.g 5000000', class: 'form-control'
 				.form-group
-					= f.label :max_salary_gteq,"Min Salary"
-					= f.text_field :min_salary_eq, placeholder: 'e.g 1000000', class: 'form-control'
+					= f.label :min_salary_gteq,"Min Salary"
+					= f.text_field :min_salary_gteq, placeholder: 'e.g 1000000', class: 'form-control'
 		.row
 			.col-md-offset-3.col-md-6
 				= f.submit "search", class: 'btn btn-block btn-primary'

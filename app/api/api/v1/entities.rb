@@ -75,6 +75,7 @@ module API
 	  		expose :experience_list, using: "API::V1::Entities::ExperienceListEntity"
 	  		expose :function_list, using: "API::V1::Entities::FunctionListEntity"
 	  		expose :industry_list, using: "API::V1::Entities::IndustryListEntity"
+	  		expose :company, using: "API::V1::Entities::CompanyEntity"
 			expose :created_at, format_with: :timestamp
 			expose :updated_at, format_with: :timestamp
 	  	end
