@@ -20,14 +20,27 @@ class SchedulesController < ApplicationController
   # GET /schedules
   # GET /schedules.json
   def index
-    @jobs = current_user.company.jobs.published_or_closed_jobs
+    @jobs = Job.by_company_id(current_user.company_id).published_or_closed_jobs
     if params[:by_active_job].present?
       active_job = params[:by_active_job]
     else
-      active_job = @jobs.ids
+      active_job = @jobs.get_job_ids
     end
-    @schedules = current_user.get_schedules.where("jobs.id IN (?)", active_job)
-    @applicants = Applicant.joins(:job).where("jobs.id IN (?)", active_job)
+
+    @applicants = Applicant.by_job_ids(active_job)
+    if params[:by_applicant].present?
+      applicants = params[:by_applicant]
+    else
+      applicants = @applicants.get_applicant_ids
+    end
+
+    if params[:by_activity].present?
+      categories = params[:by_activity]
+    else
+      categories = @category_collection
+    end
+
+    @schedules = current_user.get_schedules.where("jobs.id IN (?) AND applicants.id IN (?) AND category IN (?)", active_job, applicants, categories)
     respond_to do |format|
       format.html {}
       format.js { render 'schedules/index' }

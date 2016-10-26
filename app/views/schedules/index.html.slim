@@ -19,7 +19,6 @@
 / hr
 
 .container
-  h1 Listing schedules
   .row
     .col-md-3
       h3 Filter
@@ -34,7 +33,7 @@
               = render 'schedules/applicant_select'
             .form-group
               = label_tag 'by_activity', 'By Activity'
-              = select_tag 'by_activity', options_from_collection_for_select(@jobs, "id", "job_title"), include_blank: "-- All activity --", class: 'form-control', id: 'by_activity'
+              = select_tag 'by_activity',  options_for_select(@category_collection.map{ |val| val.titleize }), include_blank: "-- All activity --", class: 'form-control', id: 'by_activity'
     .col-md-9
       h3 Agenda
       hr
@@ -48,7 +47,7 @@
     $("#by_active_job, #by_applicant, #by_activity").on('click', function(){
       console.log($('.form_filter').serialize());
       $.ajax({
-        url: Routes.company_schedules_path("#{current_user.company_id}") + ".js",
+        url: Routes.company_schedules_path("#{current_user.company_id}"),
         method: 'get',
         data: $('.form_filter').serialize()
       });

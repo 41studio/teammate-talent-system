@@ -84,6 +84,7 @@ class User < ActiveRecord::Base
   
   private
     scope :by_company_id, -> (company_id) { self.joins(:company).where(companies: {id: company_id}) }
+    scope :by_job_ids, -> (job_ids) { self.joins(schedules: :job) }
 
     def generate_authentication_token
       loop do

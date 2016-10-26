@@ -84,7 +84,8 @@ class Applicant < ActiveRecord::Base
 
 	private
 		scope :by_company_id, -> (company_id) { self.joins(:job).where(jobs: {company_id: company_id}) }
-
+		scope :by_job_ids, -> (job_ids) { self.joins(:job, :schedules).where(jobs: {id: job_ids}).group(:id) }
+		scope :get_applicant_ids, -> { self.ids }
 		def applicant_statuses
 			if STATUSES.has_key? self.status.to_sym && self.status != DISQUALIFIED
 				errors[:status] << "not available" 
