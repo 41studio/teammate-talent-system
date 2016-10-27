@@ -56,6 +56,8 @@ class ApplicantsController < ApplicationController
     @applicant = Applicant.new
     @applicant.educations.build
     @applicant.experiences.build
+    @education = Education.new
+    @experience = Experience.new
     @url = company_job_applicants_path(params[:company_id], params[:job_id])
   end
 
@@ -108,7 +110,7 @@ class ApplicantsController < ApplicationController
 
         format.html { redirect_to company_job_path(@job.company_id, @job), notice: 'Applicant was successfully created.' }
         format.json { render :show, status: :created, location: @applicant }
-      else
+      else    
         format.html { render :new }
         format.json { render json: @applicant.errors, status: :unprocessable_entity }
       end
