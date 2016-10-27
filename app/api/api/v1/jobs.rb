@@ -42,8 +42,8 @@ module API
           present :industry_list, industry_list, with: API::V1::Entities::IndustryListEntity
         end
 
-        def job_list(jobs, page, job_title = "asc", published_date = "asc")
-          present :jobs, jobs.page(page).order(job_title: job_title.to_sym, created_at: published_date.to_sym), with: API::V1::Entities::JobEntity, only: [:id, :job_title, :country, :state, :city, {company: [:photo_company]}]
+        def search_jobs(jobs, page)
+          present :jobs, jobs.page(page), with: API::V1::Entities::JobEntity, only: [:id, :job_title, :country, :state, :city, {company: [:photo_company]}]
         end
 
         def error_message
@@ -69,7 +69,7 @@ module API
         end
         get '/all' do
           begin
-            present :jobs, jobs.page(params[:page]), with: API::V1::Entities::JobEntity, only: [:id, :job_title, :status, :created_at]
+            present :jobs, jobs.order(status: :desc, created_at: :desc).page(params[:page]), with: API::V1::Entities::JobEntity, only: [:id, :job_title, :status, :created_at]
           rescue ActiveRecord::RecordNotFound
             record_not_found_message
           end          
@@ -231,7 +231,7 @@ module API
            end
         end
 
-        desc "Job and applicant list", {
+        desc "Applicant list by status", {
           :notes => <<-NOTE
           Get Job By Id with applicants group by status
           --------------------------------------------
@@ -266,16 +266,19 @@ module API
             optional :industry_cont, type: String, desc: "Industry name"
             optional :max_salary_lteq, type: Integer, desc: "Max salary"
             optional :min_salary_gteq, type: Integer, desc: "Min salary"
+            # optional :s, type: Array, desc: "Name or job keyword"
           end
           optional :sort_by, type: Hash do
-            optional :job_title, type: String, values: { value: ['asc','desc'], message: 'not valid' }, desc: "Sort by job title ASC / DESC"
-            optional :published_date, type: String, values: { value: ['asc','desc'], message: 'not valid' },  desc: "Sort by published date ASC / DESC"
+            optional :job_title, type: String, default: 'asc', values: { value: ['asc','desc'], message: 'not valid' }, desc: "Sort by job title ASC / DESC"
+            optional :created_at, type: String, default: 'desc', values: { value: ['asc','desc'], message: 'not valid' },  desc: "Sort by created date ASC / DESC"
           end
         end
         post "/search" do
-          @jobs = Job.search(params[:q]).result.published_jobs
-          byebug
-          @jobs.present? ? job_list(@jobs, params[:page], params[:sort_by][:job_title], params[:sort_by][:published_date]) : { status: "No Jobs Related"}
+          @search = Job.search(params[:q])
+           
+          params[:sort_by].present? ? @search.sorts = params[:sort_by].map{|k,v| "#{k.to_s} #{v.to_s}"} : @search.sorts = ['job_title asc', 'created_at desc']
+          @jobs = @search.result.published_jobs
+          @jobs ? search_jobs(@jobs, params[:page]) : { status: "No Jobs Related"}
         end
       end #end resource
     end
