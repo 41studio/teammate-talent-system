@@ -266,14 +266,13 @@ module API
             optional :industry_cont, type: String, desc: "Industry name"
             optional :max_salary_lteq, type: Integer, desc: "Max salary"
             optional :min_salary_gteq, type: Integer, desc: "Min salary"
-            # optional :s, type: Array, desc: "Name or job keyword"
           end
           optional :sort_by, type: Hash do
             optional :job_title, type: String, default: 'asc', values: { value: ['asc','desc'], message: 'not valid' }, desc: "Sort by job title ASC / DESC"
             optional :created_at, type: String, default: 'desc', values: { value: ['asc','desc'], message: 'not valid' },  desc: "Sort by created date ASC / DESC"
           end
         end
-        post "/search" do
+        get "/search" do
           @search = Job.search(params[:q])
            
           params[:sort_by].present? ? @search.sorts = params[:sort_by].map{|k,v| "#{k.to_s} #{v.to_s}"} : @search.sorts = ['job_title asc', 'created_at desc']

@@ -49,6 +49,7 @@ class ReportController < ApplicationController
     end
     
     @data = Applicant.join_job.filter_report_applicant(current_user.company_id, filter_by_job, filter_by_stage, filter_by_gender).group(time).count
+    # asfd
     respond_to do |format|
       format.html
       format.js { render 'report/filter_report' }

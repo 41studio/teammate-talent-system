@@ -29,7 +29,7 @@ module API
         end
 
         def field_on_schedule_form
-          present :assignee, User.by_company_id(current_user.company_id), with: API::V1::Entities::UserEntity, only: [:id, :fullname]
+          present :assignee, User.by_company_id(current_company), with: API::V1::Entities::UserEntity, only: [:id, :fullname]
           present :category_collection, Schedule.new, with: API::V1::Entities::ScheduleEntity, only: [:category_valid]
         end
 

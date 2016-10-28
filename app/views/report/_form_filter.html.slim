@@ -31,7 +31,7 @@
 			- @jobs.each do |job|
 				.input-group
 					label
-						= check_box_tag "filter_by_job[#{job.id}]", job.job_title, false, class: 'filter_by_job'
+						= check_box_tag "filter_by_job[#{job.id}]", job.id, false, class: 'filter_by_job'
 						= job.job_title
 	.panel.panel-default
 		.panel-body

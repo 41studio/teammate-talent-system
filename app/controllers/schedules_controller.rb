@@ -25,23 +25,23 @@ class SchedulesController < ApplicationController
     if params[:by_active_job].present?
       active_job = params[:by_active_job]
     else
-      active_job = @jobs.get_job_ids
+      active_job = @jobs.ids
     end
 
     @applicants = Applicant.by_job_ids(active_job)
     if params[:by_applicant].present?
       applicants = params[:by_applicant]
     else
-      applicants = @applicants.get_applicant_ids
+      applicants = @applicants.ids
     end
 
-    @assignee = User
+    # @assignee = User
     if params[:by_activity].present?
       categories = params[:by_activity]
     else
       categories = @category_collection
     end
-
+    
     @schedules = current_user.get_schedules.where("jobs.id IN (?) AND applicants.id IN (?) AND category IN (?)", active_job, applicants, categories)
     respond_to do |format|
       format.js

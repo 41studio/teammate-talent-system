@@ -44,7 +44,7 @@
         p = "You must create company first"
 - content_for :javascript_in_file do
   javascript:
-    $("#by_active_job, #by_applicant, #by_activity").on('click', function(){
+    $("#by_active_job, #by_applicant, #by_activity").on('change', function(){
       console.log($('.form_filter').serialize());
       $.ajax({
         url: Routes.company_schedules_path("#{current_user.company_id}"),

@@ -84,8 +84,8 @@ module API
         params do
           requires :user, type: Hash do
             use :user_params
-            requires :password                          ,type: String, desc: "User password", allow_blank: false
-            requires :password_confirmation             ,type: String, desc: "User password confirmation", allow_blank: false
+            requires :password               ,type: String, desc: "User password", allow_blank: false
+            requires :password_confirmation  ,type: String, desc: "User password confirmation", allow_blank: false
           end
         end        
         post '/sign_up' do
