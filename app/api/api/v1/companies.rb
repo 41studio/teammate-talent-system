@@ -252,6 +252,8 @@ module API
         get '/report' do
             time = "#{params[:by_period][:period]}(applicants.created_at)"
             # byebug
+              # def self.filter_report_applicant(company_id, job_id, applicant_status, applicant_gender)
+
             Applicant.join_job.filter_report_applicant(@company, params[:by_jobs][:job], params[:by_stages][:stage], params[:by_consideration][:consideration]).group(time).count
         end        
 

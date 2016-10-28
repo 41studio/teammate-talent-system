@@ -26,11 +26,30 @@ module API
       resource :applicants do
         segment '/:applicant_id' do
           resource :comments do
-	        before do
-	        	authenticate!
-	        	set_applicant
-	        	applicant_valid
-	        end
+  	        before do
+  	        	authenticate!
+  	        	set_applicant
+  	        	applicant_valid
+  	        end
+
+            desc "Comments List Applicant" do
+              detail ' : applicant commented by user (create comment)'
+              named 'comments'
+              headers token: {
+                      description: 'Validates user identity by token',
+                      required: true
+                    }
+            end
+            params do
+              use :applicant_id
+            end        
+            get '/all' do
+              begin
+                present :comments, @applicant.comment_threads, with: API::V1::Entities::CommentEntity, except: [{ user: [:id, :first_name, :last_name, :email, :joined_at, :token] }]
+              rescue ActiveRecord::RecordNotFound
+                record_not_found_message
+              end 
+            end
 
             desc "Comment Applicant" do
               detail ' : applicant commented by user (create comment)'

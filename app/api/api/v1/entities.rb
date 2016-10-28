@@ -29,13 +29,13 @@ module API
 	  		expose :resume
 	  		expose :photo
 	  		expose :educations, using: "API::V1::Entities::EducationEntity", as: :educations 
-	  		expose :experiences, using: "API::V1::Entities::ExperienceEntity", as: :experiences 
-			expose :comment_threads, using: "API::V1::Entities::CommentEntity", as: :comments
+	  		expose :experiences, using: "API::V1::Entities::ExperienceEntity", as: :experiences
 	  	end
 
 	  	class CommentEntity < Grape::Entity
 	  		expose :user, using: "API::V1::Entities::UserEntity"
 	  		expose :body
+	  		expose :created_at, format_with: :timestamp
 	  	end
 
 	  	class EducationEntity < Grape::Entity

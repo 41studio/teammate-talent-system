@@ -24,16 +24,12 @@ class ReportController < ApplicationController
       filter_by_stage = ["applied","phone_screen","interview","offer","hired"]
     end
 
-    if params[:filter_by_consideration] && params[:filter_by_consideration].values == "disqualified"
-      filter_by_stage = params[:filter_by_consideration].values
+    if params[:filter_by_stage]
+      filter_by_stage = params[:filter_by_stage].values
+    elsif params[:filter_by_consideration].present? && params[:filter_by_consideration].values == ["disqualified"]
+      filter_by_stage = ["disqualified"]
     else
-      if params[:filter_by_stage]
-        filter_by_stage = params[:filter_by_stage].values
-      elsif params[:filter_by_consideration].present? && params[:filter_by_consideration].values == ["disqualified"]
-        filter_by_stage = ["disqualified"]
-      else
-        filter_by_stage = ["applied","phone_screen","interview","offer","hired"]
-      end
+      filter_by_stage = Applicant::STATUSES.map{|key, val| key.to_s}
     end
     
     if params[:filter_by_job]
