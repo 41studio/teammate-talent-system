@@ -37,14 +37,15 @@ class Applicant < ActiveRecord::Base
 
 	EMAIL_REGEX = /\A[\w]([^@\s,;]+)@(([\w-]+\.)+(com|edu|org|net|gov|mil|biz|info|co.id))\z/i
 
-	validates :gender, :date_birth, :email, :phone, :address, :photo, :resume,  presence: true
-	validates :name, length: {in: 2..70}
+	validates :gender, :date_birth, :headline, :address, :photo, :resume,  presence: true
+	validates :name, presence: true, length: {in: 2..70}
+	validates :phone, presence: true, length: {in: 10..16}
 	# validates :gender, inclusion: { in: %w(Male Female), message: "%{value} is not a gender"}
 	validates :phone, numericality: true
-	validate :applicant_statuses
-	validates_processing_of :photo
-	validate :image_size_validation
 	validates :email, presence: true, uniqueness: true, format: {with: EMAIL_REGEX}
+	validates_processing_of :photo
+	validate :applicant_statuses
+	validate :image_size_validation
 
 	validates_processing_of :resume
 	validate :resume_size_validation

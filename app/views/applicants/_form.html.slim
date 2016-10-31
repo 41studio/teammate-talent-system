@@ -9,6 +9,7 @@
   .form-group
     = f.label :name, class: 'control-label'
     = f.text_field :name, class: 'form-control'
+    strong#applicant-name-status
   .form-group
     = f.label :gender, class: 'control-label'
     br
@@ -74,8 +75,48 @@
     = f.submit "Submit", data: { confirm: "Are you sure you want to submit this form ?" }, class: 'btn btn-primary'
 - content_for :javascript_in_file do
   javascript:
-    $(function () {
+    $(document).ready(function(){
       $('#datetimepicker1').datetimepicker({
         format: 'DD-MM-YYYY'
       });
-     });
+      $('#applicant_email, #applicant_name, #applicant_date_birth, #applicant_headline, #applicant_phone, #applicant_address').focus(function(){
+        var length = this.value.length;
+        if (length == 0){
+          $(this).parent(".form-group").removeClass("has-success has-feedback").addClass("has-error");
+        } else{
+          $(this).parent(".form-group").removeClass("has-error").addClass("has-success has-feedback");
+        }
+      });
+      $('#applicant_email, #applicant_address').keyup(function(){
+        var length = this.value.length;
+        if (length > 0){
+          $(this).parent(".form-group").removeClass("has-error").addClass("has-success has-feedback");
+        } else{
+          $(this).parent(".form-group").removeClass("has-success has-feedback").addClass("has-error");
+        }
+      });
+      $('#applicant_name').keyup(function(){
+        var length = this.value.length;
+        if (length > 2 && length < 70){
+          $(this).parent(".form-group").removeClass("has-error").addClass("has-success has-feedback");
+        } else{
+          $(this).parent(".form-group").removeClass("has-success has-feedback").addClass("has-error");
+        }
+      });
+      $('#applicant_headline').keyup(function(){
+        var length = this.value.length;
+        if (length > 15 ){
+          $(this).parent(".form-group").removeClass("has-error").addClass("has-success has-feedback");
+        } else{
+          $(this).parent(".form-group").removeClass("has-success has-feedback").addClass("has-error");
+        }
+      });
+      $('#applicant_phone').keyup(function(){
+        var length = this.value.length;
+        if (length >= 10 ){
+          $(this).parent(".form-group").removeClass("has-error").addClass("has-success has-feedback");
+        } else{
+          $(this).parent(".form-group").removeClass("has-success has-feedback").addClass("has-error");
+        }
+      });
+    });
