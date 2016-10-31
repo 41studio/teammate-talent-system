@@ -29,8 +29,9 @@
             .form-group
               = label_tag 'by_active_job', 'By Active Job'
               = select_tag 'by_active_job', options_from_collection_for_select(@jobs, "id", "job_title"), include_blank: "-- All active job --", class: 'form-control', id: 'by_active_job'
-            .form-group#applicant-select
-              = render 'schedules/applicant_select'
+            .form-group
+              = label_tag 'by_applicant', 'By Applicant'
+              = select_tag 'by_applicant', options_from_collection_for_select(@applicants, "id", "name"), include_blank: "-- All applicant --", class: 'form-control', id: 'by_applicant'
             .form-group
               = label_tag 'by_activity', 'By Activity'
               = select_tag 'by_activity',  options_for_select(@category_collection), include_blank: "-- All activity --", class: 'form-control', id: 'by_activity'
