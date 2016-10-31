@@ -12,6 +12,7 @@ module API
       mount API::V1::Applicants
       mount API::V1::Users
       mount API::V1::Schedules
+      mount API::V1::Comments
 
       add_swagger_documentation \
         mount_path: '/swagger_doc',

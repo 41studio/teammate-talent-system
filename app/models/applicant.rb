@@ -68,8 +68,8 @@ class Applicant < ActiveRecord::Base
 		joins(:job).where(jobs: {id: job_id, company_id: company_id}, applicants: {status: status})
 	end
 
-	def self.filter_report_applicant(company_id, job_title, applicant_status, applicant_gender)
-		where("jobs.company_id IN (?) and jobs.job_title IN (?) and applicants.status IN (?) and applicants.gender IN (?)", company_id, job_title, applicant_status, applicant_gender )
+	def self.filter_report_applicant(company_id, job_id, applicant_status, applicant_gender)
+		where("jobs.company_id IN (?) and jobs.id IN (?) and applicants.status IN (?) and applicants.gender IN (?)", company_id, job_id, applicant_status, applicant_gender )
 	end
 
 	def self.filter_applicant(job_id, time, gender, status, job_title)
@@ -88,7 +88,7 @@ class Applicant < ActiveRecord::Base
 	private
 		scope :by_company_id, -> (company_id) { self.joins(:job).where(jobs: {company_id: company_id}) }
 		scope :by_job_ids, -> (job_ids) { self.joins(:job, :schedules).where(jobs: {id: job_ids}).group(:id) }
-		scope :get_applicant_ids, -> { self.ids }
+
 		def applicant_statuses
 			if STATUSES.has_key? self.status.to_sym && self.status != DISQUALIFIED
 				errors[:status] << "not available" 

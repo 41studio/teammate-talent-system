@@ -11,39 +11,31 @@ module API
         end
 
         def applicant_params
-          applicant_param = ActionController::Parameters.new(params).require(:applicants).permit(:job_id, :name, :gender, :date_birth, :email, :headline, :phone, :address, photo: [:filename, :type, :name, :tempfile, :head], resume: [:filename, :type, :name, :tempfile, :head], educations_attributes: [:name_school, :field_study, :degree], experiences_attributes: [:name_company, :industry, :title, :summary])
+          applicant_param = ActionController::Parameters.new(params).require(:applicant).permit(:job_id, :name, :gender, :date_birth, :email, :headline, :phone, :address, photo: [:filename, :type, :name, :tempfile, :head], resume: [:filename, :type, :name, :tempfile, :head], educations_attributes: [:name_school, :field_study, :degree], experiences_attributes: [:name_company, :industry, :title, :summary])
 
-          if params.applicants.educations_attributes.present?
-            params.applicants.educations_attributes.each do |key, val|
-              applicant_param["educations_attributes"]["#{key}"] = params.applicants.educations_attributes[key]
+          if params.applicant.educations_attributes.present?
+            params.applicant.educations_attributes.each do |key, val|
+              applicant_param["educations_attributes"]["#{key}"]  = params.applicant.educations_attributes[key]
             end
           end
           
-          if params.applicants.experiences_attributes.present?
-            params.applicants.experiences_attributes.each do |key, val|
-              applicant_param["experiences_attributes"]["#{key}"] = params.applicants.experiences_attributes[key]
+          if params.applicant.experiences_attributes.present?
+            params.applicant.experiences_attributes.each do |key, val|
+              applicant_param["experiences_attributes"]["#{key}"] = params.applicant.experiences_attributes[key]
             end
           end
 
-          applicant_param["photo"] = ActionDispatch::Http::UploadedFile.new(params.applicants.photo) if params.applicants.photo.present? 
-          applicant_param["resume"] = ActionDispatch::Http::UploadedFile.new(params.applicants.resume) if params.applicants.resume.present?
+          applicant_param["photo"]  = ActionDispatch::Http::UploadedFile.new(params.applicant.photo) if params.applicant.photo.present? 
+          applicant_param["resume"] = ActionDispatch::Http::UploadedFile.new(params.applicant.resume) if params.applicant.resume.present?
           applicant_param
         end
 
-        def applicant
-          Applicant.find(params[:id])
+        def set_applicant
+          @applicant = Applicant.find(params[:id])
         end
-        
-        def schedule_params
-          ActionController::Parameters.new(params).require(:schedule).permit(:start_date, :end_date, :category)
-        end
-
-        def comment_params
-          ActionController::Parameters.new(params).permit(:body)
-        end   
 
         def error_message
-          error!({ status: :error, message: applicant.errors.full_messages.first }) if applicant.errors.any?
+          error!({ status: :error, message: @applicant.errors.full_messages.first }) if @applicant.errors.any?
         end       
       end
 
@@ -51,162 +43,143 @@ module API
         before do
           unless request.path.include?("applicants/create")
             authenticate!
+            set_applicant
             applicant_valid
           end
         end
 
-        desc "Create Applicant", {
-          :notes => <<-NOTE
-          Create Applicant, save process (save)
-          -------------------------------------
-          NOTE
-        }
+        desc "Create Applicant" do
+          detail ' : create process (save)'
+          params API::V1::Entities::ApplicantEntity.documentation
+          named 'applicants'
+        end
         params do
-          requires :applicants, type: Hash do
-            requires :job_id, type: String, allow_blank: false
-            requires :name, type: String, allow_blank: false
-            requires :gender, type: String, allow_blank: false
-            requires :date_birth, type: String, allow_blank: false
-            requires :email, type: String, allow_blank: false
-            requires :headline, type: String, allow_blank: false
-            requires :phone, type: String, allow_blank: false
-            requires :address, type: String, allow_blank: false
-            optional :educations_attributes, type: Hash do
+          group :applicant, type: Hash do
+            requires :job_id,     type: String, regexp: /^[0-9]/, desc: 'Job id',                                   allow_blank: false
+            requires :name,       type: String, desc: 'Applicant name',                           allow_blank: false
+            requires :gender,     type: String, values: { value: ['Male', 'Female'], message: 'not valid' }, 
+                                                desc: 'Applicant gender',                         allow_blank: false
+            requires :date_birth, type: Date,   desc: 'Applicant date birth',                     allow_blank: false
+            requires :email,      type: String, regexp: /.+@.+/,  desc: 'Applicant email',        allow_blank: false
+            requires :headline,   type: String, desc: 'Applicant headline',                       allow_blank: false
+            requires :phone,      type: String, regexp: /^[0-9]/, desc: 'Applicant phone number', allow_blank: false
+            requires :address,    type: String, desc: 'Applicant address',                        allow_blank: false
+            group :educations_attributes, type: Hash do
               optional :"#{0}", type: Hash do
-                optional :name_school, type: String
-                optional :field_study, type: String
-                optional :degree, type: String
+                optional :name_school, type: String, desc: 'School name'
+                optional :field_study, type: String, desc: 'Field study'
+                optional :degree,      type: String, desc: 'School degree'
               end
             end
-            optional :experiences_attributes, type: Hash do
-              optional :"#{0}" , type: Hash do
-                optional :name_company, type: String
-                optional :industry, type: String
-                optional :title, type: String
-                optional :summary, type: String
+            group :experiences_attributes, type: Hash do
+              optional :"#{0}", type: Hash do
+                optional :name_company, type: String, desc: 'Company Name '
+                optional :industry,     type: String, desc: 'Company industry'
+                optional :title,        type: String, desc: 'Experience title'
+                optional :summary,      type: String, desc: 'Experience summary'
               end
             end
-            requires :photo, type: File, desc: "Applicant photo", allow_blank: false
+            requires :photo,  type: File, desc: "Applicant photo",  allow_blank: false
             requires :resume, type: File, desc: "Applicant resume", allow_blank: false
           end
         end
         post '/create' do
-          job = Job.find(params.applicants.job_id)
-          applicant = job.applicants.new(applicant_params)
-          applicant.status = "applied"
-          if applicant.save!
-            { status: :success }
+          job = Job.find(params.applicant.job_id)
+          @applicant = job.applicants.new(applicant_params)
+          @applicant.status = "applied"
+          if @applicant.save!
+            { status: "Applying success" }
           else
             error_message
           end
         end 
 
-        desc "Applicant By  Id", {
-          :notes => <<-NOTE
-          Get Applicant  By Id
-          ---------------------
-          NOTE
-        }
+        desc "Applicant detail" do
+          detail ' : show applicant by id'
+          named 'applicants'
+          headers token: {
+                  description: 'Validates user identity by token',
+                  required: true
+                }
+        end
         params do
           use :applicant_id       
         end
         get ":id/detail" do
           begin 
-            present :applicant, applicant, with: API::V1::Entities::ApplicantEntity, except: [ { educations: [:id], experiences: [:id], comments:  [ user: [:id, :first_name, :last_name, :email, :joined_at] ] }]
+            present :applicant, @applicant, with: API::V1::Entities::ApplicantEntity, except: [ { educations: [:id], experiences: [:id], comments:  [ user: [:id, :first_name, :last_name, :email, :joined_at, :token] ] }]
           rescue ActiveRecord::RecordNotFound
             record_not_found_message
           end
         end
 
-        desc "Edit Status", {
-          :notes => <<-NOTE
-          Edit Status applicant, for applicant edit status form (edit)
-          -------------------------------------------------------------
-          NOTE
-        }
+        desc "Edit Status" do
+          detail ' : edit status form (edit)'
+          named 'applicants'
+          headers token: {
+                  description: 'Validates user identity by token',
+                  required: true
+                }
+        end
         params do
           use :applicant_id
         end
         get ':id/edit_status' do
           present Applicant::STATUSES, root: 'applicant_statuses'
-          present :applicant, applicant, with: API::V1::Entities::ApplicantEntity, only: [:status]
+          present :applicant, @applicant, with: API::V1::Entities::ApplicantEntity, only: [:status]
         end
 
-        desc "Update Status Applicant By Id", {
-          :notes => <<-NOTE
-          Update Applicant By Id
-          ----------------------- 
-          NOTE
-        }
+        desc "Update Status Applicant" do
+          detail ' : update applicant status process (update)'
+          named 'applicants'
+          headers token: {
+                  description: 'Validates user identity by token',
+                  required: true
+                }
+        end
         params do
           use :applicant_id
-          requires :status        ,type: String, values: { value: Applicant::STATUSES.map{|key, val| key.to_s}, message: 'not valid' }, desc: "Applicant status"
+          requires :status, type: String, values: { value: Applicant::STATUSES.map{|key, val| key.to_s}, message: 'not valid' }, desc: "Applicant status"
         end
         put ':id/update_status/' do
           begin
-            unless applicant.status == Applicant::DISQUALIFIED
-              if applicant.update_attribute(:status, params[:status])
-                { status: :success }
+            unless @applicant.status == Applicant::DISQUALIFIED
+              if @applicant.update_attribute(:status, params[:status])
+                { status: "Applicant status updated" }
               else
-                error!({ status: :error, message: applicant.errors.full_messages.first }) if applicant.errors.any?
+                error_message
               end
             else
-              { status: :this_applicant_cannot_do_any_changes }
+              { status: "This applicant cannot do any changes" }
             end
-       
           rescue ActiveRecord::RecordNotFound
             record_not_found_message
           end
         end
 
-        desc "Disqualified Applicant", {
-          :notes => <<-NOTE
-          Update status to disqualified
-          -----------------------------
-          NOTE
-        }
+        desc "Disqualified Applicant" do
+          detail ' : update applicant status to disqualified process (update)'
+          named 'applicants'
+          headers token: {
+                  description: 'Validates user identity by token',
+                  required: true
+                }
+        end
         params do
           use :applicant_id
         end
         put ':id/disqualified/' do
           begin
-            if applicant.update_attribute(:status, Applicant::DISQUALIFIED)
-              { status: :applicant_disqualified }
+            if @applicant.update_attribute(:status, Applicant::DISQUALIFIED)
+              { status: "Applicant disqualified" }
             else
-              error!({ status: :error, message: applicant.errors.full_messages.first }) if applicant.errors.any?
+              error_message
             end
-     
           rescue ActiveRecord::RecordNotFound
             record_not_found_message
           end
         end
 
-        desc "Comment Applicant", {
-          :notes => <<-NOTE
-          User Comment Applicant
-          ----------------------
-          NOTE
-        }
-        params do
-          use :applicant_id
-          requires :body, type: String, allow_blank: false
-        end        
-        post ':id/comment/new' do
-          begin
-            if applicant
-              # byebug
-              comments = Comment.build_from(applicant, current_user.id, comment_params[:body])
-              if comments.save!
-                { status: :success }
-              else
-                error!({ status: :error, message: comments.errors.full_messages.first }) if comments.errors.any?
-              end
-            end
-
-          rescue ActiveRecord::RecordNotFound
-            record_not_found_message
-          end 
-        end 
       end #end resource
     end
   end

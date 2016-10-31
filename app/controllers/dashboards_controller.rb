@@ -30,10 +30,10 @@ class DashboardsController < ApplicationController
       
       if params[:filter_by_stage]
         filter_by_stage = params[:filter_by_stage].values
-      elsif params[:filter_by_consideration].present? && params[:filter_by_consideration].values == ["disqualified"]
-        filter_by_stage = ["disqualified"]
+      elsif params[:filter_by_consideration].present? && params[:filter_by_consideration].values == Applicant::DISQUALIFIED
+        filter_by_stage = Applicant::DISQUALIFIED
       else
-        filter_by_stage = ["applied","phone_screen","interview","offer","hired"]
+        filter_by_stage = Applicant::STATUSES.map{|key, val| key.to_s}
       end
     
       if params[:filter_by_gender]
