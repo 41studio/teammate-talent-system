@@ -85,11 +85,11 @@ gem 'jquery-ui-rails'
 
 ## gem for chart
 gem 'chartkick'
+
 gem 'nprogress-rails'
 gem 'friendly_id', '~> 5.1.0'
 gem 'dotenv-rails'
 gem 'momentjs-rails', '>= 2.9.0'
-# gem 'country_state_select'
 
 ## API
 gem 'simple_token_authentication', '~> 1.0'
@@ -97,6 +97,10 @@ gem 'grape'
 gem 'grape-entity', github: 'intridea/grape-entity'
 gem 'grape-swagger'
 gem 'grape-swagger-rails'
+
+## html to PDF
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary-edge'
 
 ## error catcher
 gem 'airbrake', '~> 5.0'
@@ -111,7 +115,7 @@ gem 'airbrake', '~> 5.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug'
+  gem 'pry'
 end
 
 group :development do
