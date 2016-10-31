@@ -96,7 +96,7 @@ gem 'simple_token_authentication', '~> 1.0'
 gem 'grape'
 gem 'grape-entity', github: 'intridea/grape-entity'
 gem 'grape-swagger'
-# gem 'grape-swagger-rails'
+gem 'grape-swagger-rails'
 
 ## html to PDF
 gem 'wicked_pdf'
