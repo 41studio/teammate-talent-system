@@ -52,7 +52,9 @@ module API
           unless request.path.include?("jobs/search")
             authenticate!
             set_jobs
-            set_job
+            unless request.path.include?("jobs/all")
+              set_job
+            end
           end
         end
 
@@ -69,7 +71,7 @@ module API
         end
         get '/all' do
           begin
-            present :jobs, jobs.order(status: :desc, created_at: :desc).page(params[:page]), with: API::V1::Entities::JobEntity, only: [:id, :job_title, :status, :created_at]
+            present :jobs, @jobs.order(status: :desc, created_at: :desc).page(params[:page]), with: API::V1::Entities::JobEntity, only: [:id, :job_title, :status, :created_at]
           rescue ActiveRecord::RecordNotFound
             record_not_found_message
           end          
