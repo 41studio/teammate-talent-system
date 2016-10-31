@@ -14,7 +14,6 @@ module API
         end
 
         def user_params
-          # byebug
           user_param = ActionController::Parameters.new(params).require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :current_password, :avatar)
           if params.user.avatar.present?
             user_param["avatar"] = ActionDispatch::Http::UploadedFile.new(params.user.avatar)
@@ -39,12 +38,10 @@ module API
           end
         end
 
-        desc "Login User", {
-          :notes => <<-NOTE
-          Get User By Login
-          -------------------
-          NOTE
-        }
+        desc "User's Login" do
+          detail " : user get token"
+          named 'users'
+        end
         params do
           requires :email                         ,type: String, desc: "User email"
           requires :password                      ,type: String, desc: "User password"
@@ -52,18 +49,18 @@ module API
         post '/login' do
           begin
             if user = User.authenticate_for_api(params[:email], params[:password])
-              # user.user_api(user)
               present user, with: API::V1::Entities::UserEntity, only: [:fullname, :email, :token]
             else
-              error_msg = 'Invalid Email or password.'
-              error!({ 'error_msg' => error_msg }, 401)
+              error!({ status: :error, message: "Invalid Email or Password" }, 401)
             end
           rescue ActiveRecord::RecordNotFound
             error!({status: :not_found}, 404)
           end 
         end
 
-        desc "Logout User" do
+        desc "User's Logout" do
+          detail " : destroy users's token"
+          named 'users'
           headers token: {
             description: 'Valdates your identity',
             required: true
@@ -75,12 +72,10 @@ module API
           end
         end
 
-        desc "User Registration", {
-          :notes => <<-NOTE
-          User Registration
-          -----------------
-          NOTE
-        }
+        desc "User's Registration" do
+          detail ' : create account (create)'
+          named 'users'
+        end
         params do
           requires :user, type: Hash do
             use :user_params
@@ -101,19 +96,21 @@ module API
           end 
         end       
         
-        desc "User Profile", {
-          # headers: { token: get_token }         
-        }
+        desc "User's Profile" do
+          named 'users'
+          headers token: {
+            description: 'Valdates your identity',
+            required: true
+          } 
+        end
         get '/profile' do
           present @user, with: API::V1::Entities::UserEntity, except: [:id, :fullname]
         end
 
-        desc "Forget Password", {
-          :notes => <<-NOTE
-          Sent reset password instructions
-          --------------------------------
-          NOTE
-        }
+        desc "Forget Password" do
+          detail ' : sent reset password instructions'
+          named 'users'
+        end
         params do
           requires :email                         ,type: String, desc: "User email"
         end
@@ -128,20 +125,25 @@ module API
         end
 
         desc "Edit User" do
-          # headers: { token: get_token }      
+          detail ' : edit user form (edit)'
+          named 'users'
+          headers token: {
+            description: 'Valdates your identity',
+            required: true
+          } 
         end
         get '/edit' do
-          present current_user, with: API::V1::Entities::UserEntity, except: [:id, :fullname, :token, :joined_at]
+          present @user, with: API::V1::Entities::UserEntity, except: [:id, :fullname, :token, :joined_at]
         end
 
-        desc "Update User", {
-          headers: {
-            "token" => {
-              desc: "Valdates your identity",
-              required: true
-            }
+        desc "Update User" do
+          detail ' : update process (update)'
+          named 'users'
+          headers token: {
+            description: 'Valdates your identity',
+            required: true
           } 
-        }
+        end
         params do
           requires :user, type: Hash do
             use :user_params
@@ -152,10 +154,9 @@ module API
             (we need your current password to confirm your changes) "
           end
         end
-        put '/update' do      
-          set_user
+        put '/update' do
           if @user.update_with_password(user_params)
-            { status: "Update Success" }
+            { status: "User Updates" }
           else
             error_message
           end

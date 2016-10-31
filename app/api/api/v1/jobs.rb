@@ -20,12 +20,8 @@ module API
           )
         end
 
-        def jobs
-          current_user.company.jobs
-        end
-
-        def job
-          jobs.find(params[:id]) 
+        def set_job
+          @job = @jobs.find(params[:id]) 
         end
         
         def field_on_job_form
@@ -47,7 +43,7 @@ module API
         end
 
         def error_message
-          error!({ status: :error, message: job.errors.full_messages.first }) if job.errors.any?
+          error!({ status: :error, message: @job.errors.full_messages.first }) if @job.errors.any?
         end        
       end
 
@@ -55,15 +51,19 @@ module API
         before do
           unless request.path.include?("jobs/search")
             authenticate!
+            set_jobs
+            set_job
           end
         end
 
-        desc "Job List", {
-          :notes => <<-NOTE
-          Get All Jobs by user's company (index)
-          --------------------------------------
-          NOTE
-        }
+        desc "Job List" do
+          detail ' : job list in company (show)'
+          named 'jobs'
+          headers token: {
+                  description: 'Validates user identity by token',
+                  required: true
+                }
+        end
         params do
           use :pagination
         end
@@ -75,12 +75,14 @@ module API
           end          
         end
 
-        desc "Job By Id", {
-          :notes => <<-NOTE
-          Detail Job by job id (show)
-          ---------------------------
-          NOTE
-        }
+        desc "Job Detail" do
+          detail ' : show job by id'
+          named 'jobs'
+          headers token: {
+                  description: 'Validates user identity by token',
+                  required: true
+                }
+        end
         params do
           use :job_id       
         end
@@ -92,113 +94,128 @@ module API
           end
         end
 
-        desc "New Job", {
-          :notes => <<-NOTE
-          New Job, for job form (new)
-          ---------------------------
-          NOTE
-        }
+        desc "New Job" do
+          detail ' : create job form (new)'
+          named 'jobs'
+          headers token: {
+                  description: 'Validates user identity by token',
+                  required: true
+                }
+        end
         get '/new' do
           field_on_job_form
         end
 
-        desc "Create Job", {
-          :notes => <<-NOTE
-          Create Job, save process (save)
-          -------------------------------
-          NOTE
-        }
+        desc "Create Job" do
+          detail ' : save job process (save)'
+          named 'jobs'
+          params API::V1::Entities::JobEntity.documentation
+          headers token: {
+                  description: 'Validates user identity by token',
+                  required: true
+                }
+        end
         post '/create' do
-          job = jobs.new(job_params)
-          # byebug
-          if job.save!
+          @job = jobs.new(job_params)
+          if @job.save!
             { status: :success }
           else
             error_message
           end
         end    
 
-        desc "Edit Job", {
-          :notes => <<-NOTE
-          Edit Job, for job form (edit)
-          ---------------------------
-          NOTE
-        }
+        desc "Edit Job" do
+          detail ' : edit job form (edit)'
+          named 'jobs'
+          headers token: {
+                  description: 'Validates user identity by token',
+                  required: true
+                }
+        end
         params do
           use :job_id
         end
         get ':id/edit' do
           begin
-            present :job, job, with: API::V1::Entities::JobEntity
+            present :job, @job, with: API::V1::Entities::JobEntity
             field_on_job_form
           rescue ActiveRecord::RecordNotFound
             record_not_found_message
           end
         end
 
-        desc "Update Job", {
-          :notes => <<-NOTE
-          Update Job, update process (update)
-          -----------------------------------
-          NOTE
-        }
+        desc "Update Job" do
+          detail ' : update process (update)'
+          named 'jobs'
+          params API::V1::Entities::JobEntity.documentation
+          headers token: {
+                  description: 'Validates user identity by token',
+                  required: true
+                }
+        end
         params do
           use :job_id
         end
         put ':id/update' do
-          if job.update(job_params)
-            { status: :update_success }
+          if @job.update(job_params)
+            { status: "Job updated" }
           else
             error_message
           end
         end 
 
-        desc "Delete Job", {
-          :notes => <<-NOTE
-          Destroy Job (destroy)
-          ---------------------
-          NOTE
-        }
+        desc "Delete Job" do
+          detail ' : destroy job process (destroy)'
+          named 'jobs'
+          headers token: {
+                  description: 'Validates user identity by token',
+                  required: true
+                }
+        end
         params do
           use :job_id
         end
         delete ':id/delete' do
           begin
-            if job.destroy!
-              { status: :delete_success }
+            if @job.destroy!
+              { status: "Job deleted" }
             end
           rescue ActiveRecord::RecordNotFound
             record_not_found_message
           end
         end
 
-        desc "Edit Status", {
-          :notes => <<-NOTE
-          Edit Status job, for job edit status form (edit)
-          ------------------------------------------------
-          NOTE
-        }
+        desc "Edit Job's Status" do
+          detail " : edit job's status form (edit)"
+          named 'jobs'
+          headers token: {
+                  description: 'Validates user identity by token',
+                  required: true
+                }
+        end
         params do
           use :job_id
         end
         get ':id/edit_status' do
           present Job::STATUSES, root: 'job_statuses'
-          present :job, job, with: API::V1::Entities::JobEntity, only: [:status]
+          present :job, @job, with: API::V1::Entities::JobEntity, only: [:status]
         end
 
-        desc "Update Status Job By Id", {
-          :notes => <<-NOTE
-          Update Status Job (update)
-          --------------------------
-          NOTE
-        }
+        desc "Update Job Status" do
+          detail " : update job's status process (update)"
+          named 'jobs'
+          headers token: {
+                  description: 'Validates user identity by token',
+                  required: true
+                }
+        end
         params do
           use :job_id
           requires :status ,type: String, values: { value: Job::STATUSES.map{|s| s.to_s}, message: 'not valid' }, desc: "Job status"
         end
         put ':id/update_status/' do
           begin
-            if job.update_attribute(:status, params[:status])
+            if @job.update_attribute(:status, params[:status])
               { status: :update_success }
             else
               error_message
@@ -208,12 +225,14 @@ module API
           end
         end
 
-        desc "Total of applicant", {
-          :notes => <<-NOTE
-          Total of applicant per status
-          ------------------------------
-          NOTE
-        }
+        desc "Total of applicant" do
+          detail ' : per status'
+          named 'jobs'
+          headers token: {
+                  description: 'Validates user identity by token',
+                  required: true
+                }
+        end
         params do
           use :job_id       
         end
@@ -221,7 +240,7 @@ module API
           begin
             statuses = {}
             Applicant::STATUSES.each do |status, val|
-              statuses[status.to_s.underscore] = job.applicants.where(status: status).size.to_s
+              statuses[status.to_s.underscore] = @job.applicants.where(status: status).size.to_s
             end
             # present statuses, root: 'applicant_statuses'
             # present :applicants, job.applicants.where(status: "applied"), with: API::V1::Entities::ApplicantEntity
@@ -231,12 +250,14 @@ module API
            end
         end
 
-        desc "Applicant list by status", {
-          :notes => <<-NOTE
-          Get Job By Id with applicants group by status
-          --------------------------------------------
-          NOTE
-        }
+        desc "Applicant list by status" do
+          detail ' : applicants group by status'
+          named 'jobs'
+          headers token: {
+                  description: 'Validates user identity by token',
+                  required: true
+                }
+        end
         params do
           use :job_id       
           use :pagination
@@ -244,19 +265,17 @@ module API
         end
         get ":id/applicants" do
           begin
-            applicants_with_status = job.applicants.where(status: params[:status])
+            applicants_with_status = @job.applicants.where(status: params[:status])
             present :applicants, applicants_with_status.page(params[:page]), with: API::V1::Entities::ApplicantEntity, except: [ { educations: [:id], experiences: [:id] }]
           rescue ActiveRecord::RecordNotFound
             record_not_found_message
            end
         end
 
-        desc "Search Job", {
-          :notes => <<-NOTE
-          Get Job By search keyword
-          --------------------------
-          NOTE
-        }
+        desc "Search Job" do
+          detail ' : by search keywords'
+          named 'jobs'
+        end
         params do
           use :pagination
           optional :q, type: Hash do
@@ -274,7 +293,6 @@ module API
         end
         get "/search" do
           @search = Job.search(params[:q])
-           
           params[:sort_by].present? ? @search.sorts = params[:sort_by].map{|k,v| "#{k.to_s} #{v.to_s}"} : @search.sorts = ['job_title asc', 'created_at desc']
           @jobs = @search.result.published_jobs
           @jobs ? search_jobs(@jobs, params[:page]) : { status: "No Jobs Related"}

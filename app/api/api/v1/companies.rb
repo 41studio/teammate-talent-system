@@ -1,7 +1,9 @@
 module API
   module V1
     class Companies < Grape::API
-      version 'v1' 
+      version 'v1', using: :path, vendor: 'teamhire'
+      # curl -X GET --header 'Accept: application/json' --header 'token: MzZs1v5js-Fw961nrWvh' 'http://localhost:3000/api/companies/detail'
+      # curl -X GET --header 'Accept: application/json' --header 'token: MzZs1v5js-Fw961nrWvh' 'http://localhost:3000/api/v1/companies/detail'
       format :json 
       helpers Helpers
 
@@ -29,14 +31,6 @@ module API
           present :industry_list, industry_list, with: API::V1::Entities::IndustryListEntity, only: [:industry]
         end     
 
-        def field_on_report_filter_form
-
-        end
-
-        def set_company
-          @company = current_user.company
-        end
-
         def error_message
           error!({ status: :error, message: @company.errors.full_messages.first }) if @company.errors.any?
         end
@@ -48,12 +42,14 @@ module API
           set_company
         end
 
-        desc "New Company", {
-          :notes => <<-NOTE
-          New Company, for Company form (new)
-          ----------------------------------
-          NOTE
-        }
+        desc "New Company" do
+          detail ' : create company form (new)'
+          named 'companies'
+          headers token: {
+                  description: 'Validates user identity by token',
+                  required: true
+                }
+        end
         get '/new' do
           field_on_company_form
         end
@@ -89,7 +85,6 @@ module API
 
         desc "Company detail" do
           detail ' : show company'
-          params API::V1::Entities::CompanyEntity.documentation
           named 'companies'
           headers token: {
                   description: 'Validates user identity by token',
@@ -149,9 +144,8 @@ module API
           end
         end 
 
-        desc "Users in company" do
+        desc "User List" do
           detail ' : users list in company (show)'
-          params API::V1::Entities::CompanyEntity.documentation
           named 'companies'
           headers token: {
                   description: 'Validates user identity by token',
@@ -194,7 +188,7 @@ module API
         end        
 
         desc "Company Agenda" do
-          detail ' : schedules list in company (show)'
+          detail ' : agenda list in company (show)'
           params API::V1::Entities::ScheduleEntity.documentation
           named 'schedules'
           headers token: {
@@ -219,7 +213,7 @@ module API
                 }
         end
         get '/report/filter' do
-          
+          field_on_filter_form
         end  
 
         desc "Applicant Report" do
@@ -233,28 +227,12 @@ module API
         end
         params do
           use :pagination
-          optional :by_period, type: Hash do
-            optional :period,   type: String,       values: { value: ['week','month', 'year'], message: 'not valid' }, desc: "Per Period"
-          end
-          optional :by_stages, type: Hash do
-            optional :stage, type: Array[String],  values: { value: Applicant::STATUSES.map{|key, val| key.to_s}, message: 'not valid' }, desc: "Applicant status" 
-          end
-          optional :by_jobs, type: Hash do
-            optional :job,   type: Array[Integer], desc: "Job id" 
-          end
-          optional :by_consideration, type: Hash do
-            optional :consideration,   type: Array[String], values: { value: ['qualified','disqualified'], message: 'not valid'}, desc: "Applicant consideration" 
-          end
-          optional :by_gender, type: Hash do
-            optional :gender,   type: Array[String], values: { value: ['Male','Female'], message: 'not valid'}, desc: "Applicant gender" 
-          end          
+          use :applicant_filter
         end
         get '/report' do
-            time = "#{params[:by_period][:period]}(applicants.created_at)"
-            # byebug
-              # def self.filter_report_applicant(company_id, job_id, applicant_status, applicant_gender)
-
-            Applicant.join_job.filter_report_applicant(@company, params[:by_jobs][:job], params[:by_stages][:stage], params[:by_consideration][:consideration]).group(time).count
+          set_applicant_filter_params
+          @report_filter = Applicant.join_job.filter_report_applicant(@company, @job, @stage, @gender).group(@period).count
+          @report_filter.present? ? @report_filter : { status: "No report for this condition"}
         end        
 
       end #end resource

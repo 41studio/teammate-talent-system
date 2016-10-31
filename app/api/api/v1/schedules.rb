@@ -41,33 +41,31 @@ module API
           @schedule = schedules.find(params[:id])
         end
 
-        def applicant
-          @applicant = Applicant.find(params[:applicant_id])
-        end
-
         def error_message
           error!({ status: :error, message: @schedule.errors.full_messages.first }) if @schedule.errors.any?
         end       
       end
 
       resource :applicants do
-        before do
-          authenticate!
-          applicant_valid
-          unless ["all", "new", "create", ].any? { |word| request.path.include?(word) }
-            set_schedule
-          end
-        end
-
         segment '/:applicant_id' do
           resource :schedules do
+            before do
+              authenticate!
+              set_applicant
+              applicant_valid
+              unless ["all", "new", "create", ].any? { |word| request.path.include?(word) }
+                set_schedule
+              end
+            end
 
-            desc "Schedule List", {
-              :notes => <<-NOTE
-              Get All Schedules by applicant_id (index)
-              -----------------------------------------
-              NOTE
-            }
+            desc "Schedule List" do
+              detail ' : schedules list on applicant'
+              named 'schedules'
+              headers token: {
+                      description: 'Validates user identity by token',
+                      required: true
+                    }
+            end
             params do
               use :pagination
             end
@@ -79,12 +77,14 @@ module API
               end          
             end
 
-            desc "New Schedule Applicant", {
-              :notes => <<-NOTE
-              Schedule Applicant Form (new)
-              -----------------------------
-              NOTE
-            }
+            desc "New Applicant's Schedule " do
+              detail " : applicant's schedule form (new)"
+              named 'schedules'
+              headers token: {
+                      description: 'Validates user identity by token',
+                      required: true
+                    }
+            end
             params do
               use :applicant_id
             end
@@ -92,30 +92,35 @@ module API
               field_on_schedule_form
             end 
 
-            desc "Create Schedule Applicant", {
-              :notes => <<-NOTE
-              Schedule Applicant create process (create)
-              -------------------------------------------
-              NOTE
-            }
+            desc "Create Schedule Applicant" do
+              detail ' : create process (save)'
+              params API::V1::Entities::ScheduleEntity.documentation
+              named 'schedules'
+              headers token: {
+                      description: 'Validates user identity by token',
+                      required: true
+                    }
+            end
             params do
               use :schedule
             end
             post '/create' do
-              @schedule = applicant.schedules.new(schedule_params)
+              @schedule = @applicant.schedules.new(schedule_params)
               if @schedule.save!
-                { status: :success }
+                { status: "Schedule created" }
               else
                 error_message
               end
             end
 
-            desc "Edit Schedule Applicant", {
-              :notes => <<-NOTE
-              Schedule applicant, for schedule edit form (edit)
-              -------------------------------------------------
-              NOTE
-            }
+            desc "Edit Schedule" do
+              detail ' : schedule edit form (edit)'
+              named 'schedules'
+              headers token: {
+                      description: 'Validates user identity by token',
+                      required: true
+                    }
+            end
             params do
               use :applicant_id
               use :schedule_id
@@ -125,12 +130,15 @@ module API
               field_on_schedule_form
             end     
 
-            desc "Update Schedule Applicant", {
-              :notes => <<-NOTE
-              Schedule Applicant update process (update)
-              -------------------------------------------
-              NOTE
-            }
+            desc "Update Schedule" do
+              detail ' : update process (update)'
+              # params API::V1::Entities::ScheduleEntity.documentation
+              named 'schedules'
+              headers token: {
+                      description: 'Validates user identity by token',
+                      required: true
+                    }
+            end
             params do
               use :applicant_id
               use :schedule_id
@@ -139,7 +147,7 @@ module API
             put ':id/update' do
               begin
                 if @schedule.update(schedule_params)
-                  { status: :update_success }
+                  { status: "Schedule updated" }
                 else
                   error_message
                 end
@@ -148,12 +156,14 @@ module API
               end
             end     
 
-            desc "Delete Schedule", {
-              :notes => <<-NOTE
-              Destroy Schedule (destroy)
-              ---------------------------
-              NOTE
-            }
+            desc "Delete Schedule" do
+              detail ' : destroy process (destroy)'
+              named 'schedules'
+              headers token: {
+                      description: 'Validates user identity by token',
+                      required: true
+                    }
+            end
             params do
               use :applicant_id
               use :schedule_id
@@ -164,7 +174,7 @@ module API
                   @schedule.send_canceled_notify_applicant_email
                 end                
                 if @schedule.destroy!
-                  { status: :delete_success }
+                  { status: "Schedule deleted" }
                 end
               rescue ActiveRecord::RecordNotFound
                 record_not_found_message

@@ -12,8 +12,8 @@ module API
       end
     end
 
-    def current_company
-      @current_company = current_user.company
+    def set_company
+      @company = current_user.company
     end
 
     def authenticate!
@@ -23,7 +23,29 @@ module API
     def applicant_valid
       error!("You don't have permission.", 401) unless @applicant.job.company.users.include?current_user
     end
-    
+  
+    def field_on_filter_form
+      set_jobs
+      present :by_period, Applicant::PERIOD, root: 'period'
+      present :by_stages, Applicant.applicant_statuses, root: 'stage'
+      present :by_jobs, @jobs.order(created_at: :desc, job_title: :asc), with: API::V1::Entities::JobEntity, only: [:id, :job_title]
+      present :by_consideration, ['qualified','disqualified'], root: 'consideration'
+      present :by_gender, ['Male','Female'], root: 'gender'
+    end    
+
+    def set_jobs
+      set_company
+      @jobs = @company.jobs
+    end
+
+    def set_applicant
+      @applicant = Applicant.find(params[:id])
+    end
+
+		def record_not_found_message
+			error!({status: :not_found}, 404)
+		end
+
     Grape::Entity.format_with :timestamp do |date|
       date.strftime('%m/%d/%Y - %l:%M %p')
     end
@@ -33,9 +55,31 @@ module API
       optional :per_page     ,type: Integer, desc: "Total per page for pagination"
     end
 
-		def record_not_found_message
-			error!({status: :not_found}, 404)
-		end
+    params :applicant_filter do
+      optional :by_period, type: Hash do
+        optional :period,  type: String, values: { value: Applicant::PERIOD, message: 'not valid' }, desc: "Per Period"
+      end
+      optional :by_stages, type: Hash do
+        optional :stage,   type: Array[String], values: { value: Applicant.applicant_statuses, message: 'not valid' }, desc: "Applicant status" 
+      end
+      optional :by_jobs, type: Hash do
+        optional :job,   type: Array[Integer], desc: "Job ids" 
+      end
+      optional :by_consideration, type: Hash do
+        optional :consideration, type: Array[String], values: { value: ['qualified','disqualified'], message: 'not valid'}, desc: "Applicant consideration" 
+      end
+      optional :by_gender, type: Hash do
+        optional :gender,  type: Array[String], values: { value: ['Male','Female'], message: 'not valid'}, desc: "Applicant gender" 
+      end          
+    end
+
+    def set_applicant_filter_params
+      set_jobs
+      @period = params[:by_period].present? ? "#{params[:by_period][:period]}(applicants.created_at)" : "date(applicants.created_at)" 
+      @stage = params[:by_stages].present? ? params[:by_stages][:stage] : Applicant.applicant_statuses 
+      @job = params[:by_jobs].present? ? params[:by_jobs][:job] : @jobs.published_and_closed_jobs.ids
+      @gender = params[:by_gender].present? ? params[:by_gender][:gender] : ['Male','Female']
+    end
 
     end #end helpers module
   end
