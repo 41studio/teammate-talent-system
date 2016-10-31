@@ -26,5 +26,9 @@ module Teamhire
     config.time_zone = 'Jakarta'
     config.active_record.default_timezone = :local
     config.active_job.queue_adapter = :sidekiq
+
+    # API
+    config.paths.add File.join('app', 'api'), glob: File.join('**', '*.rb')
+    config.autoload_paths += Dir[Rails.root.join('app', 'api', '*')]
   end
 end

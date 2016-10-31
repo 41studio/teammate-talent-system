@@ -34,6 +34,6 @@ Rails.application.routes.draw do
 
   mount API::Root => '/'
   mount Sidekiq::Web => '/sidekiq'
-  mount GrapeSwaggerRails::Engine, at: "/swagger-ui"
+  mount GrapeSwaggerRails::Engine, at: "api/swagger-ui"
 
 end
