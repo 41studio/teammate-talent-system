@@ -28,7 +28,7 @@ class SchedulesController < ApplicationController
       active_job = @jobs.ids
     end
 
-    @applicants = Applicant.by_job_ids(active_job)
+    @applicants = Applicant.total_applicant(current_user.company.id, @jobs)
     if params[:by_applicant].present?
       applicants = params[:by_applicant]
     else

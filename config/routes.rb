@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     get '/jobs/:id/:status', to: 'jobs#upgrade_status', as:'upgrade_status'
     post '/invite_personnel', to: 'companies#invite_personnel', as: 'invite_personnel'
     resources :report, only: [:index]
+    get 'report/download_report', to: 'report#download_report', as: 'report_download'
   end
   # post '/companies/:id/invite_personnel', to: 'companies#invite_personnel', as: 'invite_personnel'
   get '/applicants' => "dashboards#applicant", as: 'applicant'

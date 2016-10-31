@@ -1,0 +1,11 @@
+br
+h3 Main Content Report
+h3
+	= "Report From #{current_user.company.company_name}"
+.container
+	.row
+		.col-md-12
+			#container
+				= line_chart data, xtitle: @x_title, ytitle: 'Applicant'
+				center
+					p Applicant Data Chart

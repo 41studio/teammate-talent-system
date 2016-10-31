@@ -7,6 +7,9 @@
 		.col-md-9
 			h3 Report
 			hr
+			.row
+				.col-md-12
+					= link_to "Download Report", company_report_download_path(current_user.company_id, format: :pdf)
 			#line_chart
 				= render 'report/line_chart'
 			br
