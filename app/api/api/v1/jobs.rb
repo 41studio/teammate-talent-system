@@ -52,7 +52,9 @@ module API
           unless request.path.include?("jobs/search")
             authenticate!
             set_jobs
-            set_job
+            unless request.path.include?("jobs/all")
+              set_job
+            end
           end
         end
 
