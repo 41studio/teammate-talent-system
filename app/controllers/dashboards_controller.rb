@@ -27,25 +27,25 @@ class DashboardsController < ApplicationController
       else
         @time = Applicant.get_first_created_applicant.map(&:created_at)
       end
-      
+
       if params[:filter_by_stage]
         filter_by_stage = params[:filter_by_stage].values
-      elsif params[:filter_by_consideration].present? && params[:filter_by_consideration].values == Applicant::DISQUALIFIED
-        filter_by_stage = Applicant::DISQUALIFIED
+      elsif params[:filter_by_consideration].present? && params[:filter_by_consideration].values == ["disqualified"]
+        filter_by_stage = ["disqualified"]
       else
-        filter_by_stage = Applicant::STATUSES.map{|key, val| key.to_s}
-      end
-    
-      if params[:filter_by_gender]
-        filter_by_gender = params[:filter_by_gender].values
-      else
-        filter_by_gender = ["Male","Female"]
+        filter_by_stage = Applicant.applicant_statuses
       end
       
       if params[:filter_by_job]
         filter_by_job = params[:filter_by_job].values
       else
-        filter_by_job = @jobs.select(:job_title)
+        filter_by_job = @jobs
+      end
+      
+      if params[:filter_by_gender]
+        filter_by_gender = params[:filter_by_gender].values
+      else
+        filter_by_gender = ["Male","Female"]
       end
 
       @search = Applicant.search(params[:q])

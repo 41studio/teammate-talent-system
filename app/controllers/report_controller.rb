@@ -1,6 +1,6 @@
 class ReportController < ApplicationController
   def index
-    @jobs = current_user.company.jobs.published_jobs
+    @jobs = current_user.company.jobs.published_and_closed_jobs.ids
     if params[:filter_by]
       case params[:filter_by]
       when "week"
@@ -17,25 +17,19 @@ class ReportController < ApplicationController
       time = 'date(applicants.created_at)'
       @x_title = "Date"
     end
-    
-    if params[:filter_by_stage]
-      filter_by_stage = params[:filter_by_stage].values
-    else
-      filter_by_stage = ["applied","phone_screen","interview","offer","hired"]
-    end
 
     if params[:filter_by_stage]
       filter_by_stage = params[:filter_by_stage].values
     elsif params[:filter_by_consideration].present? && params[:filter_by_consideration].values == ["disqualified"]
       filter_by_stage = ["disqualified"]
     else
-      filter_by_stage = Applicant::STATUSES.map{|key, val| key.to_s}
+      filter_by_stage = Applicant.applicant_statuses
     end
     
     if params[:filter_by_job]
       filter_by_job = params[:filter_by_job].values
     else
-      filter_by_job = @jobs.job_title
+      filter_by_job = @jobs
     end
     
     if params[:filter_by_gender]
