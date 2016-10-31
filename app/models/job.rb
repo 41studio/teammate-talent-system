@@ -146,8 +146,8 @@ class Job < ActiveRecord::Base
 		where(status: "closed")
 	end
 
-	def self.published_or_closed_jobs
-		where("jobs.status IN (?)", ["published","closed"])
+	def self.published_and_closed_jobs
+		where("jobs.status != \"draft\"")
 	end
 	
 	# def self.job_title

@@ -1,20 +1,13 @@
 = form_tag nil, class: 'form_filter'
 	.panel.panel-default
 		.panel-body
-			p By Date
+			p By Period
 			hr
-			.input-group
-				label
-					= radio_button_tag 'filter_by', 'week', false, class: 'filter_by_time'
-					= label_tag 'last_week', 'Week'
-			.input-group
-				label
-					= radio_button_tag 'filter_by', 'month', false, class: 'filter_by_time'
-					= label_tag 'last_week', 'Month'
-			.input-group
-				label
-					= radio_button_tag 'filter_by', 'year', false, class: 'filter_by_time'
-					= label_tag 'last_week', 'Year'
+			- Applicant::PERIOD.each do |period|
+				.input-group
+					label
+						= radio_button_tag 'filter_by', period, false, class: 'filter_by_time'
+						= label_tag "last_#{period}", period.titleize
 	.panel.panel-default
 		.panel-body
 			p By Stage

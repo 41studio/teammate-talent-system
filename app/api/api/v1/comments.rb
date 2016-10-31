@@ -33,7 +33,7 @@ module API
   	        end
 
             desc "Comments List Applicant" do
-              detail ' : applicant commented by user (create comment)'
+              detail ' : applicant comment threads (show)'
               named 'comments'
               headers token: {
                       description: 'Validates user identity by token',
@@ -63,15 +63,13 @@ module API
               use :applicant_id
               requires :body,         type: String,  desc: 'Comment body', allow_blank: false
             end        
-            post '/new' do
+            post '/create' do
               begin
-                if @applicant
-                  @comment = Comment.build_from(@applicant, current_user.id, comment_params[:body])
-                  if @comment.save!
-                    { status: "Comment sent" }
-                  else
-                  	error_message
-                  end
+                @comment = Comment.build_from(@applicant, current_user.id, comment_params[:body])
+                if @comment.save!
+                  { status: "Comment sent" }
+                else
+                	error_message
                 end
               rescue ActiveRecord::RecordNotFound
                 record_not_found_message

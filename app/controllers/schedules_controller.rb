@@ -21,7 +21,7 @@ class SchedulesController < ApplicationController
   # GET /schedules
   # GET /schedules.json
   def index
-    @jobs = Job.by_company_id(current_user.company_id).published_or_closed_jobs
+    @jobs = Job.by_company_id(current_user.company_id).published_and_closed_jobs
     if params[:by_active_job].present?
       active_job = params[:by_active_job]
     else

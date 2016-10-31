@@ -23,7 +23,7 @@ class ReportController < ApplicationController
 
   private
     def chart_data
-      @jobs = current_user.company.jobs.published_or_closed_jobs
+      @jobs = current_user.company.jobs.published_and_closed_jobs
       if params[:filter_by]
         case params[:filter_by]
         when "week"

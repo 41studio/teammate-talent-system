@@ -30,10 +30,6 @@ module API
           applicant_param
         end
 
-        def set_applicant
-          @applicant = Applicant.find(params[:id])
-        end
-
         def error_message
           error!({ status: :error, message: @applicant.errors.full_messages.first }) if @applicant.errors.any?
         end       
@@ -139,7 +135,7 @@ module API
         end
         params do
           use :applicant_id
-          requires :status, type: String, values: { value: Applicant::STATUSES.map{|key, val| key.to_s}, message: 'not valid' }, desc: "Applicant status"
+          requires :status, type: String, values: { value: Applicant.applicant_statuses, message: 'not valid' }, desc: "Applicant status"
         end
         put ':id/update_status/' do
           begin

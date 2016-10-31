@@ -52,6 +52,7 @@ class Applicant < ActiveRecord::Base
 	
 	STATUSES = {"applied": 1,"phone_screen": 2,"interview": 3,"offer": 4,"hired": 5}
 	DISQUALIFIED = "disqualified"
+	PERIOD = ["week", "month", "year"]
 
 	paginates_per 10
 
@@ -86,11 +87,15 @@ class Applicant < ActiveRecord::Base
 		order("created_at ASC LIMIT 1")
 	end
 
+	def self.applicant_statuses
+        STATUSES.keys.map{|key| key.to_s}
+	end
+
 	private
 		scope :by_company_id, -> (company_id) { self.joins(:job).where(jobs: {company_id: company_id}) }
 		scope :by_job_ids, -> (job_ids) { self.joins(:job, :schedules).where(jobs: {id: job_ids}).group(:id) }
 
-		def applicant_statuses
+		def statuses
 			if STATUSES.has_key? self.status.to_sym && self.status != DISQUALIFIED
 				errors[:status] << "not available" 
 				return false
