@@ -21,6 +21,8 @@
     = link_to job.job_title, company_job_path(@company, job)
     br
     = link_to "edit #{job.job_title}", edit_company_job_path(@company, job)
+    br
+    = link_to "Publish Job", company_upgrade_status_path(current_user.company_id, job.id, "published")
     p
       | Created 
       = time_ago_in_words(job.created_at)
@@ -33,6 +35,7 @@
     p
       | Applicants :
       = job.applicants_count
+    = link_to "Close Job", company_upgrade_status_path(current_user.company_id, job.id, "closed")
     p
       | Publised 
       = time_ago_in_words(job.updated_at)

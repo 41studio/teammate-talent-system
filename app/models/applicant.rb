@@ -74,9 +74,9 @@ class Applicant < ActiveRecord::Base
 		where("jobs.company_id IN (?) and jobs.id IN (?) and applicants.status IN (?) and applicants.gender IN (?)", company_id, job_id, applicant_status, applicant_gender )
 	end
 
-	def self.filter_applicant(job_id, time, gender, status, job_title)
+	def self.filter_applicant(job_id_on_company, time, gender, status, job_id)
 		joins(:job).where("applicants.job_id IN (?) and applicants.created_at >= ? and applicants.gender IN (?) 
-        and applicants.status IN (?) and jobs.job_title IN (?)", job_id, time, gender, status, job_title)		
+        and applicants.status IN (?) and jobs.id IN (?)", job_id_on_company, time, gender, status, job_id)		
 	end
 
 	def self.join_job
