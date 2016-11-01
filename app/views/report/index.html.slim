@@ -15,14 +15,18 @@
 			br
 				- @jobs.each do |job|
 					.col-md-4
-						- if job.applicant_stage_per_job(job).present?
+						- if job.applicant_stage_per_job(job.id).present?
 							.panel.panel-default
 								.panel-body
-									= job.job_title
-									= pie_chart job.applicant_stage_per_job(job)
+									center
+										= job.job_title
+									= pie_chart job.applicant_stage_per_job(job.id)
 						-else
-							center
-								p Empty Chart
+							.panel.panel-default
+								.panel-body
+									center
+										= job.job_title
+										p Empty Chart
 - content_for :javascript_in_file do
   javascript:
     $('.filter_by_time').on('click', function(){

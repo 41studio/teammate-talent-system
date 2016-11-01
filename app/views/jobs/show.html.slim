@@ -2,7 +2,7 @@
   p#notice = notice
   - if user_signed_in? && current_user.company_id == @job.company_id
     - if @job.status == "draft"
-      = link_to "Publish job", company_upgrade_status_path(params[:company_id], @job.id, "published")
+      = link_to "Publish job", company_upgrade_status_path(current_user.company_id, @job.id, "published")
       hr 
       p
         strong Job status 

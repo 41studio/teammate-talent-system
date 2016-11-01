@@ -13,6 +13,7 @@ class ReportController < ApplicationController
       format.html
       format.pdf do
         render pdf: "report",
+               viewport_size: '1280x1024',
                margin: { top: 20, bottom: 20, left: 20, right: 20 },
                layout: 'pdf.html.slim',
                header: { html: { template: 'report/report_header', layout: 'pdf.html.slim' } },
@@ -23,7 +24,7 @@ class ReportController < ApplicationController
 
   private
     def chart_data
-      @jobs = current_user.company.jobs.published_and_closed_jobs
+      @jobs = current_user.company.jobs.published_and_closed_jobs.sort_job_by_updated_at
       if params[:filter_by]
         case params[:filter_by]
         when "week"
