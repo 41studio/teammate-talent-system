@@ -14,7 +14,7 @@ class ReportController < ApplicationController
       format.pdf do
         render pdf: "report",
                viewport_size: '1280x1024',
-               margin: { top: 20, bottom: 20, left: 20, right: 20 },
+               margin: { top: 20, bottom: 0, left: 0, right: 0 },
                layout: 'pdf.html.slim',
                header: { html: { template: 'report/report_header', layout: 'pdf.html.slim' } },
                locals: {data: chart_data }
