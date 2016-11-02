@@ -44,7 +44,7 @@ class Applicant < ActiveRecord::Base
 	validates :phone, numericality: true
 	validates :email, presence: true, uniqueness: true, format: {with: EMAIL_REGEX}
 	validates_processing_of :photo
-	validate :applicant_statuses
+	# validate :applicant_statuses
 	validate :image_size_validation
 
 	validates_processing_of :resume
@@ -88,7 +88,7 @@ class Applicant < ActiveRecord::Base
 	end
 
 	def self.applicant_statuses
-        STATUSES.keys.map{|key| key.to_s}
+    STATUSES.keys.map{|key| key.to_s}
 	end
 
 	private

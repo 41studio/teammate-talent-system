@@ -1,0 +1,29 @@
+h3
+	= "New applicant has applied to #{@job.job_title}"
+br
+table
+	tr
+		td[style="width:120px;"]
+			p Name
+		td
+			p = @applicant.name
+	tr
+		td
+			p Gender
+		td
+			p = @applicant.gender
+	tr
+		td
+			p Address
+		td
+			p = @applicant.address
+	tr
+		td
+			p Email
+		td
+			p = @applicant.email
+	tr
+		td
+			p Headline
+		td
+			p = @applicant.headline
