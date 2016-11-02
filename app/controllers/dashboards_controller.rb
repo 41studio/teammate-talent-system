@@ -4,9 +4,9 @@ class DashboardsController < ApplicationController
   def index
     @company = current_user.company
     if @company.present?
-      @drafted_jobs = @company.jobs.drafted_jobs
-      @published_jobs = @company.jobs.published_jobs
-      @closed_jobs = @company.jobs.closed_jobs
+      @drafted_jobs = @company.jobs.drafted_jobs.sort_job_by_updated_at
+      @published_jobs = @company.jobs.published_jobs.sort_job_by_updated_at
+      @closed_jobs = @company.jobs.closed_jobs.sort_job_by_updated_at
     else
       redirect_to new_company_path
     end
