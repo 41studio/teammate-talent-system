@@ -27,3 +27,5 @@ table
 			p Headline
 		td
 			p = @applicant.headline
+h4 Click link below to review applicant
+= link_to "Click here!", company_job_applicant_url(@job.company_id, @job.id, @applicant.id)
