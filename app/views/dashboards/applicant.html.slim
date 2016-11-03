@@ -14,9 +14,8 @@
 					= f.submit "search", class: 'btn btn-primary'
 				#list-of-applicant
 					= render 'dashboards/applicant_list'
-				.col-md-12
-					center
-						= paginate @applicants
+				.col-md-12#pagination
+					= render 'dashboards/pagination_filter'
 - else
 	p = "You must create company first"
 
@@ -26,7 +25,8 @@
     $('.filter_by_time').on('click', function(){
     	console.log($('.form_filter').serialize());
     	$.ajax({
-        url: Routes.applicant_path() + ".js",
+        url: Routes.applicant_path(),
+        dataType: 'script',
         method: 'get',
         data: $('.form_filter').serialize()
       });
@@ -34,7 +34,8 @@
     $('.filter_by_stage, .filter_by_job, .filter_by_gender, .filter_by_consideration').on('change', function(){
     	console.log($('.form_filter').serialize());
     	$.ajax({
-        url: Routes.applicant_path() + ".js",
+        url: Routes.applicant_path(),
+        dataType: 'script',
         method: 'get',
         data: $('.form_filter').serialize()
     	});
