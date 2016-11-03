@@ -21,7 +21,7 @@ class Company < ActiveRecord::Base
 	mount_uploader :photo_company, PhotoCompanyUploader
 	
 	validates :company_name, :company_website, :company_email, :company_phone, :industry, :photo_company, presence: true
-	validates :company_name, length: { minimum: 2 }
+	validates :company_name, length: { in: 2..40 }
 	validates :company_phone, numericality: true
   	validates_processing_of :photo_company
     validates :company_email, presence: true, uniqueness: true, format: {with: EMAIL_REGEX}
