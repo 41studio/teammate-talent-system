@@ -1,9 +1,4 @@
 = form_for @job, url: @url do |f|
-  / - if @job.errors.any?
-  /   #error_explanation
-  /     h2 = "#{pluralize(@job.errors.count, "error")} prohibited this job from being saved"
-
-
   .form-group
     = f.label :job_title
     = f.text_field :job_title, class: 'form-control'

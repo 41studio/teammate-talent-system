@@ -1,15 +1,12 @@
 = form_for @form, url: company_job_applicants_path(params[:company_id], params[:job_id]) do |f|
-  - if @applicant.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@applicant.errors.count, "error")} prohibited this applicant from being saved:"
-      ul
-        - @applicant.errors.full_messages.each do |message|
-          li = message
-
   .form-group
     = f.label :name, class: 'control-label'
     = f.text_field :name, class: 'form-control'
-    strong#applicant-name-status
+    - if @applicant.errors[:name].any?
+      p.bg-danger
+        - @applicant.errors[:name].each do |error|
+          = error
+          br
   .form-group
     = f.label :gender, class: 'control-label'
     br
@@ -19,6 +16,11 @@
     .radio-inline
       = f.radio_button :gender, 'Female'
       = f.label :Female
+    - if @applicant.errors[:gender].any?
+      p.bg-danger
+        - @applicant.errors[:gender].each do |error|
+          = error
+          br
   div.row
     div.col-md-4
       div.form-group
@@ -26,18 +28,43 @@
         div.input-group.date#datetimepicker1
           = f.text_field :date_birth, class: "form-control"
           = content_tag(:span, content_tag(:span, "", class: "glyphicon glyphicon-calendar"), class: "input-group-addon")
+        - if @applicant.errors[:date_birth].any?
+          p.bg-danger
+            - @applicant.errors[:date_birth].each do |error|
+              = error
+              br
   .form-group
     = f.label :email, class: 'control-label'
     = f.email_field :email, class: 'form-control'
+    - if @applicant.errors[:email].any?
+      p.bg-danger
+        - @applicant.errors[:email].each do |error|
+          = error
+          br
   .form-group
     = f.label :headline, class: 'control-label'
     = f.text_field :headline, class: 'form-control'
+    - if @applicant.errors[:headline].any?
+      p.bg-danger
+        - @applicant.errors[:headline].each do |error|
+          = error
+          br
   .form-group
     = f.label :phone, class: 'control-label'
     = f.number_field :phone, class: 'form-control'
+    - if @applicant.errors[:phone].any?
+      p.bg-danger
+        - @applicant.errors[:phone].each do |error|
+          = error
+          br
   .form-group
     = f.label :address, class: 'control-label'
     = f.text_area :address, class: 'form-control'
+    - if @applicant.errors[:address].any?
+      p.bg-danger
+        - @applicant.errors[:address].each do |error|
+          = error
+          br
   .form-group
     = f.label :photo, class: 'control-label'
     = f.file_field :photo, accept: 'image/png,image/jpeg'
@@ -45,6 +72,11 @@
       = image_tag f.object.photo.thumb.url
       = f.label :remove_photo
       = f.check_box :remove_photo
+    - if @applicant.errors[:photo].any?
+      p.bg-danger
+        - @applicant.errors[:photo].each do |error|
+          = error
+          br
   .form-group
     = f.label :resume, class: 'control-label'
     = f.file_field :resume , accept: 'application/pdf'
@@ -52,6 +84,11 @@
       = link_to "Preview Resume", f.object.resume.url, target: '_blank'
       = f.label :remove_resume
       = f.check_box :remove_resume
+    - if @applicant.errors[:resume].any?
+      p.bg-danger
+        - @applicant.errors[:resume].each do |error|
+          = error
+          br
 
     - for education in @applicant.educations  
       = f.fields_for :educations, @education do |education|
