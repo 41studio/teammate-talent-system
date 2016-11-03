@@ -52,6 +52,7 @@
   .form-group
     = f.label :phone, class: 'control-label'
     = f.number_field :phone, class: 'form-control'
+    #number-needed
     - if @applicant.errors[:phone].any?
       p.bg-danger
         - @applicant.errors[:phone].each do |error|
@@ -116,6 +117,7 @@
       $('#datetimepicker1').datetimepicker({
         format: 'DD-MM-YYYY'
       });
+      $('#applicant_phone').numeric();
       $('#applicant_email, #applicant_name, #applicant_date_birth, #applicant_headline, #applicant_phone, #applicant_address').focus(function(){
         var length = this.value.length;
         if (length == 0){
@@ -154,6 +156,13 @@
           $(this).parent(".form-group").removeClass("has-error").addClass("has-success has-feedback");
         } else{
           $(this).parent(".form-group").removeClass("has-success has-feedback").addClass("has-error");
+        }
+        if (!$.isNumeric(this.value)){
+          $('#number-needed').text("Have to input number!");
+          $(this).parent(".form-group").removeClass("has-success has-feedback").addClass("has-error");
+        } else{
+          $('#number-needed').text("");
+          $(this).parent(".form-group").removeClass("has-error").addClass("has-success has-feedback");
         }
       });
     });
