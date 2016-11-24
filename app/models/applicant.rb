@@ -19,11 +19,18 @@
 #
 
 class Applicant < ActiveRecord::Base
-	alias_attribute :applicant_status, :status
+	STATUSES = {"applied": 1,"phone_screen": 2,"interview": 3,"offer": 4,"hired": 5}
+	DISQUALIFIED = "disqualified"
+	PERIOD = ["week", "month", "year"]
+	EMAIL_REGEX = /\A[\w]([^@\s,;]+)@(([\w-]+\.)+(com|edu|org|net|gov|mil|biz|info|co.id))\z/i
+
 	acts_as_commentable
+	
 	belongs_to :job
+
 	has_and_belongs_to_many :educations
 	has_and_belongs_to_many :experiences
+	
 	has_many :schedules, dependent: :destroy
 	has_many :comments
 
@@ -34,8 +41,6 @@ class Applicant < ActiveRecord::Base
 
 	mount_uploader :photo, PhotoUploader
 	mount_uploader :resume, ResumeUploader
-
-	EMAIL_REGEX = /\A[\w]([^@\s,;]+)@(([\w-]+\.)+(com|edu|org|net|gov|mil|biz|info|co.id))\z/i
 
 	validates :gender, :date_birth, :headline, :address, :photo, :resume,  presence: true
 	validates :name, presence: true, length: {in: 2..70}
@@ -49,12 +54,16 @@ class Applicant < ActiveRecord::Base
 
 	validates_processing_of :resume
 	validate :resume_size_validation
-	
-	STATUSES = {"applied": 1,"phone_screen": 2,"interview": 3,"offer": 4,"hired": 5}
-	DISQUALIFIED = "disqualified"
-	PERIOD = ["week", "month", "year"]
 
 	paginates_per 10
+
+	scope :by_company_id, -> (company_id) { self.joins(:job).where(jobs: {company_id: company_id}) }
+	scope :by_job_ids, -> (job_ids) { self.joins(:job, :schedules).where(jobs: {id: job_ids}).group(:id) }
+	scope :are_qualified, -> { self.where.not(status: DISQUALIFIED) }
+
+	alias_attribute :applicant_status, :status
+	
+	delegate :company, to: :job, prefix: true
 
 	def disable_level
 		if self.status != "disqualified"
@@ -75,8 +84,9 @@ class Applicant < ActiveRecord::Base
 	end
 
 	def self.filter_applicant(job_id, time, gender, status, job_title)
-		joins(:job).where("applicants.job_id IN (?) and applicants.created_at >= ? and applicants.gender IN (?) 
-        and applicants.status IN (?) and jobs.job_title IN (?)", job_id, time, gender, status, job_title)		
+		self
+		# joins(:job).where("applicants.job_id IN (?) AND applicants.created_at >= ? AND applicants.gender IN (?) 
+  		# AND applicants.status IN (?) AND jobs.job_title IN (?)", job_id, time, gender, status, job_title)		
 	end
 
 	def self.join_job
@@ -91,10 +101,13 @@ class Applicant < ActiveRecord::Base
         STATUSES.keys.map{|key| key.to_s}
 	end
 
-	private
-		scope :by_company_id, -> (company_id) { self.joins(:job).where(jobs: {company_id: company_id}) }
-		scope :by_job_ids, -> (job_ids) { self.joins(:job, :schedules).where(jobs: {id: job_ids}).group(:id) }
+	def send_notification!(notice)
+		notification = ApplicantPushNotification.new(self)
+		notification.set_notice(notice)
+		notification.push!
+	end
 
+	private
 		def statuses
 			if STATUSES.has_key? self.status.to_sym && self.status != DISQUALIFIED
 				errors[:status] << "not available" 

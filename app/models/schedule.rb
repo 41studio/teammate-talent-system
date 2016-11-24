@@ -60,6 +60,26 @@ class Schedule < ActiveRecord::Base
 		# ScheduleMailer.canceled_notify_applicant_email(self.applicant, self).deliver
 	end
 
+	def self.filter(params_filter = {})
+		active_job = params_filter[:by_active_job] 
+		applicants = params_filter[:by_applicant]
+		categories = params_filter[:by_activity]
+
+		joins = []
+		if active_job.present?
+			joins << { applicant: [:job] }
+		elsif applicants.present?
+			joins << :applicant
+		end			
+		
+		conditions = []
+		conditions << sanitize_sql_array(["jobs.id IN (?)", active_job]) 	   if active_job.present?
+		conditions << sanitize_sql_array(["applicants.id IN (?)", applicants]) if applicants.present?
+		conditions << sanitize_sql_array(["category IN (?)", categories]) 	   if active_job.present?		 
+		conditions = conditions.join(" AND ")
+		self.joins(joins).where(conditions)
+	end
+
 	private
 		def time_collection
 			time_now = Time.now.in_time_zone

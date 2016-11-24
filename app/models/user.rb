@@ -63,10 +63,10 @@ class User < ActiveRecord::Base
     self.authentication_token ||= generate_authentication_token
   end
 
-  def self.authenticate_for_api(email, password)
+  def self.authenticate_for_api(email, password, firebase_access_token = nill)
     if user = self.find_for_authentication(email: email)
       if user.valid_password?(password)
-        key = user.api_keys.create
+        key = user.api_keys.create(firebase_access_token: firebase_access_token)
         user.save
         user
       else
@@ -83,6 +83,12 @@ class User < ActiveRecord::Base
   
   def token
     self.api_keys.nil? ? nil : self.api_keys.last.access_token
+  end
+
+  def fullname=(fullname)
+    fullname = fullname.split(" ")
+    self.first_name = fullname[0]
+    self.last_name = fullname[1]
   end
   
   private

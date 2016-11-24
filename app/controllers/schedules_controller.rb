@@ -12,8 +12,8 @@
 #
 
 class SchedulesController < ApplicationController
-  before_action :set_applicant, :set_location, :set_assignee_collection, except: [:index]
-  before_action :set_category_collection
+  before_action :set_applicant, :set_location, :set_assignee_collection, except: [:index, :filter]
+  before_action :set_filter_collection, only: [:index]
   before_action :new_schedule_path, only: [:new, :create]
   before_action :set_schedule, :edit_schedule_path, only: [:destroy, :edit, :update]
   # protect_from_forgery except: :index
@@ -22,31 +22,14 @@ class SchedulesController < ApplicationController
   # GET /schedules.json
   def index
     @jobs = Job.by_company_id(current_user.company_id).published_and_closed_jobs
-    if params[:by_active_job].present?
-      active_job = params[:by_active_job]
-    else
-      active_job = @jobs.ids
-    end
+    @applicants = Applicant.total_applicant(current_user.company.id, @jobs)    
+    @schedules = current_user.get_schedules
+  end
 
-    @applicants = Applicant.total_applicant(current_user.company.id, @jobs)
-    if params[:by_applicant].present?
-      applicants = params[:by_applicant]
-    else
-      applicants = @applicants.ids
-    end
-
-    # @assignee = User
-    if params[:by_activity].present?
-      categories = params[:by_activity]
-    else
-      categories = @category_collection
-    end
-    
-    @schedules = current_user.get_schedules.where("jobs.id IN (?) AND applicants.id IN (?) AND category IN (?)", active_job, applicants, categories)
-    respond_to do |format|
-      format.js
-      format.html
-    end
+  # GET /schedules/filter.js
+  def filter
+    @schedules = current_user.get_schedules.filter(params[:filter_schedule])
+    render :index
   end
 
   # GET /schedules/1
@@ -108,8 +91,10 @@ class SchedulesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     
-    def set_category_collection
-      @category_collection = Schedule::CATEGORY
+    def set_filter_collection
+      @category_collection  = Schedule::CATEGORY
+      @applicant_collection = current_company.applicants.are_qualified.map{|applicant| [applicant.name, applicant.id, {"data-job-id": applicant.job_id}]}
+      @job_collection       = current_company.jobs.published_and_closed_jobs.map{|job| [job.job_title, job.id]}
     end
     
     def set_assignee_collection

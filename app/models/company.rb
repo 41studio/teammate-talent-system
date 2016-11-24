@@ -15,6 +15,8 @@
 
 class Company < ActiveRecord::Base
 	has_many :jobs, dependent: :destroy
+	has_many :applicants, through: :jobs
+	has_many :schedules, through: :applicants
 	has_many :users
 	
 	EMAIL_REGEX = /\A[\w]([^@\s,;]+)@(([\w-]+\.)+(com|edu|org|net|gov|mil|biz|info|co.id))\z/i
