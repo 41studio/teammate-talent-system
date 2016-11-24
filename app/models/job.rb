@@ -161,4 +161,8 @@ class Job < ActiveRecord::Base
 	def applicant_stage_per_job(attr)
 		Job.find(attr).applicants.group(:status).count
 	end
+
+	def self.sort_job_by_updated_at
+		order('jobs.updated_at DESC')
+	end
 end

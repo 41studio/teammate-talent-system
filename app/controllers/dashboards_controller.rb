@@ -4,9 +4,9 @@ class DashboardsController < ApplicationController
   def index
     @company = current_user.company
     if @company.present?
-      @drafted_jobs = @company.jobs.drafted_jobs
-      @published_jobs = @company.jobs.published_jobs
-      @closed_jobs = @company.jobs.closed_jobs
+      @drafted_jobs = @company.jobs.drafted_jobs.sort_job_by_updated_at
+      @published_jobs = @company.jobs.published_jobs.sort_job_by_updated_at
+      @closed_jobs = @company.jobs.closed_jobs.sort_job_by_updated_at
     else
       redirect_to new_company_path
     end
@@ -39,7 +39,7 @@ class DashboardsController < ApplicationController
       if params[:filter_by_job]
         filter_by_job = params[:filter_by_job].values
       else
-        filter_by_job = @jobs
+        filter_by_job = @jobs.ids
       end
       
       if params[:filter_by_gender]
@@ -52,9 +52,6 @@ class DashboardsController < ApplicationController
       @applicants = @searched_applicants.result.filter_applicant(@jobs.ids,@time,filter_by_gender,filter_by_stage,filter_by_job).page(params[:page]).per(10)
       @applicant_filter_result_count = @searched_applicants.result.filter_applicant(@jobs.ids,@time,filter_by_gender,filter_by_stage,filter_by_job).count
       @applicant_total = Applicant.total_applicant(current_user.company_id, @jobs).count
-      # disqualified = filter_by_stage = ["disqualified"]
-      # applicant_disqualified = @search.result.filter_applicant(@jobs.ids,@time,filter_by_gender,disqualified,filter_by_job).count
-      # @applicant_total = @applicant_total - applicant_disqualified
       
 
       respond_to do |format|

@@ -68,7 +68,7 @@ class ApplicantsController < ApplicationController
   def send_email
     @applicant = Applicant.find(params[:id])
     @job = Job.find(params[:job_id])
-    SendMail.delay.sample_email(@applicant, params[:subject], params[:body])
+    SendMail.delay.send_email_to_applicant(@applicant, params[:subject], params[:body])
     redirect_to company_job_applicant_path(@job.company_id, @job, @applicant)
   end
 
@@ -83,6 +83,7 @@ class ApplicantsController < ApplicationController
       if @applicant.save
         @applicant.send_notification!("New Applicant")
         SendMail.delay.send_email_after_apply(@applicant, @job)
+        SendMail.send_email_to_company_after_applicant_applied(@job.company.users, @job, @applicant)
         format.html { redirect_to company_job_path(@job.company_id, @job), notice: 'Applicant was successfully created.' }
         format.json { render :show, status: :created, location: @applicant }
       else    
