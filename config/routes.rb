@@ -2,7 +2,13 @@ require 'sidekiq/web'
 
 Rails.application.routes.draw do
   resources :companies, except: [:index] do
-    resources :schedules, only: [:index]
+
+    resources :schedules, only: [:index] do 
+      collection do
+        get :filter
+      end
+    end
+
     resources :jobs do 
       resources :applicants, only: [:new, :create, :show] do
         member do
