@@ -27,3 +27,4 @@
 //= require Chart.bundle
 //= require chartkick
 //= require jquery_numeric
+//= require ckeditor/init

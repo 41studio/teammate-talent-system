@@ -13,16 +13,15 @@ nav.navbar.navbar-inverse.navigation-style[role="navigation"]
         = link_to 'Teamhire', root_path, class: 'navbar-brand'
     #bs-navbar-collapse.collapse.navbar-collapse
       ul.nav.navbar-nav
-        -if user_signed_in?
+        - if user_signed_in? && current_user.company_id.present?
           li
             = link_to "Dashboard", dashboards_path, class: 'navbar-link'
           li
             = link_to "Applicant", applicant_path, class: 'navbar-link'
-          - if current_user.company_id.present?
-            li
-              = link_to "Report", company_report_index_path(current_user.company_id), class: 'navbar-link'
-            li
-              = link_to "Agenda", company_schedules_path(current_user.company_id), class: 'navbar-link'
+          li
+            = link_to "Report", company_report_index_path(current_user.company_id), class: 'navbar-link'
+          li
+            = link_to "Agenda", company_schedules_path(current_user.company_id), class: 'navbar-link'
       ul.nav.navbar-nav.navbar-right
         - if user_signed_in?
           li

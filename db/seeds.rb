@@ -1,10 +1,3 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
 applicant_educations_list = [
 	"Unspecified",
 	"High School or equivalent",
@@ -249,21 +242,43 @@ applicant_industries_list = [
 	"Writing and Editing"
 ]
 
-applicant_educations_list.each do |list|
-  EducationList.find_or_create_by( education: list)
-end
-applicant_employment_types_list.each do |list|
-  EmploymentTypeList.find_or_create_by( employment_type: list)
+education_list_has_valid_total_options = EducationList.where(id: 1..applicant_educations_list.count).count == applicant_educations_list.count
+employment_types_list_has_valid_total_options = EmploymentTypeList.where(id: 1..applicant_employment_types_list.count).count == applicant_employment_types_list.count
+experiences_list_has_valid_total_options = ExperienceList.where(id: 1..applicant_experiences_list.count).count == applicant_experiences_list.count
+functions_list_has_valid_total_options = FunctionList.where(id: 1..applicant_functions_list.count).count == applicant_functions_list.count
+industries_list_has_valid_total_options = IndustryList.where(id: 1..applicant_industries_list.count).count == applicant_industries_list.count
+
+unless education_list_has_valid_total_options
+	applicant_educations_list.each.with_index do |list, index|
+		id = index + 1
+	  EducationList.find_or_create_by(id: id, education: list)
+	end
 end
 
-applicant_experiences_list.each do |list|
-  ExperienceList.find_or_create_by( experience: list)
+unless employment_types_list_has_valid_total_options
+	applicant_employment_types_list.each.with_index do |list, index|
+		id = index + 1
+	  EmploymentTypeList.find_or_create_by(id: id, employment_type: list)
+	end
 end
 
-applicant_functions_list.each do |list|
-  FunctionList.find_or_create_by( function: list)
+unless experiences_list_has_valid_total_options
+	applicant_experiences_list.each.with_index do |list, index|
+		id = index + 1
+	  ExperienceList.find_or_create_by(id: id, experience: list)
+	end
 end
 
-applicant_industries_list.each do |list|
-  IndustryList.find_or_create_by( industry: list)
+unless functions_list_has_valid_total_options
+	applicant_functions_list.each.with_index do |list, index|
+		id = index + 1
+	  FunctionList.find_or_create_by(id: id, function: list)
+	end
+end
+
+unless industries_list_has_valid_total_options
+	applicant_industries_list.each.with_index do |list, index|
+		id = index + 1
+	  IndustryList.find_or_create_by(id: id, industry: list)
+	end
 end

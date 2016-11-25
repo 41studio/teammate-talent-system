@@ -84,7 +84,7 @@
           br
   .form-group
     = f.label :job_description
-    = f.text_area :job_description, class: 'form-control'
+    = f.cktext_area :job_description, class: 'form-control'
     span#karakter_description[style="color:red"]
       |  500 
     |  Characters left
@@ -95,7 +95,7 @@
           br
   .form-group
     = f.label :job_requirement
-    = f.text_area :job_requirement, class: 'form-control'
+    = f.cktext_area :job_requirement, class: 'form-control'
     span#karakter_requirement[style="color:red"]
       |  500 
     |  Characters left
@@ -106,7 +106,7 @@
           br
   .form-group
     = f.label :benefits
-    = f.text_area :benefits, class: 'form-control'
+    = f.cktext_area :benefits, class: 'form-control'
     span#karakter_benefits[style="color:red"]
       |  500 
     |  Characters left

@@ -90,12 +90,12 @@
   = link_to "Send Email", "javascript:void(0)", id: 'show_email_form'
   #email_to_applicant
     = form_tag email_to_applicant_path(@applicant.job_id,@applicant), method: :post
-      div.field
+      .form-group
         = label_tag :subject
-        = text_field_tag :subject
-      div.field
+        = text_field_tag :subject, nil, class: "form-control"
+      .form-group
         = label_tag :body
-        = text_area_tag :body
+        = cktext_area_tag :body
       = button_tag "send"
   hr
   = link_to "Comment", "javascript:void(0)", id: 'show_comment_form'

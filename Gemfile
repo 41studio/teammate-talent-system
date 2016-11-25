@@ -86,8 +86,13 @@ gem 'jquery-ui-rails'
 ## gem for chart
 gem 'chartkick'
 
-gem 'nprogress-rails'
+## make id more prettier
 gem 'friendly_id', '~> 5.1.0'
+
+## ckeditor text area
+gem 'ckeditor'
+
+gem 'nprogress-rails'
 gem 'dotenv-rails'
 gem 'momentjs-rails', '>= 2.9.0'
 
