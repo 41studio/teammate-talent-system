@@ -17,9 +17,9 @@
 				.col-md-12#pagination
 					= render 'dashboards/pagination_filter'
 - else
-	p = "You must create company first"
+  p = "You must create company first"
 
-	
+  
 - content_for :javascript_in_file do
   javascript:
     $('.filter_by_time').on('click', function(){
@@ -30,6 +30,10 @@
         method: 'get',
         data: $('.form_filter').serialize()
       });
+    }
+
+    $('.filter_by_time').on('click', function(){
+      ajaxFilter()
     });
     $('.filter_by_stage, .filter_by_job, .filter_by_gender, .filter_by_consideration').on('change', function(){
     	console.log($('.form_filter').serialize());

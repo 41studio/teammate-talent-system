@@ -28,13 +28,13 @@
           .panel-body
             .form-group
               = label_tag 'by_active_job', 'By Active Job'
-              = select_tag 'by_active_job', options_from_collection_for_select(@jobs, "id", "job_title"), include_blank: "-- All active job --", class: 'form-control', id: 'by_active_job'
+              = select_tag 'filter_schedule[by_active_job]', options_for_select(@job_collection), include_blank: "-- All active job --", class: 'form-control', id: 'js-by_active_job'
             .form-group
               = label_tag 'by_applicant', 'By Applicant'
-              = select_tag 'by_applicant', options_from_collection_for_select(@applicants, "id", "name"), include_blank: "-- All applicant --", class: 'form-control', id: 'by_applicant'
+              = select_tag 'filter_schedule[by_applicant]', options_for_select(@applicant_collection), include_blank: "-- All applicant --", class: 'form-control', id: 'js-by_applicant'
             .form-group
               = label_tag 'by_activity', 'By Activity'
-              = select_tag 'by_activity',  options_for_select(@category_collection), include_blank: "-- All activity --", class: 'form-control', id: 'by_activity'
+              = select_tag 'filter_schedule[by_activity]',  options_for_select(@category_collection), include_blank: "-- All activity --", class: 'form-control', id: 'by_activity'
     .col-md-9
       h3 Agenda
       hr
@@ -45,12 +45,24 @@
         p = "You must create company first"
 - content_for :javascript_in_file do
   javascript:
-    $("#by_active_job, #by_applicant, #by_activity").on('change', function(){
-      console.log($('.form_filter').serialize());
+    ajaxFilter = function(){
       $.ajax({
-        url: Routes.company_schedules_path("#{current_user.company_id}"),
+        url: Routes.filter_company_schedules_path("#{current_user.company_id}"),
         dataType: 'script',
         method: 'get',
         data: $('.form_filter').serialize()
       });
+    }
+
+    $("#js-by_active_job").on('change', function(){
+      $("#js-by_applicant").val("")
+      $("#js-by_applicant").children().show()
+      $("#js-by_applicant").children().not("[data-job-id='" + $(this).val() + "']").hide()
+      ajaxFilter()
+    });
+
+    $("#js-by_applicant").on('change', function(event){
+      jobId = $(this.options[event.target.selectedIndex]).data('job-id')
+      $("#js-by_active_job").val(jobId)
+      ajaxFilter()
     });

@@ -20,4 +20,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  protected
+    def current_company
+      current_user.company  
+    end
 end

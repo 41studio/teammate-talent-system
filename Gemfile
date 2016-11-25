@@ -29,7 +29,7 @@ end
 
 ## library for push notification
 gem 'pushmeup'
-gem 'rpush'
+gem 'firebase'
 
 ## Auth library
 gem 'devise'
@@ -138,4 +138,3 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
 end
-

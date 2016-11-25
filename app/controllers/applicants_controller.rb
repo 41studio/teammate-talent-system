@@ -75,40 +75,15 @@ class ApplicantsController < ApplicationController
   # POST /applicants
   # POST /applicants.json
   def create
-    # asd
     @job = Job.find(params[:job_id])
     @applicant = @job.applicants.new(applicant_params)
     @form = @applicant
     @applicant.status = "applied"
     respond_to do |format|
       if @applicant.save
+        @applicant.send_notification!("New Applicant")
         SendMail.delay.send_email_after_apply(@applicant, @job)
         SendMail.send_email_to_company_after_applicant_applied(@job.company.users, @job, @applicant)
-        format.html { redirect_to company_job_path(@job.company_id, @job), notice: 'Applicant was successfully created.' }
-
-        #push notification
-
-        # app = Rpush::Gcm::App.new
-        # app.name = "teamhire"
-        # app.auth_key = "AIzaSyCWX1_asXP_gdqYYc-fb2_Uor2pODB_bDw"
-        # app.connections = 1
-        # app.save!
-
-        # n = Rpush::Gcm::Notification.new
-        # n.app = Rpush::Gcm::App.find_by_name("teamhire")
-        # n.registration_ids = ["238618199031-2pjffhh7adjvgjflof8ecpbha50dnhjt.apps.googleusercontent.com"]
-        # n.data = { message: "hi mom!" }
-        # n.priority = 'high'        # Optional, can be either 'normal' or 'high'
-        # n.content_available = true # Optional
-        # # Optional notification payload. See the reference below for more keys you can use!
-        # n.notification = { body: 'great match!',
-        #                    title: 'Portugal vs. Denmark',
-        #                    icon: 'myicon'
-        #                  }
-        # n.save!
-
-        #end of push notification
-
         format.html { redirect_to company_job_path(@job.company_id, @job), notice: 'Applicant was successfully created.' }
         format.json { render :show, status: :created, location: @applicant }
       else    

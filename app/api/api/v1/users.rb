@@ -45,10 +45,11 @@ module API
         params do
           requires :email                         ,type: String, desc: "User email"
           requires :password                      ,type: String, desc: "User password"
+          optional :firebase_access_token         ,type: String, desc: "Firebase access token"
         end
         post '/login' do
           begin
-            if user = User.authenticate_for_api(params[:email], params[:password])
+            if user = User.authenticate_for_api(params[:email], params[:password], params[:firebase_access_token])
               present user, with: API::V1::Entities::UserEntity, only: [:fullname, :email, :token]
             else
               error!({ status: :error, message: "Invalid Email or Password" }, 401)

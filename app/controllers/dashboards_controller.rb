@@ -48,9 +48,9 @@ class DashboardsController < ApplicationController
         filter_by_gender = ["Male","Female"]
       end
 
-      @search = Applicant.search(params[:q])
-      @applicants = @search.result.filter_applicant(@jobs.ids,@time,filter_by_gender,filter_by_stage,filter_by_job).page(params[:page]).per(10)
-      @applicant_filter_result_count = @search.result.filter_applicant(@jobs.ids,@time,filter_by_gender,filter_by_stage,filter_by_job).count
+      @searched_applicants = Applicant.search(params[:q])
+      @applicants = @searched_applicants.result.filter_applicant(@jobs.ids,@time,filter_by_gender,filter_by_stage,filter_by_job).page(params[:page]).per(10)
+      @applicant_filter_result_count = @searched_applicants.result.filter_applicant(@jobs.ids,@time,filter_by_gender,filter_by_stage,filter_by_job).count
       @applicant_total = Applicant.total_applicant(current_user.company_id, @jobs).count
       
 
