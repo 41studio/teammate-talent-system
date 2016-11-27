@@ -17,7 +17,8 @@ class ReportController < ApplicationController
                margin: { top: 20, bottom: 0, left: 0, right: 0 },
                layout: 'pdf.html.slim',
                header: { html: { template: 'report/report_header', layout: 'pdf.html.slim' } },
-               locals: {data: chart_data }
+               locals: { data: chart_data },
+               show_as_html: params[:as_html]
       end
     end
   end
@@ -25,7 +26,7 @@ class ReportController < ApplicationController
   private
     def chart_data
       @jobs = current_user.company.jobs.published_and_closed_jobs.sort_job_by_updated_at
-      if params[:filter_by]
+      if params[:filter_by] 
         case params[:filter_by]
         when "week"
           time = 'week(applicants.created_at)'

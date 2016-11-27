@@ -8,7 +8,7 @@
 			.col-md-9
 				h3 Applicant List
 				hr
-				= search_form_for(@search, url: applicant_path, method: :get) do |f|
+				= search_form_for(@searched_applicants, url: applicant_path, method: :get) do |f|
 					= f.text_field :name_cont, placeholder: 'search by name', class: 'form-control'
 					br
 					= f.submit "search", class: 'btn btn-primary'
