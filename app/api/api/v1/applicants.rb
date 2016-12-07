@@ -103,6 +103,7 @@ module API
         end
         get ":id/detail" do
           begin 
+            present :user, current_user, with: API::V1::Entities::UserEntity, only: [:avatar]
             present :applicant, @applicant, with: API::V1::Entities::ApplicantEntity, except: [ { educations: [:id], experiences: [:id], comments:  [ user: [:id, :first_name, :last_name, :email, :joined_at, :token] ] }]
           rescue ActiveRecord::RecordNotFound
             record_not_found_message
