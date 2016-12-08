@@ -43,9 +43,9 @@ module API
           named 'users'
         end
         params do
-          requires :email                         ,type: String, desc: "User email"
-          requires :password                      ,type: String, desc: "User password"
-          optional :firebase_access_token         ,type: String, desc: "Firebase access token"
+          requires :email                  ,type: String, desc: "User email"
+          requires :password               ,type: String, desc: "User password"
+          optional :firebase_access_token  ,type: String, desc: "Firebase access token"
         end
         post '/login' do
           begin
