@@ -1,0 +1,10 @@
+p
+  strong comments :
+  p
+  	div.comment-body id="comment-#{comment.id}"
+	    h4
+	      = comment.user.fullname
+	    h5
+	      = comment.body
+	    = time_ago_in_words(comment.created_at)
+	    |  ago

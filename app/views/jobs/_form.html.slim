@@ -1,0 +1,237 @@
+= form_for @job, url: @url do |f|
+  .form-group
+    = f.label :job_title
+    = f.text_field :job_title, class: 'form-control'
+    - if @job.errors[:job_title].any?
+      p.bg-danger
+        - @job.errors[:job_title].each do |error|
+          = error
+          br
+  .form-group
+    = f.label :departement
+    = f.text_field :departement, class: 'form-control'
+    - if @job.errors[:departement].any?
+      p.bg-danger
+        - @job.errors[:departement].each do |error|
+          = error
+          br
+  .form-group
+    = f.label :job_code
+    = f.text_field :job_code, class: 'form-control'
+    - if @job.errors[:job_code].any?
+      p.bg-danger
+        - @job.errors[:job_code].each do |error|
+          = error
+          br
+  .form-group
+    = f.label :country
+    = f.text_field :country, class: 'form-control'
+    - if @job.errors[:country].any?
+      p.bg-danger
+        - @job.errors[:country].each do |error|
+          = error
+          br
+  .form-group
+    = f.label :state
+    = f.text_field :state, class: 'form-control'
+    - if @job.errors[:state].any?
+      p.bg-danger
+        - @job.errors[:state].each do |error|
+          = error
+          br
+  .form-group
+    = f.label :city
+    = f.text_field :city, class: 'form-control'
+    - if @job.errors[:city].any?
+      p.bg-danger
+        - @job.errors[:city].each do |error|
+          = error
+          br
+  .form-group
+    = f.label :zip_code
+    = f.text_field :zip_code, class: 'form-control'
+    - if @job.errors[:zip_code].any?
+      p.bg-danger
+        - @job.errors[:zip_code].each do |error|
+          = error
+          br
+    #number-needed
+  .form-group
+    = f.label :min_salary
+    = f.number_field :min_salary, class: 'form-control'
+    - if @job.errors[:min_salary].any?
+      p.bg-danger
+        - @job.errors[:min_salary].each do |error|
+          = error
+          br
+    #number-needed
+  .form-group
+    = f.label :max_salary
+    = f.number_field :max_salary, class: 'form-control'
+    - if @job.errors[:max_salary].any?
+      p.bg-danger
+        - @job.errors[:max_salary].each do |error|
+          = error
+          br
+    #number-needed
+  .form-group
+    = f.label :curency
+    = f.text_field :curency, class: 'form-control'
+    - if @job.errors[:curency].any?
+      p.bg-danger
+        - @job.errors[:curency].each do |error|
+          = error
+          br
+  .form-group
+    = f.label :job_description
+    = f.cktext_area :job_description, class: 'form-control'
+    span#karakter_description[style="color:red"]
+      |  500 
+    |  Characters left
+    - if @job.errors[:job_description].any?
+      p.bg-danger
+        - @job.errors[:job_description].each do |error|
+          = error
+          br
+  .form-group
+    = f.label :job_requirement
+    = f.cktext_area :job_requirement, class: 'form-control'
+    span#karakter_requirement[style="color:red"]
+      |  500 
+    |  Characters left
+    - if @job.errors[:job_requirement].any?
+      p.bg-danger
+        - @job.errors[:job_requirement].each do |error|
+          = error
+          br
+  .form-group
+    = f.label :benefits
+    = f.cktext_area :benefits, class: 'form-control'
+    span#karakter_benefits[style="color:red"]
+      |  500 
+    |  Characters left
+    - if @job.errors[:benefits].any?
+      p.bg-danger
+        - @job.errors[:benefits].each do |error|
+          = error
+          br
+  .form-group
+    = f.label :experience_list_id, "Applicant Experience"
+    = f.select :experience_list_id, @experience_collection, {include_blank:  "Select Applicant Level"}, {class: 'form-control'}
+    - if @job.errors[:experience_list_id].any?
+      p.bg-danger
+        - @job.errors[:experience_list_id].each do |error|
+          = error
+          br
+  .form-group
+    = f.label :function_list_id, "Applicant Function"
+    = f.select :function_list_id, @function_collection, {include_blank: "Select Applicant Level"}, {class: 'form-control'}
+    - if @job.errors[:function_list_id].any?
+      p.bg-danger
+        - @job.errors[:function_list_id].each do |error|
+          = error
+          br
+  .form-group
+    = f.label :employment_type_list_id, "Applicant Employment Type"
+    = f.select :employment_type_list_id, @employment_type_collection, {include_blank: "Select Applicant Employment Type"}, {class: 'form-control'}
+    - if @job.errors[:employment_type_list_id].any?
+      p.bg-danger
+        - @job.errors[:employment_type_list_id].each do |error|
+          = error
+          br
+  .form-group
+    = f.label :industry_list_id, "Applicant Industry"
+    = f.select :industry_list_id, @industry_collection, {include_blank: "Select Applicant Industry"}, {class: 'form-control'}
+    - if @job.errors[:industry_list_id].any?
+      p.bg-danger
+        - @job.errors[:industry_list_id].each do |error|
+          = error
+          br
+  .form-group
+    = f.label :education_list_id, "Applicant Education"
+    = f.select :education_list_id, @education_collection, {include_blank: "Select Applicant Education"}, {class: 'form-control'}
+    - if @job.errors[:education_list_id].any?
+      p.bg-danger
+        - @job.errors[:education_list_id].each do |error|
+          = error
+          br
+  .form-group
+    = f.label :job_search_keyword
+    = f.text_field :job_search_keyword, class: 'form-control'
+    - if @job.errors[:job_search_keyword].any?
+      p.bg-danger
+        - @job.errors[:job_search_keyword].each do |error|
+          = error
+          br
+  .form-group
+    = f.submit "Submit", class: 'btn btn-primary'
+- content_for :javascript_in_file do
+  javascript:
+    $(document).ready(function(){
+      $('#job_zip_code, #job_min_salary, #job_max_salary').numeric();
+      $('#job_job_title, #job_departement, #job_job_code, #job_country, #job_state, #job_city, #job_curency, #job_job_description, #job_job_requirement, #job_benefits, #job_job_search_keyword').focus(function(){
+        var length = this.value.length;
+        if (length == 0){
+          $(this).parent(".form-group").removeClass("has-success has-feedback").addClass("has-error");
+        }
+      });
+      $('#job_job_title').keyup(function(){
+        var length = this.value.length;
+        if (length >= 3 && length <= 100){
+          $(this).parent(".form-group").removeClass("has-error").addClass("has-success has-feedback");
+        } else{
+          $(this).parent(".form-group").removeClass("has-success has-feedback").addClass("has-error");
+        }
+      });
+      $('#job_departement, #job_job_code, #job_country, #job_state, #job_city, #job_curency, #job_job_search_keyword').keyup(function(){
+        var length = this.value.length;
+        if (length > 0){
+          $(this).parent(".form-group").removeClass("has-error").addClass("has-success has-feedback");
+        } else{
+          $(this).parent(".form-group").removeClass("has-success has-feedback").addClass("has-error");
+        }
+      });
+      $('#job_zip_code, #job_min_salary, #job_max_salary').keyup(function(){
+        if (!$.isNumeric(this.value)){
+          $('#number-needed').text("Have to input number!");
+          $(this).parent(".form-group").removeClass("has-success has-feedback").addClass("has-error");
+        } else{
+          $('#number-needed').text("");
+          $(this).parent(".form-group").removeClass("has-error").addClass("has-success has-feedback");
+        }
+      });
+      //kalem kalem kalem kalem kalem kalem kalem kalem kalem kalem kalem kalem kalem kalem kalem 
+      $('#job_job_description').keyup(function(){
+        var len = this.value.length;
+        if (len >= 500){
+          this.value = this.value.substring(0,500);
+        }
+        if (len >= 100){
+          $(this).parent(".form-group").removeClass("has-error").addClass("has-success has-feedback");
+          $('#karakter_description').css("color", "green");
+        }
+        $('#karakter_description').text(500 - len)
+      });
+      $('#job_job_requirement').keyup(function(){
+        var len = this.value.length;
+        if (len >= 500){
+          this.value = this.value.substring(0,500);
+        }
+        if (len >= 100){
+          $(this).parent(".form-group").removeClass("has-error").addClass("has-success has-feedback");
+          $('#karakter_requirement').css("color", "green");
+        }
+        $('#karakter_requirement').text(500 - len)
+      });
+      $('#job_benefits').keyup(function(){
+        var len = this.value.length;
+        if (len >= 500){
+          this.value = this.value.substring(0,500);
+        }
+        if (len >= 100){
+          $(this).parent(".form-group").removeClass("has-error").addClass("has-success has-feedback");
+          $('#karakter_benefits').css("color", "green");
+        }
+        $('#karakter_benefits').text(500 - len)
+      });
+    });

@@ -1,0 +1,38 @@
+.container
+	.row
+		.col-md-3
+			h3 Filter
+			hr
+			= render 'form_filter_applicant_status'					
+		.col-md-9
+			h3 
+				= "#{params[:status].titleize} Applicant for #{@job_title.job_title}"		
+			hr
+			= search_form_for(@search, url: company_job_applicant_status_path(@company_id, @job_id, @status ), method: :get) do |f|
+				= f.text_field :name_cont, placeholder: 'search by name', class: 'form-control'
+				br
+				= f.submit "search", class: 'btn btn-primary'
+			#list-of-applicant-status
+				= render 'applicant_status'
+			.col-md-12
+				center
+					= paginate @applicants
+
+- content_for :javascript_in_file do
+  javascript:
+    $('.filter_by_time').on('click', function(){
+    	console.log($('.form_filter').serialize());
+    	$.ajax({
+        url: Routes.applicant_status_path({status: @status}) + ".js",
+        method: 'get',
+        data: $('.form_filter').serialize()
+      });
+    });
+    $('.filter_by_gender').on('change', function(){
+    	console.log($('.form_filter').serialize());
+    	$.ajax({
+        url: Routes.applicant_status_path({status: @status}) + ".js",
+        method: 'get',
+        data: $('.form_filter').serialize()
+    	});
+    });

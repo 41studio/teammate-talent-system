@@ -1,0 +1,4 @@
+= form_for @new_comment, url: @url, remote: true do |f|
+  .form-group
+    = f.text_area :body, id: "comment_field", class: "form-control"
+  .actions = f.submit

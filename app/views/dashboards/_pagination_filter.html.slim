@@ -1,0 +1,9 @@
+center
+	= paginate @applicants, remote: true
+
+javascript:
+  $('ul.pagination').children().click(function() {
+    $('html, body').animate({
+        scrollTop: $("#list-of-applicant").offset().top
+    }, 300);
+	});

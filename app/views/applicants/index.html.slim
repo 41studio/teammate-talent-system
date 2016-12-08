@@ -1,0 +1,39 @@
+h1 Listing applicants
+
+table border="1"
+  thead
+    tr
+      th Name
+      th Gender
+      th Date birth
+      th Email
+      th Headline
+      th Phone
+      th Address
+      th Photo
+      th Resume
+      th Status
+      th
+      th
+      th
+
+  tbody
+    - @applicants.each do |applicant|
+      tr
+        td = applicant.name
+        td = applicant.gender
+        td = applicant.date_birth
+        td = applicant.email
+        td = applicant.headline
+        td = applicant.phone
+        td = applicant.address
+        td = image_tag applicant.photo.thumb.url
+        td = link_to "Download Resume",  applicant.resume_url, target: '_blank'
+        td = applicant.status
+        td = link_to 'Show', applicant
+        td = link_to 'Edit', edit_job_applicant_path(applicant.job_id,applicant)
+        td = link_to 'Destroy', applicant, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'Back', root_path

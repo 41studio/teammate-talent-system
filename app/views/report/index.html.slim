@@ -1,0 +1,47 @@
+.container
+	.row
+		.col-md-3
+			h3 Filter
+			hr
+			= render 'report/form_filter'
+		.col-md-9
+			h3 Report
+			hr
+			.row
+				.col-md-12
+					= link_to "Download Report", company_report_download_path(current_user.company_id, format: :pdf)
+			#line_chart
+				= render 'report/line_chart'
+			br
+				- @jobs.each do |job|
+					.col-md-4
+						- if job.applicant_stage_per_job(job.id).present?
+							.panel.panel-default
+								.panel-body
+									center
+										= job.job_title
+									= pie_chart job.applicant_stage_per_job(job.id)
+						-else
+							.panel.panel-default
+								.panel-body
+									center
+										= job.job_title
+										p Empty Chart
+- content_for :javascript_in_file do
+  javascript:
+    $('.filter_by_time').on('click', function(){
+    	console.log($('.form_filter').serialize());
+    	$.ajax({
+        url: Routes.company_report_index_path("#{current_user.company_id}") + ".js",
+        method: 'get',
+        data: $('.form_filter').serialize()
+      });
+    });
+    $('.filter_by_stage, .filter_by_job, .filter_by_gender, .filter_by_consideration').on('change', function(){
+    	console.log($('.form_filter').serialize());
+    	$.ajax({
+        url: Routes.company_report_index_path("#{current_user.company_id}") + ".js",
+        method: 'get',
+        data: $('.form_filter').serialize()
+    	});
+    });

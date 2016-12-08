@@ -1,0 +1,88 @@
+.container
+  p#notice = notice
+  - if user_signed_in? && current_user.company_id == @job.company_id
+    - if @job.status == "draft"
+      = link_to "Publish job", company_upgrade_status_path(current_user.company_id, @job.id, "published")
+      hr 
+      p
+        strong Job status 
+        = @job.status
+    - else
+      = ' '
+  .row
+    .col-md-8.col-md-offset-2
+      ol.breadcrumb
+        li = link_to "All Jobs", root_path
+        li = @job.job_title
+      h2 
+        |
+        b = @job.job_title
+      span.glyphicon.glyphicon-map-marker
+      |     
+      = "#{@job.city}, #{@job.state}, #{@job.country}"
+      br
+      span.glyphicon.glyphicon-briefcase
+      |     
+      = @job.departement
+      hr
+      .row
+        .col-md-2
+          p Job Type
+        .col-md-6
+          = @job.get_employment_type_name.employment_type
+      .row
+        .col-md-2
+          p Job Industry
+        .col-md-6
+          = @job.get_industry_name.industry
+      .row
+        .col-md-2
+          p Job Function
+        .col-md-6
+          = @job.get_function_name.function
+      .row
+        .col-md-2
+          p Experience
+        .col-md-6
+          = @job.get_experience_name.experience
+      .row
+        .col-md-2
+          p Salary
+        .col-md-6
+          = "#{@job.curency} #{@job.min_salary} - #{@job.max_salary}"
+      .row
+        .col-md-2
+          p Education
+        .col-md-6
+          = @job.get_education_name.education
+      h3
+        |
+        b Description
+      p 
+        = @job.job_description
+      h3
+        |
+        b Requirements
+      p 
+        = @job.job_requirement
+      h3
+        |
+        b Benefits
+      p 
+        = @job.benefits
+
+      - if user_signed_in? && current_user.company_id == @job.company_id
+        = link_to 'Back', dashboards_path
+        '|
+        = link_to 'Delete', company_job_path(params[:company_id], @job), data: { confirm: 'Are you sure?' }, method: :delete
+        - if @job.status == "published"
+          h3
+            | list of applicants
+          =render @job.applicants
+        
+      - elsif user_signed_in? && current_user.company_id != @job.company_id
+        = link_to 'back', dashboards_path
+
+      - else
+        = link_to 'apply this job', new_company_job_applicant_path(@job.company_id, @job), class: 'btn btn-primary'
+

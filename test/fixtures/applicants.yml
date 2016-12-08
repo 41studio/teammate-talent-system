@@ -1,0 +1,59 @@
+# == Schema Information
+#
+# Table name: applicants
+#
+#  id         :integer          not null, primary key
+#  name       :string(255)      default(""), not null
+#  gender     :string(255)      default(""), not null
+#  date_birth :date             not null
+#  email      :string(255)      default(""), not null
+#  headline   :string(255)      default(""), not null
+#  phone      :string(255)      default(""), not null
+#  address    :string(255)      default(""), not null
+#  photo      :string(255)      default(""), not null
+#  resume     :string(255)      default(""), not null
+#  status     :string(255)      default("Applied"), not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  job_id     :integer
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  gender: MyString
+  date_birth: 2016-09-13
+  email: MyString
+  headline: MyString
+  phone: MyString
+  address: MyString
+  photo: MyString
+  name_school: MyString
+  state_study: MyString
+  degree: MyString
+  company_name: MyString
+  industry: MyString
+  title: MyString
+  summary: MyString
+  resume: MyString
+  status: MyString
+
+two:
+  name: MyString
+  gender: MyString
+  date_birth: 2016-09-13
+  email: MyString
+  headline: MyString
+  phone: MyString
+  address: MyString
+  photo: MyString
+  name_school: MyString
+  state_study: MyString
+  degree: MyString
+  company_name: MyString
+  industry: MyString
+  title: MyString
+  summary: MyString
+  resume: MyString
+  status: MyString

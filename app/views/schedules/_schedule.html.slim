@@ -1,0 +1,17 @@
+tr
+	td.padth
+		= schedule.category
+	td.padth
+		= schedule.assignee.fullname
+	td.padth
+		= schedule.start_date_display
+	td.padth
+		= schedule.end_date_display
+	- if schedule.out_of_date
+		td.padth	
+			= link_to " Delete ", company_job_applicant_schedule_path(params[:company_id], schedule.applicant.job_id, schedule.applicant_id, schedule), data: { confirm: 'Are you sure want to delete this schedule?' }, method: :delete
+	- else		
+		td.padth
+			= link_to " Edit ", edit_company_job_applicant_schedule_path(params[:company_id], schedule.applicant.job_id, schedule.applicant_id, schedule)
+			||
+			= link_to " Canceled ", company_job_applicant_schedule_path(params[:company_id], schedule.applicant.job_id, schedule.applicant_id, schedule), data: { confirm: 'Are you sure want to cancel this schedule?' }, method: :delete

@@ -1,0 +1,46 @@
+- if current_user.company.present?
+	.container
+		.row
+			.col-md-3
+				h3 Filter
+				hr
+				= render 'report/form_filter'					
+			.col-md-9
+				h3 Applicant List
+				hr
+				= search_form_for(@searched_applicants, url: applicant_path, method: :get) do |f|
+					= f.text_field :name_cont, placeholder: 'search by name', class: 'form-control'
+					br
+					= f.submit "search", class: 'btn btn-primary'
+				#list-of-applicant
+					= render 'dashboards/applicant_list'
+				.col-md-12#pagination
+					= render 'dashboards/pagination_filter'
+- else
+  p = "You must create company first"
+
+  
+- content_for :javascript_in_file do
+  javascript:
+    $('.filter_by_time').on('click', function(){
+    	console.log($('.form_filter').serialize());
+    	$.ajax({
+        url: Routes.applicant_path(),
+        dataType: 'script',
+        method: 'get',
+        data: $('.form_filter').serialize()
+      });
+    }
+
+    $('.filter_by_time').on('click', function(){
+      ajaxFilter()
+    });
+    $('.filter_by_stage, .filter_by_job, .filter_by_gender, .filter_by_consideration').on('change', function(){
+    	console.log($('.form_filter').serialize());
+    	$.ajax({
+        url: Routes.applicant_path(),
+        dataType: 'script',
+        method: 'get',
+        data: $('.form_filter').serialize()
+    	});
+    });

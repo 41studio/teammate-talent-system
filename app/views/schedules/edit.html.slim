@@ -1,0 +1,7 @@
+.container
+	h1 Editing schedule
+
+	== render 'form'
+
+	= link_to 'Back', company_job_applicant_path(current_user.company_id, @applicant.job_id, @applicant)
+

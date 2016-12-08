@@ -1,0 +1,6 @@
+.container
+	h1 New applicant
+
+	== render 'form'
+
+	= link_to 'Back', company_job_path(@job.company_id, @job)

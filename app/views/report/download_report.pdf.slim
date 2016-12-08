@@ -1,0 +1,109 @@
+/ = render 'report/report_header'
+.container
+	br
+	h3 Main Content Report
+	center
+		h4 Applicant chart
+	= line_chart data, xtitle: @x_title, ytitle: 'Applicant'
+	- @jobs.each do |job|
+		.row
+			- if job.applicant_stage_per_job(job.id).present?
+				.col-md-4
+					.panel.panel-default
+						.panel-body
+						center
+							= job.job_title
+						= pie_chart job.applicant_stage_per_job(job.id)
+				.col-md-8
+					.panel.panel-default
+						.panel-body
+							h3 Details
+							hr
+							.col-md-6
+								table
+									tr
+										td[style="width:120px;"]
+											p Job Title
+										td
+											p = job.job_title
+									tr
+										td
+											p Departement
+										td
+											p = job.departement
+									tr
+										td
+											p Country
+										td
+											p = job.country
+									tr
+										td
+											p State
+										td
+											p = job.state
+									tr
+										td
+											p City
+										td
+											p = job.city
+									tr
+										td
+											p Company
+										td
+											p = job.company.company_name
+							.col-md-6
+								table
+									tr
+										th[style="width:150px;"]
+												p Applicant Stages
+										th
+											center
+												p Total of Each Stage
+									tr
+										td
+											p Applied
+										td
+											center
+												= job.applied_count
+									tr
+										td
+											p Phone Screen
+										td
+											center
+												= job.phone_screen_count
+									tr
+										td
+											p Interview
+										td
+											center
+												= job.interview_count
+									tr
+										td
+											p Offer
+										td
+											center
+												= job.offer_count
+									tr
+										td
+											p Hired
+										td
+											center
+												= job.hired_count
+									tr [style="background-color: #AAAAAA"]
+										td
+											p Total
+										td
+											center
+												= job.applicants_count
+			-else
+				.col-md-4
+					.panel.panel-default
+						.panel-body
+							center
+								= job.job_title
+							center
+								p Empty Chart
+				.col-md-8
+					.panel.panel-default
+						.panel-body
+							h3 Empty

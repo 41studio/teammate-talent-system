@@ -1,0 +1,68 @@
+/ table
+/   thead
+/     tr
+/       th Job
+/       th Applicant
+/       th Start Date
+/       th End Date
+/       th Category
+/       th Assignee
+/   tbody  
+/     -@schedules.each do |schedule|
+/       tr
+/         td = " #{schedule.applicant.job.job_title}"  
+/         td = " #{schedule.applicant.name}"  
+/         td = " #{schedule.start_date.to_formatted_s(:long_ordinal)}"
+/         td = " #{schedule.end_date.to_formatted_s(:long_ordinal)}"
+/         td = " #{schedule.category}"
+/         td = " #{schedule.assignee.fullname}"
+/ hr
+
+.container
+  .row
+    .col-md-3
+      h3 Filter
+      hr
+      = form_tag nil, class: 'form_filter'
+        .panel.panel-default
+          .panel-body
+            .form-group
+              = label_tag 'by_active_job', 'By Active Job'
+              = select_tag 'filter_schedule[by_active_job]', options_for_select(@job_collection), include_blank: "-- All active job --", class: 'form-control', id: 'js-by_active_job'
+            .form-group
+              = label_tag 'by_applicant', 'By Applicant'
+              = select_tag 'filter_schedule[by_applicant]', options_for_select(@applicant_collection), include_blank: "-- All applicant --", class: 'form-control', id: 'js-by_applicant'
+            .form-group
+              = label_tag 'by_activity', 'By Activity'
+              = select_tag 'filter_schedule[by_activity]',  options_for_select(@category_collection), include_blank: "-- All activity --", class: 'form-control', id: 'by_activity'
+    .col-md-9
+      h3 Agenda
+      hr
+      - if current_user.company.present?
+        #calendar
+          = render partial: 'schedules/calendar', locals: {event: @schedules}
+      - else
+        p = "You must create company first"
+- content_for :javascript_in_file do
+  javascript:
+    ajaxFilter = function(){
+      $.ajax({
+        url: Routes.filter_company_schedules_path("#{current_user.company_id}"),
+        dataType: 'script',
+        method: 'get',
+        data: $('.form_filter').serialize()
+      });
+    }
+
+    $("#js-by_active_job").on('change', function(){
+      $("#js-by_applicant").val("")
+      $("#js-by_applicant").children().show()
+      $("#js-by_applicant").children().not("[data-job-id='" + $(this).val() + "']").hide()
+      ajaxFilter()
+    });
+
+    $("#js-by_applicant").on('change', function(event){
+      jobId = $(this.options[event.target.selectedIndex]).data('job-id')
+      $("#js-by_active_job").val(jobId)
+      ajaxFilter()
+    });

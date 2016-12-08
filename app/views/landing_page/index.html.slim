@@ -1,0 +1,64 @@
+.container	
+    p#notice = notice
+	h1
+		| Welcome
+	hr
+	h3
+		| Search Jobs
+	= search_form_for(@search, url: root_path, method: :get, remote: true) do |f|
+		.row
+			.col-md-6
+				= f.text_field :keyword_cont, placeholder: 'name or keyword job', class: 'form-control'
+				br
+			.col-md-6
+				= f.text_field :city_cont, placeholder: 'location city', class: 'form-control'
+				br
+		.row
+			.col-md-6
+				= f.text_field :company_cont, placeholder: 'e.g Traveloka (company name)', class: 'form-control'
+				br
+			.col-md-6
+				= f.text_field :industry_cont, placeholder: 'e.g Airlines, Marketing, Banking (industry)', class: 'form-control', id: 'js-autocomplete'
+				br
+		br
+		.row
+			.col-md-offset-3.col-md-6
+				.form-group
+					= f.label :max_salary_lteq, "Max Salary"
+					= f.text_field :max_salary_lteq, placeholder: 'e.g 5000000', class: 'form-control'
+				.form-group
+					= f.label :min_salary_gteq,"Min Salary"
+					= f.text_field :min_salary_gteq, placeholder: 'e.g 1000000', class: 'form-control'
+		.row
+			.col-md-offset-3.col-md-6
+				= f.submit "search", class: 'btn btn-block btn-primary'
+	br
+	p Sort :
+	table
+		tr
+			th.padth = sort_link(@search, :job_title, "Job title")
+			th.padth = sort_link(@search, :created_at, "Date Published")
+	hr
+	- if @jobs.present?
+		#jobs
+			= render partial: 'landing_page/job'
+	- else
+		blockquote
+			h3 style="margin:0px;" No Jobs Related
+
+javascript:
+	$( "#js-autocomplete" ).autocomplete({
+      source: function( request, response ) {
+        $.ajax( {
+          url: Routes.autocomplete_industry_path({q: request.term}),
+          dataType: "JSON",
+          success: function( data ) {
+            response( data );
+          }
+        } );
+      },
+      minLength: 3,
+      select: function( event, ui ) {
+        log( "Selected: " + ui.item.value + " aka " + ui.item.id );
+      }
+    });

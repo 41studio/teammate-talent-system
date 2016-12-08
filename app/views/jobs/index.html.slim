@@ -1,0 +1,58 @@
+h1 Listing jobs
+
+= form_tag(company_jobs_path, method: 'get', id: 'search-form') do
+  = text_field_tag :search, params[:search], placeholder: 'search job'
+  = submit_tag "search"
+br
+table border="1"
+  thead
+    tr
+      th Job title
+      th Departement
+      th Job code
+      th Country
+      th State
+      th City
+      th Zip code
+      th Min salary
+      th Max salary
+      th Curency
+      th Job description
+      th Job requirement
+      th Benefits
+      th Aplicant experience
+      th Aplicant function
+      th Aplicant employment type
+      th Aplicant industry
+      th Aplicant education
+      th Job search keyword
+      th
+      th
+      th
+
+  tbody
+    - @jobs.each do |job|
+      tr
+        td = job.job_title
+        td = job.departement
+        td = job.job_code
+        td = job.country
+        td = job.state
+        td = job.city
+        td = job.zip_code
+        td = job.min_salary
+        td = job.max_salary
+        td = job.curency
+        td = job.job_description
+        td = job.job_requirement
+        td = job.benefits
+        td = job.experience_list_id
+        td = job.function_list_id
+        td = job.employment_type_list_id
+        td = job.industry_list_id
+        td = job.education_list_id
+        td = job.job_search_keyword
+        td = link_to 'Show', job
+
+br
+= link_to 'Back', root_path
