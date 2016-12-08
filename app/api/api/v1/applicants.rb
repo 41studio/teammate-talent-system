@@ -98,7 +98,7 @@ module API
                   required: true
                 }
         end
-        params do
+        params do 
           use :applicant_id       
         end
         get ":id/detail" do

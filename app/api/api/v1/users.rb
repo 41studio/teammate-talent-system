@@ -50,7 +50,8 @@ module API
         post '/login' do
           begin
             firebase_access_token = params[:firebase_access_token] if params[:firebase_access_token].present?
-            if user = User.authenticate_for_api(params[:email], params[:password], firebase_access_token)              present user, with: API::V1::Entities::UserEntity, only: [:fullname, :email, :token]
+            if user = User.authenticate_for_api(params[:email], params[:password], firebase_access_token)
+              present user, with: API::V1::Entities::UserEntity, only: [:fullname, :email, :token]
             else
               error!({ status: :error, message: "Invalid Email or Password" }, 401)
             end
