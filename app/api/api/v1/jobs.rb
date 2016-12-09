@@ -263,11 +263,12 @@ module API
         params do
           use :job_id       
           use :pagination
-          requires :status        ,type: String, desc: "Applicants status", allow_blank: false
+          optional :status        ,type: String, desc: "Applicants status", allow_blank: false
         end
         get ":id/applicants" do
           begin
             applicants_with_status = @job.applicants.where(status: params[:status])
+            present :user, current_user, with: API::V1::Entities::UserEntity, only: [:avatar]
             present :applicants, applicants_with_status.page(params[:page]), with: API::V1::Entities::ApplicantEntity, except: [ { educations: [:id], experiences: [:id] }]
           rescue ActiveRecord::RecordNotFound
             record_not_found_message
