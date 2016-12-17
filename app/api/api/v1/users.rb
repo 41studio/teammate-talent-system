@@ -41,15 +41,18 @@ module API
         desc "User's Login" do
           detail " : user get token"
           named 'users'
+          headers firebase_access_token: {
+            description: 'Valdates your identity',
+            required: true
+          }           
         end
         params do
           requires :email                  ,type: String, desc: "User email"
           requires :password               ,type: String, desc: "User password"
-          optional :firebase_access_token  ,type: String, desc: "Firebase access token"
         end
         post '/login' do
           begin
-            firebase_access_token = params[:firebase_access_token] if params[:firebase_access_token].present?
+            firebase_access_token = headers['Firebase-Access-Token'] if headers['Firebase-Access-Token'].present?
             if user = User.authenticate_for_api(params[:email], params[:password], firebase_access_token)
               present user, with: API::V1::Entities::UserEntity, only: [:fullname, :email, :token]
             else
@@ -90,6 +93,7 @@ module API
             @user = User.create(user_params)
             if @user.save!
               { status: "A message with a confirmation link has been sent to your email address. Please follow the link to activate your account." }
+              @user
             else
               error_message
             end
@@ -147,8 +151,11 @@ module API
           } 
         end
         params do
-          requires :user, type: Hash do
-            use :user_params
+          optional :user, type: Hash do
+            optional :first_name                        ,type: String, desc: "User first name", allow_blank: true
+            optional :last_name                         ,type: String, desc: "User last name", allow_blank: true
+            optional :email                             ,type: String, desc: "User email"
+            optional :avatar                            ,type: File, desc: "User avatar", allow_blank: true
             optional :password                          ,type: String, desc: "User password 
             (leave blank if you don't want to change it) ", allow_blank: true
             optional :password_confirmation             ,type: String, desc: "User password confirmation", allow_blank: true
@@ -159,6 +166,7 @@ module API
         put '/update' do
           if @user.update_with_password(user_params)
             { status: "User Updates" }
+            @user
           else
             error_message
           end
