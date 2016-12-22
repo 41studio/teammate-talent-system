@@ -155,7 +155,7 @@ module API
             optional :first_name                        ,type: String, desc: "User first name", allow_blank: true
             optional :last_name                         ,type: String, desc: "User last name", allow_blank: true
             optional :email                             ,type: String, desc: "User email"
-            optional :avatar                            ,type: File, desc: "User avatar", allow_blank: true
+            optional :avatar                            ,type: File,   desc: "User avatar", allow_blank: true
             optional :password                          ,type: String, desc: "User password 
             (leave blank if you don't want to change it) ", allow_blank: true
             optional :password_confirmation             ,type: String, desc: "User password confirmation", allow_blank: true
