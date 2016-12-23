@@ -52,7 +52,7 @@ module API
           unless request.path.include?("jobs/search")
             authenticate!
             set_jobs
-            unless request.path.include?("jobs/all")
+            unless ["all", "new", "create"].any? { |word| request.path.include?(word) }
               set_job
             end
           end
@@ -118,9 +118,10 @@ module API
                 }
         end
         post '/create' do
-          @job = jobs.new(job_params)
+          @job = @jobs.new(job_params)
           if @job.save!
             { status: :success }
+            @job
           else
             error_message
           end
@@ -161,6 +162,7 @@ module API
         put ':id/update' do
           if @job.update(job_params)
             { status: "Job updated" }
+            @job
           else
             error_message
           end
@@ -181,6 +183,7 @@ module API
           begin
             if @job.destroy!
               { status: "Job deleted" }
+              @job
             end
           rescue ActiveRecord::RecordNotFound
             record_not_found_message
@@ -219,6 +222,7 @@ module API
           begin
             if @job.update_attribute(:status, params[:status])
               { status: :update_success }
+              @job
             else
               error_message
             end
@@ -267,9 +271,19 @@ module API
         end
         get ":id/applicants" do
           begin
-            applicants_with_status = @job.applicants.where(status: params[:status])
-            present :user, current_user, with: API::V1::Entities::UserEntity, only: [:avatar]
-            present :applicants, applicants_with_status.page(params[:page]), with: API::V1::Entities::ApplicantEntity, except: [ { educations: [:id], experiences: [:id] }]
+            # applicants = params[:status].present? ? @job.applicants.where(status: params[:status]) : @job.applicants
+            # present :applicants, applicants.page(params[:page]), with: API::V1::Entities::ApplicantEntity, except: [ { educations: [:id], experiences: [:id] }]
+          
+            applicants = params[:status].present? ? @job.applicants.where(status: params[:status]) : @job.applicants
+            result = {'Applicants' => []}
+
+            applicants.page(params[:page]).each do |applicant|
+              applicant = API::V1::Entities::ApplicantEntity.represent(applicant, except: [ { educations: [:id], experiences: [:id] }]).as_json
+              applicant['user_avatar'] = API::V1::Entities::UserEntity.represent(current_user, only: [:avatar]).as_json
+              result['Applicants'] << applicant
+            end
+
+            result
           rescue ActiveRecord::RecordNotFound
             record_not_found_message
            end
