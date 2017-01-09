@@ -100,11 +100,11 @@ class JobsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_job
-      @job = Job.find(params[:id])
+      @job = Job.friendly.find(params[:id])
     end
 
     def set_company
-      @company = Company.find(params[:company_id])
+      @company = Company.friendly.find(params[:company_id])
     end
 
     def set_collection
@@ -119,14 +119,15 @@ class JobsController < ApplicationController
       if current_user.company_id != set_company.id
         redirect_to dashboards_path
       end
+    end
     
     def job_allowed
-      company_id = params[:company_id].to_i
-      if set_job.company_id != company_id
-         redirect_to root_path, notice: 'No Job available' 
+      company_id = params[:company_id]
+      if set_job.company.friendly_id != company_id
+        redirect_to root_path, notice: 'No Job available' 
       end
     end
-  end
+    
     # Never trust parameters from the scary internet, only allow the white list through.
     def job_params
       params.require(:job).permit(:job_title, :departement, :job_code, :country, :state, :city, :zip_code, :min_salary, :max_salary, :curency, :job_description, :job_requirement, :benefits, :experience_list_id, :function_list_id, :employment_type_list_id, :industry_list_id, :education_list_id, :job_search_keyword)

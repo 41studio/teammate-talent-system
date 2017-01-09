@@ -14,12 +14,14 @@
 #
 
 class Company < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :company_name, use: :slugged
 	has_many :jobs, dependent: :destroy
 	has_many :applicants, through: :jobs
 	has_many :schedules, through: :applicants
 	has_many :users
 	
-	EMAIL_REGEX = /\A[\w]([^@\s,;]+)@(([\w-]+\.)+(com|edu|org|net|gov|mil|biz|info|co.id))\z/i
+  EMAIL_REGEX = /\A[\w]([^@\s,;]+)@(([\w-]+\.)+(com|edu|org|net|gov|mil|biz|info|co.id))\z/i
 	mount_uploader :photo_company, PhotoCompanyUploader
 	
 	validates :company_name, :company_website, :company_email, :company_phone, :industry, :photo_company, presence: true

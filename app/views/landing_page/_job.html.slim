@@ -11,12 +11,12 @@ p = "#{@jobs.total_count} Jobs Available"
 							= job.job_title
 					hr
 					.panel-body
-						= link_to job.company.company_name, company_path(job.company_id)
+						= link_to job.company.company_name, company_path(job.company.friendly_id)
 						br
 						= "#{job.city}, #{job.state}, #{job.country}"
 						hr
 						.row
 							.col-md-12
-								= link_to "View Detail", company_job_path(job.company_id, job), { class: 'btn btn-block btn-primary', style: 'border-radius:0px;' }
+								= link_to "View Detail", company_job_path(job.company.friendly_id, job), { class: 'btn btn-block btn-primary', style: 'border-radius:0px;' }
 center
 	= paginate @jobs

@@ -22,13 +22,11 @@ class CompaniesController < ApplicationController
 
   # GET /companies
   # GET /companies.json
-  def index
-  end
+  def index; end
 
   # GET /companies/1
   # GET /companies/1.json
-  def show
-  end
+  def show; end
 
   # GET /companies/new
   def new
@@ -36,36 +34,27 @@ class CompaniesController < ApplicationController
   end
 
   # GET /companies/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /companies
   # POST /companies.json
   def create
     @company = Company.new(company_params)
-    respond_to do |format|
-      if @company.save
-        current_user.update_attribute(:company_id, @company.id)
-        format.html { redirect_to dashboards_path, notice: 'Company was successfully created.' }
-        format.json { render :show, status: :created, location: @company }
-      else
-        format.html { render :new }
-        format.json { render json: @company.errors, status: :unprocessable_entity }
-      end
+    if @company.save
+      current_user.update_attribute(:company_id, @company.id)
+      redirect_to dashboards_path, notice: 'Company was successfully created.'
+    else
+      render :new
     end
   end
 
   # PATCH/PUT /companies/1
   # PATCH/PUT /companies/1.json
   def update
-    respond_to do |format|
-      if @company.update(company_params)
-        format.html { redirect_to dashboards_path, notice: 'Company was successfully updated.' }
-        format.json { render :show, status: :ok, location: @company }
-      else
-        format.html { render :edit }
-        format.json { render json: @company.errors, status: :unprocessable_entity }
-      end
+    if @company.update(company_params)
+      redirect_to dashboards_path, notice: 'Company was successfully updated.'
+    else
+      render :edit
     end
   end
 
@@ -73,23 +62,16 @@ class CompaniesController < ApplicationController
   # DELETE /companies/1.json
   def destroy
     @company.destroy
-    respond_to do |format|
-      format.html { redirect_to dashboards_path, notice: 'Company was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to dashboards_path, notice: 'Company was successfully destroyed.'
   end
 
   def invite_personnel
     personnel_email = params[:email]
     if valid_email?(personnel_email)    
-    respond_to do |format|
       if User.invite!({email: personnel_email, company_id: current_user.company_id}, current_user)
-        format.html { redirect_to dashboards_path, notice: 'User invited!' }
-        # format.json { render :show, status: :ok, location: @company }
+        redirect_to dashboards_path, notice: 'User invited!'
       else
-        format.html { redirect_to dashboards_path }
-        # format.json { render json: @company.errors, status: :unprocessable_entity }
-        end
+        redirect_to dashboards_path
       end
     else
       redirect_to dashboards_path, notice: 'email is not valid'
@@ -117,9 +99,9 @@ class CompaniesController < ApplicationController
 
     def set_company
       if user_signed_in?
-        @company = Company.find(current_user.company_id)
+        @company = Company.friendly.find(current_user.company_id)
       else
-        @company = Company.find(params[:id])
+        @company = Company.friendly.find(params[:id])
       end
     end
 

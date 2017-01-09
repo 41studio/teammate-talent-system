@@ -29,6 +29,8 @@
 #
 
 class Job < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :job_title, use: :slugged
 	alias_attribute :job_status, :status
 	has_many :applicants, dependent: :destroy
 	belongs_to :company
