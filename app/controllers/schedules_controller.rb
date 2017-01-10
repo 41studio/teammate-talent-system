@@ -13,7 +13,7 @@
 
 class SchedulesController < ApplicationController
   before_action :set_applicant, :set_location, :set_assignee_collection, except: [:index, :filter]
-  before_action :set_filter_collection, only: [:index]
+  before_action :set_filter_collection, only: [:index, :new]
   before_action :new_schedule_path, only: [:new, :create]
   before_action :set_schedule, :edit_schedule_path, only: [:destroy, :edit, :update]
   # protect_from_forgery except: :index

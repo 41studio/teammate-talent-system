@@ -5,7 +5,7 @@ p = "#{@jobs.total_count} Jobs Available"
 			.panel.panel-default[style="border-radius:0px;"]
 				.panel-body
 					.panel-body
-						= link_to company_job_path(job.company_id, job) do
+						= link_to company_job_path(job.company.friendly_id, job) do
 							= image_tag job.company.photo_company.thumb.url 
 							|   
 							= job.job_title

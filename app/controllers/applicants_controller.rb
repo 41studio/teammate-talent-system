@@ -52,7 +52,7 @@ class ApplicantsController < ApplicationController
   # GET /applicants/new
   def new
     @company = set_company
-    @form = @company.jobs.find(params[:job_id]).applicants.new
+    @form = @company.jobs.friendly.find(params[:job_id]).applicants.new
     @applicant = Applicant.new
     @applicant.educations.build
     @applicant.experiences.build
@@ -75,35 +75,27 @@ class ApplicantsController < ApplicationController
   # POST /applicants
   # POST /applicants.json
   def create
-    @job = Job.find(params[:job_id])
+    @job = Job.friendly.find(params[:job_id])
     @applicant = @job.applicants.new(applicant_params)
     @form = @applicant
     @applicant.status = "applied"
-    respond_to do |format|
-      if @applicant.save
-        @applicant.send_notification!("New Applicant")
-        SendMail.delay.send_email_after_apply(@applicant, @job)
-        SendMail.send_email_to_company_after_applicant_applied(@job.company.users, @job, @applicant)
-        format.html { redirect_to company_job_path(@job.company_id, @job), notice: 'Applicant was successfully created.' }
-        format.json { render :show, status: :created, location: @applicant }
-      else    
-        format.html { render :new }
-        format.json { render json: @applicant.errors, status: :unprocessable_entity }
-      end
+    if @applicant.save
+      @applicant.send_notification!("New Applicant")
+      SendMail.delay.send_email_after_apply(@applicant, @job)
+      SendMail.send_email_to_company_after_applicant_applied(@job.company.users, @job, @applicant)
+      redirect_to company_job_path(@job.company.friendly_id, @job), notice: 'Applicant was successfully created.'
+    else    
+      render :new
     end
   end
 
   # PATCH/PUT /applicants/1
   # PATCH/PUT /applicants/1.json
   def update
-    respond_to do |format|
-      if @applicant.update(applicant_params)
-        format.html { redirect_to @applicant, notice: 'Applicant was successfully updated.' }
-        format.json { render :show, status: :ok, location: @applicant }
-      else
-        format.html { render :edit }
-        format.json { render json: @applicant.errors, status: :unprocessable_entity }
-      end
+    if @applicant.update(applicant_params)
+      redirect_to @applicant, notice: 'Applicant was successfully updated.'
+    else
+      render :edit
     end
   end
 
@@ -111,10 +103,8 @@ class ApplicantsController < ApplicationController
   # DELETE /applicants/1.json
   def destroy
     @applicant.destroy
-    respond_to do |format|
-      format.html { redirect_to applicants_url, notice: 'Applicant was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to applicants_url, notice: 'Applicant was successfully destroyed.'
+    head :no_content
   end
 
   def applicant_status
