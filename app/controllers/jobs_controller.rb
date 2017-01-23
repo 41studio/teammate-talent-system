@@ -3,9 +3,9 @@
 # Table name: jobs
 #
 #  id                      :integer          not null, primary key
-#  job_title               :string(255)      default(""), not null
+#  title               :string(255)      default(""), not null
 #  departement             :string(255)      default(""), not null
-#  job_code                :string(255)      default(""), not null
+#  code                :string(255)      default(""), not null
 #  country                 :string(255)      default(""), not null
 #  state                   :string(255)      default(""), not null
 #  city                    :string(255)      default(""), not null
@@ -13,10 +13,10 @@
 #  min_salary              :integer          default(0), not null
 #  max_salary              :integer          default(0), not null
 #  curency                 :string(255)      default(""), not null
-#  job_description         :text(65535)      not null
-#  job_requirement         :text(65535)      not null
+#  description         :text(65535)      not null
+#  requirement         :text(65535)      not null
 #  benefits                :text(65535)      not null
-#  job_search_keyword      :string(255)      default(""), not null
+#  search_keyword      :string(255)      default(""), not null
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
 #  company_id              :integer
@@ -32,7 +32,7 @@ class JobsController < ApplicationController
   skip_before_filter :authenticate_user!, only: [:index, :show]
   before_filter :user_allowed, only: [:edit, :update, :destroy, :create, :new]
   before_filter :job_allowed, only: [:show]
-  before_action :set_job, only: [:show, :edit, :update, :destroy]
+  before_action :set_job, only: [:show, :edit, :update, :destroy, :upgrade_status]
   before_action :set_company, only: [:new]
   before_action :set_collection, only: [:new, :edit, :create, :update]
 
@@ -79,21 +79,17 @@ class JobsController < ApplicationController
 
   def destroy
     @job.destroy
-    respond_to do |format|
-      format.html { redirect_to company_path(@job.company_id), notice: 'Job was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to company_path(@job.company_id), notice: 'Job was successfully destroyed.'
   end
 
   def upgrade_status
-    @job = Job.find(params[:id])
     @job.status = params[:status]
     if @job.status == "published" or @job.status == "closed"
       if @job.save!
-        redirect_to company_job_path(@job.company_id, @job), notice: 'Job was successfully '+@job.status+'.'
+        redirect_to company_job_path(@job.company.friendly_id, @job), notice: 'Job was successfully '+@job.status+'.'
       end
     else
-      redirect_to company_job_path(@job.company_id, @job), notice: 'Invalid command!'
+      redirect_to company_job_path(@job.company.friendly_id, @job), notice: 'Invalid command!'
     end
   end
 
@@ -130,6 +126,6 @@ class JobsController < ApplicationController
     
     # Never trust parameters from the scary internet, only allow the white list through.
     def job_params
-      params.require(:job).permit(:job_title, :departement, :job_code, :country, :state, :city, :zip_code, :min_salary, :max_salary, :curency, :job_description, :job_requirement, :benefits, :experience_list_id, :function_list_id, :employment_type_list_id, :industry_list_id, :education_list_id, :job_search_keyword)
+      params.require(:job).permit(:title, :departement, :code, :country, :state, :city, :zip_code, :min_salary, :max_salary, :curency, :description, :requirement, :benefits, :experience_list_id, :function_list_id, :employment_type_list_id, :industry_list_id, :education_list_id, :search_keyword)
     end
 end

@@ -149,7 +149,7 @@ class ApplicantsController < ApplicationController
         format.html
         format.js { render 'applicants/filter_applicant_status' }
     end
-    # @job_title = Job.find(params[:job_id])
+    # @title = Job.find(params[:job_id])
     # status = params[:status]
     # @status = status
     # @company_id = params[:company_id]

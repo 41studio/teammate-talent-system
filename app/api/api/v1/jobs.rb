@@ -12,11 +12,11 @@ module API
 
         def job_params
           ActionController::Parameters.new(params).require(:job).permit(
-            :job_title, :departement, :job_code, :country, :state, :city, 
-            :zip_code, :min_salary, :max_salary, :curency, :job_description, 
-            :job_requirement, :benefits, :experience_list_id, :function_list_id,
+            :title, :departement, :code, :country, :state, :city, 
+            :zip_code, :min_salary, :max_salary, :curency, :description, 
+            :requirement, :benefits, :experience_list_id, :function_list_id,
             :employment_type_list_id, :industry_list_id, :education_list_id, 
-            :job_search_keyword
+            :search_keyword
           )
         end
 
@@ -39,7 +39,7 @@ module API
         end
 
         def search_jobs(jobs, page)
-          present :jobs, jobs.page(page), with: API::V1::Entities::JobEntity, only: [:id, :job_title, :country, :state, :city, {company: [:photo_company]}]
+          present :jobs, jobs.page(page), with: API::V1::Entities::JobEntity, only: [:id, :title, :country, :state, :city, {company: [:photo_company]}]
         end
 
         def error_message
@@ -71,7 +71,7 @@ module API
         end
         get '/all' do
           begin
-            present :jobs, @jobs.order(status: :desc, created_at: :desc).page(params[:page]), with: API::V1::Entities::JobEntity, only: [:id, :job_title, :status, :created_at]
+            present :jobs, @jobs.order(status: :desc, created_at: :desc).page(params[:page]), with: API::V1::Entities::JobEntity, only: [:id, :title, :status, :created_at]
           rescue ActiveRecord::RecordNotFound
             record_not_found_message
           end          
@@ -304,13 +304,13 @@ module API
             optional :min_salary_gteq, type: Integer, desc: "Min salary"
           end
           optional :sort_by, type: Hash do
-            optional :job_title, type: String, default: 'asc', values: { value: ['asc','desc'], message: 'not valid' }, desc: "Sort by job title ASC / DESC"
+            optional :title, type: String, default: 'asc', values: { value: ['asc','desc'], message: 'not valid' }, desc: "Sort by job title ASC / DESC"
             optional :created_at, type: String, default: 'desc', values: { value: ['asc','desc'], message: 'not valid' },  desc: "Sort by created date ASC / DESC"
           end
         end
         get "/search" do
           @search = Job.search(params[:q])
-          params[:sort_by].present? ? @search.sorts = params[:sort_by].map{|k,v| "#{k.to_s} #{v.to_s}"} : @search.sorts = ['job_title asc', 'created_at desc']
+          params[:sort_by].present? ? @search.sorts = params[:sort_by].map{|k,v| "#{k.to_s} #{v.to_s}"} : @search.sorts = ['title asc', 'created_at desc']
           @jobs = @search.result.published_jobs
           @jobs ? search_jobs(@jobs, params[:page]) : { status: "No Jobs Related"}
         end

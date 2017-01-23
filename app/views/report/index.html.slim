@@ -19,13 +19,13 @@
 							.panel.panel-default
 								.panel-body
 									center
-										= job.job_title
+										= job.title
 									= pie_chart job.applicant_stage_per_job(job.id)
 						-else
 							.panel.panel-default
 								.panel-body
 									center
-										= job.job_title
+										= job.title
 										p Empty Chart
 - content_for :javascript_in_file do
   javascript:

@@ -8,7 +8,7 @@ p = "#{@jobs.total_count} Jobs Available"
 						= link_to company_job_path(job.company.friendly_id, job) do
 							= image_tag job.company.photo_company.thumb.url 
 							|   
-							= job.job_title
+							= job.title
 					hr
 					.panel-body
 						= link_to job.company.company_name, company_path(job.company.friendly_id)

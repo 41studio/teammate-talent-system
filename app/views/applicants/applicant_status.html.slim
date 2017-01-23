@@ -6,7 +6,7 @@
 			= render 'form_filter_applicant_status'					
 		.col-md-9
 			h3 
-				= "#{params[:status].titleize} Applicant for #{@job.job_title}"		
+				= "#{params[:status].titleize} Applicant for #{@job.title}"		
 			hr
 			= search_form_for(@search, url: company_job_applicant_status_path(@company_id, @job.id, @status ), method: :get) do |f|
 				= f.text_field :name_cont, placeholder: 'search by name', class: 'form-control'

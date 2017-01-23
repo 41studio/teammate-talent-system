@@ -94,7 +94,7 @@ class SchedulesController < ApplicationController
     def set_filter_collection
       @category_collection  = Schedule::CATEGORY
       @applicant_collection = current_company.applicants.are_qualified.map{|applicant| [applicant.name, applicant.id, {"data-job-id": applicant.job_id}]}
-      @job_collection       = current_company.jobs.published_and_closed_jobs.map{|job| [job.job_title, job.id]}
+      @job_collection       = current_company.jobs.published_and_closed_jobs.map{|job| [job.title, job.id]}
     end
     
     def set_assignee_collection

@@ -1,10 +1,10 @@
 = form_for @job, url: @url do |f|
   .form-group
-    = f.label :job_title
-    = f.text_field :job_title, class: 'form-control'
-    - if @job.errors[:job_title].any?
+    = f.label :title
+    = f.text_field :title, class: 'form-control'
+    - if @job.errors[:title].any?
       p.bg-danger
-        - @job.errors[:job_title].each do |error|
+        - @job.errors[:title].each do |error|
           = error
           br
   .form-group
@@ -16,11 +16,11 @@
           = error
           br
   .form-group
-    = f.label :job_code
-    = f.text_field :job_code, class: 'form-control'
-    - if @job.errors[:job_code].any?
+    = f.label :code
+    = f.text_field :code, class: 'form-control'
+    - if @job.errors[:code].any?
       p.bg-danger
-        - @job.errors[:job_code].each do |error|
+        - @job.errors[:code].each do |error|
           = error
           br
   .form-group
@@ -83,25 +83,25 @@
           = error
           br
   .form-group
-    = f.label :job_description
-    = f.cktext_area :job_description, class: 'form-control'
+    = f.label :description
+    = f.cktext_area :description, class: 'form-control'
     span#karakter_description[style="color:red"]
       |  500 
     |  Characters left
-    - if @job.errors[:job_description].any?
+    - if @job.errors[:description].any?
       p.bg-danger
-        - @job.errors[:job_description].each do |error|
+        - @job.errors[:description].each do |error|
           = error
           br
   .form-group
-    = f.label :job_requirement
-    = f.cktext_area :job_requirement, class: 'form-control'
+    = f.label :requirement
+    = f.cktext_area :requirement, class: 'form-control'
     span#karakter_requirement[style="color:red"]
       |  500 
     |  Characters left
-    - if @job.errors[:job_requirement].any?
+    - if @job.errors[:requirement].any?
       p.bg-danger
-        - @job.errors[:job_requirement].each do |error|
+        - @job.errors[:requirement].each do |error|
           = error
           br
   .form-group
@@ -156,11 +156,11 @@
           = error
           br
   .form-group
-    = f.label :job_search_keyword
-    = f.text_field :job_search_keyword, class: 'form-control'
-    - if @job.errors[:job_search_keyword].any?
+    = f.label :search_keyword
+    = f.text_field :search_keyword, class: 'form-control'
+    - if @job.errors[:search_keyword].any?
       p.bg-danger
-        - @job.errors[:job_search_keyword].each do |error|
+        - @job.errors[:search_keyword].each do |error|
           = error
           br
   .form-group

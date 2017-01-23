@@ -13,10 +13,10 @@
     .col-md-8.col-md-offset-2
       ol.breadcrumb
         li = link_to "All Jobs", root_path
-        li = @job.job_title
+        li = @job.title
       h2 
         |
-        b = @job.job_title
+        b = @job.title
       span.glyphicon.glyphicon-map-marker
       |     
       = "#{@job.city}, #{@job.state}, #{@job.country}"
@@ -59,12 +59,12 @@
         |
         b Description
       p 
-        = @job.job_description
+        = @job.description
       h3
         |
         b Requirements
       p 
-        = @job.job_requirement
+        = @job.requirement
       h3
         |
         b Benefits

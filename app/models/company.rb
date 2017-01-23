@@ -39,7 +39,7 @@ class Company < ActiveRecord::Base
 		schedules = {}
 
 		self.jobs.each do |job|
-			jobs["job#{job.id}".to_s] = job.job_title
+			jobs["job#{job.id}".to_s] = job.title
 			applicant_schedules[:jobs] = jobs
 			job.applicants.each do |applicant|
 				applicants["applicant#{applicant.id}".to_s] = applicant.name

@@ -18,9 +18,9 @@
   hr style="height:1px; background-color:black;"
   p Drafted Jobs
   - @drafted_jobs.each do |job|
-    = link_to job.job_title, company_job_path(@company, job)
+    = link_to job.title, company_job_path(@company, job)
     br
-    = link_to "edit #{job.job_title}", edit_company_job_path(@company, job)
+    = link_to "edit #{job.title}", edit_company_job_path(@company, job)
     br
     = link_to "Publish Job", company_upgrade_status_path(current_user.company.friendly_id, job.friendly_id, "published")
     p
@@ -31,7 +31,7 @@
   hr style="height:1px; background-color:black;"
   p Published Jobs
   - @published_jobs.each do |job|
-    = link_to job.job_title, company_job_path(@company, job)
+    = link_to job.title, company_job_path(@company, job)
     p
       | Applicants :
       = job.applicants_count
@@ -77,7 +77,7 @@
   hr style="height:1px; background-color:black;"
   p Closed Jobs
   - @closed_jobs.each do |job|
-    = link_to job.job_title, company_job_path(@company, job)
+    = link_to job.title, company_job_path(@company, job)
     p
       | Closed 
       = time_ago_in_words(job.updated_at)

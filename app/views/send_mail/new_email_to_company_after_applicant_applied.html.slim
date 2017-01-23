@@ -1,5 +1,5 @@
 h3
-	= "New applicant has applied to #{@job.job_title}"
+	= "New applicant has applied to #{@job.title}"
 br
 table
 	tr
@@ -28,4 +28,4 @@ table
 		td
 			p = @applicant.headline
 h4 Click link below to review applicant
-= link_to "Click here!", company_job_applicant_url(@job.company_id, @job.id, @applicant.id)
+= link_to "Click here!", company_job_applicant_url(@job.company.friendly_id, @job.friendly_id, @applicant.id)

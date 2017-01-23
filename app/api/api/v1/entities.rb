@@ -55,9 +55,9 @@ module API
 
       class JobEntity < Grape::Entity
         expose :id
-        expose :job_title
+        expose :title
         expose :departement
-        expose :job_code
+        expose :code
         expose :country
         expose :state
         expose :city
@@ -65,10 +65,10 @@ module API
         expose :min_salary
         expose :max_salary
         expose :curency
-        expose :job_description
-        expose :job_requirement
+        expose :description
+        expose :requirement
         expose :benefits
-        expose :job_search_keyword
+        expose :search_keyword
         expose :status
         expose :education_list, using: "API::V1::Entities::EducationListEntity"
         expose :employment_type_list, using: "API::V1::Entities::EmploymentTypeListEntity"

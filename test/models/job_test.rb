@@ -3,7 +3,7 @@
 # Table name: jobs
 #
 #  id                      :integer          not null, primary key
-#  job_title               :string(255)      default(""), not null
+#  title               :string(255)      default(""), not null
 #  departement             :string(255)      default(""), not null
 #  job_code                :string(255)      default(""), not null
 #  country                 :string(255)      default(""), not null
