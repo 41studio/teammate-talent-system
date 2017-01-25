@@ -14,12 +14,8 @@ module API
           ActionController::Parameters.new(params).permit(:body)
         end   
 
-        def set_applicant
-          @applicant = Applicant.find(params[:applicant_id])
-        end
-
         def error_message
-            error!({ status: :error, message: @comment.errors.full_messages.first }) if @comment.errors.any?
+          error!({ status: :error, message: @comment.errors.full_messages.first}, 400) if @comment.errors.any?
         end       
       end
 
@@ -28,14 +24,14 @@ module API
           resource :comments do
   	        before do
   	        	authenticate!
-  	        	set_applicant
+  	        	find_applicant
   	        	applicant_valid
   	        end
 
             desc "Comments List Applicant" do
               detail ' : applicant comment threads (show)'
               named 'comments'
-              headers token: {
+              headers X_Auth_Token: {
                       description: 'Validates user identity by token',
                       required: true
                     }
@@ -43,18 +39,18 @@ module API
             params do
               use :applicant_id
             end        
-            get '/all' do
-              begin
-                present :comments, @applicant.comment_threads, with: API::V1::Entities::CommentEntity, except: [{ user: [:id, :first_name, :last_name, :email, :joined_at, :token] }]
-              rescue ActiveRecord::RecordNotFound
-                record_not_found_message
-              end 
+            get '/all' , failure: [
+              { code: 200, message: 'OK' },
+              { code: 400, message: "id is invalid, id does not have a valid value" },
+              { code: 401, message: "Invalid or expired token"},
+            ] do
+              present :comments, @applicant.comment_threads, with: API::V1::Entities::CommentEntity, except: [{ user: [:id, :first_name, :last_name, :email, :joined_at, :token] }]
             end
 
             desc "Comment Applicant" do
               detail ' : applicant commented by user (create comment)'
               named 'comments'
-              headers token: {
+              headers X_Auth_Token: {
                       description: 'Validates user identity by token',
                       required: true
                     }
@@ -63,16 +59,21 @@ module API
               use :applicant_id
               requires :body,         type: String,  desc: 'Comment body', allow_blank: false
             end        
-            post '/create' do
+            post '/create' , failure: [
+              { code: 201, message: 'Created' },
+              { code: 400, message: "parameter is invalid" },
+              { code: 401, message: "Invalid or expired token"},
+            ] do
               begin
                 @comment = Comment.build_from(@applicant, current_user.id, comment_params[:body])
                 if @comment.save!
                   { status: "Comment sent" }
+                  API::V1::Entities::CommentEntity.represent(@comment, only: [:body, :created_at]).as_json
                 else
                 	error_message
                 end
-              rescue ActiveRecord::RecordNotFound
-                record_not_found_message
+              rescue ActiveRecord::RecordInvalid
+                error_message
               end 
             end
 

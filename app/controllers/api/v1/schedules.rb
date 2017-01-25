@@ -6,10 +6,6 @@ module API
       helpers Helpers
 
       helpers do
-        params :applicant_id do
-          requires :applicant_id, type: Integer, desc: "Applicant id" 
-        end
-
         params :schedule_id do
           requires :id, type: Integer, desc: "Schedule id" 
         end
@@ -29,20 +25,33 @@ module API
         end
 
         def field_on_schedule_form
-          present :assignee, User.by_company_id(current_company), with: API::V1::Entities::UserEntity, only: [:id, :fullname]
+          set_company
+          present :assignee, User.by_company_id(@current_company), with: API::V1::Entities::UserEntity, only: [:id, :fullname]
           present :category_collection, Schedule.new, with: API::V1::Entities::ScheduleEntity, only: [:category_valid]
         end
 
         def schedules
-          applicant.schedules
+          @applicant.schedules
+        end
+
+        def set_applicant
+          begin
+            @applicant = Applicant.find(params[:applicant_id])
+          rescue ActiveRecord::RecordNotFound
+            error!("Applicant id is invalid, id does not have a valid value", 400)
+          end
         end
 
         def set_schedule
-          @schedule = schedules.find(params[:id])
+          begin
+            @schedule = schedules.find(params[:id])
+          rescue ActiveRecord::RecordNotFound
+            error!("Schedule id is invalid, id does not have a valid value", 400)
+          end
         end
 
         def error_message
-          error!({ status: :error, message: @schedule.errors.full_messages.first }) if @schedule.errors.any?
+          error!({ status: :error, message: @schedule.errors.full_messages.first }, 400) if @schedule.errors.any?
         end       
       end
 
@@ -51,7 +60,7 @@ module API
           resource :schedules do
             before do
               authenticate!
-              set_applicant
+              find_applicant
               applicant_valid
               unless ["all", "new", "create", ].any? { |word| request.path.include?(word) }
                 set_schedule
@@ -61,7 +70,7 @@ module API
             desc "Schedule List" do
               detail ' : schedules list on applicant'
               named 'schedules'
-              headers token: {
+              headers X_Auth_Token: {
                       description: 'Validates user identity by token',
                       required: true
                     }
@@ -69,18 +78,19 @@ module API
             params do
               use :pagination
             end
-            get '/all' do
-              begin
-                present :schedules, API::V1::Entities::ScheduleEntity.represent(schedules.order('start_date DESC').page(params[:page]), only: [:id, :start_date, :end_date, :category, :sent_email_to_applicant, { applicant: [:name], assignee: [:fullname] }])
-              rescue ActiveRecord::RecordNotFound
-                record_not_found_message
-              end          
+            get '/all' , failure: [
+              { code: 200, message: 'OK' },
+              { code: 400, message: "id is invalid, id does not have a valid value" },
+              { code: 401, message: "Invalid or expired token"},
+            ] do
+                present :schedules, API::V1::Entities::ScheduleEntity.represent(schedules.order('start_date DESC').page(params[:page]), only: [:id, :start_date, :end_date, :category, { assignee: [:fullname] }])
+                # present :schedules, API::V1::Entities::ScheduleEntity.represent(schedules.order('start_date DESC').page(params[:page]), only: [:id, :start_date, :end_date, :category, :sent_email_to_applicant, { applicant: [:name], assignee: [:fullname] }])
             end
 
             desc "New Applicant's Schedule " do
               detail " : applicant's schedule form (new)"
               named 'schedules'
-              headers token: {
+              headers X_Auth_Token: {
                       description: 'Validates user identity by token',
                       required: true
                     }
@@ -96,7 +106,7 @@ module API
               detail ' : create process (save)'
               params API::V1::Entities::ScheduleEntity.documentation
               named 'schedules'
-              headers token: {
+              headers X_Auth_Token: {
                       description: 'Validates user identity by token',
                       required: true
                     }
@@ -104,19 +114,27 @@ module API
             params do
               use :schedule
             end
-            post '/create' do
+            post '/create' , failure: [
+              { code: 201, message: 'Created' },
+              { code: 400, message: "parameter is invalid" },
+              { code: 401, message: "Invalid or expired token"},
+            ] do
               @schedule = @applicant.schedules.new(schedule_params)
-              if @schedule.save!
-                { status: "Schedule created" }
-              else
+              begin
+                if @schedule.save!
+                  @schedule
+                else
+                  error_message
+                end
+              rescue ActiveRecord::RecordInvalid
                 error_message
-              end
+              end 
             end
 
             desc "Edit Schedule" do
               detail ' : schedule edit form (edit)'
               named 'schedules'
-              headers token: {
+              headers X_Auth_Token: {
                       description: 'Validates user identity by token',
                       required: true
                     }
@@ -125,7 +143,11 @@ module API
               use :applicant_id
               use :schedule_id
             end
-            get ':id/edit' do
+            get ':id/edit' , failure: [
+              { code: 200, message: 'OK' },
+              { code: 400, message: "id is invalid, id does not have a valid value" },
+              { code: 401, message: "Invalid or expired token"},
+            ] do
               present :schedule, @schedule, with: API::V1::Entities::ScheduleEntity, only: [:start_date, :end_date, :category , { applicant: [:name], assignee: [:fullname] }]
               field_on_schedule_form
             end     
@@ -134,7 +156,7 @@ module API
               detail ' : update process (update)'
               # params API::V1::Entities::ScheduleEntity.documentation
               named 'schedules'
-              headers token: {
+              headers X_Auth_Token: {
                       description: 'Validates user identity by token',
                       required: true
                     }
@@ -144,22 +166,27 @@ module API
               use :schedule_id
               use :schedule
             end
-            put ':id/update' do
+            put ':id/update' , failure: [
+              { code: 200, message: 'OK' },
+              { code: 400, message: "id is invalid, id does not have a valid value" },
+              { code: 401, message: "Invalid or expired token"},
+            ] do
               begin
                 if @schedule.update(schedule_params)
                   { status: "Schedule updated" }
+                  @schedule
                 else
                   error_message
                 end
-              rescue ActiveRecord::RecordNotFound
-                record_not_found_message
+              rescue ActiveRecord::RecordInvalid
+                error_message
               end
             end     
 
             desc "Delete Schedule" do
               detail ' : destroy process (destroy)'
               named 'schedules'
-              headers token: {
+              headers X_Auth_Token: {
                       description: 'Validates user identity by token',
                       required: true
                     }
@@ -168,16 +195,17 @@ module API
               use :applicant_id
               use :schedule_id
             end
-            delete ':id/delete' do
-              begin
-                unless @schedule.out_of_date
-                  @schedule.send_canceled_notify_applicant_email
-                end                
-                if @schedule.destroy!
-                  { status: "Schedule deleted" }
-                end
-              rescue ActiveRecord::RecordNotFound
-                record_not_found_message
+            delete ':id/delete' , failure: [
+              { code: 200, message: 'OK' },
+              { code: 400, message: "id is invalid, id does not have a valid value" },
+              { code: 401, message: "Invalid or expired token"},
+            ] do
+              unless @schedule.out_of_date
+                @schedule.send_canceled_notify_applicant_email
+              end                
+              if @schedule.destroy!
+                { status: "Schedule deleted" }
+                @schedule
               end
             end     
 

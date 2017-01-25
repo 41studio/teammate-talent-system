@@ -31,7 +31,7 @@ module API
         end
 
         def error_message
-          error!({ status: :error, message: @applicant.errors.full_messages.first }) if @applicant.errors.any?
+          error!({ status: :error, message: @applicant.errors.full_messages.first }, 400) if @applicant.errors.any?
         end       
       end
 
@@ -79,21 +79,36 @@ module API
             requires :resume, type: File, desc: "Applicant resume", allow_blank: false
           end
         end
-        post '/create' do
-          job = Job.find(params.applicant.job_id)
+        post '/create' , failure: [
+          { code: 201, message: 'Created' },
+          { code: 400, message: "parameter is invalid" },
+          { code: 401, message: "Invalid or expired token"},
+        ] do
+          begin
+            job = Job.find(params.applicant.job_id)
+          rescue ActiveRecord::RecordNotFound
+            error!("id is invalid, id does not have a valid value", 400)
+          end
+
           @applicant = job.applicants.new(applicant_params)
           @applicant.status = "applied"
-          if @applicant.save!
-            { status: "Applying success" }
-          else
+
+          begin
+            if @applicant.save!
+              present :applicant, @applicant, with: API::V1::Entities::ApplicantEntity
+              { status: "Applying success" }
+            else
+              error_message
+            end
+          rescue ActiveRecord::RecordInvalid
             error_message
-          end
+          end 
         end 
 
         desc "Applicant detail" do
           detail ' : show applicant by id'
           named 'applicants'
-          headers token: {
+          headers X_Auth_Token: {
                   description: 'Validates user identity by token',
                   required: true
                 }
@@ -101,18 +116,18 @@ module API
         params do 
           use :applicant_id       
         end
-        get ":id/detail" do
-          begin 
+        get ":id/detail" , failure: [
+          { code: 200, message: 'OK' },
+          { code: 400, message: "id is invalid, id does not have a valid value" },
+          { code: 401, message: "Invalid or expired token"},
+        ] do
             present :applicant, @applicant, with: API::V1::Entities::ApplicantEntity, except: [ { educations: [:id], experiences: [:id], comments:  [ user: [:id, :first_name, :last_name, :email, :joined_at, :token] ] }]
-          rescue ActiveRecord::RecordNotFound
-            record_not_found_message
-          end
         end
 
         desc "Edit Status" do
           detail ' : edit status form (edit)'
           named 'applicants'
-          headers token: {
+          headers X_Auth_Token: {
                   description: 'Validates user identity by token',
                   required: true
                 }
@@ -120,7 +135,11 @@ module API
         params do
           use :applicant_id
         end
-        get ':id/edit_status' do
+        get ':id/edit_status' , failure: [
+          { code: 200, message: 'OK' },
+          { code: 400, message: "id is invalid, id does not have a valid value" },
+          { code: 401, message: "Invalid or expired token"},
+        ] do
           present Applicant::STATUSES, root: 'applicant_statuses'
           present :applicant, @applicant, with: API::V1::Entities::ApplicantEntity, only: [:status]
         end
@@ -128,19 +147,24 @@ module API
         desc "Update Status Applicant" do
           detail ' : update applicant status process (update)'
           named 'applicants'
-          headers token: {
+          headers X_Auth_Token: {
                   description: 'Validates user identity by token',
                   required: true
                 }
         end
         params do
           use :applicant_id
-          requires :status, type: String, values: { value: Applicant.applicant_statuses, message: 'not valid' }, desc: "Applicant status"
+          requires :status, type: String, values: { value: Applicant.applicant_statuses, message: 'is invalid' }, desc: "Applicant status"
         end
-        put ':id/update_status/' do
+        put ':id/update_status/' , failure: [
+          { code: 200, message: 'OK' },
+          { code: 400, message: "id is invalid, id does not have a valid value" },
+          { code: 401, message: "Invalid or expired token"},
+        ] do
           begin
             unless @applicant.status == Applicant::DISQUALIFIED
               if @applicant.update_attribute(:status, params[:status])
+                present :applicant, @applicant, with: API::V1::Entities::ApplicantEntity
                 { status: "Applicant status updated" }
               else
                 error_message
@@ -149,14 +173,14 @@ module API
               { status: "This applicant cannot do any changes" }
             end
           rescue ActiveRecord::RecordNotFound
-            record_not_found_message
+            error_message
           end
         end
 
         desc "Disqualified Applicant" do
           detail ' : update applicant status to disqualified process (update)'
           named 'applicants'
-          headers token: {
+          headers X_Auth_Token: {
                   description: 'Validates user identity by token',
                   required: true
                 }
@@ -164,15 +188,20 @@ module API
         params do
           use :applicant_id
         end
-        put ':id/disqualified/' do
+        put ':id/disqualified/' , failure: [
+          { code: 200, message: 'OK' },
+          { code: 400, message: "id is invalid, id does not have a valid value" },
+          { code: 401, message: "Invalid or expired token"},
+        ] do
           begin
             if @applicant.update_attribute(:status, Applicant::DISQUALIFIED)
+              present :applicant, @applicant, with: API::V1::Entities::ApplicantEntity
               { status: "Applicant disqualified" }
             else
               error_message
             end
           rescue ActiveRecord::RecordNotFound
-            record_not_found_message
+            error_message
           end
         end
 

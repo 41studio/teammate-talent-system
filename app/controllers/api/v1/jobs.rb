@@ -21,7 +21,11 @@ module API
         end
 
         def set_job
-          @job = @jobs.find(params[:id]) 
+          begin
+            @job = @jobs.find(params[:id])
+          rescue ActiveRecord::RecordNotFound
+            error!("id is invalid, id does not have a valid value", 400)
+          end
         end
         
         def field_on_job_form
@@ -43,7 +47,7 @@ module API
         end
 
         def error_message
-          error!({ status: :error, message: @job.errors.full_messages.first }) if @job.errors.any?
+          error!({ status: :error, message: @job.errors.full_messages.first }, 400) if @job.errors.any?
         end        
       end
 
@@ -61,7 +65,7 @@ module API
         desc "Job List" do
           detail ' : job list in company (show)'
           named 'jobs'
-          headers token: {
+          headers X_Auth_Token: {
                   description: 'Validates user identity by token',
                   required: true
                 }
@@ -80,7 +84,7 @@ module API
         desc "Job Detail" do
           detail ' : show job by id'
           named 'jobs'
-          headers token: {
+          headers X_Auth_Token: {
                   description: 'Validates user identity by token',
                   required: true
                 }
@@ -88,18 +92,18 @@ module API
         params do
           use :job_id       
         end
-        get ":id/detail" do
-          begin
-            present job, with: API::V1::Entities::JobEntity, except: [:company, :updated_at , { education_list: [:id], employment_type_list: [:id], experience_list: [:id], function_list: [:id], industry_list: [:id] }]
-          rescue ActiveRecord::RecordNotFound
-            record_not_found_message
-          end
+        get ":id/detail" , failure: [
+          { code: 200, message: 'OK' },
+          { code: 400, message: "parameter is invalid" },
+          { code: 401, message: "Invalid or expired token"},
+        ] do
+          present job, with: API::V1::Entities::JobEntity, except: [:company, :updated_at , { education_list: [:id], employment_type_list: [:id], experience_list: [:id], function_list: [:id], industry_list: [:id] }]
         end
 
         desc "New Job" do
           detail ' : create job form (new)'
           named 'jobs'
-          headers token: {
+          headers X_Auth_Token: {
                   description: 'Validates user identity by token',
                   required: true
                 }
@@ -112,17 +116,25 @@ module API
           detail ' : save job process (save)'
           named 'jobs'
           params API::V1::Entities::JobEntity.documentation
-          headers token: {
+          headers X_Auth_Token: {
                   description: 'Validates user identity by token',
                   required: true
                 }
         end
-        post '/create' do
+        post '/create' , failure: [
+          { code: 201, message: 'Created' },
+          { code: 400, message: "parameter is invalid" },
+          { code: 401, message: "Invalid or expired token"},
+        ] do
           @job = @jobs.new(job_params)
-          if @job.save!
-            { status: :success }
-            @job
-          else
+          begin
+            if @job.save!
+              { status: :success }
+              @job
+            else
+              error_message
+            end
+          rescue ActiveRecord::RecordInvalid
             error_message
           end
         end    
@@ -130,7 +142,7 @@ module API
         desc "Edit Job" do
           detail ' : edit job form (edit)'
           named 'jobs'
-          headers token: {
+          headers X_Auth_Token: {
                   description: 'Validates user identity by token',
                   required: true
                 }
@@ -138,20 +150,20 @@ module API
         params do
           use :job_id
         end
-        get ':id/edit' do
-          begin
-            present :job, @job, with: API::V1::Entities::JobEntity
-            field_on_job_form
-          rescue ActiveRecord::RecordNotFound
-            record_not_found_message
-          end
+        get ':id/edit' , failure: [
+          { code: 200, message: 'OK' },
+          { code: 400, message: "parameter is invalid" },
+          { code: 401, message: "Invalid or expired token"},
+        ] do
+          present :job, @job, with: API::V1::Entities::JobEntity
+          field_on_job_form
         end
 
         desc "Update Job" do
           detail ' : update process (update)'
           named 'jobs'
           params API::V1::Entities::JobEntity.documentation
-          headers token: {
+          headers X_Auth_Token: {
                   description: 'Validates user identity by token',
                   required: true
                 }
@@ -159,19 +171,27 @@ module API
         params do
           use :job_id
         end
-        put ':id/update' do
-          if @job.update(job_params)
-            { status: "Job updated" }
-            @job
-          else
+        put ':id/update' , failure: [
+          { code: 200, message: 'OK' },
+          { code: 400, message: "parameter is invalid" },
+          { code: 401, message: "Invalid or expired token"},
+        ] do
+          begin
+            if @job.update(job_params)
+              { status: "Job updated" }
+              @job
+            else
+              error_message
+            end
+          rescue ActiveRecord::RecordInvalid
             error_message
-          end
+          end          
         end 
 
         desc "Delete Job" do
           detail ' : destroy job process (destroy)'
           named 'jobs'
-          headers token: {
+          headers X_Auth_Token: {
                   description: 'Validates user identity by token',
                   required: true
                 }
@@ -179,21 +199,21 @@ module API
         params do
           use :job_id
         end
-        delete ':id/delete' do
-          begin
-            if @job.destroy!
-              { status: "Job deleted" }
-              @job
-            end
-          rescue ActiveRecord::RecordNotFound
-            record_not_found_message
+        delete ':id/delete' , failure: [
+          { code: 200, message: 'OK' },
+          { code: 400, message: "id is invalid, id does not have a valid value" },
+          { code: 401, message: "Invalid or expired token"},
+        ] do
+          if @job.destroy!
+            { status: "Job deleted" }
+            @job
           end
         end
 
         desc "Edit Job's Status" do
           detail " : edit job's status form (edit)"
           named 'jobs'
-          headers token: {
+          headers X_Auth_Token: {
                   description: 'Validates user identity by token',
                   required: true
                 }
@@ -201,7 +221,11 @@ module API
         params do
           use :job_id
         end
-        get ':id/edit_status' do
+        get ':id/edit_status' , failure: [
+          { code: 200, message: 'OK' },
+          { code: 400, message: "parameter is invalid" },
+          { code: 401, message: "Invalid or expired token"},
+        ] do
           present Job::STATUSES, root: 'job_statuses'
           present :job, @job, with: API::V1::Entities::JobEntity, only: [:status]
         end
@@ -209,7 +233,7 @@ module API
         desc "Update Job Status" do
           detail " : update job's status process (update)"
           named 'jobs'
-          headers token: {
+          headers X_Auth_Token: {
                   description: 'Validates user identity by token',
                   required: true
                 }
@@ -218,7 +242,11 @@ module API
           use :job_id
           requires :status ,type: String, values: { value: Job::STATUSES.map{|s| s.to_s}, message: 'not valid' }, desc: "Job status"
         end
-        put ':id/update_status/' do
+        put ':id/update_status/', failure: [
+          { code: 200, message: 'OK' },
+          { code: 400, message: "parameter is invalid" },
+          { code: 401, message: "Invalid or expired token"},
+        ] do
           begin
             if @job.update_attribute(:status, params[:status])
               { status: :update_success }
@@ -226,15 +254,15 @@ module API
             else
               error_message
             end
-          rescue ActiveRecord::RecordNotFound
-            record_not_found_message
+          rescue ActiveRecord::RecordInvalid
+            error_message
           end
         end
 
         desc "Total of applicant" do
           detail ' : per status'
           named 'jobs'
-          headers token: {
+          headers X_Auth_Token: {
                   description: 'Validates user identity by token',
                   required: true
                 }
@@ -253,13 +281,13 @@ module API
             statuses
           rescue ActiveRecord::RecordNotFound
             record_not_found_message
-           end
+          end
         end
 
         desc "Applicant list by status" do
           detail ' : applicants group by status'
           named 'jobs'
-          headers token: {
+          headers XAuthToken: {
                   description: 'Validates user identity by token',
                   required: true
                 }
@@ -269,8 +297,11 @@ module API
           use :pagination
           optional :status        ,type: String, desc: "Applicants status", allow_blank: false
         end
-        get ":id/applicants" do
-          begin
+        get ":id/applicants", failure: [
+          { code: 200, message: 'OK' },
+          { code: 400, message: "id is invalid, id does not have a valid value" },
+          { code: 401, message: "Invalid or expired token"},
+        ] do
             # applicants = params[:status].present? ? @job.applicants.where(status: params[:status]) : @job.applicants
             # present :applicants, applicants.page(params[:page]), with: API::V1::Entities::ApplicantEntity, except: [ { educations: [:id], experiences: [:id] }]
           
@@ -284,9 +315,6 @@ module API
             end
 
             result
-          rescue ActiveRecord::RecordNotFound
-            record_not_found_message
-           end
         end
 
         desc "Search Job" do
@@ -308,7 +336,10 @@ module API
             optional :created_at, type: String, default: 'desc', values: { value: ['asc','desc'], message: 'not valid' },  desc: "Sort by created date ASC / DESC"
           end
         end
-        get "/search" do
+        get "/search", failure: [
+          { code: 200, message: 'OK' },
+          { code: 400, message: "parameter is invalid" },
+        ] do
           @search = Job.search(params[:q])
           params[:sort_by].present? ? @search.sorts = params[:sort_by].map{|k,v| "#{k.to_s} #{v.to_s}"} : @search.sorts = ['job_title asc', 'created_at desc']
           @jobs = @search.result.published_jobs

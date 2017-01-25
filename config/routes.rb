@@ -1,6 +1,10 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  mount API::Root => '/api'
+  mount Sidekiq::Web => '/sidekiq'
+  mount GrapeSwaggerRails::Engine, at: "api/documentation"
+
   resources :companies, except: [:index] do
 
     resources :schedules, only: [:index] do 
@@ -38,9 +42,5 @@ Rails.application.routes.draw do
   get '/autocomplete/json', to: 'companies#autocomplete_industry', as: 'autocomplete_industry' , defaults: { format: 'json' }
 
   root 'landing_page#index'
-
-  mount API::Root => '/'
-  mount Sidekiq::Web => '/sidekiq'
-  mount GrapeSwaggerRails::Engine, at: "api/swagger-ui"
 
 end

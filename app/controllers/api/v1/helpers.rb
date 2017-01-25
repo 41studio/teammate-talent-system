@@ -4,7 +4,7 @@ module API
     extend Grape::API::Helpers
     
     def current_user
-      token = ApiKey.find_by(access_token: headers['Token'])
+      token = ApiKey.find_by(access_token: headers['X-Auth-Token'])
       if token && !token.expired?
         User.find(token.user_id)
       else
@@ -17,11 +17,11 @@ module API
     end
 
     def authenticate!
-      error!('Unauthorized. Invalid or expired token.', 401) unless current_user
+      error!("Invalid or expired token", 401) unless current_user
     end
 
     def applicant_valid
-      error!("You don't have permission.", 401) unless @applicant.job.company.users.include?current_user
+      error!("Invalid or expired token", 401) unless @applicant.job.company.users.include?current_user
     end
   
     def field_on_filter_form
@@ -39,7 +39,19 @@ module API
     end
 
     def set_applicant
-      @applicant = Applicant.find(params[:id])
+      begin
+        @applicant = Applicant.find(params[:id])
+      rescue ActiveRecord::RecordNotFound
+        error!("id is invalid, id does not have a valid value", 400)
+      end                
+    end
+
+    def find_applicant
+      begin
+        @applicant = Applicant.find(params[:applicant_id])
+      rescue ActiveRecord::RecordNotFound
+        error!("Applicant id is invalid, id does not have a valid value", 400)
+      end
     end
 
 		def record_not_found_message
@@ -48,6 +60,10 @@ module API
 
     Grape::Entity.format_with :timestamp do |date|
       date.strftime('%m/%d/%Y - %l:%M %p')
+    end
+
+    params :applicant_id do
+      requires :applicant_id, type: Integer, desc: "Applicant id" 
     end
 
     params :pagination do
