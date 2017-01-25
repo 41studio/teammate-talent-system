@@ -59,17 +59,17 @@
         |
         b Description
       p 
-        = @job.description
+        = @job.description.html_safe
       h3
         |
         b Requirements
       p 
-        = @job.requirement
+        = @job.requirement.html_safe
       h3
         |
         b Benefits
       p 
-        = @job.benefits
+        = @job.benefits.html_safe
 
       - if user_signed_in? && current_user.company_id == @job.company_id
         = link_to 'Back', dashboards_path

@@ -17,6 +17,7 @@
  *= require applicants
  *= require simple_calendar
  *= require_self
+ *= require bootstrap-notifications.min
  */
  body{
  	padding-top: 0px;

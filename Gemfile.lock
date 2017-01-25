@@ -143,6 +143,8 @@ GEM
     equalizer (0.0.11)
     erubis (2.7.0)
     execjs (2.7.0)
+    faker (1.7.2)
+      i18n (~> 0.5)
     firebase (0.2.6)
       httpclient
       json
@@ -396,6 +398,7 @@ DEPENDENCIES
   devise
   devise_invitable (~> 1.7.0)
   dotenv-rails
+  faker
   firebase
   friendly_id (~> 5.1.0)
   grape
