@@ -54,9 +54,9 @@ gem 'mini_magick'
 gem 'kaminari'
 
 ## bootstrap
-gem 'bootstrap-sass'
+# gem 'bootstrap-sass'
 gem 'bootstrap-kaminari-views'
-gem 'bootstrap-sass-extras'
+# gem 'bootstrap-sass-extras'
 
 ## datepicker bootstrap
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17.42'
@@ -81,7 +81,7 @@ gem 'redis-rails', '~> 4'
 gem 'sidekiq'
 
 ## jquery UI rails
-gem 'jquery-ui-rails'
+# gem 'jquery-ui-rails'
 
 ## gem for chart
 gem 'chartkick'
