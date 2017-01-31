@@ -53,9 +53,9 @@ gem 'mini_magick'
 ## paging
 gem 'kaminari'
 
-## bootstrap
-# gem 'bootstrap-sass'
+## bootstrap for kaminari (paging)
 gem 'bootstrap-kaminari-views'
+# gem 'bootstrap-sass'
 # gem 'bootstrap-sass-extras'
 
 ## datepicker bootstrap
@@ -94,7 +94,7 @@ gem 'ckeditor'
 
 gem 'nprogress-rails'
 gem 'dotenv-rails'
-gem 'momentjs-rails', '>= 2.9.0'
+# gem 'momentjs-rails', '>= 2.9.0'
 
 ## API
 gem 'simple_token_authentication', '~> 1.0'
