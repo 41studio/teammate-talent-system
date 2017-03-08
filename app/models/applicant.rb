@@ -26,7 +26,10 @@ class Applicant < ActiveRecord::Base
 
 	acts_as_commentable
 	
-	belongs_to :job
+  	belongs_to :job
+	delegate :creator, to: :job, prefix: true
+
+	# applicant.job_creator
 
 	has_and_belongs_to_many :educations
 	has_and_belongs_to_many :experiences

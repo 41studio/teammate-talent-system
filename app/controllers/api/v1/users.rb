@@ -42,7 +42,7 @@ module API
           detail " : user get token"
           named 'users'
           headers X_Firebase_Token: {
-            description: 'Valdates your identity',
+            description: 'Your firebase token for notification',
             required: false
           }           
         end

@@ -37,6 +37,9 @@ class Job < ActiveRecord::Base
 	belongs_to :experience_list
 	belongs_to :function_list
 	belongs_to :industry_list
+  	belongs_to :user
+	alias_method :creator, :user
+
 	validates :job_title, :departement, :job_code, :country, :state, :city, :zip_code,
 		:min_salary, :max_salary, :curency, :job_description, :job_requirement, :benefits,
 		:experience_list_id, :function_list_id, :employment_type_list_id, :industry_list_id, 

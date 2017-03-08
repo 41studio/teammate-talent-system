@@ -30,6 +30,7 @@ end
 ## library for push notification
 gem 'pushmeup'
 gem 'firebase'
+gem 'fcm'
 
 ## Auth library
 gem 'devise'
@@ -103,6 +104,10 @@ gem 'grape-entity', github: 'intridea/grape-entity'
 gem 'grape-swagger'
 gem 'grape-swagger-rails'
 
+#dummy data
+gem 'faker'
+gem "fake_person", "~> 1.0"
+
 ## html to PDF
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary-edge'
@@ -117,6 +122,9 @@ gem 'airbrake', '~> 5.0'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+
+## migration
+gem 'migration_data'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

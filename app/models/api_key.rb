@@ -4,7 +4,7 @@ class ApiKey < ActiveRecord::Base
   before_save :set_expiration
   belongs_to :user
 
-  scope :are_not_expired, -> { where("expires_at < (?)", DateTime.now) }
+  scope :are_not_expired, -> { where("expires_at > (?)", DateTime.now) }
 
   def expired?
     DateTime.now >= self.expires_at

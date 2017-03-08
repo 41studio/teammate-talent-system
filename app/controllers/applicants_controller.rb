@@ -81,6 +81,7 @@ class ApplicantsController < ApplicationController
     @applicant.status = "applied"
     respond_to do |format|
       if @applicant.save
+        # pry
         @applicant.send_notification!("New Applicant")
         SendMail.delay.send_email_after_apply(@applicant, @job)
         SendMail.send_email_to_company_after_applicant_applied(@job.company.users, @job, @applicant)

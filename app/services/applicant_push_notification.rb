@@ -22,7 +22,6 @@ class ApplicantPushNotification
         @responses << @firebase.push(PATH, @data)
       end
     end
-
     @responses
   end
 end
