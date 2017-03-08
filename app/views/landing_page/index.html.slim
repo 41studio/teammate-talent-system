@@ -36,7 +36,7 @@
 	p Sort :
 	table
 		tr
-			th.padth = sort_link(@search, :job_title, "Job title")
+			th.padth = sort_link(@search, :title, "Job title")
 			th.padth = sort_link(@search, :created_at, "Date Published")
 	hr
 	- if @jobs.present?

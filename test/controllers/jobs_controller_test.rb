@@ -3,7 +3,7 @@
 # Table name: jobs
 #
 #  id                      :integer          not null, primary key
-#  job_title               :string(255)      default(""), not null
+#  title               :string(255)      default(""), not null
 #  departement             :string(255)      default(""), not null
 #  job_code                :string(255)      default(""), not null
 #  country                 :string(255)      default(""), not null
@@ -48,7 +48,7 @@ class JobsControllerTest < ActionController::TestCase
 
   test "should create job" do
     assert_difference('Job.count') do
-      post :create, job: { aplicant_education: @job.aplicant_education, aplicant_employment_type: @job.aplicant_employment_type, aplicant_experience: @job.aplicant_experience, aplicant_function: @job.aplicant_function, aplicant_industry: @job.aplicant_industry, benefits: @job.benefits, city: @job.city, country: @job.country, curency: @job.curency, departement: @job.departement, job_code: @job.job_code, job_description: @job.job_description, job_requirement: @job.job_requirement, job_search_keyword: @job.job_search_keyword, job_title: @job.job_title, max_salary: @job.max_salary, min_salary: @job.min_salary, state: @job.state, zip_code: @job.zip_code }
+      post :create, job: { aplicant_education: @job.aplicant_education, aplicant_employment_type: @job.aplicant_employment_type, aplicant_experience: @job.aplicant_experience, aplicant_function: @job.aplicant_function, aplicant_industry: @job.aplicant_industry, benefits: @job.benefits, city: @job.city, country: @job.country, curency: @job.curency, departement: @job.departement, job_code: @job.job_code, job_description: @job.job_description, job_requirement: @job.job_requirement, job_search_keyword: @job.job_search_keyword, title: @job.title, max_salary: @job.max_salary, min_salary: @job.min_salary, state: @job.state, zip_code: @job.zip_code }
     end
 
     assert_redirected_to job_path(assigns(:job))
@@ -65,7 +65,7 @@ class JobsControllerTest < ActionController::TestCase
   end
 
   test "should update job" do
-    patch :update, id: @job, job: { aplicant_education: @job.aplicant_education, aplicant_employment_type: @job.aplicant_employment_type, aplicant_experience: @job.aplicant_experience, aplicant_function: @job.aplicant_function, aplicant_industry: @job.aplicant_industry, benefits: @job.benefits, city: @job.city, country: @job.country, curency: @job.curency, departement: @job.departement, job_code: @job.job_code, job_description: @job.job_description, job_requirement: @job.job_requirement, job_search_keyword: @job.job_search_keyword, job_title: @job.job_title, max_salary: @job.max_salary, min_salary: @job.min_salary, state: @job.state, zip_code: @job.zip_code }
+    patch :update, id: @job, job: { aplicant_education: @job.aplicant_education, aplicant_employment_type: @job.aplicant_employment_type, aplicant_experience: @job.aplicant_experience, aplicant_function: @job.aplicant_function, aplicant_industry: @job.aplicant_industry, benefits: @job.benefits, city: @job.city, country: @job.country, curency: @job.curency, departement: @job.departement, job_code: @job.job_code, job_description: @job.job_description, job_requirement: @job.job_requirement, job_search_keyword: @job.job_search_keyword, title: @job.title, max_salary: @job.max_salary, min_salary: @job.min_salary, state: @job.state, zip_code: @job.zip_code }
     assert_redirected_to job_path(assigns(:job))
   end
 

@@ -6,9 +6,9 @@
 			= render 'form_filter_applicant_status'					
 		.col-md-9
 			h3 
-				= "#{params[:status].titleize} Applicant for #{@job_title.job_title}"		
+				= "#{params[:status].titleize} Applicant for #{@job.title}"		
 			hr
-			= search_form_for(@search, url: company_job_applicant_status_path(@company_id, @job_id, @status ), method: :get) do |f|
+			= search_form_for(@search, url: company_job_applicant_status_path(@company_id, @job.id, @status ), method: :get) do |f|
 				= f.text_field :name_cont, placeholder: 'search by name', class: 'form-control'
 				br
 				= f.submit "search", class: 'btn btn-primary'
@@ -21,7 +21,6 @@
 - content_for :javascript_in_file do
   javascript:
     $('.filter_by_time').on('click', function(){
-    	console.log($('.form_filter').serialize());
     	$.ajax({
         url: Routes.applicant_status_path({status: @status}) + ".js",
         method: 'get',
@@ -29,7 +28,6 @@
       });
     });
     $('.filter_by_gender').on('change', function(){
-    	console.log($('.form_filter').serialize());
     	$.ajax({
         url: Routes.applicant_status_path({status: @status}) + ".js",
         method: 'get',

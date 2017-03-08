@@ -12,7 +12,7 @@
 					.panel.panel-default
 						.panel-body
 						center
-							= job.job_title
+							= job.title
 						= pie_chart job.applicant_stage_per_job(job.id)
 				.col-md-8
 					.panel.panel-default
@@ -25,7 +25,7 @@
 										td[style="width:120px;"]
 											p Job Title
 										td
-											p = job.job_title
+											p = job.title
 									tr
 										td
 											p Departement
@@ -100,7 +100,7 @@
 					.panel.panel-default
 						.panel-body
 							center
-								= job.job_title
+								= job.title
 							center
 								p Empty Chart
 				.col-md-8

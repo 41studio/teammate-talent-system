@@ -14,7 +14,7 @@ hr
 				.col-md-9
 					.input-group
 						label Full Name : 
-						= link_to applicant.name, company_job_applicant_path(current_user.company,applicant.job_id,applicant.id)
+						= link_to applicant.name, company_job_applicant_path(current_user.company,applicant.job.friendly_id,applicant.id)
 					.input-group
 						label Gender :  
 						= applicant.gender
@@ -23,4 +23,4 @@ hr
 						= applicant.headline
 					.input-group
 						label Job :
-						= applicant.job.job_title
+						= applicant.job.title

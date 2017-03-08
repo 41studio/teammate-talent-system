@@ -28,7 +28,7 @@ module API
       set_jobs
       present :by_period, Applicant::PERIOD, root: 'period'
       present :by_stages, Applicant.applicant_statuses, root: 'stage'
-      present :by_jobs, @jobs.order(created_at: :desc, job_title: :asc), with: API::V1::Entities::JobEntity, only: [:id, :job_title]
+      present :by_jobs, @jobs.order(created_at: :desc, title: :asc), with: API::V1::Entities::JobEntity, only: [:id, :title]
       present :by_consideration, ['qualified','disqualified'], root: 'consideration'
       present :by_gender, ['Male','Female'], root: 'gender'
     end    

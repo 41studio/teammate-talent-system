@@ -3,7 +3,7 @@
 # Table name: jobs
 #
 #  id                      :integer          not null, primary key
-#  job_title               :string(255)      default(""), not null
+#  title               :string(255)      default(""), not null
 #  departement             :string(255)      default(""), not null
 #  job_code                :string(255)      default(""), not null
 #  country                 :string(255)      default(""), not null
@@ -31,7 +31,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  job_title: MyString
+  title: MyString
   departement: MyString
   job_code: MyString
   country: MyString
@@ -52,7 +52,7 @@ one:
   job_search_keyword: MyString
 
 two:
-  job_title: MyString
+  title: MyString
   departement: MyString
   job_code: MyString
   country: MyString

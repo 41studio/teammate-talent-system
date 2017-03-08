@@ -54,10 +54,10 @@ gem 'mini_magick'
 ## paging
 gem 'kaminari'
 
-## bootstrap
-gem 'bootstrap-sass'
+## bootstrap for kaminari (paging)
 gem 'bootstrap-kaminari-views'
-gem 'bootstrap-sass-extras'
+# gem 'bootstrap-sass'
+# gem 'bootstrap-sass-extras'
 
 ## datepicker bootstrap
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17.42'
@@ -82,7 +82,7 @@ gem 'redis-rails', '~> 4'
 gem 'sidekiq'
 
 ## jquery UI rails
-gem 'jquery-ui-rails'
+# gem 'jquery-ui-rails'
 
 ## gem for chart
 gem 'chartkick'
@@ -95,7 +95,7 @@ gem 'ckeditor'
 
 gem 'nprogress-rails'
 gem 'dotenv-rails'
-gem 'momentjs-rails', '>= 2.9.0'
+# gem 'momentjs-rails', '>= 2.9.0'
 
 ## API
 gem 'simple_token_authentication', '~> 1.0'
@@ -145,4 +145,5 @@ group :development do
   gem 'letter_opener'
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'faker'
 end

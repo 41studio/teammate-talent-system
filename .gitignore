@@ -56,9 +56,12 @@ build-iPhoneSimulator/
 # unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
 .rvmrc
 
-config/database.yml
+.byebug_history
 log/
 public/*
-db/schema.rb
-.byebug_history
 dump.rdb
+dummy_applicant.rb
+dummy_schedule.rb
+lib/tasks/dummy.rb
+config/database.yml
+db/schema.rb

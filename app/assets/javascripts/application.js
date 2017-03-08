@@ -13,9 +13,8 @@
 //= require jquery
 //= require jquery.turbolinks
 //= require jquery_ujs
-//= require jquery-ui
-//= require jquery-ui/autocomplete
-//=	require bootstrap
+//= require jquery-ui.min
+//=	require bootstrap.min
 //= require turbolinks
 //= require nprogress
 //= require nprogress-turbolinks

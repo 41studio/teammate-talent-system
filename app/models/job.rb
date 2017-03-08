@@ -3,9 +3,9 @@
 # Table name: jobs
 #
 #  id                      :integer          not null, primary key
-#  job_title               :string(255)      default(""), not null
+#  title               :string(255)      default(""), not null
 #  departement             :string(255)      default(""), not null
-#  job_code                :string(255)      default(""), not null
+#  code                :string(255)      default(""), not null
 #  country                 :string(255)      default(""), not null
 #  state                   :string(255)      default(""), not null
 #  city                    :string(255)      default(""), not null
@@ -13,10 +13,10 @@
 #  min_salary              :integer          default(0), not null
 #  max_salary              :integer          default(0), not null
 #  curency                 :string(255)      default(""), not null
-#  job_description         :text(65535)      not null
-#  job_requirement         :text(65535)      not null
+#  description         :text(65535)      not null
+#  requirement         :text(65535)      not null
 #  benefits                :text(65535)      not null
-#  job_search_keyword      :string(255)      default(""), not null
+#  search_keyword      :string(255)      default(""), not null
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
 #  company_id              :integer
@@ -29,6 +29,8 @@
 #
 
 class Job < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :title, use: :slugged
 	alias_attribute :job_status, :status
 	has_many :applicants, dependent: :destroy
 	belongs_to :company
@@ -39,19 +41,19 @@ class Job < ActiveRecord::Base
 	belongs_to :industry_list
   	belongs_to :user
 	alias_method :creator, :user
-
-	validates :job_title, :departement, :job_code, :country, :state, :city, :zip_code,
-		:min_salary, :max_salary, :curency, :job_description, :job_requirement, :benefits,
+	
+	validates :title, :departement, :code, :country, :state, :city, :zip_code,
+		:min_salary, :max_salary, :curency, :description, :requirement, :benefits,
 		:experience_list_id, :function_list_id, :employment_type_list_id, :industry_list_id, 
-		:education_list_id, :job_search_keyword,  presence: true
-	validates :job_title, length: {in: 3..100}
-	validates :job_description, :job_requirement, :benefits, 
+		:education_list_id, :search_keyword,  presence: true
+	validates :title, length: {in: 3..100}
+	validates :description, :requirement, :benefits, 
 	length: {in: 100..500, message: 'Must be more than 100 character and less than 500 character'}
 	validates :min_salary, :max_salary, numericality: { greater_than_or_equal_to: 1 }
 	validate :salary_regulation, :experience_collection_validation,:function_collection_validation,
 		:employment_type_collection_validation,:industry_collection_validation,:education_collection_validation
-	before_save :job_title
-	before_update :job_title
+	before_save :title
+	before_update :title
 
 	ransack_alias :keyword, :job_title_or_job_search_keyword
 	ransack_alias :company, :company_company_name
@@ -153,12 +155,12 @@ class Job < ActiveRecord::Base
 		where("jobs.status != \"draft\"")
 	end
 	
-	# def self.job_title
-	# 	self[:job_title].titleize
+	# def self.title
+	# 	self[:title].titleize
 	# end
 	
-	def self.job_title
-		select(:job_title)
+	def self.title
+		select(:title)
 	end
 
 	def applicant_stage_per_job(attr)

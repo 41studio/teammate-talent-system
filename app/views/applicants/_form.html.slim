@@ -60,7 +60,7 @@
           br
   .form-group
     = f.label :address, class: 'control-label'
-    = f.cktext_area :address, class: 'form-control'
+    = f.text_area :address, class: 'form-control'
     - if @applicant.errors[:address].any?
       p.bg-danger
         - @applicant.errors[:address].each do |error|

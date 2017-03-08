@@ -1,5 +1,5 @@
 -	if job.status == "published"
-	= link_to job.job_title, company_job_path(params[:id],job)
+	= link_to job.title, company_job_path(params[:id],job)
 	p
 		| from 
 		= link_to job.company.company_name, company_path(job.company)

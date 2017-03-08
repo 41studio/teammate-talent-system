@@ -10,10 +10,11 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require bootstrap_modified
+ *= require bootstrap
+ *= require bootstrap.min
+ *= require bootstrap-theme.min
  *= require npprogress-custom
- *= require jquery-ui
- *= require jquery-ui/autocomplete
+ *= require jquery-ui.min
  *= require applicants
  *= require simple_calendar
  *= require_self

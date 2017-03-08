@@ -13,8 +13,8 @@
 
 class SchedulesController < ApplicationController
   before_action :set_applicant, :set_location, :set_assignee_collection, except: [:index, :filter]
-  before_action :set_filter_collection, only: [:index]
   before_action :set_category_collection
+  before_action :set_filter_collection, only: [:index, :new]
   before_action :new_schedule_path, only: [:new, :create]
   before_action :set_schedule, :edit_schedule_path, only: [:destroy, :edit, :update]
   # protect_from_forgery except: :index
@@ -95,7 +95,7 @@ class SchedulesController < ApplicationController
     def set_filter_collection
       # @category_collection  = Schedule::CATEGORY
       @applicant_collection = current_company.applicants.are_qualified.map{|applicant| [applicant.name, applicant.id, {"data-job-id": applicant.job_id}]}
-      @job_collection       = current_company.jobs.published_and_closed_jobs.map{|job| [job.job_title, job.id]}
+      @job_collection       = current_company.jobs.published_and_closed_jobs.map{|job| [job.title, job.id]}
     end
     
     def set_category_collection
